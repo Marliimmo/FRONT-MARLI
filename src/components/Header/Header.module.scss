@@ -1,0 +1,54 @@
+@import "../../assets/styles/variables";
+
+.allContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    background-color: $gray-color;
+
+    .LogoContainer{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 20px;
+        p{
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 20px;
+            font-size: 11px;
+        }
+
+        img{
+            width: 40px;
+        }
+    }
+
+    .LinkContainer{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        column-gap: 40px;
+    }
+
+    .TelButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        border: 1px $white-color solid;
+        border-radius: 100px;
+        column-gap: 10px;
+        font-size: 15px;
+        p{
+            margin: 0;
+        }
+
+    }
+}
