@@ -211,17 +211,16 @@ margin: 20px;
 
 .slick-track {
     display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    height: 100vh !important;
+    justify-content: space-between !important;
     position: initial !important;
-    
-    div{
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+    column-gap: 25px;
+    @media screen and (max-width: 750px) {
+        column-gap: 5px;
     }
+}
+
+.slick-arrow{
+    display: none !important;
 }
 
 

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
 function NotFound() {
-    return ( 
-        <div className="error">
-            <h1>404</h1>
-            <p>Oups, cette page n&apos;hexiste pas</p>
-        </div>
-     );
+  return (
+    <div className='error'>
+      <h1>404</h1>
+      <p>Oups, cette page n&apos;existe pas</p>
+    </div>
+  )
 }
 
-export default NotFound;
+export default NotFound
