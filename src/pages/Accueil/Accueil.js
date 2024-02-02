@@ -298,6 +298,15 @@ function Accueil() {
           <CardAvis />
           <CardAvis />
         </Slider>
+
+        <div className={styles.btnSection}>
+          <Link>
+            <button>Voir plus d’avis</button>
+          </Link>
+          <Link>
+            <button>Déposer mon avis</button>
+          </Link>
+        </div>
       </div>
     </div>
   )

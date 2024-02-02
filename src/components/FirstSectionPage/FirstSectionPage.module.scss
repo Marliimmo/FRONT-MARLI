@@ -46,7 +46,7 @@
         gap: 20px;
         height: fit-content;
         z-index: 2;
-        padding-top: 8%;
+        padding-top: 10%;
 
         img{
             width: 150px;
@@ -63,13 +63,18 @@
 
     @media screen and (max-width: 750px) {
         padding: 30px;
-        height: 60dvh;
+        height: 50dvh;
 
         .ImgPremierePlan, .opacityBlack{
-            height: 60dvh;
+            height: 50dvh;
+        }
+
+        h2{
+            font-size: 30px;
         }
 
         .TextContent{
+            padding-top: 20%;
             img{
                 width: 100px;
             }
