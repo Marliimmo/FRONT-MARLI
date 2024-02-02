@@ -1,0 +1,79 @@
+@import "../../assets/styles/variables";
+
+form{
+    label{
+        font-size: 17px;
+        font-weight: 400;
+    }
+
+    input{
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 10px 2px;
+        font-size: 16px;
+        font-weight: 300;
+        color: $white-color;
+        border-bottom: 1px solid $white-color;
+        margin-bottom: 40px;
+
+        &[type="file"]{
+            border: none;
+            padding-top: 20px;
+            cursor: pointer;
+        }
+    }
+
+    select{
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 10px 2px;
+        font-size: 16px;
+        font-weight: 300;
+        color: $white-color;
+        border-bottom: 1px solid $white-color;
+        margin-bottom: 40px;
+
+        option{
+            color: $gray-color;
+        }
+    }
+
+    .twoElement{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        column-gap: 35px;
+
+        >div{
+            flex: 1 0 200px;
+        }
+    }
+
+    textarea{
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 10px 2px;
+        font-size: 16px;
+        font-weight: 300;
+        color: $white-color;
+        border-bottom: 1px solid $white-color;
+        margin-bottom: 40px;
+    }
+
+    button{
+        border: none;
+        font-size: 18px;
+        color: $gray-color;
+        font-weight: 500;
+        border-radius: 100px;
+        background-color: $white-color;
+        padding: 20px 35px;
+        cursor: pointer;
+    }
+}
