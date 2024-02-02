@@ -11,6 +11,7 @@
     padding: 15px 10%;
     background-color: $gray-color;
     z-index: 10;
+    box-shadow: 0px 0px 25px #ffffff17;
 
     .LogoContainer{
         display: flex;
@@ -36,20 +37,186 @@
         justify-content: flex-end;
         align-items: center;
         column-gap: 40px;
-    }
-
-    .TelButton{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 20px;
-        border: 1px $white-color solid;
-        border-radius: 100px;
-        column-gap: 10px;
-        font-size: 15px;
-        p{
-            margin: 0;
+        
+        .TextLink{
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            column-gap: 40px;
         }
-
     }
+
+    // .TelButton{
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     padding: 10px 20px;
+    //     border: 1px $white-color solid;
+    //     border-radius: 100px;
+    //     column-gap: 10px;
+    //     font-size: 15px;
+    //     p{
+    //         margin: 0;
+    //     }
+
+    // }
+
+    .iconApropos{
+        font-size: 30px;
+        animation: animationIconeApropos 2s infinite ease;
+    }
+
+    .menuBurger{
+        width: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        position: relative;
+
+        p{
+            margin: 4px 0px;
+            border: 1px solid $white-color;
+        }
+        .animationBarTop{
+            animation: barTopMenuBurger 300ms ease-in-out both;
+        }
+        .animationBarBottom{
+            animation: barBottomMenuBurger 300ms ease-in-out both;
+            margin-top: -6px;
+        }
+        .BarTopSetAnim{
+            animation: barTopAnimReset 300ms ease-in-out both;
+        }
+        .BarBottomSetAnim{
+            animation: barBottomAnimReset 300ms ease-in-out both;
+        }
+    }
+
+    @media screen and (max-width: 750px) {
+        padding: 15px 30px;
+
+        .LogoContainer{
+            column-gap: 15px;
+            p{
+                &:nth-child(2){
+                    margin-top: -8px;
+                    font-size: 10px;
+                }
+            }
+    
+            img{
+                width: 35px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1140px) {
+        .LinkContainer{
+            .TextLink{
+                display: none;
+            }
+        }
+    }
+
+    @media screen and (min-width: 1141px) {
+        .menuBurger{
+            display: none;
+        }
+    }
+}
+
+.MenuMobile{
+    position: fixed;
+    border-radius: 10px;
+    width: 220px;
+    background-color: $white-color;
+    top: 80px;
+    right: 10%;
+    z-index: 10;
+    color: $gray-color;
+    padding: 0px 20px;
+    animation: fadin 300ms both;
+
+    @media screen and (max-width: 750px) {
+        right: 30px;
+    }
+
+    @media screen and (min-width: 1141px) {
+        display: none;
+    }
+}
+
+// Animation du sous menu
+@keyframes fadin {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+    
+}
+
+@keyframes animationIconeApropos {
+    0%{
+        transform: scale(0.7);
+    }
+    50%{
+        
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0.7);
+    }
+}
+
+
+// Animation du menu burger
+@keyframes barTopMenuBurger {
+    0%{
+        transform: rotate(0deg);
+        transform-origin: center;
+    }
+    100%{
+        transform: rotate(35deg);
+    }
+    
+}
+
+@keyframes barBottomMenuBurger {
+    0%{
+        transform: rotate(0deg);
+        transform-origin: center;
+    }
+    100%{
+        transform: rotate(-35deg);
+    }
+    
+}
+
+@keyframes barTopAnimReset {
+    0%{
+        transform: rotate(35deg);
+        transform-origin: center;
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+    
+}
+
+@keyframes barBottomAnimReset {
+    0%{
+        transform: rotate(-35deg);
+        transform-origin: center;
+        margin-top: -6px;
+    }
+    100%{
+        transform: rotate(0deg);
+        margin-top: 4px;
+    }
+    
 }
