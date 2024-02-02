@@ -2,9 +2,12 @@ import React from 'react'
 import styles from './FormVendreOuRecherche.module.scss'
 
 function FormVendreOuRecherche({ context }) {
+  const SubmitForm = (e) => {
+    e.preventDefault()
+  }
   return (
     <>
-      <form>
+      <form onSubmit={SubmitForm}>
         <label htmlFor='localisation'>Emplacement / Localisation*</label> <br />
         <input id='localisation' type='text' required /> <br />
         <div className={styles.twoElement}>
@@ -66,7 +69,7 @@ function FormVendreOuRecherche({ context }) {
           }
         ></textarea>
         <br />
-        <button>Envoyer</button>
+        <button type='submit'>Envoyer</button>
       </form>
     </>
   )
