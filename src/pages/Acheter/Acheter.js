@@ -14,16 +14,18 @@ function Acheter() {
       />
 
       <div className={styles.investerSection}>
-        <h2>INVESTIR DANS L’IMMOBILIER</h2>
-        <ul>
-          <li>Accompagnement, étude de rentabilité.</li>
-          <li>Recherche de biens en France et au Sénégal.</li>
-          <li>
-            Sénégal, destination soleil durant toute l’année, pour vous dénicher
-            le bien qui correspond à vos attentes.
-          </li>
-        </ul>
-        <Link to='nous-contacter'>Nous contacter</Link>
+        <div>
+          <h2>INVESTIR DANS L’IMMOBILIER</h2>
+          <ul>
+            <li>Accompagnement, étude de rentabilité.</li>
+            <li>Recherche de biens en France et au Sénégal.</li>
+            <li>
+              Sénégal, destination soleil durant toute l’année, pour vous
+              dénicher le bien qui correspond à vos attentes.
+            </li>
+          </ul>
+          <Link to='nous-contacter'>Nous contacter</Link>
+        </div>
       </div>
     </div>
   )

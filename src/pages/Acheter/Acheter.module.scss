@@ -1,45 +1,56 @@
 @import "../../assets/styles/variables";
 
 .investerSection{
-    padding: 80px 10%;
-    padding-bottom: 110px;
-    background-color: $white-color;
-    color: $gray-color;
-    
-    ul{
-        margin-bottom: 70px;
-        padding-left: 16px;
-        li{
-            list-style: initial;
-            font-size: 20px;
-            margin: 20px 0px;
+    padding: 100px 10%;
+    margin-top: -5px;
+    background-color: $gray-color;
+
+    div{
+        padding: 50px;
+        padding-bottom: 80px;
+        background-color: $white-color;
+        color: $gray-color;
+        border-radius: 18px;
+        
+        ul{
+            margin-bottom: 70px;
+            padding-left: 16px;
+            li{
+                list-style: initial;
+                font-size: 20px;
+                margin: 20px 0px;
+            }
         }
-    }
-
-    h2{
-        font-size: 30px;
-        letter-spacing: 1.3px;
-        margin-bottom: 35px;
-    }
-
-    a{
-        width: fit-content;
-        padding: 20px 35px;
-        background-color: $gray-color;
-        color: $white-color;
-        border-radius: 100px;
-        letter-spacing: 1.3px;
+    
+        h2{
+            font-size: 30px;
+            letter-spacing: 1.3px;
+            margin-bottom: 35px;
+        }
+    
+        a{
+            width: fit-content;
+            padding: 20px 35px;
+            background-color: $gray-color;
+            color: $white-color;
+            border-radius: 100px;
+            letter-spacing: 1.3px;
+        }
+    
+        @media screen and (max-width: 750px) {
+            h2{
+                font-size: 25px;
+            }
+    
+            ul{
+                li{
+                    font-size: 17px;
+                }
+            }
+        }
     }
 
     @media screen and (max-width: 750px) {
-        h2{
-            font-size: 25px;
-        }
-
-        ul{
-            li{
-                font-size: 17px;
-            }
-        }
+        padding: 50px 30px;
     }
 }
