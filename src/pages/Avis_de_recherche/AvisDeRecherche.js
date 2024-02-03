@@ -50,17 +50,9 @@ function AvisDeRecherche() {
   return (
     <div className={styles.allContainer}>
       <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
-      <div className={styles.formContainer}>
-        <h3>Décrivez nous votre recherche</h3>
-        <FormVendreOuRecherche context='avis' />
-      </div>
 
       <div className={styles.AvisDrechercheContainer}>
         <h3>Nos clients cherchent</h3>
-        <p>Vous détenez l’un de ces biens ? N’hésitez à nous contacter</p>
-        <Link to='/marli/nous-contacter'>
-          <button>Nous contacter</button>
-        </Link>
 
         <Slider {...settings}>
           <CardAvisRecherche urlImage={ImageAvisSearch} />
@@ -69,6 +61,16 @@ function AvisDeRecherche() {
           <CardAvisRecherche urlImage={ImageAvisSearch} />
           <CardAvisRecherche urlImage={ImageAvisSearch} />
         </Slider>
+
+        <p>Vous détenez l’un de ces biens ? N’hésitez à nous contacter</p>
+        <Link to='/marli/nous-contacter'>
+          <button>Nous contacter</button>
+        </Link>
+      </div>
+
+      <div className={styles.formContainer}>
+        <h3>Décrivez nous votre recherche</h3>
+        <FormVendreOuRecherche context='avis' />
       </div>
     </div>
   )

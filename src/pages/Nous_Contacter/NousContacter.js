@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './NousContacter.module.scss'
 import FormContact from '../../components/FormContact/FormContact'
-import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/united-states-spokane.jpg'
+// import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
+// import Image from '../../assets/images/united-states-spokane.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faPhoneFlip } from '@fortawesome/free-solid-svg-icons'
 import WhatsAppIcone from '../../assets/images/whatsapp.svg'
@@ -10,7 +10,7 @@ import WhatsAppIcone from '../../assets/images/whatsapp.svg'
 function NousContacter() {
   return (
     <div className={styles.allContainer}>
-      <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' />
+      {/* <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' /> */}
 
       <div className={styles.coodonneeContainer}>
         <div className={styles.coordonnee}>

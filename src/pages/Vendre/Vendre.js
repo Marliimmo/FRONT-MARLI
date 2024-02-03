@@ -17,7 +17,7 @@ function Vendre() {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: 2,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
@@ -25,7 +25,7 @@ function Vendre() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
