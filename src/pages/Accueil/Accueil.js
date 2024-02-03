@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ImgPremierePlan from '../../assets/images/immobilier.png'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 import ImgImmeuble from '../../assets/images/united-states-spokane.jpg'
+import ImgDressing from '../../assets/images/image_dressing.jpg'
+import IngChambre from '../../assets/images/image_chambre.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
@@ -19,18 +21,20 @@ import CardAvis from '../../components/CardAvis/CardAvis'
 
 function Accueil() {
   const sliderRef = useRef(null)
+  const [handleHover, setHandleHover] = useState(false)
+
   // const sliderRef2 = useRef(null)
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: 2,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
@@ -137,7 +141,8 @@ function Accueil() {
 
       <div className={styles.presentationSection}>
         <div className={styles.LeftContent}>
-          <img src={ImgImmeuble} alt='img immeuble' />
+          <img src={ImgDressing} alt='img dressing' />
+          <img src={IngChambre} alt='img immeuble' />
         </div>
 
         <div className={styles.RightContent}>
@@ -179,11 +184,14 @@ function Accueil() {
 
       <div className={styles.widget}>
         <div className={styles.NouveautesContainer}>
-          {/* <h3>De nouvelles histoires</h3> */}
+          <h3>De nouvelles histoires</h3>
 
-          <div className={styles.titleEslideBtn}>
-            <h3>De nouvelles histoires</h3>
-            <div className={styles.slideButton}>
+          {handleHover && (
+            <div
+              className={styles.slideButton}
+              onMouseEnter={() => setHandleHover(true)}
+              onMouseLeave={() => setHandleHover(false)}
+            >
               <div onClick={slidePrev}>
                 <FontAwesomeIcon icon={faArrowLeft} />
               </div>
@@ -191,14 +199,20 @@ function Accueil() {
                 <FontAwesomeIcon icon={faArrowRight} />
               </div>
             </div>
-          </div>
+          )}
 
-          <Slider ref={sliderRef} {...settings}>
-            <CardSlider />
-            <CardSlider />
-            <CardSlider />
-            <CardSlider />
-          </Slider>
+          {/* slider  */}
+          <div
+            onMouseEnter={() => setHandleHover(true)}
+            onMouseLeave={() => setHandleHover(false)}
+          >
+            <Slider ref={sliderRef} {...settings}>
+              <CardSlider />
+              <CardSlider />
+              <CardSlider status='sous-compromis' />
+              <CardSlider status='vendu' />
+            </Slider>
+          </div>
 
           <div className={styles.btnContainer}>
             <Link to='/marli/acheter'>Découvrir toutes nos histoires</Link>
@@ -272,16 +286,18 @@ function Accueil() {
       </div>
 
       <div className={styles.investerSection}>
-        <h2>INVESTIR DANS L’IMMOBILIER</h2>
-        <ul>
-          <li>Accompagnement, étude de rentabilité.</li>
-          <li>Recherche de biens en France et au Sénégal.</li>
-          <li>
-            Sénégal, destination soleil durant toute l’année, pour vous dénicher
-            le bien qui correspond à vos attentes.
-          </li>
-        </ul>
-        <Link to='nous-contacter'>Nous contacter</Link>
+        <div>
+          <h2>INVESTIR DANS L’IMMOBILIER</h2>
+          <ul>
+            <li>Accompagnement, étude de rentabilité.</li>
+            <li>Recherche de biens en France et au Sénégal.</li>
+            <li>
+              Sénégal, destination soleil durant toute l’année, pour vous
+              dénicher le bien qui correspond à vos attentes.
+            </li>
+          </ul>
+          <Link to='nous-contacter'>Nous contacter</Link>
+        </div>
       </div>
 
       <div className={styles.AvisSection}>
@@ -300,9 +316,9 @@ function Accueil() {
         </Slider>
 
         <div className={styles.btnSection}>
-          <Link>
+          {/* <Link>
             <button>Voir plus d’avis</button>
-          </Link>
+          </Link> */}
           <Link>
             <button>Déposer mon avis</button>
           </Link>

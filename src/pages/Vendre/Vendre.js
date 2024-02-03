@@ -99,10 +99,10 @@ function Vendre() {
       <div className={styles.BienVenduContainer}>
         <h3>Nos biens vendus</h3>
         <Slider ref={sliderRef} {...settings}>
-          <CardSlider status='Vendu' />
-          <CardSlider status='Vendu' />
-          <CardSlider status='Vendu' />
-          <CardSlider status='Vendu' />
+          <CardSlider status='vendu' />
+          <CardSlider status='vendu' />
+          <CardSlider status='vendu' />
+          <CardSlider status='vendu' />
         </Slider>
       </div>
     </div>

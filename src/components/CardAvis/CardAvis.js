@@ -9,9 +9,7 @@ function CardAvis({ avis }) {
     <>
       <div className={styles.allContainer}>
         <div className={styles.imgContainer}>
-          <div>
-            <img src='' alt='img-user' />
-          </div>
+          <div>{avis && avis.urlImg && <img src='' alt='img-user' />}</div>
         </div>
 
         <div className={styles.textContainer}>
