@@ -1,14 +1,15 @@
 @import "../../assets/styles/variables";
 
 .allContainer{
-    h2{
-        margin-top: 50px;
-    }
-    
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/image_chateau.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    
+    h2{
+        margin-top: 50px;
+    }
+    
     .formContainer{
         padding: 100px 25%;
         h3{

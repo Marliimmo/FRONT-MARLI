@@ -1,0 +1,359 @@
+@import "../../assets/styles/variables";
+
+.allContainer{
+    padding: 50px 10%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/image_vague_noir.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .imageContainer{
+        position: relative;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        margin-bottom: 35px;
+        display: flex;
+        justify-content: space-between;
+        column-gap: 20px;
+
+        div{
+            &:nth-child(2){
+                div {
+                    &:nth-child(1){
+                        div{
+                            &:nth-child(1){
+                                column-gap: 0px !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        img{
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .CrousselContainer{
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            flex: 1 0 500px;
+
+            &:hover{
+                .slideButton{
+                    display: flex;
+                }
+            }
+
+            .slideButton{
+                width: 100%;
+                display: none;
+                justify-content: space-between;
+                position: absolute;
+                top: 42%;
+                left: 0;
+                padding: 0px 10px;
+    
+                div{
+                    cursor: pointer;
+                    width: 60px;
+                    height: 60px;
+                    min-width: 60px;
+                    min-height: 60px;
+                    background-color: $white-color;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    z-index: 10;
+                    border-radius: 100px;
+                    transition: all 500ms;
+                    
+                    svg{
+                        font-size: 25px;
+                        color: $gray-color;
+                    }
+                }
+            }    
+
+            .fullScreenIcone{
+                cursor: pointer;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                min-height: 40px;
+                background-color: $white-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                z-index: 10;
+                border-radius: 100px;
+                
+                svg{
+                    font-size: 20px;
+                    color: $gray-color;
+                }
+            }
+        }
+
+        .galerieMiniature{
+            overflow: hidden;
+            justify-content: space-between;
+            height: 400px;
+            overflow-y: scroll;
+            flex : 1 0 200px;
+            
+            img{
+                width: 46%;
+                height: 120px;
+                min-width: 46%;
+                min-height: 120px;
+                object-fit: cover;
+                border-radius: 10px;
+                cursor: pointer;
+                margin: 0px 3% 3% 0px;
+
+                &:hover{
+                    border: 2px solid $white-color;
+                }
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .CrousselContainer{
+                width: 100%;
+                flex: 1;
+                
+                .slideButton{
+                    display: flex;
+                }
+            }
+
+            .galerieMiniature{
+                display: none;
+            }
+        }
+    }
+
+    .detailsBien{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        h3{
+            font-size: 25px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        p{
+            line-height: 28px;
+            font-size: 17px;
+            font-weight: 300;
+        }
+
+        .histoireContainer{
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            flex: 1 0 500px;
+            background: rgba(255, 255, 255, 0.13);
+
+            @media screen and (max-width: 650px) {
+                flex: 1 1 100%;
+            }
+        }
+
+        .RightContainer{
+            flex: 1 0 200px;
+            margin-top: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            p{
+                line-height: 25px;
+                margin: 8px 0px;
+            }
+            
+            .prixElocalisation{
+                flex: 1 0 45%;
+                border-radius: 15px;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.13);
+
+                p{
+                    text-transform: uppercase;
+                }
+            }
+            
+            .caracteristique{
+                flex: 1 0 45%;
+                h3{
+                    font-size: 25px;
+                    letter-spacing: 1px;
+                }
+
+                border-radius: 15px;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.13);
+            }
+        }
+    }
+
+    .sectionRef{
+        width: 100%;
+        text-align: center;
+        padding: 40px 0px 30px 0px;
+
+        p{
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .btnSection{
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 50px;
+    
+            a{
+                width: fit-content;
+                button{
+                    padding: 20px 35px;
+                    border: 1px solid $white-color;
+                    border-radius: 100px;
+                    letter-spacing: 1.3px;
+                    font-size: 17px;
+                    color: $white-color;
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+            }
+    
+        }
+    }
+
+    .sliderFullScreen{
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: 100dvh;
+        z-index: 90;
+        display: flex;
+        justify-content: center;
+        background-color: $gray-color;
+
+        div{
+            &:nth-child(2){
+                div {
+                    &:nth-child(1){
+                        div{
+                            &:nth-child(1){
+                                column-gap: 0px !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .slideButton{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 40%;
+            left: 0;
+            padding: 0px 10px;
+
+            div{
+                cursor: pointer;
+                width: 60px;
+                height: 60px;
+                min-width: 40px;
+                min-height: 60px;
+                background-color: $white-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                z-index: 10;
+                border-radius: 100px;
+                
+                svg{
+                    font-size: 25px;
+                    color: $gray-color;
+                }
+            }
+        }
+
+        .sliderContainer{
+            width: 100%;
+            height: 100dvh;
+            img{
+                object-fit: contain;
+                height: 100dvh;
+            }
+        }
+
+        .closeSliderButton{
+            position: fixed;
+            top: 76px;
+            right: 0;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            min-height: 50px;
+            background-color: $white-color;
+            border: 1px solid $white-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 10;
+            
+            svg{
+                font-size: 25px;
+                color: $gray-color;
+            }
+
+            &:hover{
+                transition: all 300ms;
+                background-color: transparent;
+                svg{
+                    color: $white-color;
+                }
+            }
+        }
+        
+        @media screen and (max-width: 750px) {
+            top: 0px;
+            .sliderContainer{
+                margin-top: 40px;
+                top: 50dvh;
+            }
+        }
+
+    }
+
+    @media screen and (max-width: 750px) {
+        padding: 50px 30px;
+    }
+}

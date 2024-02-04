@@ -9,7 +9,7 @@ import WhatsAppIcone from '../../assets/images/whatsapp.svg'
 
 function NousContacter() {
   return (
-    <div className={styles.allContainer}>
+    <div className={`fadinAnimation ${styles.allContainer}`}>
       {/* <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' /> */}
 
       <div className={styles.coodonneeContainer}>
