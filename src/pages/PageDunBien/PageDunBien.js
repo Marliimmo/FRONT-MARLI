@@ -11,6 +11,7 @@ import {
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import CardSlider from '../../components/CardSlider/CardSlider'
 import Image1 from '../../assets/images/image_chambre.jpg'
 import Image2 from '../../assets/images/image_chateau.jpg'
 import Image3 from '../../assets/images/image_de_pont.jpg'
@@ -30,6 +31,43 @@ function PageDunBien() {
     slidesToShow: 1,
     initialSlide: currentIndex,
     afterChange: (index) => setCurrentIndex(index),
+  }
+
+  const settingsBienRecommander = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 1,
+    slidesToShow: 2,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   }
 
   const slidePrev = () => {
@@ -182,6 +220,16 @@ function PageDunBien() {
             </div>
           </div>
         )}
+      </div>
+
+      <div className={styles.BienRecommandeContainer}>
+        <h3>Biens qui pourraient vous plaire</h3>
+        <Slider {...settingsBienRecommander}>
+          <CardSlider />
+          <CardSlider />
+          <CardSlider />
+          <CardSlider />
+        </Slider>
       </div>
     </>
   )
