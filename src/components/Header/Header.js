@@ -3,7 +3,7 @@ import styles from './Header.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 import { Link, NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHollyBerry } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
   const [sousMenu, setSousMenu] = useState(false)
@@ -81,8 +81,8 @@ function Header() {
           </div>
 
           <div className={styles.iconApropos}>
-            <Link>
-              <FontAwesomeIcon icon={faHollyBerry} />
+            <Link to='/marli/a-propos'>
+              <FontAwesomeIcon icon={faInfoCircle} />
             </Link>
           </div>
 

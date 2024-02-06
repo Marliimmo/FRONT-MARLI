@@ -10,6 +10,7 @@ import NousContacter from './pages/Nous_Contacter/NousContacter.js'
 import PageDunBien from './pages/PageDunBien/PageDunBien.js'
 import MentionsLegales from './pages/MentionsLegales/MentionsLegales.js'
 import Honoraires from './pages/Honoraires/Honoraires.js'
+import APropos from './pages/A_Propos/A_Propos.js'
 
 // page d'erreur
 import NotFound from './not-found'
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: '/marli/honoraires',
         element: <Honoraires />,
+      },
+      {
+        path: '/marli/a-propos',
+        element: <APropos />,
       },
     ],
   },

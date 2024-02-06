@@ -1,0 +1,100 @@
+@import "../../assets/styles/variables";
+
+.allContainer{
+    padding: 50px 10%;
+    font-size: 1.2em;
+    font-weight: 200;
+    line-height: 30px;
+
+    .borderStyle{
+        border-top: 3px solid $white-color;
+        width: 35%;
+        padding-top: 30px;
+    }
+
+    .presentationFondatrice{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: row-reverse;
+        gap: 30px;
+        margin-bottom: 80px;
+
+        .textContent{
+            flex: 1 0 65%;
+            padding-right: 100px;
+        }
+
+        .imageContainer{
+            flex: 1 0 30%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+            align-items: flex-end;
+            
+            div{
+                text-transform: uppercase;
+                margin-right: -20px;
+                h3{
+                    font-size: 30px;
+                }
+    
+                p{
+                    margin: 8px 0px;
+                    letter-spacing: 0.4px;
+                }
+            }
+        }
+    }
+
+    .presentationMarli{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+
+        .marliLogoContainer{
+            flex: 1 0 40%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: gray;
+            text-align: center;
+            padding: 50px 0px;
+
+            img{
+                width: 150px;
+            }
+
+            p{
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 17px;
+            }
+
+        }
+
+        .textContent{
+            flex: 1 0 55%;
+        }
+    }
+
+    @media screen and (max-width: 750px) {
+        padding: 50px 30px;
+        font-size: 1em;
+
+        .presentationFondatrice{
+            img{
+                object-fit: contain;
+                max-width: 70%;
+            }
+
+            .textContent{
+                padding-right: 0;
+            }
+        }
+    }
+}
