@@ -54,3 +54,130 @@
         padding: 50px 30px;
     }
 }
+
+.BienContainer{
+    padding: 50px 10%;
+
+    .showFiltre{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid $white-color;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+        cursor: pointer;
+        p{
+            margin: 0;
+        }
+    }
+
+    .filtreContainer{
+        display: flex;
+        column-gap: 20px;
+
+        input{
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            padding: 10px 2px;
+            font-size: 16px;
+            font-weight: 300;
+            color: $white-color;
+            border-bottom: 1px solid $white-color;
+            margin-bottom: 40px;
+            appearance: textfield;
+
+            &::placeholder{
+                color: $white-color;
+            }
+        }
+
+        select{
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            padding: 10px 2px;
+            font-size: 16px;
+            font-weight: 300;
+            color: $white-color;
+            border-bottom: 1px solid $white-color;
+            margin-bottom: 40px;
+
+            option{
+                color: $gray-color;
+            }
+        }
+
+        .btnSearchContainer{
+            width: 35px;
+            height: 35px;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $white-color;
+            border: 1px solid $white-color;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            svg{
+                color: $gray-color;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            flex-direction: column;
+            display: none;
+
+            .btnSearchContainer{
+                color: $gray-color;
+                width: fit-content;
+                span{
+                    margin-right: 20px;
+                }
+            }
+        }
+
+        @media screen and (min-width: 701px) {
+            .btnSearchContainer{
+                span{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .ListeDBien{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+
+    .showMoreBtn{
+        margin: 50px 0px;
+        text-align: center;
+        
+        button{
+            font-size: 18px;
+            font-weight: 400;
+            background-color: $white-color;
+            border: 1px solid $white-color;
+            padding: 15px 35px;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+    }
+
+    @media screen and (max-width: 750px) {
+        padding: 40px 30px;
+    }
+
+    @media screen and (min-width: 701px) {
+        .showFiltre{
+            display: none;
+        }
+    }
+}
