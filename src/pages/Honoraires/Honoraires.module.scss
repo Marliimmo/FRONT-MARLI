@@ -1,0 +1,48 @@
+@import "../../assets/styles/variables";
+
+.allContainer{
+    text-align: center;
+    padding: 50px 10%;
+
+    .content{
+        border: 1px solid $white-color;
+        border-radius: 15px;
+        overflow: hidden;
+
+        .title{
+            background-color: $white-color;
+            padding: 30px;
+            color: $gray-color;
+        }
+
+        h2{
+            font-size: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    
+        .tarif{    
+            p{
+                font-size: 18px;
+                border-bottom: 1px solid $white-color;
+                padding-bottom: 20px;
+                font-weight: 300;
+
+                &:nth-child(5){
+                    border-bottom: 0px;
+                    padding-bottom: 0px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 750px) {
+        padding: 30px;
+
+        .content{
+            h2{
+                font-size: 25px;
+            }
+        }
+    }
+}
