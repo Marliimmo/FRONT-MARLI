@@ -1,6 +1,8 @@
 @import "../../assets/styles/variables";
 
 .allContainer{
+    position: relative;
+    z-index: 8;
     padding: 50px 10%;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/image_vague_noir.jpg");
     background-size: cover;
