@@ -55,10 +55,7 @@ function Footer() {
                 <Link to='/marli/nous-contacter'>Nous contacter</Link>
               </p>
               <p>
-                <Link to='#'>Mentions légales</Link>
-              </p>
-              <p>
-                <Link to='#'>Politique de confidentialité</Link>
+                <Link to='/marli/mentions-legales'>Mentions légales</Link>
               </p>
             </div>
           </div>

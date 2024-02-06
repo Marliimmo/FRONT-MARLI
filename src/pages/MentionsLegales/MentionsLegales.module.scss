@@ -1,0 +1,26 @@
+.allContainer{
+    padding: 50px 10%;
+
+    h2{
+        font-size: 30px;
+        margin-bottom: 30px;
+        font-weight: 500;
+    }
+
+    h3{
+        font-size: 20px;
+        margin-top: 30px;
+        font-weight: 500;
+    }
+
+    p{
+        font-weight: 200;
+        line-height: 28px;
+        font-size: 16px;
+        letter-spacing: 0.3px;
+    }
+
+    @media screen and (max-width: 750px) {
+        padding: 30px;
+    }
+}
