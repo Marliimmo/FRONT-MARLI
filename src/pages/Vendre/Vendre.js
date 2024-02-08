@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/united-states-spokane.jpg'
 import styles from './Vendre.module.scss'
@@ -12,6 +12,7 @@ import FormVendreOuRecherche from '../../components/FormVendreOuRecherche/FormVe
 
 function Vendre() {
   const sliderRef = useRef(null)
+  const [dataBienVendu, setDataBienVendu] = useState([])
   const settings = {
     dots: false,
     infinite: true,
@@ -48,6 +49,20 @@ function Vendre() {
       },
     ],
   }
+
+  useEffect(() => {
+    const fecthBienVendu = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/bien/all-biens?status=vendu&pageSize=5`,
+      )
+      if (response.ok) {
+        const result = await response.json()
+        setDataBienVendu(result.biens)
+      }
+    }
+
+    fecthBienVendu()
+  }, [])
   return (
     <div>
       <FirstSectionPage
@@ -96,15 +111,24 @@ function Vendre() {
         <FormVendreOuRecherche context='vendre' />
       </div>
 
-      <div className={styles.BienVenduContainer}>
-        <h3>Nos biens vendus</h3>
-        <Slider ref={sliderRef} {...settings}>
-          <CardSlider status='vendu' />
-          <CardSlider status='vendu' />
-          <CardSlider status='vendu' />
-          <CardSlider status='vendu' />
-        </Slider>
-      </div>
+      {dataBienVendu.length > 0 && (
+        <div className={styles.BienVenduContainer}>
+          <h3>Nos biens vendus</h3>
+          <Slider ref={sliderRef} {...settings}>
+            {dataBienVendu.map((bien) => (
+              <CardSlider
+                key={bien.ref}
+                image={bien?._medias?.image_galerie_0?.url}
+                price={bien?.prix}
+                localisation={bien?.localisation}
+                caracteristiques={bien?.caracteristiques}
+                status={bien?.status}
+                reference={bien?.ref}
+              />
+            ))}
+          </Slider>
+        </div>
+      )}
     </div>
   )
 }

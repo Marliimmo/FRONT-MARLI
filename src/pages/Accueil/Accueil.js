@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ImgPremierePlan from '../../assets/images/immobilier.png'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
@@ -22,6 +22,7 @@ import CardAvis from '../../components/CardAvis/CardAvis'
 function Accueil() {
   const sliderRef = useRef(null)
   const [handleHover, setHandleHover] = useState(false)
+  const [dataBienNouveau, setDataBienNouveau] = useState([])
 
   // const sliderRef2 = useRef(null)
   const settings = {
@@ -119,6 +120,20 @@ function Accueil() {
   //   }
   // }
 
+  useEffect(() => {
+    const fecthBienDisponible = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&pageSize=5`,
+      )
+      if (response.ok) {
+        const result = await response.json()
+        setDataBienNouveau(result.biens)
+      }
+    }
+
+    fecthBienDisponible()
+  }, [])
+
   return (
     <div className={`fadinAnimation`}>
       <div className={styles.firstSectionContainer}>
@@ -186,7 +201,7 @@ function Accueil() {
         <div className={styles.NouveautesContainer}>
           <h3>De nouvelles histoires</h3>
 
-          {handleHover && (
+          {dataBienNouveau.length > 2 && handleHover && (
             <div
               className={styles.slideButton}
               onMouseEnter={() => setHandleHover(true)}
@@ -207,10 +222,17 @@ function Accueil() {
             onMouseLeave={() => setHandleHover(false)}
           >
             <Slider ref={sliderRef} {...settings}>
-              <CardSlider />
-              <CardSlider />
-              <CardSlider status='sous-compromis' />
-              <CardSlider status='vendu' />
+              {dataBienNouveau.map((bien) => (
+                <CardSlider
+                  key={bien.ref}
+                  image={bien?._medias?.image_galerie_0?.url}
+                  price={bien?.prix}
+                  localisation={bien?.localisation}
+                  caracteristiques={bien?.caracteristiques}
+                  status={bien?.status}
+                  reference={bien?.ref}
+                />
+              ))}
             </Slider>
           </div>
 

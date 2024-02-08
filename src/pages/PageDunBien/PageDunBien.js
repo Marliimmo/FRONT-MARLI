@@ -18,8 +18,10 @@ function PageDunBien() {
   const sliderRefFullScreen = useRef(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [fullScreen, setFullScreen] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { reference } = useParams()
   const [data, setData] = useState([])
+  const [dataBienDispo, setDataBienDispo] = useState([])
 
   const settings = {
     dots: false,
@@ -98,26 +100,41 @@ function PageDunBien() {
     }
 
     try {
-      const feacthData = async () => {
+      const fecthData = async () => {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/bien/get-one?ref=${reference}`,
         )
         if (response.ok) {
           const result = await response.json()
           setData(result)
+          setLoading(false)
+        } else {
+          setLoading(false)
         }
       }
 
-      feacthData()
+      const fecthBienDisponible = async () => {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible`,
+        )
+        if (response.ok) {
+          const result = await response.json()
+          setDataBienDispo(result.biens)
+        }
+      }
+
+      fecthBienDisponible()
+      fecthData()
     } catch (error) {
       console.log('Erreur lors de la requette fecth', error)
+      setLoading(false)
     }
   }, [currentIndex, reference])
 
   return (
     <>
       <div className={`fadinAnimation ${styles.allContainer}`}>
-        {data.length <= 0 ? (
+        {loading ? null : data.length <= 0 ? (
           <p className={styles.notFoundBien}>Aucun bien trouver</p>
         ) : (
           <>
@@ -258,15 +275,26 @@ function PageDunBien() {
         )}
       </div>
 
-      <div className={styles.BienRecommandeContainer}>
-        <h3>Biens qui pourraient vous plaire</h3>
-        <Slider {...settingsBienRecommander}>
-          <CardSlider />
-          <CardSlider />
-          <CardSlider />
-          <CardSlider />
-        </Slider>
-      </div>
+      {dataBienDispo.length > 0 && (
+        <div className={styles.BienRecommandeContainer}>
+          <h3>Biens qui pourraient vous plaire</h3>
+          <Slider {...settingsBienRecommander}>
+            {dataBienDispo.map((bien) =>
+              bien?.ref !== reference ? (
+                <CardSlider
+                  key={bien.ref}
+                  image={bien?._medias?.image_galerie_0?.url}
+                  price={bien?.prix}
+                  localisation={bien?.localisation}
+                  caracteristiques={bien?.caracteristiques}
+                  status={bien?.status}
+                  reference={bien?.ref}
+                />
+              ) : null,
+            )}
+          </Slider>
+        </div>
+      )}
     </>
   )
 }
