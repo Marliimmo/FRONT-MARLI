@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './PageDunBien.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
@@ -12,16 +12,14 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import CardSlider from '../../components/CardSlider/CardSlider'
-import Image1 from '../../assets/images/image_chambre.jpg'
-import Image2 from '../../assets/images/image_chateau.jpg'
-import Image3 from '../../assets/images/image_de_pont.jpg'
-import Image4 from '../../assets/images/image_dressing.jpg'
 
 function PageDunBien() {
   const sliderRef = useRef(null)
   const sliderRefFullScreen = useRef(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [fullScreen, setFullScreen] = useState(false)
+  const { reference } = useParams()
+  const [data, setData] = useState([])
 
   const settings = {
     dots: false,
@@ -98,127 +96,165 @@ function PageDunBien() {
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(currentIndex)
     }
-  }, [currentIndex])
+
+    try {
+      const feacthData = async () => {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/get-one?ref=${reference}`,
+        )
+        if (response.ok) {
+          const result = await response.json()
+          setData(result)
+        }
+      }
+
+      feacthData()
+    } catch (error) {
+      console.log('Erreur lors de la requette fecth', error)
+    }
+  }, [currentIndex, reference])
 
   return (
     <>
       <div className={`fadinAnimation ${styles.allContainer}`}>
-        <div className={styles.imageContainer}>
-          <div className={styles.CrousselContainer}>
-            <div className={styles.slideButton}>
-              <div onClick={slidePrev}>
-                <FontAwesomeIcon icon={faChevronLeft} />
+        {data.length <= 0 ? (
+          <p className={styles.notFoundBien}>Aucun bien trouver</p>
+        ) : (
+          <>
+            {data?._medias?.image_galerie_0?.url && (
+              <div className={styles.imageContainer}>
+                <div className={styles.CrousselContainer}>
+                  <div className={styles.slideButton}>
+                    <div onClick={slidePrev}>
+                      <FontAwesomeIcon icon={faChevronLeft} />
+                    </div>
+                    <div onClick={slideNext}>
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </div>
+                  </div>
+
+                  {/* slider  */}
+                  <div className={styles.sliderContainer}>
+                    <Slider ref={sliderRef} {...settings}>
+                      {data._medias &&
+                        Object.keys(data._medias).map((key, index) => {
+                          const media = data._medias[key]
+                          if (media.url) {
+                            return (
+                              <img
+                                key={index}
+                                src={`${process.env.REACT_APP_URL_BASE_IMAGE}${media.url}`}
+                                alt={`imag slider ${index + 1}`}
+                              />
+                            )
+                          }
+                          return null
+                        })}
+                    </Slider>
+                  </div>
+
+                  <div
+                    className={styles.fullScreenIcone}
+                    onClick={() => setFullScreen(!fullScreen)}
+                    title='Plein ecran'
+                  >
+                    <FontAwesomeIcon icon={faExpand} />
+                  </div>
+                </div>
+
+                <div className={styles.galerieMiniature}>
+                  {data._medias &&
+                    Object.keys(data._medias).map((key, index) => {
+                      const media = data._medias[key]
+                      if (media.url) {
+                        return (
+                          <img
+                            key={index}
+                            src={`${process.env.REACT_APP_URL_BASE_IMAGE}${media.url}`}
+                            alt={`imag slider ${index + 1}`}
+                            onClick={() => setCurrentIndex(index)}
+                          />
+                        )
+                      }
+                      return null
+                    })}
+                </div>
               </div>
-              <div onClick={slideNext}>
-                <FontAwesomeIcon icon={faChevronRight} />
+            )}
+
+            <div className={styles.detailsBien}>
+              <div className={styles.histoireContainer}>
+                <h3>L’histoire de ce bien</h3>
+                <p style={{ whiteSpace: 'pre-line' }}>{data.histoire}</p>
               </div>
-            </div>
 
-            {/* slider  */}
-            <div className={styles.sliderContainer}>
-              <Slider ref={sliderRef} {...settings}>
-                {[Image1, Image2, Image3, Image4].map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`imag slider ${index + 1}`}
-                  />
-                ))}
-              </Slider>
-            </div>
+              <div className={styles.RightContainer}>
+                <div className={styles.prixElocalisation}>
+                  <h3>{data.prix.toLocaleString('fr-FR')} €</h3>
+                  <p>{data.localisation}</p>
+                  <p>{data.title}</p>
+                </div>
 
-            <div
-              className={styles.fullScreenIcone}
-              onClick={() => setFullScreen(!fullScreen)}
-              title='Plein ecran'
-            >
-              <FontAwesomeIcon icon={faExpand} />
-            </div>
-          </div>
-
-          <div className={styles.galerieMiniature}>
-            {[Image1, Image2, Image3, Image4].map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`imag slider ${index + 1}`}
-                onClick={() => setCurrentIndex(index)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.detailsBien}>
-          <div className={styles.histoireContainer}>
-            <h3>L’histoire de ce bien</h3>
-            <p>
-              Son histoire est commune à celle de ses 3 voisines par leur
-              jeunesse, crée en 2014, leur position géographique en cœur de
-              ville et aujourd’hui leur première commercialisation. Au calme,
-              avec un accès en retrait de la rue, ils forment une petite
-              copropriété de 4 appartements sans charges de fonctionnement
-              communes. Ils ont chacun leur propre cachet et identité.
-            </p>
-          </div>
-
-          <div className={styles.RightContainer}>
-            <div className={styles.prixElocalisation}>
-              <h3>250 000 €</h3>
-              <p>DAKAR, Sénégal</p>
-              <p>A VOS CALCULETTES</p>
-            </div>
-
-            <div className={styles.caracteristique}>
-              <h3>Caractéristiques</h3>
-              <p>- Immeuble</p>
-              <p>- 520 m²</p>
-              <p>- 3 F4, 1 F3</p>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.sectionRef}>
-          <p>Intéressé(e) par ce bien ? Contacter-nous.</p>
-          <p className={styles.reference}>REF : YUT782</p>
-
-          <div className={styles.btnSection}>
-            <Link to='/marli/nous-contacter'>
-              <button>Nous contacter</button>
-            </Link>
-          </div>
-        </div>
-
-        {fullScreen && (
-          <div className={styles.sliderFullScreen}>
-            <div className={styles.slideButton}>
-              <div onClick={slidePrevFullScreen}>
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </div>
-              <div onClick={slideNextFullScreen}>
-                <FontAwesomeIcon icon={faChevronRight} />
+                <div className={styles.caracteristique}>
+                  <h3>Caractéristiques</h3>
+                  {data?.caracteristiques.split('#').map((value) => (
+                    <p>- {value}</p>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* slider  */}
-            <div className={styles.sliderContainer}>
-              <Slider ref={sliderRefFullScreen} {...settings}>
-                {[Image1, Image2, Image3, Image4].map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`imag slider ${index + 1}`}
-                  />
-                ))}
-              </Slider>
+            <div className={styles.sectionRef}>
+              <p>Intéressé(e) par ce bien ? Contacter-nous.</p>
+              <p className={styles.reference}>REF : {reference}</p>
+
+              <div className={styles.btnSection}>
+                <Link to='/marli/nous-contacter'>
+                  <button>Nous contacter</button>
+                </Link>
+              </div>
             </div>
 
-            <div
-              className={styles.closeSliderButton}
-              onClick={() => setFullScreen(!fullScreen)}
-            >
-              <FontAwesomeIcon icon={faXmark} />
-            </div>
-          </div>
+            {fullScreen && (
+              <div className={styles.sliderFullScreen}>
+                <div className={styles.slideButton}>
+                  <div onClick={slidePrevFullScreen}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                  </div>
+                  <div onClick={slideNextFullScreen}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </div>
+                </div>
+
+                {/* slider  */}
+                <div className={styles.sliderContainer}>
+                  <Slider ref={sliderRefFullScreen} {...settings}>
+                    {data._medias &&
+                      Object.keys(data._medias).map((key, index) => {
+                        const media = data._medias[key]
+                        if (media.url) {
+                          return (
+                            <img
+                              key={index}
+                              src={`${process.env.REACT_APP_URL_BASE_IMAGE}${media.url}`}
+                              alt={`imag slider ${index + 1}`}
+                            />
+                          )
+                        }
+                        return null
+                      })}
+                  </Slider>
+                </div>
+
+                <div
+                  className={styles.closeSliderButton}
+                  onClick={() => setFullScreen(!fullScreen)}
+                >
+                  <FontAwesomeIcon icon={faXmark} />
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
 

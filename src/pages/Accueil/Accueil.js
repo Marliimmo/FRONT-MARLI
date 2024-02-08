@@ -149,8 +149,8 @@ function Accueil() {
           <p className={styles.borderStyle}></p>
           <p>
             Nous souhaitons jouer un rôle de facilitateur dans l’accomplissement
-            de votre projet immobilier desa conception à son aboutissement.Votre
-            satisfaction sera notre première gratitude.
+            de votre projet immobilier de sa conception à son aboutissement.
+            Votre satisfaction sera notre première gratitude.
           </p>
 
           <p>A vous d’écrire la suite de l’histoire</p>

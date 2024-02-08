@@ -218,6 +218,10 @@
         text-align: center;
         padding: 40px 0px 30px 0px;
 
+        // .reference{
+        //     text-transform: uppercase;
+        // }
+
         p{
             font-size: 18px;
             font-style: italic;
@@ -382,4 +386,17 @@
             margin-bottom: 30px;
         }
     }
+}
+
+.notFoundBien{
+    width: 100%;
+    min-height: 30dvh;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+    margin-top: 70px;
+    font-size: 30px;
+    font-weight: 500;
+    color: $white-color;
 }

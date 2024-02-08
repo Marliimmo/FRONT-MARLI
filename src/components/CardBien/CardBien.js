@@ -1,22 +1,24 @@
 import React from 'react'
 import styles from './CardBien.module.scss'
-import Image from '../../assets/images/image_chambre.jpg'
 import { Link } from 'react-router-dom'
 
 function CardBien({
   imgUrl,
   prix,
-  loaclisation,
+  localisation,
   caracteristique,
   title,
-  idBien,
   status,
+  reference,
 }) {
   return (
-    <Link to={`/marli/bien/1234`}>
+    <Link to={`/marli/bien/${reference}`}>
       <div className={styles.allContainer}>
         <div className={styles.imageContainer}>
-          <img src={Image} alt='imag-bien' />
+          <img
+            src={`${process.env.REACT_APP_URL_BASE_IMAGE}${imgUrl}`}
+            alt='imag-bien'
+          />
           <div
             style={
               status === 'vendu'
@@ -37,30 +39,20 @@ function CardBien({
 
         <div className={styles.detailsContainer}>
           <div>
-            <h4 className={styles.localisation}>Dakar, Sénégal</h4>
-            <p className={styles.titleBien}>A VOS CALCULETTES</p>
+            <h4 className={styles.localisation}>{localisation}</h4>
+            <p className={styles.titleBien}>{title}</p>
 
             <div className={styles.partialCarteristique}>
-              <div className={styles.oneCaractq}>
-                <p></p>
-                <p>Immeuble</p>
-              </div>
-              <div className={styles.oneCaractq}>
-                <p></p>
-                <p>Immeuble</p>
-              </div>
-              <div className={styles.oneCaractq}>
-                <p></p>
-                <p>Immeuble</p>
-              </div>
-              <div className={styles.oneCaractq}>
-                <p></p>
-                <p>Immeuble</p>
-              </div>
+              {caracteristique.split('#').map((value) => (
+                <div className={styles.oneCaractq}>
+                  <p></p>
+                  <p>{value}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <h3 className={styles.prix}>250 000 €</h3>
+          <h3 className={styles.prix}>{prix.toLocaleString('fr-FR')} €</h3>
         </div>
       </div>
     </Link>

@@ -3,13 +3,21 @@
 .allContainer{
     display: flex;
     border: 1px solid rgba(255, 255, 255, 0.329);
+    color: $white-color;
     border-radius: 10px;
     gap: 20px;
     padding: 5px;
     cursor: pointer;
+    animation: fadin-botom 1s ease-in-out both;
 
     .imageContainer{
         position: relative;
+        width: 500px;
+        height: 250px;
+        background-color: gray;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 12px;
+
         img{
             width: 500px;
             height: 250px;
@@ -17,6 +25,10 @@
             border-top-left-radius: 10px;
             border-bottom-left-radius: 12px;
             filter: grayscale(1);
+
+            &::before{
+                color: transparent;
+            }
         }
 
         .statusBien{
@@ -99,6 +111,10 @@
     @media screen and (max-width: 899px) {
         flex-direction: column;
         .imageContainer{
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 0px;
             img{
                 width: 100%;
                 border-top-left-radius: 10px;
@@ -110,5 +126,16 @@
         .prix{
             margin-top: 25px;
         }
+    }
+}
+
+@keyframes fadin-botom {
+    0%{
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
     }
 }

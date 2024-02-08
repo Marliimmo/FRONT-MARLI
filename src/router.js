@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
         element: <NousContacter />,
       },
       {
-        path: '/marli/bien/:id',
+        path: '/marli/bien/:reference',
         element: <PageDunBien />,
       },
       {
