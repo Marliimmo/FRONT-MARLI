@@ -78,5 +78,16 @@
             padding: 20px 35px;
             cursor: pointer;
         }
+
+        .MessageFeedBack{
+            margin-top: 25px;
+            border-radius: 5px;
+            width: fit-content;
+            padding: 15px 20px;
+            color: $white-color;
+            font-size: 18px;
+            font-weight: 500;
+        }
     }
+
 }
