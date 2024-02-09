@@ -17,47 +17,94 @@ function FormVendreOuRecherche({ context }) {
   const SubmitForm = async (e) => {
     e.preventDefault()
     setLoading(true)
-    const data = JSON.stringify({
-      localisation: localisation,
-      typeBien: typeBien,
-      superficie: superficie,
-      pieces: pieces,
-      budget: budget,
-      name: name,
-      email: email,
-      phone: phone,
-      message: message,
-    })
 
-    // avis de recherche
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/form/wanted`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: data,
-        },
-      )
-      if (response.ok) {
-        setTimeout(() => {
-          const form = document.querySelector('#form')
-          form.reset()
-          setLoading('')
-          setSuccesSend(true)
-        }, 1500)
-      } else {
+    // vente de bien
+    if (context === 'vendre') {
+      const dataSelling = JSON.stringify({
+        localisation: localisation,
+        typeBien: typeBien,
+        superficie: superficie,
+        pieces: pieces,
+        name: name,
+        email: email,
+        phone: phone,
+        message: message,
+      })
+
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/form/selling`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: dataSelling,
+          },
+        )
+        if (response.ok) {
+          setTimeout(() => {
+            const form = document.querySelector('#form')
+            form.reset()
+            setLoading('')
+            setSuccesSend(true)
+          }, 1500)
+        } else {
+          setTimeout(() => {
+            setSuccesSend(false)
+            setLoading('')
+          }, 1500)
+        }
+      } catch (error) {
         setTimeout(() => {
           setSuccesSend(false)
           setLoading('')
         }, 1500)
+        console.log('Erreur lors de la requette fecth', error)
       }
-    } catch (error) {
-      setTimeout(() => {
-        setSuccesSend(false)
-        setLoading('')
-      }, 1500)
-      console.log('Erreur lors de la requette fecth', error)
+    }
+
+    // avis de recherche
+    if (context === 'avis') {
+      const dataWanted = JSON.stringify({
+        localisation: localisation,
+        typeBien: typeBien,
+        superficie: superficie,
+        pieces: pieces,
+        budget: budget,
+        name: name,
+        email: email,
+        phone: phone,
+        message: message,
+      })
+
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/form/wanted`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: dataWanted,
+          },
+        )
+        if (response.ok) {
+          setTimeout(() => {
+            const form = document.querySelector('#form')
+            form.reset()
+            setLoading('')
+            setSuccesSend(true)
+          }, 1500)
+        } else {
+          setTimeout(() => {
+            setSuccesSend(false)
+            setLoading('')
+          }, 1500)
+        }
+      } catch (error) {
+        setTimeout(() => {
+          setSuccesSend(false)
+          setLoading('')
+        }, 1500)
+        console.log('Erreur lors de la requette fecth', error)
+      }
     }
   }
 
@@ -126,12 +173,7 @@ function FormVendreOuRecherche({ context }) {
           </div>
 
           <div>
-            {context === 'vendre' ? (
-              <>
-                <label htmlFor='file'>Joindre un fichier</label>
-                <input id='file' type='file' />
-              </>
-            ) : (
+            {context === 'vendre' ? null : (
               <>
                 <label htmlFor='budget'>Votre budget*</label> <br />
                 <input
