@@ -1,22 +1,95 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './FormVendreOuRecherche.module.scss'
 
 function FormVendreOuRecherche({ context }) {
-  const SubmitForm = (e) => {
+  const [localisation, setLocalisation] = useState('')
+  const [typeBien, setTypeBien] = useState('Autres')
+  const [superficie, setSuperficie] = useState('')
+  const [pieces, setPieces] = useState('')
+  const [budget, setBudget] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [succesSend, setSuccesSend] = useState('')
+
+  const SubmitForm = async (e) => {
     e.preventDefault()
+    setLoading(true)
+    const data = JSON.stringify({
+      localisation: localisation,
+      typeBien: typeBien,
+      superficie: superficie,
+      pieces: pieces,
+      budget: budget,
+      name: name,
+      email: email,
+      phone: phone,
+      message: message,
+    })
+
+    // avis de recherche
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/form/wanted`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: data,
+        },
+      )
+      if (response.ok) {
+        setTimeout(() => {
+          const form = document.querySelector('#form')
+          form.reset()
+          setLoading('')
+          setSuccesSend(true)
+        }, 1500)
+      } else {
+        setTimeout(() => {
+          setSuccesSend(false)
+          setLoading('')
+        }, 1500)
+      }
+    } catch (error) {
+      setTimeout(() => {
+        setSuccesSend(false)
+        setLoading('')
+      }, 1500)
+      console.log('Erreur lors de la requette fecth', error)
+    }
   }
+
   return (
     <>
-      <form onSubmit={SubmitForm}>
+      <form id='form' onSubmit={SubmitForm}>
         <label htmlFor='localisation'>Emplacement / Localisation*</label> <br />
-        <input id='localisation' type='text' required /> <br />
+        <input
+          onChange={(e) => {
+            setLocalisation(e.target.value)
+            setSuccesSend('')
+          }}
+          id='localisation'
+          type='text'
+          required
+        />
+        <br />
         <div className={styles.twoElement}>
           <div>
             <label htmlFor='typeDbien'>Type de bien*</label> <br />
-            <select id='typeDbien' required>
-              <option>Appartement</option>
-              <option>Immeuble</option>
-              <option>Maison</option>
+            <select
+              onChange={(e) => {
+                setTypeBien(e.target.value)
+                setSuccesSend('')
+              }}
+              id='typeDbien'
+              required
+            >
+              <option value='Autres'>Autres</option>
+              <option value='Appartement'>Appartement</option>
+              <option value='Immeuble'>Immeuble</option>
+              <option value='Maison'>Maison</option>
             </select>
           </div>
 
@@ -25,13 +98,31 @@ function FormVendreOuRecherche({ context }) {
               Superficie {context !== 'vendre' && 'min'} (m²)*
             </label>
             <br />
-            <input id='superficie' type='number' min={1} required />
+            <input
+              onChange={(e) => {
+                setSuperficie(e.target.value)
+                setSuccesSend('')
+              }}
+              id='superficie'
+              type='number'
+              min={1}
+              required
+            />
           </div>
         </div>
         <div className={styles.twoElement}>
           <div>
             <label htmlFor='pieces'>Nombre de pièces*</label> <br />
-            <input id='pieces' type='number' min={1} required />
+            <input
+              onChange={(e) => {
+                setPieces(e.target.value)
+                setSuccesSend('')
+              }}
+              id='pieces'
+              type='number'
+              min={1}
+              required
+            />
           </div>
 
           <div>
@@ -43,24 +134,62 @@ function FormVendreOuRecherche({ context }) {
             ) : (
               <>
                 <label htmlFor='budget'>Votre budget*</label> <br />
-                <input type='text' id='budget' required /> <br />
+                <input
+                  onChange={(e) => {
+                    setBudget(e.target.value)
+                    setSuccesSend('')
+                  }}
+                  type='text'
+                  id='budget'
+                  required
+                />
+                <br />
               </>
             )}
           </div>
         </div>
         <label htmlFor='name'>Votre nom complet*</label> <br />
-        <input type='text' id='name' required /> <br />
+        <input
+          onChange={(e) => {
+            setName(e.target.value)
+            setSuccesSend('')
+          }}
+          type='text'
+          id='name'
+          required
+        />
+        <br />
         <div className={styles.twoElement}>
           <div>
             <label htmlFor='email'>Votre e-mail*</label> <br />
-            <input id='email' type='email' required />
+            <input
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setSuccesSend('')
+              }}
+              id='email'
+              type='email'
+              required
+            />
           </div>
           <div>
             <label htmlFor='phone'>Téléphone*</label> <br />
-            <input type='phone' id='phone' required />
+            <input
+              onChange={(e) => {
+                setPhone(e.target.value)
+                setSuccesSend('')
+              }}
+              type='phone'
+              id='phone'
+              required
+            />
           </div>
         </div>
         <textarea
+          onChange={(e) => {
+            setMessage(e.target.value)
+            setSuccesSend('')
+          }}
           rows='5'
           placeholder={
             context === 'vendre'
@@ -69,7 +198,25 @@ function FormVendreOuRecherche({ context }) {
           }
         ></textarea>
         <br />
-        <button type='submit'>Envoyer</button>
+        <button type='submit'>
+          {loading ? 'Veuillez patienter...' : 'Envoyer'}
+        </button>
+        <div
+          style={
+            succesSend === false
+              ? { backgroundColor: 'red' }
+              : succesSend === true
+                ? { backgroundColor: 'green' }
+                : {}
+          }
+          className={styles.MessageFeedBack}
+        >
+          {succesSend === false
+            ? "Oups, une erreur s'est produite, verifiez vos informations saisies (email) et réessayez"
+            : succesSend === true
+              ? 'Votre message a été envoyé avec succès.'
+              : null}
+        </div>
       </form>
     </>
   )

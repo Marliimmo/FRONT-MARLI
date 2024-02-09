@@ -61,14 +61,20 @@ function FormContact() {
         <input
           id='titleMessage'
           type='text'
-          onChange={(e) => setTitleMessage(e.target.value)}
+          onChange={(e) => {
+            setTitleMessage(e.target.value)
+            setSuccesSend('')
+          }}
         />{' '}
         <br />
         <div className={styles.twoElement}>
           <label htmlFor='contextMessage'>Votre message concerne ?*</label>{' '}
           <br />
           <select
-            onChange={(e) => setMotif(e.target.value)}
+            onChange={(e) => {
+              setMotif(e.target.value)
+              setSuccesSend('')
+            }}
             id='contextMessage'
             required
           >
@@ -81,7 +87,10 @@ function FormContact() {
         </div>
         <label htmlFor='name'>Votre nom complet*</label> <br />
         <input
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value)
+            setSuccesSend('')
+          }}
           type='text'
           id='name'
           required
@@ -91,7 +100,10 @@ function FormContact() {
           <div>
             <label htmlFor='email'>Votre e-mail*</label> <br />
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setSuccesSend('')
+              }}
               id='email'
               type='email'
               required
@@ -100,7 +112,10 @@ function FormContact() {
           <div>
             <label htmlFor='phone'>Téléphone*</label> <br />
             <input
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                setPhone(e.target.value)
+                setSuccesSend('')
+              }}
               type='number'
               id='phone'
               min='0'
@@ -109,7 +124,10 @@ function FormContact() {
           </div>
         </div>
         <textarea
-          onChange={(e) => setContenu(e.target.value)}
+          onChange={(e) => {
+            setContenu(e.target.value)
+            setSuccesSend('')
+          }}
           rows='5'
           placeholder='Message*'
           required
@@ -129,7 +147,7 @@ function FormContact() {
           className={styles.MessageFeedBack}
         >
           {succesSend === false
-            ? "Oups, une erreur s'est produite, réessayez ultérieurement"
+            ? "Oups, une erreur s'est produite, verifiez vos informations saisies (email) et réessayez"
             : succesSend === true
               ? 'Votre message a été envoyé avec succès.'
               : null}
