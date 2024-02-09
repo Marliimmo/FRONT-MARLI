@@ -80,7 +80,20 @@
                         color: $gray-color;
                     }
                 }
-            }    
+            }
+            
+            .statusBien{
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                color: $white-color;
+                padding: 10px 25px;
+                border-radius: 100px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-size: 15px;
+                z-index: 1;
+            }
 
             .fullScreenIcone{
                 cursor: pointer;

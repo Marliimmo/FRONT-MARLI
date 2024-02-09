@@ -170,12 +170,35 @@ function PageDunBien() {
                     </Slider>
                   </div>
 
-                  <div
-                    className={styles.fullScreenIcone}
-                    onClick={() => setFullScreen(!fullScreen)}
-                    title='Plein ecran'
-                  >
-                    <FontAwesomeIcon icon={faExpand} />
+                  <div>
+                    {/* status bien */}
+                    {data.status !== 'disponible' && (
+                      <div
+                        style={
+                          data.status === 'vendu'
+                            ? { backgroundColor: 'red' }
+                            : data.status === 'sous-compromis'
+                              ? { backgroundColor: 'orange' }
+                              : null
+                        }
+                        className={styles.statusBien}
+                      >
+                        {data.status === 'vendu'
+                          ? 'bien vendu'
+                          : data.status === 'sous-compromis'
+                            ? 'sous compromis'
+                            : null}
+                      </div>
+                    )}
+
+                    {/* icone fullScreen */}
+                    <div
+                      className={styles.fullScreenIcone}
+                      onClick={() => setFullScreen(!fullScreen)}
+                      title='Plein ecran'
+                    >
+                      <FontAwesomeIcon icon={faExpand} />
+                    </div>
                   </div>
                 </div>
 
