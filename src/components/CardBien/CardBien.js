@@ -43,12 +43,15 @@ function CardBien({
             <p className={styles.titleBien}>{title}</p>
 
             <div className={styles.partialCarteristique}>
-              {caracteristique.split('#').map((value) => (
-                <div className={styles.oneCaractq}>
-                  <p></p>
-                  <p>{value}</p>
-                </div>
-              ))}
+              {caracteristique.split('#').map(
+                (value, index) =>
+                  index <= 3 && (
+                    <div className={styles.oneCaractq}>
+                      <p></p>
+                      <p>{value}</p>
+                    </div>
+                  ),
+              )}
             </div>
           </div>
 

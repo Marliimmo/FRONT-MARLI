@@ -32,12 +32,15 @@ function CardSlider({
         <div className={styles.partialInfoBien}>
           <h2>{localisation}</h2>
           <div className={styles.partialCarteristique}>
-            {caracteristiques.split('#').map((value) => (
-              <div className={styles.oneCaractq}>
-                <p></p>
-                <p>{value}</p>
-              </div>
-            ))}
+            {caracteristiques.split('#').map(
+              (value, index) =>
+                index <= 3 && (
+                  <div className={styles.oneCaractq}>
+                    <p></p>
+                    <p>{value}</p>
+                  </div>
+                ),
+            )}
           </div>
         </div>
       </div>
