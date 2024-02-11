@@ -63,10 +63,16 @@ function Footer() {
           <div className={styles.widgetFooter3}>
             <h2>Nos réseaux</h2>
             <div className={styles.LinkText}>
-              <Link to='https://www.facebook.com/marli.immobilier'>
+              <Link
+                target='_blank'
+                to='https://www.facebook.com/marli.immobilier'
+              >
                 <img src={FacebookIcon} alt='icon-facebook' />
               </Link>
-              <Link to='https://www.linkedin.com/company/marli-immobilier'>
+              <Link
+                target='_blank'
+                to='https://www.linkedin.com/company/marli-immobilier'
+              >
                 <img src={LinkedInIcon} alt='icone-linkedin' />
               </Link>
             </div>

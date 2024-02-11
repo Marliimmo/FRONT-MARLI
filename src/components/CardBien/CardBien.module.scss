@@ -32,11 +32,12 @@
             }
         }
 
-        .statusBien{
+        .statusBienVendu, .statusSousCompromis{
             position: absolute;
             top: 10px;
             left: 10px;
             color: $white-color;
+            background-color: $gray-color;
             padding: 10px 25px;
             border-radius: 100px;
             text-transform: uppercase;
@@ -106,6 +107,16 @@
         .imageContainer{
             img{
                 filter: grayscale(0);
+            }
+
+            .statusBienVendu{
+                background: red;
+                transform: all 200ms;
+            }
+
+            .statusSousCompromis{
+                background-color: orange;
+                transform: all 200ms;
             }
         }
     }

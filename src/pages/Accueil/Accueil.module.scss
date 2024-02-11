@@ -33,7 +33,7 @@
     }
 
     .TextContent{
-        max-width: 600px;
+        max-width: 650px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -48,13 +48,16 @@
 
         img{
             width: 150px;
+            margin-bottom: -15px;
         }
 
         h3{
             font-weight: 500;
-            font-size: 25px;
+            font-size: 23px;
             line-height: 35px;
             letter-spacing: 1px;
+            border-top: 3px solid $white-color;
+            padding-top: 15px;
         }
     }
 
@@ -273,12 +276,15 @@
             a{
                 width: fit-content;
                 padding: 20px 35px;
-                background-color: $white-color;
+                // background-color: $white-color;
+                // border: 1px solid $white-color;
+                // color: $gray-color;
                 border: 1px solid $white-color;
-                color: $gray-color;
+                color: $white-color;
                 font-size: 18px;
                 border-radius: 100px;
             }
+
         }
     }
     
@@ -302,6 +308,12 @@
                 height: 500px;
                 width: 100%;
                 object-fit: cover;
+
+            }
+
+            &:hover{
+                box-shadow: 2px 2px 100px $white-color;
+                transition: all 200ms;
             }
         }
     
@@ -341,9 +353,11 @@
             a{
                 width: fit-content;
                 padding: 20px 35px;
-                background-color: $white-color;
+                // background-color: $white-color;
+                // border: 1px solid $white-color;
+                // color: $gray-color;
                 border: 1px solid $white-color;
-                color: $gray-color;
+                color: $white-color;
                 font-size: 18px;
                 border-radius: 100px;
             }
