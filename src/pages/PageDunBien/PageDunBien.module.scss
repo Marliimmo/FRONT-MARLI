@@ -44,6 +44,8 @@
             overflow: hidden;
             border-radius: 20px;
             flex: 1 0 500px;
+            box-shadow: 0px 0px 3px $white-color;
+            
 
             &:hover{
                 .slideButton{
@@ -163,6 +165,7 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 20px;
+        margin-top: 50px;
 
         h3{
             font-size: 25px;
@@ -173,16 +176,17 @@
 
         p{
             line-height: 28px;
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 300;
         }
 
         .histoireContainer{
-            border-radius: 15px;
-            padding: 30px;
+            // border-radius: 15px;
+            // padding: 30px;
+            padding-right: 35px;
             width: 100%;
             flex: 1 0 500px;
-            background: rgba(255, 255, 255, 0.13);
+            // background: rgba(255, 255, 255, 0.13);
 
             @media screen and (max-width: 650px) {
                 flex: 1 1 100%;
@@ -195,6 +199,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            height: fit-content;
 
             p{
                 line-height: 25px;
@@ -203,9 +208,12 @@
             
             .prixElocalisation{
                 flex: 1 0 45%;
-                border-radius: 15px;
-                padding: 30px;
-                background: rgba(255, 255, 255, 0.13);
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid $white-color;
+                // border-radius: 15px;
+                // padding: 30px;
+                // background: rgba(255, 255, 255, 0.13);
 
                 p{
                     text-transform: uppercase;
@@ -218,11 +226,32 @@
                     font-size: 25px;
                     letter-spacing: 1px;
                 }
-
-                border-radius: 15px;
-                padding: 30px;
-                background: rgba(255, 255, 255, 0.13);
+                // border-radius: 15px;
+                // padding: 30px;
+                // background: rgba(255, 255, 255, 0.13);
             }
+        }
+
+        @media screen and (max-width: 594px) {
+            .RightContainer{
+                margin-top: 20px;
+                padding-top: 30px;
+                border-top: 1px solid $white-color;
+            }
+        }
+
+        @media screen and (min-width: 595px) and (max-width: 992px) {
+            .RightContainer{
+                margin-top: 20px;
+                padding-top: 20px;
+                .prixElocalisation{
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    border-bottom: 0;
+                    // margin-right: 10px;
+                    border-right: 1px solid $white-color;
+                }
+            }   
         }
     }
 
