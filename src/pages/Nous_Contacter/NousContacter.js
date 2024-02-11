@@ -15,21 +15,21 @@ function NousContacter() {
       <div className={styles.coodonneeContainer}>
         <div className={styles.coordonnee}>
           <p className={styles.iconeContainer}>
-            <FontAwesomeIcon icon={faLocationDot} />
-          </p>
-          <div>
-            <h4>Notre localisation</h4>
-            <p>2b rue des Jardins, 25 000 Besançon</p>
-          </div>
-        </div>
-
-        <div className={styles.coordonnee}>
-          <p className={styles.iconeContainer}>
             <FontAwesomeIcon icon={faPhoneFlip} />
           </p>
           <div>
             <h4>Appelez-nous</h4>
             <p>+33 6 51 31 03 81</p>
+          </div>
+        </div>
+
+        <div className={styles.coordonnee}>
+          <p className={styles.iconeContainer}>
+            <FontAwesomeIcon icon={faLocationDot} />
+          </p>
+          <div>
+            <h4>Notre localisation</h4>
+            <p>2b rue des Jardins, 25 000 Besançon</p>
           </div>
         </div>
 
