@@ -73,7 +73,7 @@ function Accueil() {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: dataReviews.length >= 3 ? 3 : dataReviews.length,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
@@ -81,13 +81,13 @@ function Accueil() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: dataReviews.length >= 3 ? 3 : dataReviews.length,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: dataReviews.length >= 2 ? 2 : dataReviews.length,
         },
       },
       {
