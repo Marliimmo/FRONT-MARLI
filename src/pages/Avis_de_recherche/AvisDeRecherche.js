@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/united-states-spokane.jpg'
 import styles from './AvisDeRecherche.module.scss'
@@ -8,9 +8,10 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Link } from 'react-router-dom'
 import CardAvisRecherche from '../../components/CardAvisRecherche/CardAvisRecherche'
-import ImageAvisSearch from '../../assets/images/Avis-de-recherche-3-1423x1080-1.jpg'
 
 function AvisDeRecherche() {
+  const [wanteds, setWanteds] = useState([])
+
   const settings = {
     dots: false,
     infinite: true,
@@ -47,6 +48,24 @@ function AvisDeRecherche() {
       },
     ],
   }
+
+  useEffect(() => {
+    try {
+      const fecthWanteds = async () => {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/get-wanteds`,
+        )
+        if (response.ok) {
+          const result = await response.json()
+          setWanteds(result)
+        }
+      }
+      fecthWanteds()
+    } catch (error) {
+      console.log('Erreur serveur', error)
+    }
+  }, [])
+
   return (
     <div className={styles.allContainer}>
       <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
@@ -55,11 +74,12 @@ function AvisDeRecherche() {
         <h3>Nos clients cherchent</h3>
 
         <Slider {...settings}>
-          <CardAvisRecherche urlImage={ImageAvisSearch} />
-          <CardAvisRecherche urlImage={ImageAvisSearch} />
-          <CardAvisRecherche urlImage={ImageAvisSearch} />
-          <CardAvisRecherche urlImage={ImageAvisSearch} />
-          <CardAvisRecherche urlImage={ImageAvisSearch} />
+          {wanteds.length > 0 &&
+            wanteds.map((wanted) => (
+              <CardAvisRecherche
+                urlImage={`${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`}
+              />
+            ))}
         </Slider>
 
         <p>Vous détenez l’un de ces biens ? N’hésitez à nous contacter</p>
