@@ -9,6 +9,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import FormVendreOuRecherche from '../../components/FormVendreOuRecherche/FormVendreOuRecherche'
+import { Helmet } from 'react-helmet'
 
 function Vendre() {
   const sliderRef = useRef(null)
@@ -64,70 +65,77 @@ function Vendre() {
     fecthBienVendu()
   }, [])
   return (
-    <div>
-      <FirstSectionPage
-        ImgPremierePlan={Image}
-        title='Combien ça coûte'
-        description='Une estimation au prix juste, condition sine qua non à la vente'
-      />
+    <>
+      <Helmet>
+        <title>Marli - Vendre</title>
+        <meta name='robots' content='noindex' />
+        <meta name='description' content="Passeur d'histoires immobilières" />
+      </Helmet>
+      <div>
+        <FirstSectionPage
+          ImgPremierePlan={Image}
+          title='Combien ça coûte'
+          description='Une estimation au prix juste, condition sine qua non à la vente'
+        />
 
-      <div className={styles.chekedContainer}>
-        <h3>Comment faisons-nous</h3>
-        <div className={styles.ListeCheckContainer}>
-          <div>
-            <FontAwesomeIcon icon={faCheckCircle} />
-            <p>
-              Chaque bien est unique. Sa valeur dépend de plusieurs variables.
-            </p>
-          </div>
+        <div className={styles.chekedContainer}>
+          <h3>Comment faisons-nous</h3>
+          <div className={styles.ListeCheckContainer}>
+            <div>
+              <FontAwesomeIcon icon={faCheckCircle} />
+              <p>
+                Chaque bien est unique. Sa valeur dépend de plusieurs variables.
+              </p>
+            </div>
 
-          <div>
-            <FontAwesomeIcon icon={faCheckCircle} />
-            <p>
-              Année de construction, standing, rareté, état général du bien et
-              du bâtiment.
-            </p>
-          </div>
+            <div>
+              <FontAwesomeIcon icon={faCheckCircle} />
+              <p>
+                Année de construction, standing, rareté, état général du bien et
+                du bâtiment.
+              </p>
+            </div>
 
-          <div>
-            <FontAwesomeIcon icon={faCheckCircle} />
-            <p>
-              Environnement visuel et sonore, positionnement par rapport à des
-              biens similaires, marché local.
-            </p>
-          </div>
+            <div>
+              <FontAwesomeIcon icon={faCheckCircle} />
+              <p>
+                Environnement visuel et sonore, positionnement par rapport à des
+                biens similaires, marché local.
+              </p>
+            </div>
 
-          <div>
-            <FontAwesomeIcon icon={faCheckCircle} />
-            <p>Plus notre petit doigt…</p>
+            <div>
+              <FontAwesomeIcon icon={faCheckCircle} />
+              <p>Plus notre petit doigt…</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles.formContainer}>
-        <h3>Parlez-nous de votre bien</h3>
-        <FormVendreOuRecherche context='vendre' />
-      </div>
-
-      {dataBienVendu.length > 0 && (
-        <div className={styles.BienVenduContainer}>
-          <h3>Nos biens vendus</h3>
-          <Slider ref={sliderRef} {...settings}>
-            {dataBienVendu.map((bien) => (
-              <CardSlider
-                key={bien.ref}
-                image={bien?._medias?.image_galerie_0?.url}
-                price={bien?.prix}
-                localisation={bien?.localisation}
-                caracteristiques={bien?.caracteristiques}
-                status={bien?.status}
-                reference={bien?.ref}
-              />
-            ))}
-          </Slider>
+        <div className={styles.formContainer}>
+          <h3>Parlez-nous de votre bien</h3>
+          <FormVendreOuRecherche context='vendre' />
         </div>
-      )}
-    </div>
+
+        {dataBienVendu.length > 0 && (
+          <div className={styles.BienVenduContainer}>
+            <h3>Nos biens vendus</h3>
+            <Slider ref={sliderRef} {...settings}>
+              {dataBienVendu.map((bien) => (
+                <CardSlider
+                  key={bien.ref}
+                  image={bien?._medias?.image_galerie_0?.url}
+                  price={bien?.prix}
+                  localisation={bien?.localisation}
+                  caracteristiques={bien?.caracteristiques}
+                  status={bien?.status}
+                  reference={bien?.ref}
+                />
+              ))}
+            </Slider>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

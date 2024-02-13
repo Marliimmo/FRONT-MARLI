@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import CardBien from '../../components/CardBien/CardBien'
 import GifLoading from '../../components/GifLoading/GifLoading'
+import { Helmet } from 'react-helmet'
 
 function Acheter() {
   const [showFiltre, setShowFiltre] = useState(false)
@@ -163,116 +164,124 @@ function Acheter() {
   }
 
   return (
-    <div>
-      {loading === 'filtre' || loading === 'fecthLoad' ? (
-        <GifLoading positionDiv='fixed' />
-      ) : null}
+    <>
+      <Helmet>
+        <title>Marli - Acheter</title>
+        <meta name='robots' content='noindex' />
+        {/* <meta name="robots" content="index, follow" /> */}
+        <meta name='description' content="Passeur d'histoires immobilières" />
+      </Helmet>
+      <div>
+        {loading === 'filtre' || loading === 'fecthLoad' ? (
+          <GifLoading positionDiv='fixed' />
+        ) : null}
 
-      <FirstSectionPage
-        ImgPremierePlan={Image}
-        title='Nos adresses'
-        description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
-      />
+        <FirstSectionPage
+          ImgPremierePlan={Image}
+          title='Nos adresses'
+          description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
+        />
 
-      <div className={styles.BienContainer}>
-        <div
-          className={styles.showFiltre}
-          onClick={() => setShowFiltre(!showFiltre)}
-        >
-          <p>Filtrer les biens par catégories</p>
-          {showFiltre ? (
-            <FontAwesomeIcon icon={faChevronUp} />
-          ) : (
-            <FontAwesomeIcon icon={faChevronDown} />
-          )}
-        </div>
+        <div className={styles.BienContainer}>
+          <div
+            className={styles.showFiltre}
+            onClick={() => setShowFiltre(!showFiltre)}
+          >
+            <p>Filtrer les biens par catégories</p>
+            {showFiltre ? (
+              <FontAwesomeIcon icon={faChevronUp} />
+            ) : (
+              <FontAwesomeIcon icon={faChevronDown} />
+            )}
+          </div>
 
-        <div
-          style={showFiltre ? { display: 'flex' } : {}}
-          className={styles.filtreContainer}
-        >
-          <select onChange={typeBienFunction}>
-            <option value='tous'>Tous les biens</option>
-            <option value='appartement'>Appartement</option>
-            <option value='immeuble'>Immeuble</option>
-            <option value='maison'>Maison</option>
-          </select>
+          <div
+            style={showFiltre ? { display: 'flex' } : {}}
+            className={styles.filtreContainer}
+          >
+            <select onChange={typeBienFunction}>
+              <option value='tous'>Tous les biens</option>
+              <option value='appartement'>Appartement</option>
+              <option value='immeuble'>Immeuble</option>
+              <option value='maison'>Maison</option>
+            </select>
 
-          <input
-            onChange={budgetsFunction}
-            onKeyDown={handleKeyDown}
-            min={1}
-            type='number'
-            placeholder='Budgets max (€)'
-          />
+            <input
+              onChange={budgetsFunction}
+              onKeyDown={handleKeyDown}
+              min={1}
+              type='number'
+              placeholder='Budgets max (€)'
+            />
 
-          <input
-            onChange={localisationFunction}
-            type='text'
-            placeholder='Localisation'
-          />
+            <input
+              onChange={localisationFunction}
+              type='text'
+              placeholder='Localisation'
+            />
 
-          <input
-            onChange={superficieFunction}
-            min={1}
-            onKeyDown={handleKeyDown}
-            type='number'
-            placeholder='Superficie (m²)'
-          />
+            <input
+              onChange={superficieFunction}
+              min={1}
+              onKeyDown={handleKeyDown}
+              type='number'
+              placeholder='Superficie (m²)'
+            />
 
-          <div className={styles.btnSearchContainer} onClick={NewUrlFecth}>
-            <span>Appliquer le filtre</span>
-            <FontAwesomeIcon icon={faSearch} />
+            <div className={styles.btnSearchContainer} onClick={NewUrlFecth}>
+              <span>Appliquer le filtre</span>
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
+          </div>
+
+          <div className={styles.ListeDBien}>
+            {loading === 'fecthLoad' ? null : (
+              <>
+                {data.map((bien) => (
+                  <div key={bien?._id}>
+                    <CardBien
+                      imgUrl={bien?._medias?.image_galerie_0?.url}
+                      prix={bien?.prix}
+                      localisation={bien?.localisation}
+                      caracteristique={bien?.caracteristiques}
+                      title={bien?.title}
+                      status={bien?.status}
+                      reference={bien?.ref}
+                    />
+                  </div>
+                ))}
+                {loading === 'fecthLoad' ? null : data.length > 0 ? null : (
+                  <div className={styles.notFoundBien}>Aucun bien trouver</div>
+                )}
+
+                {hasMore && (
+                  <div className={styles.showMoreBtn}>
+                    <button onClick={loadMoreData}>
+                      {loading === 'seeMore' ? 'Chargement...' : 'Voir plus'}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
 
-        <div className={styles.ListeDBien}>
-          {loading === 'fecthLoad' ? null : (
-            <>
-              {data.map((bien) => (
-                <div key={bien?._id}>
-                  <CardBien
-                    imgUrl={bien?._medias?.image_galerie_0?.url}
-                    prix={bien?.prix}
-                    localisation={bien?.localisation}
-                    caracteristique={bien?.caracteristiques}
-                    title={bien?.title}
-                    status={bien?.status}
-                    reference={bien?.ref}
-                  />
-                </div>
-              ))}
-              {loading === 'fecthLoad' ? null : data.length > 0 ? null : (
-                <div className={styles.notFoundBien}>Aucun bien trouver</div>
-              )}
-
-              {hasMore && (
-                <div className={styles.showMoreBtn}>
-                  <button onClick={loadMoreData}>
-                    {loading === 'seeMore' ? 'Chargement...' : 'Voir plus'}
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+        <div className={styles.investerSection}>
+          <div>
+            <h2>INVESTIR DANS L’IMMOBILIER</h2>
+            <ul>
+              <li>Accompagnement, étude de rentabilité.</li>
+              <li>Recherche de biens en France et au Sénégal.</li>
+              <li>
+                Sénégal, destination soleil durant toute l’année, pour vous
+                dénicher le bien qui correspond à vos attentes.
+              </li>
+            </ul>
+            <Link to='/marli/nous-contacter'>Nous contacter</Link>
+          </div>
         </div>
       </div>
-
-      <div className={styles.investerSection}>
-        <div>
-          <h2>INVESTIR DANS L’IMMOBILIER</h2>
-          <ul>
-            <li>Accompagnement, étude de rentabilité.</li>
-            <li>Recherche de biens en France et au Sénégal.</li>
-            <li>
-              Sénégal, destination soleil durant toute l’année, pour vous
-              dénicher le bien qui correspond à vos attentes.
-            </li>
-          </ul>
-          <Link to='/marli/nous-contacter'>Nous contacter</Link>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 

@@ -12,6 +12,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import CardSlider from '../../components/CardSlider/CardSlider'
+import { Helmet } from 'react-helmet'
 
 function PageDunBien() {
   const sliderRef = useRef(null)
@@ -133,6 +134,11 @@ function PageDunBien() {
 
   return (
     <>
+      <Helmet>
+        <title>Marli - Page de bien</title>
+        <meta name='robots' content='noindex' />
+        <meta name='description' content="Passeur d'histoires immobilières" />
+      </Helmet>
       <div className={`fadinAnimation ${styles.allContainer}`}>
         {loading ? null : data.length <= 0 ? (
           <p className={styles.notFoundBien}>Aucun bien trouver</p>

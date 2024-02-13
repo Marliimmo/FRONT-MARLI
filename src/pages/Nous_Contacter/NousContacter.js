@@ -6,50 +6,59 @@ import FormContact from '../../components/FormContact/FormContact'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faPhoneFlip } from '@fortawesome/free-solid-svg-icons'
 import WhatsAppIcone from '../../assets/images/whatsapp.svg'
+import { Helmet } from 'react-helmet'
 
 function NousContacter() {
   return (
-    <div className={`fadinAnimation ${styles.allContainer}`}>
-      {/* <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' /> */}
+    <>
+      <Helmet>
+        <title>Marli - Contact</title>
+        <meta name='robots' content='noindex' />
+        {/* <meta name="robots" content="index, follow" /> */}
+        <meta name='description' content="Passeur d'histoires immobilières" />
+      </Helmet>
+      <div className={`fadinAnimation ${styles.allContainer}`}>
+        {/* <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' /> */}
 
-      <div className={styles.coodonneeContainer}>
-        <div className={styles.coordonnee}>
-          <p className={styles.iconeContainer}>
-            <FontAwesomeIcon icon={faPhoneFlip} />
-          </p>
-          <div>
-            <h4>Appelez-nous</h4>
-            <p>+33 6 51 31 03 81</p>
+        <div className={styles.coodonneeContainer}>
+          <div className={styles.coordonnee}>
+            <p className={styles.iconeContainer}>
+              <FontAwesomeIcon icon={faPhoneFlip} />
+            </p>
+            <div>
+              <h4>Appelez-nous</h4>
+              <p>+33 6 51 31 03 81</p>
+            </div>
+          </div>
+
+          <div className={styles.coordonnee}>
+            <p className={styles.iconeContainer}>
+              <FontAwesomeIcon icon={faLocationDot} />
+            </p>
+            <div>
+              <h4>Pour boire un café</h4>
+              <p>2b rue des Jardins, 25 000 Besançon</p>
+            </div>
+          </div>
+
+          <div className={styles.coordonnee}>
+            <p className={styles.iconeContainer}>
+              <img src={WhatsAppIcone} alt='whatsapp-icone' />
+            </p>
+            <div>
+              <h4>WhatsApp</h4>
+              <p>+33 6 51 31 03 81</p>
+            </div>
           </div>
         </div>
 
-        <div className={styles.coordonnee}>
-          <p className={styles.iconeContainer}>
-            <FontAwesomeIcon icon={faLocationDot} />
-          </p>
-          <div>
-            <h4>Pour boire un café</h4>
-            <p>2b rue des Jardins, 25 000 Besançon</p>
-          </div>
-        </div>
-
-        <div className={styles.coordonnee}>
-          <p className={styles.iconeContainer}>
-            <img src={WhatsAppIcone} alt='whatsapp-icone' />
-          </p>
-          <div>
-            <h4>WhatsApp</h4>
-            <p>+33 6 51 31 03 81</p>
-          </div>
+        <div className={styles.formContainer}>
+          <h3>Dites nous tout</h3>
+          <p>Nous vous reviendrons rapidement</p>
+          <FormContact />
         </div>
       </div>
-
-      <div className={styles.formContainer}>
-        <h3>Dites nous tout</h3>
-        <p>Nous vous reviendrons rapidement</p>
-        <FormContact />
-      </div>
-    </div>
+    </>
   )
 }
 

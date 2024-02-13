@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Link } from 'react-router-dom'
 import CardAvisRecherche from '../../components/CardAvisRecherche/CardAvisRecherche'
+import { Helmet } from 'react-helmet'
 
 function AvisDeRecherche() {
   const [wanteds, setWanteds] = useState([])
@@ -67,31 +68,39 @@ function AvisDeRecherche() {
   }, [])
 
   return (
-    <div className={styles.allContainer}>
-      <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
+    <>
+      <Helmet>
+        <title>Marli - Avis de recherche</title>
+        <meta name='robots' content='noindex' />
+        {/* <meta name="robots" content="index, follow" /> */}
+        <meta name='description' content="Passeur d'histoires immobilières" />
+      </Helmet>
+      <div className={styles.allContainer}>
+        <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
 
-      <div className={styles.AvisDrechercheContainer}>
-        <h3>Nos clients cherchent</h3>
+        <div className={styles.AvisDrechercheContainer}>
+          <h3>Nos clients cherchent</h3>
 
-        <Slider {...settings}>
-          {wanteds.length > 0 &&
-            wanteds.map((wanted) => (
-              <CardAvisRecherche
-                urlImage={`${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`}
-              />
-            ))}
-        </Slider>
-        <p></p>
-        <Link to='/marli/nous-contacter'>
-          <button>Si vous avez un de ces biens</button>
-        </Link>
+          <Slider {...settings}>
+            {wanteds.length > 0 &&
+              wanteds.map((wanted) => (
+                <CardAvisRecherche
+                  urlImage={`${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`}
+                />
+              ))}
+          </Slider>
+          <p></p>
+          <Link to='/marli/nous-contacter'>
+            <button>Si vous avez un de ces biens</button>
+          </Link>
+        </div>
+
+        <div className={styles.formContainer}>
+          <h3>Que recherchez-vous</h3>
+          <FormVendreOuRecherche context='avis' />
+        </div>
       </div>
-
-      <div className={styles.formContainer}>
-        <h3>Que recherchez-vous</h3>
-        <FormVendreOuRecherche context='avis' />
-      </div>
-    </div>
+    </>
   )
 }
 
