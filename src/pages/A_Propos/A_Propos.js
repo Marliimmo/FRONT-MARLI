@@ -19,14 +19,14 @@ function A_Propos() {
           <p className={styles.borderStyle}></p>
           <p>
             Commerciale depuis une trentaine d’années sur le territoire national
-            et en particulier en Bourgogne Franche-Comté, je suis reconnue pour
-            mon professionnalisme, mon sens aigu du service et des relations
+            et notamment en Bourgogne Franche-Comté. Je suis reconnue pour mon
+            professionnalisme, mon sens aigu du service et des relations
             humaines.
           </p>
           <p>
-            Aujourd’hui, je mets mon savoir-faire à votre service en créant
-            Marli Immobilier. Avec audace et efficacité je vous propose des
-            services à la mesure de vos attentes.
+            Aujourd’hui, avec audace et efficacité, j’ai créé Marli Immobilier.
+            Je vous propose des services à la mesure de vos attentes pour
+            l’ensemble de vos projets immobilier.
           </p>
           <p>
             Comme dans toutes les fonctions que j’ai eues à occuper jusqu’ici,
@@ -34,10 +34,12 @@ function A_Propos() {
             que vous me confierez.
           </p>
           <p>
-            Je me suis entourée de personnes expertes dans leur domaine
-            d’activité pour vous garantir un accompagnement optimal. Merci de
-            votre confiance.
+            Je me suis entourée de personnes expertes dans leur domaine pour
+            vous garantir un accompagnement optimal.
           </p>
+          <p>Merci de votre confiance.</p>
+          <p>A bientôt</p>
+          <p>Néné</p>
         </div>
       </div>
 
@@ -62,38 +64,29 @@ function A_Propos() {
             Nous le ferons passionnément, consciencieusement, avec transparence.
           </p>
           <p>
-            Nous avons une appétence particulière pour les biens d’ expressions,
-            de caractères, atypiques.
+            Nous savons que tout lieu a quelque chose à exprimer, un vécu, une
+            histoire voire des secrets.
           </p>
+          <p>Nous aurons à cœur de vous les révéler.</p>
           <p>
-            Nous savons aussi que tout lieu à son vécu, son histoire voir ses
-            secrets, quelque chose à exprimer. Nous aurons à cœur de vous aider
-            à les révéler.
-          </p>
-          <p>
-            Par conséquent, quelle que soit sa taille, son prix, sa situation
-            géographique, nous réservons à chaque bien une attention
-            particulière, des services sur mesure.
+            Quelle que soit sa taille, son prix, sa situation géographique, nous
+            réservons à chaque bien une attention particulière, des services sur
+            mesure.
           </p>
           <p>Voilà ce que nous faisons de mieux.</p>
           <p>
-            Notre moteur au quotidien sera de trouver des acquéreurs, des lieux
-            de vie qui vous ressemblent ou tout simplement des investissements
-            rentables.
+            Notre moteur au quotidien sera de trouver des acquéreurs pour vos
+            biens, des lieux de vie qui vous ressemblent ou tout simplement des
+            investissements rentables.
           </p>
           <p>
             La transaction immobilière peut être source de stress, transformons
             la en une expérience sereine, un parcours plaisant.
           </p>
           <p>
-            Libérez vous l’esprit en vous reposant sur une agence à votre
-            écoute.
-          </p>
-          <p>
             Bienvenue chez Marli où votre satisfaction est notre première
             gratitude.
           </p>
-          <p>A vous d’inscrire la suite de l’ histoire.</p>
         </div>
       </div>
     </div>

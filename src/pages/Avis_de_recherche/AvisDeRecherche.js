@@ -81,15 +81,14 @@ function AvisDeRecherche() {
               />
             ))}
         </Slider>
-
-        <p>Vous détenez l’un de ces biens ? N’hésitez à nous contacter</p>
+        <p></p>
         <Link to='/marli/nous-contacter'>
-          <button>Nous contacter</button>
+          <button>Si vous avez un de ces biens</button>
         </Link>
       </div>
 
       <div className={styles.formContainer}>
-        <h3>Décrivez nous votre recherche</h3>
+        <h3>Que recherchez-vous</h3>
         <FormVendreOuRecherche context='avis' />
       </div>
     </div>

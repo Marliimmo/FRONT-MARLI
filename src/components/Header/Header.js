@@ -75,7 +75,7 @@ function Header() {
               }
               to='/marli/nous-contacter'
             >
-              Nous contacter
+              Contact
               <p></p>
             </NavLink>
           </div>
@@ -171,7 +171,7 @@ function Header() {
             }
             to='/marli/nous-contacter'
           >
-            Nous contacter
+            Contact
             <p></p>
           </NavLink>
         </div>

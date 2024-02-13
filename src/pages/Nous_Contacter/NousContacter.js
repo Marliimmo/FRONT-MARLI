@@ -28,7 +28,7 @@ function NousContacter() {
             <FontAwesomeIcon icon={faLocationDot} />
           </p>
           <div>
-            <h4>Notre localisation</h4>
+            <h4>Pour boire un café</h4>
             <p>2b rue des Jardins, 25 000 Besançon</p>
           </div>
         </div>
@@ -45,8 +45,8 @@ function NousContacter() {
       </div>
 
       <div className={styles.formContainer}>
-        <h3>Envoyez-nous un message</h3>
-        <p>Nous serons ravi de vous entendre</p>
+        <h3>Dites nous tout</h3>
+        <p>Nous vous reviendrons rapidement</p>
         <FormContact />
       </div>
     </div>

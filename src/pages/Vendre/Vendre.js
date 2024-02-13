@@ -67,35 +67,33 @@ function Vendre() {
     <div>
       <FirstSectionPage
         ImgPremierePlan={Image}
-        title='VENDRE / ESTIMER UN BIEN'
-        description='Maximisez  la valeur de votre bien avec notre équipe de professionnels.'
+        title='Combien ça coûte'
+        description='Une estimation au prix juste, condition sine qua non à la vente'
       />
 
       <div className={styles.chekedContainer}>
-        <h3>Chaque bien est unique</h3>
+        <h3>Comment faisons-nous</h3>
         <div className={styles.ListeCheckContainer}>
           <div>
             <FontAwesomeIcon icon={faCheckCircle} />
             <p>
-              Sa valeur dépend de son année de construction, son standing, son
-              état général et son environnement visuel et sonore.
+              Chaque bien est unique. Sa valeur dépend de plusieurs variables.
             </p>
           </div>
 
           <div>
             <FontAwesomeIcon icon={faCheckCircle} />
             <p>
-              Notre évaluation immobilière prend en compte l’ensemble des
-              caractéristiques de votre bâtiment pour en pondérer la valeur.
+              Année de construction, standing, rareté, état général du bien et
+              du bâtiment.
             </p>
           </div>
 
           <div>
             <FontAwesomeIcon icon={faCheckCircle} />
             <p>
-              Notre estimation prend également en compte sa rareté, son
-              positionnement par rapport à des biens similaires, enfin du marché
-              local.
+              Environnement visuel et sonore, positionnement par rapport à des
+              biens similaires, marché local.
             </p>
           </div>
 
@@ -107,7 +105,7 @@ function Vendre() {
       </div>
 
       <div className={styles.formContainer}>
-        <h3>Parlez nous de votre bien</h3>
+        <h3>Parlez-nous de votre bien</h3>
         <FormVendreOuRecherche context='vendre' />
       </div>
 

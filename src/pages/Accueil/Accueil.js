@@ -187,12 +187,12 @@ function Accueil() {
         <div className={styles.RightContent}>
           <p className={styles.borderStyle}></p>
           <p>
-            Nous souhaitons jouer un rôle de facilitateur dans l’accomplissement
-            de votre projet immobilier de sa conception à son aboutissement.
-            Votre satisfaction sera notre première gratitude.
+            Nous souhaitons vous faciliter votre projet immobilier de sa
+            conception à son aboutissement. Votre satisfaction sera notre
+            première gratitude.
           </p>
 
-          <p>A vous d’écrire la suite de l’histoire</p>
+          <p>A vous d’écrire la suite de l’histoire...</p>
         </div>
       </div>
 
@@ -223,7 +223,7 @@ function Accueil() {
 
       <div className={styles.widget}>
         <div className={styles.NouveautesContainer}>
-          <h3>De nouvelles histoires</h3>
+          <h3>Nos nouvelles histoires</h3>
 
           {dataBienNouveau.length > 2 && handleHover && (
             <div
@@ -261,8 +261,10 @@ function Accueil() {
           </div>
 
           <div className={styles.btnContainer}>
-            <Link to='/marli/acheter'>Découvrir toutes nos histoires</Link>
+            <Link to='/marli/acheter'>Nos autres histoires</Link>
           </div>
+
+          <h3>Que faisons-nous pour vous</h3>
         </div>
 
         <div className={styles.sectionChecked}>
@@ -277,7 +279,12 @@ function Accueil() {
             <div className={styles.ListeCheckContainer}>
               <div>
                 <FontAwesomeIcon icon={faCheckCircle} />
-                <p>Choix et présentions de biens adéquats.</p>
+                <p>Identification de votre besoin.</p>
+              </div>
+
+              <div>
+                <FontAwesomeIcon icon={faCheckCircle} />
+                <p>Sélection et visite ciblées.</p>
               </div>
 
               <div>
@@ -287,11 +294,11 @@ function Accueil() {
 
               <div>
                 <FontAwesomeIcon icon={faCheckCircle} />
-                <p>Visite, compromis, signature.</p>
+                <p>Compromis, signature.</p>
               </div>
             </div>
 
-            <Link to='/marli/acheter'>Découvrir tous nos biens</Link>
+            <Link to='/marli/acheter'>Toutes nos histoires</Link>
           </div>
         </div>
 
@@ -312,17 +319,17 @@ function Accueil() {
 
               <div>
                 <FontAwesomeIcon icon={faCheckCircle} />
-                <p>Mise en lumière de votre bien avec des outils modernes.</p>
+                <p>Valorisation et mise en lumière.</p>
               </div>
 
               <div>
                 <FontAwesomeIcon icon={faCheckCircle} />
-                <p>Communication sur sites de ventes immobilières ciblés.</p>
+                <p>Commercialisation</p>
               </div>
 
               <div>
                 <FontAwesomeIcon icon={faCheckCircle} />
-                <p>Portefeuille clients acquéreurs conséquent.</p>
+                <p>Portefeuille clients acquéreurs conséquent</p>
               </div>
             </div>
 
@@ -335,19 +342,18 @@ function Accueil() {
         <div>
           <h2>INVESTIR DANS L’IMMOBILIER</h2>
           <ul>
-            <li>Accompagnement, étude de rentabilité.</li>
-            <li>Recherche de biens en France et au Sénégal.</li>
+            <li>Chasseur de bien.</li>
             <li>
-              Sénégal, destination soleil durant toute l’année, pour vous
-              dénicher le bien qui correspond à vos attentes.
+              Résidences secondaires au Sénégal, destination soleil 365/365j.
             </li>
+            <li>Accompagnement, étude de faisabilité et rentabilité</li>
           </ul>
           <Link to='nous-contacter'>Nous contacter</Link>
         </div>
       </div>
 
       <div id='avisContainer' className={styles.AvisSection}>
-        <h2>Paroles libres</h2>
+        <h2>Parole libre</h2>
         <div className={styles.barStyleContainer}>
           <p className={styles.borderStyle}></p>
         </div>
@@ -365,7 +371,7 @@ function Accueil() {
             </Link> */}
             {isSuccesSend !== true && (
               <ScrollLink smooth to='formAddReview' onClick={handleChange}>
-                <button>Déposer mon avis</button>
+                <button>Je témoigne</button>
               </ScrollLink>
             )}
 

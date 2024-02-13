@@ -190,7 +190,7 @@ function FormVendreOuRecherche({ context }) {
             )}
           </div>
         </div>
-        <label htmlFor='name'>Votre nom complet*</label> <br />
+        <label htmlFor='name'>Nom & prénom*</label> <br />
         <input
           onChange={(e) => {
             setName(e.target.value)
@@ -203,7 +203,7 @@ function FormVendreOuRecherche({ context }) {
         <br />
         <div className={styles.twoElement}>
           <div>
-            <label htmlFor='email'>Votre e-mail*</label> <br />
+            <label htmlFor='email'>E-mail*</label> <br />
             <input
               onChange={(e) => {
                 setEmail(e.target.value)
@@ -235,7 +235,7 @@ function FormVendreOuRecherche({ context }) {
           rows='5'
           placeholder={
             context === 'vendre'
-              ? 'un mot pour accompagnez ?'
+              ? 'un mot pour accompagner ?'
               : 'plus de details ?'
           }
         ></textarea>

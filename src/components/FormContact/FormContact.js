@@ -57,7 +57,7 @@ function FormContact() {
   return (
     <div className={styles.allContainer}>
       <form id='form' onSubmit={SubmitForm}>
-        <label htmlFor='titleMessage'>Titre de votre message</label> <br />
+        <label htmlFor='titleMessage'>Sujet</label> <br />
         <input
           id='titleMessage'
           type='text'
@@ -68,8 +68,7 @@ function FormContact() {
         />{' '}
         <br />
         <div className={styles.twoElement}>
-          <label htmlFor='contextMessage'>Votre message concerne ?*</label>{' '}
-          <br />
+          <label htmlFor='contextMessage'>Votre message concerne*</label> <br />
           <select
             onChange={(e) => {
               setMotif(e.target.value)
@@ -80,12 +79,12 @@ function FormContact() {
           >
             <option value='Autres'>Autres</option>
             <option value='Acheter un bien'>Acheter un bien</option>
-            <option value="J'ai un bien que l'un de vos clients recheche">
+            <option value="J'ai un bien que l'un de vos clients recherche">
               J'ai un bien que l'un de vos clients recheche
             </option>
           </select>
         </div>
-        <label htmlFor='name'>Votre nom complet*</label> <br />
+        <label htmlFor='name'>Nom & prénom*</label> <br />
         <input
           onChange={(e) => {
             setName(e.target.value)
@@ -98,7 +97,7 @@ function FormContact() {
         <br />
         <div className={styles.twoElement}>
           <div>
-            <label htmlFor='email'>Votre e-mail*</label> <br />
+            <label htmlFor='email'>E-mail*</label> <br />
             <input
               onChange={(e) => {
                 setEmail(e.target.value)
@@ -129,7 +128,7 @@ function FormContact() {
             setSuccesSend('')
           }}
           rows='5'
-          placeholder='Message*'
+          placeholder='pour approfondir*'
           required
         ></textarea>
         <br />

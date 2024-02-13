@@ -170,8 +170,8 @@ function Acheter() {
 
       <FirstSectionPage
         ImgPremierePlan={Image}
-        title='Acheter un bien'
-        description='Votre havre de paix vous attend dans cette élégante maison, prête à devenir vôtre.'
+        title='Nos adresses'
+        description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
       />
 
       <div className={styles.BienContainer}>
