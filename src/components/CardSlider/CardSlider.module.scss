@@ -1,6 +1,13 @@
 @import "../../assets/styles/variables";
 
+.linkCard{
+    max-width: 500px;
+    width: 100%;
+    display: inline-block;
+}
+
 .allContainer{
+    width: 100%;
     .imageEprixContainer{
         position: relative;
         width: 100%;

@@ -18,7 +18,7 @@ function Vendre() {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 2,
+    slidesToShow: dataBienVendu.length >= 2 ? 2 : dataBienVendu.length,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
@@ -26,13 +26,13 @@ function Vendre() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: dataBienVendu.length >= 2 ? 2 : dataBienVendu.length,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: dataBienVendu.length >= 2 ? 2 : dataBienVendu.length,
         },
       },
       {

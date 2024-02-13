@@ -38,7 +38,7 @@ function PageDunBien() {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 2,
+    slidesToShow: dataBienDispo.length >= 2 ? 2 : dataBienDispo.length,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
@@ -46,13 +46,13 @@ function PageDunBien() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: dataBienDispo.length >= 2 ? 2 : dataBienDispo.length,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: dataBienDispo.length >= 2 ? 2 : dataBienDispo.length,
         },
       },
       {

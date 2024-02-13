@@ -11,7 +11,7 @@ function CardSlider({
   reference,
 }) {
   return (
-    <Link to={`/marli/bien/${reference}`}>
+    <Link className={styles.linkCard} to={`/marli/bien/${reference}`}>
       <div
         className={`${status === 'vendu' ? styles.statusBienVendu : status === 'sous-compromis' ? styles.statusSousCompromis : null} ${styles.allContainer}`}
       >
