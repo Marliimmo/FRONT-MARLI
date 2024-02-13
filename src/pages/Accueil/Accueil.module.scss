@@ -544,4 +544,16 @@
         }
 
     }
+
+    .MessageFeedBackSucces{
+        margin-top: 15px;
+        text-align: center;
+        border-radius: 5px;
+        width: fit-content;
+        padding: 15px 20px;
+        color: $white-color;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: green;
+    }
 }

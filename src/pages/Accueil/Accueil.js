@@ -18,11 +18,19 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useRef } from 'react'
 import CardAvis from '../../components/CardAvis/CardAvis'
+import CardAddReview from '../../components/CardAddReview/CardAddReview'
+import { Link as ScrollLink } from 'react-scroll'
 
 function Accueil() {
   const sliderRef = useRef(null)
   const [handleHover, setHandleHover] = useState(false)
   const [dataBienNouveau, setDataBienNouveau] = useState([])
+  const [showFormAvis, setShowFormAvis] = useState(false)
+  const [isSuccesSend, setIsSuccesSend] = useState('')
+
+  const handleSuccesSend = (value) => {
+    setIsSuccesSend(value)
+  }
 
   // const sliderRef2 = useRef(null)
   const settings = {
@@ -119,6 +127,10 @@ function Accueil() {
   //     sliderRef2.current.slickNext()
   //   }
   // }
+
+  const handleChange = () => {
+    setShowFormAvis(!showFormAvis)
+  }
 
   useEffect(() => {
     const fecthBienDisponible = async () => {
@@ -322,12 +334,11 @@ function Accueil() {
         </div>
       </div>
 
-      <div className={styles.AvisSection}>
+      <div id='avisContainer' className={styles.AvisSection}>
         <h2>Paroles libres</h2>
         <div className={styles.barStyleContainer}>
           <p className={styles.borderStyle}></p>
         </div>
-
         <Slider {...settingsSliderAvis}>
           <CardAvis />
           <CardAvis />
@@ -336,15 +347,33 @@ function Accueil() {
           <CardAvis />
           <CardAvis />
         </Slider>
+        {!showFormAvis && (
+          <div className={styles.btnSection}>
+            {/* <Link>
+              <button>Voir plus d’avis</button>
+            </Link> */}
+            {isSuccesSend !== true && (
+              <ScrollLink smooth to='formAddReview' onClick={handleChange}>
+                <button>Déposer mon avis</button>
+              </ScrollLink>
+            )}
 
-        <div className={styles.btnSection}>
-          {/* <Link>
-            <button>Voir plus d’avis</button>
-          </Link> */}
-          <Link>
-            <button>Déposer mon avis</button>
-          </Link>
-        </div>
+            {isSuccesSend === true && (
+              <div className={styles.MessageFeedBackSucces}>
+                Merci pour votre avis !
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div id='formAddReview'>
+        {showFormAvis && (
+          <CardAddReview
+            visibilityForm={handleChange}
+            isSuccesSend={handleSuccesSend}
+          />
+        )}
       </div>
     </div>
   )
