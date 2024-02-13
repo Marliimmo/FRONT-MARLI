@@ -18,6 +18,7 @@
             li{
                 list-style: initial;
                 font-size: 20px;
+                line-height: 28px;
                 margin: 20px 0px;
             }
         }
@@ -52,6 +53,13 @@
 
     @media screen and (max-width: 750px) {
         padding: 50px 30px;
+    }
+
+    @media screen and (max-width: 420px) {
+        div{
+            padding: 30px;
+            padding-bottom: 60px;
+        }
     }
 }
 

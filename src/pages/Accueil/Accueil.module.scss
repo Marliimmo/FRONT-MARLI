@@ -81,6 +81,14 @@
             }
         }
     }
+
+    @media screen and (max-width: 420px) {
+        .TextContent{
+            h3{
+                font-size: 16px;
+            }
+        }
+    }
 }
 
 .borderStyle{
@@ -149,13 +157,25 @@
         }
     }
 
+    @media screen and (max-width: 860px) {
+        .LeftContent{
+            display: none;
+        }
+    }
+
     @media screen and (max-width: 750px) {
         padding: 50px 30px;
     }
 
-    @media screen and (max-width: 860px) {
-        .LeftContent{
-            display: none;
+    @media screen and (max-width: 420px) {
+        .RightContent{
+            p{
+                font-size: 15px;
+                line-height: 28px;
+                &:nth-child(3){
+                    font-size: 25px;
+                }
+            }
         }
     }
 }
@@ -372,21 +392,6 @@
         }
     }
 
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-        .NouveautesContainer{
-            .titleEslideBtn{
-                padding: 0px;
-            }
-
-            .btnContainer{
-                a{
-                    padding: 20px;
-                }
-            }
-        }
-    }
-
     @media screen and (max-width: 966px) {
         .sectionChecked{
             flex-direction: column;
@@ -440,6 +445,40 @@
             }
         }
     }
+
+    @media screen and (max-width: 750px) {
+        padding: 50px 30px;
+        .NouveautesContainer{
+            .titleEslideBtn{
+                padding: 0px;
+            }
+
+            .btnContainer{
+                a{
+                    padding: 20px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 420px) {
+        .NouveautesContainer{
+            margin-bottom: 0px;
+            h3{
+                font-size: 20px;
+                margin-bottom: 25px;
+                line-height: 30px;
+            }
+        }
+
+        .sectionChecked{
+            .RightContent{
+                h2{
+                  font-size: 30px;  
+                }
+            }
+        }
+    }
 }
 
 .investerSection{
@@ -461,6 +500,7 @@
                 list-style: initial;
                 font-size: 20px;
                 margin: 20px 0px;
+                line-height: 28px;
             }
         }
     
@@ -494,6 +534,13 @@
 
     @media screen and (max-width: 750px) {
         padding: 50px 30px;
+    }
+
+    @media screen and (max-width: 420px) {
+        div{
+            padding: 30px;
+            padding-bottom: 60px;
+        }
     }
 }
 
@@ -556,5 +603,19 @@
         font-size: 18px;
         font-weight: 500;
         background-color: green;
+    }
+
+    @media screen and (max-width: 420px) {
+        .barStyleContainer{
+            margin-top: 20px;
+            margin-bottom: 10px;
+            p{
+                width: 50%;
+            }
+        }
+
+        h2{
+            font-size: 30px;
+        }
     }
 }

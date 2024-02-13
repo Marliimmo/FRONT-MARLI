@@ -56,6 +56,20 @@
             }
         }
     }
+
+    @media screen and (max-width: 420px) {
+        h3{
+            font-size: 25px;
+        }
+
+        .ListeCheckContainer{
+            > div{
+                p{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
 }
 
 .formContainer{
