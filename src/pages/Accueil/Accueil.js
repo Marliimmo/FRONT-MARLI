@@ -25,6 +25,7 @@ function Accueil() {
   const sliderRef = useRef(null)
   const [handleHover, setHandleHover] = useState(false)
   const [dataBienNouveau, setDataBienNouveau] = useState([])
+  const [dataReviews, setDataReviews] = useState([])
   const [showFormAvis, setShowFormAvis] = useState(false)
   const [isSuccesSend, setIsSuccesSend] = useState('')
 
@@ -143,7 +144,18 @@ function Accueil() {
       }
     }
 
+    const getReviews = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/user/reviews`,
+      )
+      if (response.ok) {
+        const result = await response.json()
+        setDataReviews(result)
+      }
+    }
+
     fecthBienDisponible()
+    getReviews()
   }, [])
 
   return (
@@ -339,14 +351,13 @@ function Accueil() {
         <div className={styles.barStyleContainer}>
           <p className={styles.borderStyle}></p>
         </div>
-        <Slider {...settingsSliderAvis}>
-          <CardAvis />
-          <CardAvis />
-          <CardAvis />
-          <CardAvis />
-          <CardAvis />
-          <CardAvis />
-        </Slider>
+        {dataReviews.length > 0 && (
+          <Slider {...settingsSliderAvis}>
+            {dataReviews.map((review) => (
+              <CardAvis avis={review} />
+            ))}
+          </Slider>
+        )}
         {!showFormAvis && (
           <div className={styles.btnSection}>
             {/* <Link>

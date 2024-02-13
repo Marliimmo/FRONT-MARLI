@@ -9,25 +9,28 @@ function CardAvis({ avis }) {
     <>
       <div className={styles.allContainer}>
         <div className={styles.imgContainer}>
-          <div>{avis && avis.urlImg && <img src='' alt='img-user' />}</div>
+          <div>
+            {avis && avis.urlImage && (
+              <img
+                src={`${process.env.REACT_APP_URL_BASE_IMAGE}${avis.urlImage}`}
+                alt='img-user'
+              />
+            )}
+          </div>
         </div>
 
         <div className={styles.textContainer}>
-          <h3>Aboubacar C.</h3>
+          <h3>{avis.pseudo}</h3>
           <p
             onClick={() => setFullContent(!fullContent)}
             style={
               fullContent ? { height: 'fit-content' } : { height: '130px' }
             }
           >
-            J’ai vendu mon appartement avec l’aide de Marli immobilier. Tout
-            c’est très bien passé. Je vous recommande de vendre votre bien avec
-            Marli. Merci pour tout. J’ai vendu mon appartement avec l’aide de
-            Marli immobilier. Tout c’est très bien passé. Je vous recommande de
-            vendre votre bien avec Marli. Merci pour tout.
+            {avis.description.toLocaleString('fr-FR')}
           </p>
 
-          <div className={styles.starContent}>
+          <div className={`${styles.starContent} _${avis.stars}star`}>
             <FontAwesomeIcon icon={faStar} />
             <FontAwesomeIcon icon={faStar} />
             <FontAwesomeIcon icon={faStar} />
