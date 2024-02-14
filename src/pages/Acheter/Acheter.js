@@ -64,7 +64,7 @@ function Acheter() {
 
   const superficieFunction = (e) => {
     if (e.target.value !== '' && e.target.value !== null) {
-      setSuperficie(`&superficie=${e.target.value} m²`)
+      setSuperficie(`&superficie=${e.target.value}`)
     } else {
       setSuperficie('')
     }
