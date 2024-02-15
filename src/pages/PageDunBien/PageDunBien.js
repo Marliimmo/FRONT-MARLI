@@ -251,12 +251,11 @@ function PageDunBien() {
             </div>
 
             <div className={styles.sectionRef}>
-              <p>Intéressé(e) par ce bien ? Contacter-nous.</p>
               <p className={styles.reference}>REF : {reference}</p>
 
               <div className={styles.btnSection}>
                 <Link to='/marli/nous-contacter'>
-                  <button>Nous contacter</button>
+                  <button>Intéressé(e) par ce bien</button>
                 </Link>
               </div>
             </div>

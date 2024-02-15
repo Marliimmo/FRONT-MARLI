@@ -177,16 +177,18 @@
         p{
             line-height: 28px;
             font-size: 15px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .histoireContainer{
-            // border-radius: 15px;
-            // padding: 30px;
-            padding-right: 35px;
-            width: 100%;
+            border-radius: 15px;
+            padding: 30px;
+            // padding-right: 35px;
+            // width: 100%;
             flex: 1 0 500px;
             // background: rgba(255, 255, 255, 0.13);
+            background: $white-color;
+            color: $gray-color;
 
             @media screen and (max-width: 650px) {
                 flex: 1 1 100%;
@@ -199,7 +201,9 @@
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            height: fit-content;
+            height: auto;
+            overflow: hidden;
+            border-radius: 15px;
 
             p{
                 line-height: 25px;
@@ -208,12 +212,15 @@
             
             .prixElocalisation{
                 flex: 1 0 45%;
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-                border-bottom: 1px solid $white-color;
-                // border-radius: 15px;
-                // padding: 30px;
+                height: auto; ///
+                // padding-bottom: 20px;
+                // margin-bottom: 20px;
+                // border-bottom: 1px solid $white-color;
+                border-radius: 15px;
+                padding: 30px;
                 // background: rgba(255, 255, 255, 0.13);
+                background: $white-color;
+                color: $gray-color;
 
                 p{
                     text-transform: uppercase;
@@ -222,36 +229,45 @@
             
             .caracteristique{
                 flex: 1 0 45%;
+                height: 100%; ///
                 h3{
                     font-size: 25px;
                     letter-spacing: 1px;
                 }
-                // border-radius: 15px;
-                // padding: 30px;
+                border-radius: 15px;
+                padding: 30px;
                 // background: rgba(255, 255, 255, 0.13);
+                background: $white-color;
+                color: $gray-color;
             }
         }
 
-        @media screen and (max-width: 594px) {
-            .RightContainer{
-                margin-top: 20px;
-                padding-top: 30px;
-                border-top: 1px solid $white-color;
-            }
-        }
+        // @media screen and (max-width: 594px) {
+        //     .RightContainer{
+        //         margin-top: 20px;
+        //         padding-top: 30px;
+        //         border-top: 1px solid $white-color;
+        //     }
+        // }
 
-        @media screen and (min-width: 595px) and (max-width: 992px) {
-            .RightContainer{
-                margin-top: 20px;
-                padding-top: 20px;
-                .prixElocalisation{
-                    padding-bottom: 0;
-                    margin-bottom: 0;
-                    border-bottom: 0;
-                    // margin-right: 10px;
-                    border-right: 1px solid $white-color;
-                }
-            }   
+        // @media screen and (min-width: 595px) and (max-width: 992px) {
+        //     .RightContainer{
+        //         margin-top: 20px;
+        //         padding-top: 20px;
+        //         .prixElocalisation{
+        //             padding-bottom: 0;
+        //             margin-bottom: 0;
+        //             border-bottom: 0;
+        //             // margin-right: 10px;
+        //             border-right: 1px solid $white-color;
+        //         }
+        //     }   
+        // }
+
+        @media screen and (min-width: 900px) and (max-width: 1260px) {
+            .histoireContainer{
+                flex: 1 0 100%;
+            }
         }
     }
 
