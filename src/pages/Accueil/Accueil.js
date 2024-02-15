@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import ImgPremierePlan from '../../assets/images/immobilier.png'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 import ImgImmeuble from '../../assets/images/united-states-spokane.jpg'
-import ImgDressing from '../../assets/images/image_dressing.jpg'
-import IngChambre from '../../assets/images/image_chambre.jpg'
+import ImgImmeuble19 from '../../assets/images/19.jpg'
+import ImgImmeuble4 from '../../assets/images/4.jpg'
+import ImgImmeuble20 from '../../assets/images/20.jpg'
+import ImgImmeuble5 from '../../assets/images/5.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
@@ -171,7 +172,7 @@ function Accueil() {
         <div className={styles.firstSectionContainer}>
           <img
             className={styles.ImgPremierePlan}
-            src={ImgPremierePlan}
+            src={ImgImmeuble19}
             alt='img-immobilier'
           />
           <div className={styles.opacityBlack}></div>
@@ -188,16 +189,16 @@ function Accueil() {
 
         <div className={styles.presentationSection}>
           <div className={styles.LeftContent}>
-            <img src={ImgDressing} alt='img dressing' />
-            <img src={IngChambre} alt='img immeuble' />
+            <img src={ImgImmeuble4} alt='img dressing' />
+            <img src={ImgImmeuble5} alt='img immeuble' />
           </div>
 
           <div className={styles.RightContent}>
             <p className={styles.borderStyle}></p>
             <p>
-              Nous souhaitons vous faciliter votre projet immobilier de sa
-              conception à son aboutissement. Votre satisfaction sera notre
-              première gratitude.
+              Nous souhaitons faciliter vos projets immobiliers de leur
+              conception à leur aboutissement.
+              <br /> Votre satisfaction sera notre première gratitude.
             </p>
 
             <p>A vous d’écrire la suite de l’histoire...</p>
@@ -263,7 +264,6 @@ function Accueil() {
                     caracteristiques={bien?.caracteristiques}
                     status={bien?.status}
                     reference={bien?.ref}
-                    isHomePage={true}
                   />
                 ))}
               </Slider>
@@ -313,7 +313,11 @@ function Accueil() {
 
           <div className={styles.sectionChecked}>
             <div className={styles.LeftContent}>
-              <img src={ImgImmeuble} alt='img illustration de vente de bien' />
+              <img
+                style={{ filter: 'grayscale(1)' }}
+                src={ImgImmeuble20}
+                alt='img illustration de vente de bien'
+              />
             </div>
 
             <div className={styles.RightContent}>
@@ -351,9 +355,9 @@ function Accueil() {
           <div>
             <h2>INVESTIR DANS L’IMMOBILIER</h2>
             <ul>
-              <li>Chasseur de bien.</li>
+              <li>Chasseur de bien</li>
               <li>
-                Résidences secondaires au Sénégal, destination soleil 365/365j.
+                Résidences secondaires au Sénégal, destination soleil 365/365j
               </li>
               <li>Accompagnement, étude de faisabilité et rentabilité</li>
             </ul>

@@ -1,5 +1,11 @@
 @import "../../assets/styles/variables";
 
+.allContainer{
+    h2:nth-child(1){
+        margin-top: 50px;
+    }
+}
+
 .chekedContainer{
     width: 100%;
     padding: 70px 15%;

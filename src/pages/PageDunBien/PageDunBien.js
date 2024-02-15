@@ -230,7 +230,7 @@ function PageDunBien() {
 
             <div className={styles.detailsBien}>
               <div className={styles.histoireContainer}>
-                <h3>L’histoire de ce bien</h3>
+                <h3>L’histoire</h3>
                 <p style={{ whiteSpace: 'pre-line' }}>{data.histoire}</p>
               </div>
 

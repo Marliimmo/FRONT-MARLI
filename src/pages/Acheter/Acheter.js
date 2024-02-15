@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/united-states-spokane.jpg'
+import Image from '../../assets/images/24.jpg'
 import { Link } from 'react-router-dom'
 import styles from './Acheter.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -176,11 +176,13 @@ function Acheter() {
           <GifLoading positionDiv='fixed' />
         ) : null}
 
-        <FirstSectionPage
-          ImgPremierePlan={Image}
-          title='Nos adresses'
-          // description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
-        />
+        <div className={styles.firstSection}>
+          <FirstSectionPage
+            ImgPremierePlan={Image}
+            title='Nos adresses'
+            // description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
+          />
+        </div>
 
         <div className={styles.BienContainer}>
           <div

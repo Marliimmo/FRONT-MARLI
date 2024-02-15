@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/united-states-spokane.jpg'
+import Image from '../../assets/images/3.jpg'
 import styles from './Vendre.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
@@ -71,15 +71,16 @@ function Vendre() {
         <meta name='robots' content='noindex' />
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
-      <div>
+      <div className={styles.allContainer}>
         <FirstSectionPage
           ImgPremierePlan={Image}
           title='Combien ça coûte'
-          description='Une estimation au prix juste, condition sine qua non à la vente'
+          // description='Une estimation au prix juste, condition sine qua non à la vente'
         />
 
         <div className={styles.chekedContainer}>
-          <h3>Comment faisons-nous</h3>
+          {/* <h3>Comment faisons-nous</h3> */}
+          <h3>Une estimation au prix juste</h3>
           <div className={styles.ListeCheckContainer}>
             <div>
               <FontAwesomeIcon icon={faCheckCircle} />

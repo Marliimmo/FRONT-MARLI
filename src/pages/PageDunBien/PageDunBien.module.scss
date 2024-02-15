@@ -186,9 +186,9 @@
             // padding-right: 35px;
             // width: 100%;
             flex: 1 0 500px;
-            // background: rgba(255, 255, 255, 0.13);
-            background: $white-color;
-            color: $gray-color;
+            background: rgba(255, 255, 255, 0.13);
+            // background: $white-color;
+            // color: $gray-color;
 
             @media screen and (max-width: 650px) {
                 flex: 1 1 100%;
@@ -218,9 +218,9 @@
                 // border-bottom: 1px solid $white-color;
                 border-radius: 15px;
                 padding: 30px;
-                // background: rgba(255, 255, 255, 0.13);
-                background: $white-color;
-                color: $gray-color;
+                background: rgba(255, 255, 255, 0.13);
+                // background: $white-color;
+                // color: $gray-color;
 
                 p{
                     text-transform: uppercase;
@@ -236,9 +236,9 @@
                 }
                 border-radius: 15px;
                 padding: 30px;
-                // background: rgba(255, 255, 255, 0.13);
-                background: $white-color;
-                color: $gray-color;
+                background: rgba(255, 255, 255, 0.13);
+                // background: $white-color;
+                // color: $gray-color;
             }
         }
 

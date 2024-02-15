@@ -57,15 +57,15 @@ function NousContacter() {
           </div>
 
           <div className={styles.coordonnee}>
-            <Link to='https://wa.me/33651310381' target='_blank'>
+            <Link to='https://wa.me/33688740621' target='_blank'>
               <p className={styles.iconeContainer}>
                 <img src={WhatsAppIcone} alt='whatsapp-icone' />
               </p>
             </Link>
-            <Link to='https://wa.me/33651310381' target='_blank'>
+            <Link to='https://wa.me/33688740621' target='_blank'>
               <div>
                 <h4>WhatsApp</h4>
-                <p>+33 6 51 31 03 81</p>
+                <p>+33 6 88 74 06 21</p>
               </div>
             </Link>
           </div>
