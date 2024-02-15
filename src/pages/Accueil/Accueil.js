@@ -263,6 +263,7 @@ function Accueil() {
                     caracteristiques={bien?.caracteristiques}
                     status={bien?.status}
                     reference={bien?.ref}
+                    isHomePage={true}
                   />
                 ))}
               </Slider>

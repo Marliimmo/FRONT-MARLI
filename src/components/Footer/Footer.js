@@ -17,17 +17,13 @@ function Footer() {
       <div className={styles.allContainer}>
         <div className={styles.LogoContainer}>
           <img src={Logo} alt='logo-marli' />
-          <p>PASSEUR D'HISTOIRES IMMOBILIERES</p>
+          <p>Passeur d'histoires immobilières</p>
         </div>
 
         <div className={styles.FooterLinkContainer}>
           <div className={styles.widgetFooter1}>
             <h2>Nos coordonnées</h2>
             <div className={styles.LinkText}>
-              <div>
-                <FontAwesomeIcon icon={faLocationDot} />
-                <p>2b rue des Jardins, 25 000 Besançon</p>
-              </div>
               <div>
                 <FontAwesomeIcon icon={faMobileScreen} />
                 <p>
@@ -39,6 +35,18 @@ function Footer() {
                 <p>
                   <Link to='mailto:marli.immobilier@gmail.com'>
                     marli.immobilier@gmail.com
+                  </Link>
+                </p>
+              </div>
+              <div>
+                <FontAwesomeIcon icon={faLocationDot} />
+                <p>
+                  {' '}
+                  <Link
+                    to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
+                    target='_blank'
+                  >
+                    2b rue des Jardins, 25 000 Besançon
                   </Link>
                 </p>
               </div>

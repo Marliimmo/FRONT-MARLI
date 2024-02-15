@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faPhoneFlip } from '@fortawesome/free-solid-svg-icons'
 import WhatsAppIcone from '../../assets/images/whatsapp.svg'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
 
 function NousContacter() {
   return (
@@ -22,33 +23,51 @@ function NousContacter() {
 
         <div className={styles.coodonneeContainer}>
           <div className={styles.coordonnee}>
-            <p className={styles.iconeContainer}>
-              <FontAwesomeIcon icon={faPhoneFlip} />
-            </p>
-            <div>
-              <h4>Appelez-nous</h4>
-              <p>+33 6 51 31 03 81</p>
-            </div>
+            <Link to='tel:+33651310381'>
+              <p className={styles.iconeContainer}>
+                <FontAwesomeIcon icon={faPhoneFlip} />
+              </p>
+            </Link>
+            <Link to='tel:+33651310381'>
+              <div>
+                <h4>Appelez-nous</h4>
+                <p>+33 6 51 31 03 81</p>
+              </div>
+            </Link>
           </div>
 
           <div className={styles.coordonnee}>
-            <p className={styles.iconeContainer}>
-              <FontAwesomeIcon icon={faLocationDot} />
-            </p>
-            <div>
-              <h4>Pour boire un café</h4>
-              <p>2b rue des Jardins, 25 000 Besançon</p>
-            </div>
+            <Link
+              to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
+              target='_blank'
+            >
+              <p className={styles.iconeContainer}>
+                <FontAwesomeIcon icon={faLocationDot} />
+              </p>
+            </Link>
+            <Link
+              to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
+              target='_blank'
+            >
+              <div>
+                <h4>Pour boire un café</h4>
+                <p>2b rue des Jardins, 25 000 Besançon</p>
+              </div>
+            </Link>
           </div>
 
           <div className={styles.coordonnee}>
-            <p className={styles.iconeContainer}>
-              <img src={WhatsAppIcone} alt='whatsapp-icone' />
-            </p>
-            <div>
-              <h4>WhatsApp</h4>
-              <p>+33 6 51 31 03 81</p>
-            </div>
+            <Link to='https://wa.me/33651310381' target='_blank'>
+              <p className={styles.iconeContainer}>
+                <img src={WhatsAppIcone} alt='whatsapp-icone' />
+              </p>
+            </Link>
+            <Link to='https://wa.me/33651310381' target='_blank'>
+              <div>
+                <h4>WhatsApp</h4>
+                <p>+33 6 51 31 03 81</p>
+              </div>
+            </Link>
           </div>
         </div>
 

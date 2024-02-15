@@ -46,8 +46,8 @@ function A_Propos() {
               vous garantir un accompagnement optimal.
             </p>
             <p>Merci de votre confiance.</p>
-            <p>A bientôt</p>
-            <p>Néné</p>
+            <p>A bientôt,</p>
+            <p className={styles.signatureStyle}>Néné</p>
           </div>
         </div>
 

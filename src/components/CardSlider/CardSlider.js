@@ -9,6 +9,7 @@ function CardSlider({
   caracteristiques,
   status,
   reference,
+  isHomePage,
 }) {
   return (
     <Link className={styles.linkCard} to={`/marli/bien/${reference}`}>
@@ -31,17 +32,19 @@ function CardSlider({
 
         <div className={styles.partialInfoBien}>
           <h2>{localisation}</h2>
-          <div className={styles.partialCarteristique}>
-            {caracteristiques.split('#').map(
-              (value, index) =>
-                index <= 3 && (
-                  <div className={styles.oneCaractq}>
-                    <p></p>
-                    <p>{value}</p>
-                  </div>
-                ),
-            )}
-          </div>
+          {isHomePage !== true && (
+            <div className={styles.partialCarteristique}>
+              {caracteristiques.split('#').map(
+                (value, index) =>
+                  index <= 3 && (
+                    <div className={styles.oneCaractq}>
+                      <p></p>
+                      <p>{value}</p>
+                    </div>
+                  ),
+              )}
+            </div>
+          )}
         </div>
       </div>
     </Link>

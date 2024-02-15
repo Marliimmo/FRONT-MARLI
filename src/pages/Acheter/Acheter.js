@@ -171,7 +171,7 @@ function Acheter() {
         {/* <meta name="robots" content="index, follow" /> */}
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
-      <div>
+      <div className={styles.allContainer}>
         {loading === 'filtre' || loading === 'fecthLoad' ? (
           <GifLoading positionDiv='fixed' />
         ) : null}
@@ -179,7 +179,7 @@ function Acheter() {
         <FirstSectionPage
           ImgPremierePlan={Image}
           title='Nos adresses'
-          description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
+          // description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
         />
 
         <div className={styles.BienContainer}>

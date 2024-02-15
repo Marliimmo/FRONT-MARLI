@@ -20,9 +20,8 @@ function Header() {
             <p>
               <img src={Logo} alt='Logo Marli' />
             </p>
-            <p>
-              PASSEUR D'HISTOIRES <br />
-              IMMOBILIERES
+            <p className={styles.slogan}>
+              Passeur d'histoires <br /> immobilières
             </p>
           </div>
         </Link>

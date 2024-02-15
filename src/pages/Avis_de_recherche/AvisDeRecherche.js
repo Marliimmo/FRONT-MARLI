@@ -96,7 +96,7 @@ function AvisDeRecherche() {
         </div>
 
         <div className={styles.formContainer}>
-          <h3>Que recherchez-vous</h3>
+          <h3>Votre recherche</h3>
           <FormVendreOuRecherche context='avis' />
         </div>
       </div>
