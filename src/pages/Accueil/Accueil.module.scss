@@ -149,17 +149,38 @@
             line-height: 35px;
             
             &:nth-child(3){
+                white-space: nowrap;
+                width: fit-content;
                 margin-top: 35px;
-                font-size: 30px;
-                font-weight: 500;
+                font-size: 28px;
+                font-weight: bold;
                 line-height: 50px;
+                position: relative;
+                color: transparent;
+                -webkit-text-stroke: 1px $white-color;
+
+                &::before{
+                    content: "A vous d'écrire la suite de l'histoire...";
+                    color: $white-color;
+                    position: absolute;
+                    top: 0;
+                    width: 0%;
+                    height: 100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    border-right: 2px solid $white-color;
+                    animation: animateX 7s linear infinite;
+                }
             }
         }
-    }
 
-    @media screen and (max-width: 860px) {
-        .LeftContent{
-            display: none;
+        @keyframes animateX {
+            0%,10%,100% {
+                width: 0%;
+            }
+            70%, 90% {
+                width: 100%;
+            }
         }
     }
 
@@ -167,13 +188,35 @@
         padding: 50px 30px;
     }
 
-    @media screen and (max-width: 420px) {
+    @media screen and (max-width: 632px) {
         .RightContent{
             p{
-                font-size: 15px;
-                line-height: 28px;
                 &:nth-child(3){
-                    font-size: 25px;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 460px) {
+        .RightContent{
+            p{
+                &:nth-child(3){
+                    font-size: 16px;
+                }
+            }
+        }
+        .LeftContent{
+            height: 350px;
+            flex: 1 0 100%;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .RightContent{
+            p{
+                &:nth-child(3){
+                    font-size: 13px;
                 }
             }
         }
