@@ -1,72 +1,88 @@
 import { React, useState } from 'react'
 import styles from './CardAddReview.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCamera, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faStar } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-scroll'
+import women_1 from '../../assets/avatar/women_1.png'
+import women_2 from '../../assets/avatar/women_2.png'
+import women_3 from '../../assets/avatar/women_3.png'
+import men_1 from '../../assets/avatar/men_1.png'
+import men_2 from '../../assets/avatar/men_2.png'
+import men_3 from '../../assets/avatar/men_3.png'
 
 function CardAddReview({ visibilityForm, isSuccesSend }) {
   const [loading, setLoading] = useState('')
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [imagePreview, setImagePreview] = useState(null)
+  const [selectedAvatar, setSelectedAvatar] = useState('women_1')
+  // const [selectedImage, setSelectedImage] = useState(null)
+  // const [imagePreview, setImagePreview] = useState(null)
   const [pseudo, setPseudo] = useState('')
   const [description, setDescription] = useState('')
   const [succesSend, setSuccesSend] = useState('')
   const [review, setReview] = useState(5)
   const [stars, hoverStar] = useState('_5star')
 
-  const handleImageChange = (e) => {
-    const selectedFile = e.target.files[0]
-    const tailleMaxAutorisee = 5 * 1024 * 1024
-    setSuccesSend('')
+  // const handleImageChange = (e) => {
+  //   const selectedFile = e.target.files[0]
+  //   const tailleMaxAutorisee = 5 * 1024 * 1024
+  //   setSuccesSend('')
 
-    if (selectedFile) {
-      const allowedFormats = [
-        'image/jpeg',
-        'image/jpg',
-        'image/png',
-        'image/webp',
-        'image/svg+xml',
-      ]
+  //   if (selectedFile) {
+  //     const allowedFormats = [
+  //       'image/jpeg',
+  //       'image/jpg',
+  //       'image/png',
+  //       'image/webp',
+  //       'image/svg+xml',
+  //     ]
 
-      if (
-        allowedFormats.includes(selectedFile.type) &&
-        selectedFile.size <= tailleMaxAutorisee
-      ) {
-        const reader = new FileReader()
-        reader.onload = () => {
-          setSelectedImage(selectedFile)
-          setImagePreview(reader.result)
-        }
-        reader.readAsDataURL(selectedFile)
-      } else {
-        e.target.value = ''
-        setSelectedImage(null)
-      }
-    }
-  }
+  //     if (
+  //       allowedFormats.includes(selectedFile.type) &&
+  //       selectedFile.size <= tailleMaxAutorisee
+  //     ) {
+  //       const reader = new FileReader()
+  //       reader.onload = () => {
+  //         setSelectedImage(selectedFile)
+  //         setImagePreview(reader.result)
+  //       }
+  //       reader.readAsDataURL(selectedFile)
+  //     } else {
+  //       e.target.value = ''
+  //       setSelectedImage(null)
+  //     }
+  //   }
+  // }
 
   // Submit de l'avis
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     if (review) {
-      const formData = new FormData()
-      formData.append('photo', selectedImage)
-      formData.append('pseudo', pseudo)
-      formData.append('description', description)
-      formData.append('stars', review)
+      // const formData = new FormData()
+      // formData.append('urlImage', selectedAvatar)
+      // formData.append('pseudo', pseudo)
+      // formData.append('description', description)
+      // formData.append('stars', review)
 
+      const formData = JSON.stringify({
+        urlImage: selectedAvatar,
+        pseudo: pseudo,
+        description: description,
+        stars: review,
+      })
+
+      console.log(formData)
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/user/add-review`,
           {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: formData,
           },
         )
         if (response.ok) {
           setTimeout(async () => {
-            setImagePreview(null)
             const form = document.querySelector('#form')
             form.reset()
             visibilityForm()
@@ -137,8 +153,94 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
           </div>
         </div>
         <div className={styles.imageContainer}>
-          <label>Photo de profil</label>
-          <label htmlFor='imageProfile'>
+          <label>Choisissez un avatar</label>
+          <div className={styles.avatarContainer}>
+            <div
+              className={styles.oneAvatar}
+              onClick={() => {
+                setSelectedAvatar('women_1')
+              }}
+            >
+              <img src={women_1} alt='avatar_1' />
+              {selectedAvatar === 'women_1' && (
+                <div>
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={styles.oneAvatar}
+              onClick={() => {
+                setSelectedAvatar('men_1')
+              }}
+            >
+              <img src={men_1} alt='avatar_2' />
+              {selectedAvatar === 'men_1' && (
+                <div>
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={styles.oneAvatar}
+              onClick={() => {
+                setSelectedAvatar('women_2')
+              }}
+            >
+              <img src={women_2} alt='avatar_3' />
+              {selectedAvatar === 'women_2' && (
+                <div>
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={styles.oneAvatar}
+              onClick={() => {
+                setSelectedAvatar('men_2')
+              }}
+            >
+              <img src={men_2} alt='avatar_4' />
+              {selectedAvatar === 'men_2' && (
+                <div>
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={styles.oneAvatar}
+              onClick={() => {
+                setSelectedAvatar('women_3')
+              }}
+            >
+              <img src={women_3} alt='avatar_5' />
+              {selectedAvatar === 'women_3' && (
+                <div>
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={styles.oneAvatar}
+              onClick={() => {
+                setSelectedAvatar('men_3')
+              }}
+            >
+              <img src={men_3} alt='avatar_6' />
+              {selectedAvatar === 'men_3' && (
+                <div>
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* <label htmlFor='imageProfile'>
             <div>
               {imagePreview && (
                 <img src={imagePreview} alt='Aperçu du profile' />
@@ -152,7 +254,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
             name='photo'
             accept='.jpg, .jpeg, .png, .webp, .svg'
             onChange={handleImageChange}
-          />
+          /> */}
         </div>
         <label htmlFor='pseudo'>Entrez votre nom ou pseudo*</label>
         <br />

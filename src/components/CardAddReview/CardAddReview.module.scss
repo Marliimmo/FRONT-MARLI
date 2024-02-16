@@ -1,7 +1,7 @@
 @import "../../assets/styles/variables";
 .allContainer{
     width: 100%;
-    padding: 0px 10%;
+    padding: 0px 11%;
     margin-bottom: 30px;
     margin-top: -50px;
 
@@ -53,16 +53,20 @@
                 font-weight: 400;
                 font-size: 20px;
             }
-        
-            label{
-                cursor: pointer;
+
+            .avatarContainer{
                 display: flex;
-                width: fit-content;
-                position: relative;
-                div{
-                    margin: 15px 0px;
-                    width: 80px;
-                    height: 80px;
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-top: 20px;
+
+                .oneAvatar{
+                    cursor: pointer;
+                    display: flex;
+                    width: fit-content;
+                    position: relative;
+                    width: 65px;
+                    height: 65px;
                     border-radius: 100px;
                     background-color: $font-color;
                     overflow: hidden;
@@ -72,25 +76,27 @@
                     img{
                         object-fit: cover;
                     }
+
+                    div{
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background-color: rgba(0, 0, 0, 0.342);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        svg{
+                            font-size: 20px;
+                            color: $white-color;
+                        }
+                    }
+                    
                 }
-        
-                svg{
-                    font-size: 15px;
-                    position: absolute;
-                    right: 0px;
-                    bottom: 12px;
-                    background-color: $white-color;
-                    border-radius: 50px;
-                    border: 1px solid rgb(231, 231, 231);
-                    padding: 8px;
-                    color: gray;
-                }
-                
             }
         
-            input{
-                display: none;
-            }
         }
 
         .btnContainer{
@@ -151,9 +157,19 @@
 
     @media screen and (max-width: 500px) {
         padding: 0px 30px;
-        
         form{
             padding: 30px;
+            h2{
+                text-align: center;
+                font-size: 22px;
+            }
+
+            .noteContainer{
+                margin-bottom: 0px;
+                label{
+                    font-size: 17px;
+                }
+            }
         }
     }
 }
