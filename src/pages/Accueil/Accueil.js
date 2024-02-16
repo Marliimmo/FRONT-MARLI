@@ -20,6 +20,12 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useRef } from 'react'
 import CardAvis from '../../components/CardAvis/CardAvis'
 import CardAddReview from '../../components/CardAddReview/CardAddReview'
+import {
+  FadeIn,
+  SlideOfRight,
+  SlideDown,
+  SlideUp,
+} from '../../components/AnimatedComponents/AnimatedComponents'
 import { Link as ScrollLink } from 'react-scroll'
 import { Helmet } from 'react-helmet'
 
@@ -177,33 +183,39 @@ function Accueil() {
           />
           <div className={styles.opacityBlack}></div>
           <div className={styles.TextContent}>
-            <p>
-              <img src={Logo} alt='logo-marli' />
-            </p>
-            <h3>
-              Les transactions immobilières sont avant tout des histoires
-              humaines et des passages de témoin.
-            </h3>
+            <SlideDown>
+              <p>
+                <img src={Logo} alt='logo-marli' />
+              </p>
+            </SlideDown>
+            <SlideUp>
+              <h3>
+                Les transactions immobilières sont avant tout des histoires
+                humaines et des passages de témoin.
+              </h3>
+            </SlideUp>
           </div>
         </div>
 
-        <div className={styles.presentationSection}>
-          <div className={styles.LeftContent}>
-            <img src={ImgImmeuble4} alt='img dressing' />
-            <img src={ImgImmeuble5} alt='img immeuble' />
-          </div>
+        <FadeIn>
+          <div className={styles.presentationSection}>
+            <div className={styles.LeftContent}>
+              <img src={ImgImmeuble4} alt='img dressing' />
+              <img src={ImgImmeuble5} alt='img immeuble' />
+            </div>
 
-          <div className={styles.RightContent}>
-            <p className={styles.borderStyle}></p>
-            <p>
-              Nous souhaitons faciliter vos projets immobiliers de leur
-              conception à leur aboutissement.
-              <br /> Votre satisfaction sera notre première gratitude.
-            </p>
+            <div className={styles.RightContent}>
+              <p className={styles.borderStyle}></p>
+              <p>
+                Nous souhaitons faciliter vos projets immobiliers de leur
+                conception à leur aboutissement.
+                <br /> Votre satisfaction sera notre première gratitude.
+              </p>
 
-            <p>A vous d’écrire la suite de l’histoire...</p>
+              <p>A vous d’écrire la suite de l’histoire...</p>
+            </div>
           </div>
-        </div>
+        </FadeIn>
 
         {/* <div className={styles.NouveautesContainer2}>
         <div className={styles.titleEslideBtn}>
@@ -231,180 +243,221 @@ function Accueil() {
       </div> */}
 
         <div className={styles.widget}>
-          <div className={styles.NouveautesContainer}>
-            <h3>Nos nouvelles histoires</h3>
+          <FadeIn>
+            <div className={styles.NouveautesContainer}>
+              <h3>Nos nouvelles histoires</h3>
 
-            {dataBienNouveau.length > 2 && handleHover && (
+              {dataBienNouveau.length > 2 && handleHover && (
+                <div
+                  className={styles.slideButton}
+                  onMouseEnter={() => setHandleHover(true)}
+                  onMouseLeave={() => setHandleHover(false)}
+                >
+                  <div onClick={slidePrev}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </div>
+                  <div onClick={slideNext}>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </div>
+                </div>
+              )}
+
+              {/* slider  */}
               <div
-                className={styles.slideButton}
                 onMouseEnter={() => setHandleHover(true)}
                 onMouseLeave={() => setHandleHover(false)}
               >
-                <div onClick={slidePrev}>
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                </div>
-                <div onClick={slideNext}>
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </div>
+                <Slider ref={sliderRef} {...settings}>
+                  {dataBienNouveau.map((bien) => (
+                    <CardSlider
+                      key={bien.ref}
+                      image={bien?._medias?.image_galerie_0?.url}
+                      price={bien?.prix}
+                      localisation={bien?.localisation}
+                      caracteristiques={bien?.caracteristiques}
+                      status={bien?.status}
+                      reference={bien?.ref}
+                    />
+                  ))}
+                </Slider>
               </div>
-            )}
 
-            {/* slider  */}
+              <div className={styles.btnContainer}>
+                <Link to='/marli/acheter'>Nos autres histoires</Link>
+              </div>
+
+              <h3>Que faisons-nous pour vous</h3>
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className={styles.sectionChecked}>
+              <div className={styles.LeftContent}>
+                <img
+                  src={ImgImmeuble}
+                  alt='img illustration de vente de bien'
+                />
+              </div>
+
+              <div className={styles.RightContent}>
+                <SlideOfRight>
+                  <h2>Acheter un bien</h2>
+                </SlideOfRight>
+                <p className={styles.borderStyle}></p>
+
+                <div className={styles.ListeCheckContainer}>
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Identification de votre besoin.</p>
+                    </div>
+                  </SlideOfRight>
+
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Sélection et visite ciblées.</p>
+                    </div>
+                  </SlideOfRight>
+
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Négociation financière.</p>
+                    </div>
+                  </SlideOfRight>
+
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Compromis, signature.</p>
+                    </div>
+                  </SlideOfRight>
+                </div>
+
+                <SlideOfRight>
+                  <Link to='/marli/acheter'>Toutes nos histoires</Link>
+                </SlideOfRight>
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn>
             <div
-              onMouseEnter={() => setHandleHover(true)}
-              onMouseLeave={() => setHandleHover(false)}
+              className={`${styles.sectionChecked} ${styles.sectionChecked2}`}
             >
-              <Slider ref={sliderRef} {...settings}>
-                {dataBienNouveau.map((bien) => (
-                  <CardSlider
-                    key={bien.ref}
-                    image={bien?._medias?.image_galerie_0?.url}
-                    price={bien?.prix}
-                    localisation={bien?.localisation}
-                    caracteristiques={bien?.caracteristiques}
-                    status={bien?.status}
-                    reference={bien?.ref}
-                  />
+              <div className={styles.LeftContent}>
+                <img
+                  style={{ filter: 'grayscale(1)' }}
+                  src={ImgImmeuble20}
+                  alt='img illustration de vente de bien'
+                />
+              </div>
+
+              <div className={styles.RightContent}>
+                <SlideOfRight>
+                  <h2>Vendre un bien</h2>
+                </SlideOfRight>
+                <p className={styles.borderStyle}></p>
+
+                <div className={styles.ListeCheckContainer}>
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Estimation</p>
+                    </div>
+                  </SlideOfRight>
+
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Valorisation et mise en lumière.</p>
+                    </div>
+                  </SlideOfRight>
+
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Commercialisation</p>
+                    </div>
+                  </SlideOfRight>
+
+                  <SlideOfRight>
+                    <div className={styles.oneChecked}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                      <p>Portefeuille clients acquéreurs conséquent</p>
+                    </div>
+                  </SlideOfRight>
+                </div>
+
+                <SlideOfRight>
+                  <Link to='/marli/vendre'>Estimer votre bien</Link>
+                </SlideOfRight>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn>
+          <div className={styles.investerSection}>
+            <div>
+              <h2>INVESTIR DANS L’IMMOBILIER</h2>
+              <ul>
+                <li>Chasseur de bien</li>
+                <li>
+                  Résidences secondaires au Sénégal, destination soleil 365/365j
+                </li>
+                <li>Accompagnement, étude de faisabilité et rentabilité</li>
+              </ul>
+              <Link to='nous-contacter'>Nous contacter</Link>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn>
+          <div id='avisContainer' className={styles.AvisSection}>
+            <h2>Parole libre</h2>
+            <div className={styles.barStyleContainer}>
+              <p className={styles.borderStyle}></p>
+            </div>
+            {dataReviews.length > 0 && (
+              <Slider {...settingsSliderAvis}>
+                {dataReviews.map((review) => (
+                  <CardAvis avis={review} />
                 ))}
               </Slider>
-            </div>
-
-            <div className={styles.btnContainer}>
-              <Link to='/marli/acheter'>Nos autres histoires</Link>
-            </div>
-
-            <h3>Que faisons-nous pour vous</h3>
-          </div>
-
-          <div className={styles.sectionChecked}>
-            <div className={styles.LeftContent}>
-              <img src={ImgImmeuble} alt='img illustration de vente de bien' />
-            </div>
-
-            <div className={styles.RightContent}>
-              <h2>Acheter un bien</h2>
-              <p className={styles.borderStyle}></p>
-
-              <div className={styles.ListeCheckContainer}>
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Identification de votre besoin.</p>
-                </div>
-
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Sélection et visite ciblées.</p>
-                </div>
-
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Négociation financière.</p>
-                </div>
-
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Compromis, signature.</p>
-                </div>
-              </div>
-
-              <Link to='/marli/acheter'>Toutes nos histoires</Link>
-            </div>
-          </div>
-
-          <div className={styles.sectionChecked}>
-            <div className={styles.LeftContent}>
-              <img
-                style={{ filter: 'grayscale(1)' }}
-                src={ImgImmeuble20}
-                alt='img illustration de vente de bien'
-              />
-            </div>
-
-            <div className={styles.RightContent}>
-              <h2>Vendre un bien</h2>
-              <p className={styles.borderStyle}></p>
-
-              <div className={styles.ListeCheckContainer}>
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Estimation</p>
-                </div>
-
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Valorisation et mise en lumière.</p>
-                </div>
-
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Commercialisation</p>
-                </div>
-
-                <div>
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                  <p>Portefeuille clients acquéreurs conséquent</p>
-                </div>
-              </div>
-
-              <Link to='/marli/vendre'>Estimer votre bien</Link>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.investerSection}>
-          <div>
-            <h2>INVESTIR DANS L’IMMOBILIER</h2>
-            <ul>
-              <li>Chasseur de bien</li>
-              <li>
-                Résidences secondaires au Sénégal, destination soleil 365/365j
-              </li>
-              <li>Accompagnement, étude de faisabilité et rentabilité</li>
-            </ul>
-            <Link to='nous-contacter'>Nous contacter</Link>
-          </div>
-        </div>
-
-        <div id='avisContainer' className={styles.AvisSection}>
-          <h2>Parole libre</h2>
-          <div className={styles.barStyleContainer}>
-            <p className={styles.borderStyle}></p>
-          </div>
-          {dataReviews.length > 0 && (
-            <Slider {...settingsSliderAvis}>
-              {dataReviews.map((review) => (
-                <CardAvis avis={review} />
-              ))}
-            </Slider>
-          )}
-          {!showFormAvis && (
-            <div className={styles.btnSection}>
-              {/* <Link>
+            )}
+            {!showFormAvis && (
+              <div className={styles.btnSection}>
+                {/* <Link>
               <button>Voir plus d’avis</button>
             </Link> */}
-              {isSuccesSend !== true && (
-                <ScrollLink smooth to='formAddReview' onClick={handleChange}>
-                  <button>Je témoigne</button>
-                </ScrollLink>
-              )}
+                {isSuccesSend !== true && (
+                  <ScrollLink smooth to='formAddReview' onClick={handleChange}>
+                    <button>Je témoigne</button>
+                  </ScrollLink>
+                )}
 
-              {isSuccesSend === true && (
-                <div className={styles.MessageFeedBackSucces}>
-                  Merci pour votre avis !
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+                {isSuccesSend === true && (
+                  <div className={styles.MessageFeedBackSucces}>
+                    Merci pour votre avis !
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </FadeIn>
 
-        <div id='formAddReview'>
-          {showFormAvis && (
-            <CardAddReview
-              visibilityForm={handleChange}
-              isSuccesSend={handleSuccesSend}
-            />
-          )}
-        </div>
+        <FadeIn>
+          <div id='formAddReview'>
+            {showFormAvis && (
+              <CardAddReview
+                visibilityForm={handleChange}
+                isSuccesSend={handleSuccesSend}
+              />
+            )}
+          </div>
+        </FadeIn>
       </div>
     </>
   )

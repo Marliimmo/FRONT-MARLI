@@ -395,7 +395,7 @@
 
             .ListeCheckContainer{
                 margin-bottom: 75px;
-                > div{
+                .oneChecked{
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
@@ -429,11 +429,9 @@
         }
     }
 
-    > div{
-        &:nth-child(3){
-            margin-top: 150px;
-            flex-direction: row-reverse;
-        }
+    .sectionChecked2{
+        margin-top: 150px;
+        flex-direction: row-reverse;
     }
 
     @media screen and (max-width: 966px) {
@@ -459,7 +457,7 @@
     
                 .ListeCheckContainer{
                     margin-bottom: 40px;
-                    > div{
+                    .oneChecked{
                         justify-content: center;
                         flex-direction: column;
                         text-align: center;

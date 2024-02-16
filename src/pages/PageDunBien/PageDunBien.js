@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import CardSlider from '../../components/CardSlider/CardSlider'
 import { Helmet } from 'react-helmet'
+import { FadeIn } from '../../components/AnimatedComponents/AnimatedComponents'
 
 function PageDunBien() {
   const sliderRef = useRef(null)
@@ -143,7 +144,7 @@ function PageDunBien() {
         {loading ? null : data.length <= 0 ? (
           <p className={styles.notFoundBien}>Aucun bien trouver</p>
         ) : (
-          <>
+          <FadeIn>
             {data?._medias?.image_galerie_0?.url && (
               <div className={styles.imageContainer}>
                 <div className={styles.CrousselContainer}>
@@ -299,7 +300,7 @@ function PageDunBien() {
                 </div>
               </div>
             )}
-          </>
+          </FadeIn>
         )}
       </div>
 

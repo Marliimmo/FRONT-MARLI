@@ -30,12 +30,13 @@
         flex-wrap: wrap;
         justify-content: flex-start;
         column-gap: 10%;
-        > div{
+
+        div{
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
             column-gap: 18px;
-            margin: 25px 0px;
+            margin: 18px 0px;
             flex: 1 0 40%;
             
             svg{
@@ -57,7 +58,8 @@
 
         .ListeCheckContainer{
             column-gap: 8%;
-            > div{
+            div{
+                margin: 10px 0px;
                 flex: 1 0 300px;
             }
         }
@@ -69,7 +71,7 @@
         }
 
         .ListeCheckContainer{
-            > div{
+            div{
                 p{
                     font-size: 15px;
                 }
