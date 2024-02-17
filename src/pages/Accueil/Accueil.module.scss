@@ -17,7 +17,6 @@
         top: 70px;
         left: 0px;
         z-index: 0;
-        // filter: grayscale(1);
     }
 
     .opacityBlack{
@@ -56,8 +55,8 @@
             font-size: 23px;
             line-height: 35px;
             letter-spacing: 1px;
-            border-top: 3px solid $white-color;
-            padding-top: 15px;
+            // border-top: 3px solid $white-color;
+            // padding-top: 15px;
         }
     }
 
@@ -361,19 +360,18 @@
         column-gap: 80px;
 
         .LeftContent{
-            height: 500px;
+            height: 575px;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 2px 2px 40px $font-color;
             width: 40%;
             // flex: 0 0 40%;
-            box-shadow: 2px 2px 100px $white-color;
+            // box-shadow: 2px 2px 100px $white-color;
 
             img{
-                height: 500px;
+                height: 575px;
                 width: 100%;
                 object-fit: cover;
-
             }
 
             // &:hover{

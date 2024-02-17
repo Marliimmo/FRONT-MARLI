@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
-import ImgImmeuble from '../../assets/images/united-states-spokane.jpg'
+// import ImgImmeuble from '../../assets/images/united-states-spokane.jpg'
 import ImgImmeuble19 from '../../assets/images/19.jpg'
 import ImgImmeuble4 from '../../assets/images/4.jpg'
-import ImgImmeuble20 from '../../assets/images/20.jpg'
+import ImgImmeuble2 from '../../assets/images/2.jpg'
+import ImgImmeuble30 from '../../assets/images/30.jpg'
 import ImgImmeuble5 from '../../assets/images/5.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -294,7 +295,7 @@ function Accueil() {
             <div className={styles.sectionChecked}>
               <div className={styles.LeftContent}>
                 <img
-                  src={ImgImmeuble}
+                  src={ImgImmeuble2}
                   alt='img illustration de vente de bien'
                 />
               </div>
@@ -309,28 +310,28 @@ function Accueil() {
                   <SlideOfRight>
                     <div className={styles.oneChecked}>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Identification de votre besoin.</p>
+                      <p>Identification de votre besoin</p>
                     </div>
                   </SlideOfRight>
 
                   <SlideOfRight>
                     <div className={styles.oneChecked}>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Sélection et visite ciblées.</p>
+                      <p>Sélection et visite ciblées</p>
                     </div>
                   </SlideOfRight>
 
                   <SlideOfRight>
                     <div className={styles.oneChecked}>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Négociation financière.</p>
+                      <p>Négociation financière</p>
                     </div>
                   </SlideOfRight>
 
                   <SlideOfRight>
                     <div className={styles.oneChecked}>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Compromis, signature.</p>
+                      <p>Compromis, signature</p>
                     </div>
                   </SlideOfRight>
                 </div>
@@ -348,8 +349,7 @@ function Accueil() {
             >
               <div className={styles.LeftContent}>
                 <img
-                  style={{ filter: 'grayscale(1)' }}
-                  src={ImgImmeuble20}
+                  src={ImgImmeuble30}
                   alt='img illustration de vente de bien'
                 />
               </div>
@@ -371,7 +371,7 @@ function Accueil() {
                   <SlideOfRight>
                     <div className={styles.oneChecked}>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Valorisation et mise en lumière.</p>
+                      <p>Valorisation et mise en lumière</p>
                     </div>
                   </SlideOfRight>
 
