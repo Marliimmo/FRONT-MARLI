@@ -263,6 +263,22 @@ function Accueil() {
                 </div>
               )}
 
+              {/* button slider for mobile */}
+              {dataBienNouveau.length > 2 && (
+                <div
+                  className={`${styles.slideButtonForMobile} ${styles.slideButton}`}
+                  onMouseEnter={() => setHandleHover(true)}
+                  onMouseLeave={() => setHandleHover(false)}
+                >
+                  <div onClick={slidePrev}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </div>
+                  <div onClick={slideNext}>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </div>
+                </div>
+              )}
+
               {/* slider  */}
               <div
                 onMouseEnter={() => setHandleHover(true)}
