@@ -21,7 +21,7 @@ function Acheter() {
   const [loading, setLoading] = useState('fecthLoad')
   const [hasMore, setHasMore] = useState(false)
   const [fecthUrl, setFecthUrl] = useState(
-    `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&page=1&pageSize=10`,
+    `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=decroissant&page=1&pageSize=10`,
   )
 
   // les constante pour gerer la recherche et filtre des biens
@@ -76,7 +76,7 @@ function Acheter() {
   const NewUrlFecth = (e) => {
     e.preventDefault()
     setLoading('filtre')
-    let newUrl = `${process.env.REACT_APP_API_URL}/bien/all-biens?filter`
+    let newUrl = `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=decroissant`
     if (typeBien !== '') {
       newUrl = `${newUrl}${typeBien}`
     }
