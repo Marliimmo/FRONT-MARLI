@@ -434,7 +434,13 @@ function Accueil() {
             </Link> */}
                 {isSuccesSend !== true && (
                   <ScrollLink smooth to='formAddReview' onClick={handleChange}>
-                    <button>Je témoigne</button>
+                    <button
+                      style={
+                        dataReviews.length > 0 ? { marginTop: '50px' } : {}
+                      }
+                    >
+                      Je témoigne
+                    </button>
                   </ScrollLink>
                 )}
 
@@ -445,17 +451,15 @@ function Accueil() {
                 )}
               </div>
             )}
-          </div>
-        </FadeIn>
 
-        <FadeIn>
-          <div id='formAddReview'>
-            {showFormAvis && (
-              <CardAddReview
-                visibilityForm={handleChange}
-                isSuccesSend={handleSuccesSend}
-              />
-            )}
+            <div id='formAddReview'>
+              {showFormAvis && (
+                <CardAddReview
+                  visibilityForm={handleChange}
+                  isSuccesSend={handleSuccesSend}
+                />
+              )}
+            </div>
           </div>
         </FadeIn>
       </div>

@@ -586,6 +586,10 @@
 
 .AvisSection{
     padding: 100px 9%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/21.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
     .barStyleContainer{
         width: 100%;
@@ -615,7 +619,6 @@
         justify-content: center;
         align-items: center;
         gap: 30px;
-        margin-top: 50px;
 
         a{
             width: fit-content;
