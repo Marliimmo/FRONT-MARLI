@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './FormVendreOuRecherche.module.scss'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 function FormVendreOuRecherche({ context }) {
   const [localisation, setLocalisation] = useState('')
@@ -13,97 +14,108 @@ function FormVendreOuRecherche({ context }) {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [succesSend, setSuccesSend] = useState('')
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false)
+
+  const handleCaptchaChange = (value) => {
+    if (value) {
+      setIsCaptchaVerified(true)
+    } else {
+      setIsCaptchaVerified(false)
+    }
+  }
 
   const SubmitForm = async (e) => {
     e.preventDefault()
-    setLoading(true)
+    if (isCaptchaVerified) {
+      setLoading(true)
 
-    // vente de bien
-    if (context === 'vendre') {
-      const dataSelling = JSON.stringify({
-        localisation: localisation,
-        typeBien: typeBien,
-        superficie: superficie,
-        pieces: pieces,
-        name: name,
-        email: email,
-        phone: phone,
-        message: message,
-      })
+      // vente de bien
+      if (context === 'vendre') {
+        const dataSelling = JSON.stringify({
+          localisation: localisation,
+          typeBien: typeBien,
+          superficie: superficie,
+          pieces: pieces,
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+        })
 
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/form/selling`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: dataSelling,
-          },
-        )
-        if (response.ok) {
-          setTimeout(() => {
-            const form = document.querySelector('#form')
-            form.reset()
-            setLoading('')
-            setSuccesSend(true)
-          }, 1500)
-        } else {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/form/selling`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: dataSelling,
+            },
+          )
+          if (response.ok) {
+            setTimeout(() => {
+              const form = document.querySelector('#form')
+              form.reset()
+              setLoading('')
+              setSuccesSend(true)
+            }, 1500)
+          } else {
+            setTimeout(() => {
+              setSuccesSend(false)
+              setLoading('')
+            }, 1500)
+          }
+        } catch (error) {
           setTimeout(() => {
             setSuccesSend(false)
             setLoading('')
           }, 1500)
+          console.log('Erreur lors de la requette fecth', error)
         }
-      } catch (error) {
-        setTimeout(() => {
-          setSuccesSend(false)
-          setLoading('')
-        }, 1500)
-        console.log('Erreur lors de la requette fecth', error)
       }
-    }
 
-    // avis de recherche
-    if (context === 'avis') {
-      const dataWanted = JSON.stringify({
-        localisation: localisation,
-        typeBien: typeBien,
-        superficie: superficie,
-        pieces: pieces,
-        budget: budget,
-        name: name,
-        email: email,
-        phone: phone,
-        message: message,
-      })
+      // avis de recherche
+      if (context === 'avis') {
+        const dataWanted = JSON.stringify({
+          localisation: localisation,
+          typeBien: typeBien,
+          superficie: superficie,
+          pieces: pieces,
+          budget: budget,
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+        })
 
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/form/wanted`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: dataWanted,
-          },
-        )
-        if (response.ok) {
-          setTimeout(() => {
-            const form = document.querySelector('#form')
-            form.reset()
-            setLoading('')
-            setSuccesSend(true)
-          }, 1500)
-        } else {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/form/wanted`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: dataWanted,
+            },
+          )
+          if (response.ok) {
+            setTimeout(() => {
+              const form = document.querySelector('#form')
+              form.reset()
+              setLoading('')
+              setSuccesSend(true)
+            }, 1500)
+          } else {
+            setTimeout(() => {
+              setSuccesSend(false)
+              setLoading('')
+            }, 1500)
+          }
+        } catch (error) {
           setTimeout(() => {
             setSuccesSend(false)
             setLoading('')
           }, 1500)
+          console.log('Erreur lors de la requette fecth', error)
         }
-      } catch (error) {
-        setTimeout(() => {
-          setSuccesSend(false)
-          setLoading('')
-        }, 1500)
-        console.log('Erreur lors de la requette fecth', error)
       }
     }
   }
@@ -240,7 +252,16 @@ function FormVendreOuRecherche({ context }) {
           }
         ></textarea>
         <br />
-        <button type='submit'>
+        <p style={{ margin: '-10px 0px 25px 0px' }}>
+          <ReCAPTCHA
+            sitekey='6LdbqX4pAAAAANfZdwd_HnsBnkO0fbocvoX2d1kv'
+            onChange={handleCaptchaChange}
+          />
+        </p>
+        <button
+          style={!isCaptchaVerified ? { backgroundColor: 'gray' } : {}}
+          type='submit'
+        >
           {loading ? 'Veuillez patienter...' : 'Envoyer'}
         </button>
         <div

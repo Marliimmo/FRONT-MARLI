@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './FormContact.module.scss'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 function FormContact() {
   const [titleMessage, setTitleMessage] = useState('')
@@ -10,47 +11,58 @@ function FormContact() {
   const [contenu, setContenu] = useState('')
   const [loading, setLoading] = useState(false)
   const [succesSend, setSuccesSend] = useState('')
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false)
+
+  const handleCaptchaChange = (value) => {
+    if (value) {
+      setIsCaptchaVerified(true)
+    } else {
+      setIsCaptchaVerified(false)
+    }
+  }
 
   const SubmitForm = async (e) => {
     e.preventDefault()
-    setLoading(true)
-    const data = JSON.stringify({
-      titleMessage: titleMessage,
-      motif: motif,
-      name: name,
-      email: email,
-      phone: phone,
-      contenu: contenu,
-    })
+    if (isCaptchaVerified) {
+      setLoading(true)
+      const data = JSON.stringify({
+        titleMessage: titleMessage,
+        motif: motif,
+        name: name,
+        email: email,
+        phone: phone,
+        contenu: contenu,
+      })
 
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/form/contact-us`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: data,
-        },
-      )
-      if (response.ok) {
-        setTimeout(() => {
-          const form = document.querySelector('#form')
-          form.reset()
-          setLoading('')
-          setSuccesSend(true)
-        }, 1500)
-      } else {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/form/contact-us`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: data,
+          },
+        )
+        if (response.ok) {
+          setTimeout(() => {
+            const form = document.querySelector('#form')
+            form.reset()
+            setLoading('')
+            setSuccesSend(true)
+          }, 1500)
+        } else {
+          setTimeout(() => {
+            setSuccesSend(false)
+            setLoading('')
+          }, 1500)
+        }
+      } catch (error) {
         setTimeout(() => {
           setSuccesSend(false)
           setLoading('')
         }, 1500)
+        console.log('Erreur lors de la requette fecth', error)
       }
-    } catch (error) {
-      setTimeout(() => {
-        setSuccesSend(false)
-        setLoading('')
-      }, 1500)
-      console.log('Erreur lors de la requette fecth', error)
     }
   }
 
@@ -132,7 +144,16 @@ function FormContact() {
           required
         ></textarea>
         <br />
-        <button type='submit'>
+        <p style={{ margin: '-10px 0px 25px 0px' }}>
+          <ReCAPTCHA
+            sitekey='6LdbqX4pAAAAANfZdwd_HnsBnkO0fbocvoX2d1kv'
+            onChange={handleCaptchaChange}
+          />
+        </p>
+        <button
+          style={!isCaptchaVerified ? { backgroundColor: 'gray' } : {}}
+          type='submit'
+        >
           {loading ? 'Veuillez patienter...' : 'Envoyer'}
         </button>
         <div

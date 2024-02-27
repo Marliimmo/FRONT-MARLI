@@ -192,7 +192,7 @@ function Accueil() {
             <SlideUp>
               <h3>
                 Les transactions immobilières sont avant tout des histoires
-                humaines et des passages de témoin.
+                humaines et des passages de témoin
               </h3>
             </SlideUp>
           </div>
@@ -209,8 +209,8 @@ function Accueil() {
               <p className={styles.borderStyle}></p>
               <p>
                 Nous souhaitons faciliter vos projets immobiliers de leur
-                conception à leur aboutissement.
-                <br /> Votre satisfaction sera notre première gratitude.
+                conception à leur aboutissement
+                <br /> Votre satisfaction sera notre première gratitude
               </p>
 
               <p>A vous d’écrire la suite de l’histoire...</p>
@@ -432,7 +432,7 @@ function Accueil() {
 
         <FadeIn>
           <div id='avisContainer' className={styles.AvisSection}>
-            <h2>Parole libre</h2>
+            <h2>Votre avis nous intéresse</h2>
             <div className={styles.barStyleContainer}>
               <p className={styles.borderStyle}></p>
             </div>
