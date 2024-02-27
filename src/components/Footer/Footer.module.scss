@@ -61,6 +61,17 @@
                     margin: 12px 0px;
                 }
             }
+
+            .imageAuhtorContainer{
+                width: 120px;
+                margin-top: 25px !important;
+                border-radius: 100px;
+                overflow: hidden;
+                img{
+                    width: 120px;
+                    object-fit: cover;
+                }
+            }
         }
 
         .widgetFooter2{
