@@ -10,7 +10,7 @@ import styles from './Footer.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 import FacebookIcon from '../../assets/images/facebook-f.svg'
 import LinkedInIcon from '../../assets/images/linkedin-in.svg'
-import image_author from '../../assets/images/author_image.jpg'
+// import image_author from '../../assets/images/author_image.jpg'
 
 function Footer() {
   return (
@@ -52,9 +52,9 @@ function Footer() {
                 </p>
               </div>
 
-              <div className={styles.imageAuhtorContainer}>
+              {/* <div className={styles.imageAuhtorContainer}>
                 <img src={image_author} alt='img_author' />
-              </div>
+              </div> */}
             </div>
           </div>
 

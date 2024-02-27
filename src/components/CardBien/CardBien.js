@@ -23,7 +23,7 @@ function CardBien({
             className={`${status === 'vendu' ? styles.statusBienVendu : status === 'sous-compromis' ? styles.statusSousCompromis : null}`}
           >
             {status === 'vendu'
-              ? 'bien vendu'
+              ? 'vendu'
               : status === 'sous-compromis'
                 ? 'sous compromis'
                 : null}

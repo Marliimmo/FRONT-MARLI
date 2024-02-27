@@ -9,7 +9,7 @@ import women_3 from '../../assets/avatar/women_3.png'
 import men_1 from '../../assets/avatar/men_1.png'
 import men_2 from '../../assets/avatar/men_2.png'
 import men_3 from '../../assets/avatar/men_3.png'
-import ReCAPTCHA from 'react-google-recaptcha'
+// import ReCAPTCHA from 'react-google-recaptcha'
 
 function CardAddReview({ visibilityForm, isSuccesSend }) {
   const [loading, setLoading] = useState('')
@@ -21,15 +21,15 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
   const [succesSend, setSuccesSend] = useState('')
   const [review, setReview] = useState(5)
   const [stars, hoverStar] = useState('_5star')
-  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false)
+  // const [isCaptchaVerified, setIsCaptchaVerified] = useState(false)
 
-  const handleCaptchaChange = (value) => {
-    if (value) {
-      setIsCaptchaVerified(true)
-    } else {
-      setIsCaptchaVerified(false)
-    }
-  }
+  // const handleCaptchaChange = (value) => {
+  //   if (value) {
+  //     setIsCaptchaVerified(true)
+  //   } else {
+  //     setIsCaptchaVerified(false)
+  //   }
+  // }
 
   // const handleImageChange = (e) => {
   //   const selectedFile = e.target.files[0]
@@ -66,53 +66,53 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (isCaptchaVerified) {
-      if (review) {
-        setLoading(true)
-        // const formData = new FormData()
-        // formData.append('urlImage', selectedAvatar)
-        // formData.append('pseudo', pseudo)
-        // formData.append('description', description)
-        // formData.append('stars', review)
+    // if (isCaptchaVerified) {
+    if (review) {
+      setLoading(true)
+      // const formData = new FormData()
+      // formData.append('urlImage', selectedAvatar)
+      // formData.append('pseudo', pseudo)
+      // formData.append('description', description)
+      // formData.append('stars', review)
 
-        const formData = JSON.stringify({
-          urlImage: selectedAvatar,
-          pseudo: pseudo,
-          description: description,
-          stars: review,
-        })
+      const formData = JSON.stringify({
+        urlImage: selectedAvatar,
+        pseudo: pseudo,
+        description: description,
+        stars: review,
+      })
 
-        console.log(formData)
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/user/add-review`,
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: formData,
-            },
-          )
-          if (response.ok) {
-            setTimeout(async () => {
-              const form = document.querySelector('#form')
-              form.reset()
-              visibilityForm()
-              isSuccesSend(true)
-              setLoading('')
-            }, 2000)
-          } else {
-            setTimeout(() => {
-              setLoading('')
-              setSuccesSend(false)
-            }, 2000)
-          }
-        } catch (error) {
-          setLoading('')
-          setSuccesSend(false)
-          console.error('Erreur lors de la requête fetch :', error)
+      console.log(formData)
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/user/add-review`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: formData,
+          },
+        )
+        if (response.ok) {
+          setTimeout(async () => {
+            const form = document.querySelector('#form')
+            form.reset()
+            visibilityForm()
+            isSuccesSend(true)
+            setLoading('')
+          }, 2000)
+        } else {
+          setTimeout(() => {
+            setLoading('')
+            setSuccesSend(false)
+          }, 2000)
         }
+      } catch (error) {
+        setLoading('')
+        setSuccesSend(false)
+        console.error('Erreur lors de la requête fetch :', error)
       }
     }
+    // }
   }
 
   return (
@@ -295,16 +295,20 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
         ></textarea>
         <br />
 
-        <p style={{ margin: '-10px 0px 25px 0px' }}>
+        {/* <p
+          style={{
+            margin: '-10px 0px 25px 0px',
+          }}
+        >
           <ReCAPTCHA
             sitekey='6LdbqX4pAAAAANfZdwd_HnsBnkO0fbocvoX2d1kv'
             onChange={handleCaptchaChange}
           />
-        </p>
+        </p> */}
 
         <div className={styles.btnContainer}>
           <button
-            style={!isCaptchaVerified ? { backgroundColor: 'gray' } : {}}
+            // style={!isCaptchaVerified ? { backgroundColor: 'gray' } : {}}
             type='submit'
           >
             {loading ? 'Veuillez patienter...' : 'Envoyez mon avis'}

@@ -242,13 +242,28 @@
             }
         }
 
-        // @media screen and (max-width: 594px) {
-        //     .RightContainer{
-        //         margin-top: 20px;
-        //         padding-top: 30px;
-        //         border-top: 1px solid $white-color;
-        //     }
-        // }
+        @media screen and (max-width: 1260px) {
+            flex-direction: column-reverse;
+
+            .RightContainer{
+                width: 100%;
+                flex: 1 0 100%;
+                flex-direction: column;
+                overflow: inherit;
+
+                .prixElocalisation{
+                    height: auto;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .caracteristique{
+                    height: auto;
+                    width: 100%;
+                    overflow: hidden;
+                }
+            }
+        }
 
         // @media screen and (min-width: 595px) and (max-width: 992px) {
         //     .RightContainer{
@@ -264,11 +279,11 @@
         //     }   
         // }
 
-        @media screen and (min-width: 900px) and (max-width: 1260px) {
-            .histoireContainer{
-                flex: 1 0 100%;
-            }
-        }
+        // @media screen and (min-width: 900px) and (max-width: 1260px) {
+        //     .histoireContainer{
+        //         flex: 1 0 100%;
+        //     }
+        // }
     }
 
     .sectionRef{

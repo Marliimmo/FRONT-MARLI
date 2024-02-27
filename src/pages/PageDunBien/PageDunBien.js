@@ -191,7 +191,7 @@ function PageDunBien() {
                         className={styles.statusBien}
                       >
                         {data.status === 'vendu'
-                          ? 'bien vendu'
+                          ? 'vendu'
                           : data.status === 'sous-compromis'
                             ? 'sous compromis'
                             : null}

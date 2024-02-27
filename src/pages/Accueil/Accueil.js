@@ -432,7 +432,7 @@ function Accueil() {
 
         <FadeIn>
           <div id='avisContainer' className={styles.AvisSection}>
-            <h2>Votre avis nous intéresse</h2>
+            <h2>Parole libre</h2>
             <div className={styles.barStyleContainer}>
               <p className={styles.borderStyle}></p>
             </div>

@@ -23,7 +23,7 @@ function CardSlider({
           />
           <h2 className={styles.prixBien}>
             {status === 'vendu'
-              ? 'bien vendu'
+              ? 'vendu'
               : status === 'sous-compromis'
                 ? 'sous compromis'
                 : `${price.toLocaleString('fr-FR')} €`}
