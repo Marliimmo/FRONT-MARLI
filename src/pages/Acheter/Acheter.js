@@ -17,11 +17,11 @@ function Acheter() {
   const [showFiltre, setShowFiltre] = useState(false)
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
-  const [pageSize] = useState(10)
+  const [pageSize] = useState(6)
   const [loading, setLoading] = useState('fecthLoad')
   const [hasMore, setHasMore] = useState(false)
   const [fecthUrl, setFecthUrl] = useState(
-    `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=decroissant&page=1&pageSize=10`,
+    `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant&page=1&pageSize=6`,
   )
 
   // les constante pour gerer la recherche et filtre des biens
@@ -76,7 +76,7 @@ function Acheter() {
   const NewUrlFecth = (e) => {
     e.preventDefault()
     setLoading('filtre')
-    let newUrl = `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=decroissant`
+    let newUrl = `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant`
     if (typeBien !== '') {
       newUrl = `${newUrl}${typeBien}`
     }
@@ -92,7 +92,7 @@ function Acheter() {
 
     setTimeout(() => {
       setLoading('')
-      setFecthUrl(`${newUrl}&page=1&pageSize=10`)
+      setFecthUrl(`${newUrl}&page=1&pageSize=6`)
       setPage(1)
     }, 1000)
   }
