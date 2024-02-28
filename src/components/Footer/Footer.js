@@ -92,6 +92,11 @@ function Footer() {
           </div>
         </div>
       </div>
+      <div className={styles.linkPoweredBy}>
+        <Link to='https://choosews.com/kmaraab' target='_blank'>
+          Powered by <span>choosews</span>
+        </Link>
+      </div>
     </>
   )
 }

@@ -82,6 +82,14 @@
     }
 
     @media screen and (max-width: 420px) {
+        // height: 100%;
+        // .ImgPremierePlan{
+        //     height: 100%;
+        // }
+        // .opacityBlack{
+        //     height: 100%;
+        // }
+
         .TextContent{
             h3{
                 font-size: 16px;
@@ -206,7 +214,7 @@
             }
         }
         .LeftContent{
-            height: 350px;
+            height: 300px;
             flex: 1 0 100%;
         }
     }

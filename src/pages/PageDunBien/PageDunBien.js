@@ -117,7 +117,7 @@ function PageDunBien() {
 
       const fecthBienDisponible = async () => {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=decroissant&pageSize=5`,
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=5`,
         )
         if (response.ok) {
           const result = await response.json()

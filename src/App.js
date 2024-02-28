@@ -5,7 +5,6 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
-import PoweredByChoosews from './components/PoweredByChoosews/PoweredByChoosews'
 
 function App() {
   useEffect(() => {
@@ -14,7 +13,6 @@ function App() {
 
   return (
     <>
-      <PoweredByChoosews />
       <ScrollToTopButton />
       <ScrollToTop />
       <LoadingAllSite />
