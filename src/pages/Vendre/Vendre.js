@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/20.jpg'
+import Image from '../../assets/images/22.jpg'
 import styles from './Vendre.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'

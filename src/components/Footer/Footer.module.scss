@@ -201,14 +201,29 @@
 }
 
 .linkPoweredBy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
     text-align: center;
     font-weight: 500;
     padding: 15px 0px 15px 0px;
     border-top: 1px solid rgba(128, 128, 128, 0.308);
     background-color: $gray-color;
 
+    img{
+        width: 100px;
+    }
+
     span{
         text-decoration: underline;
+    }
+
+    .imageAuhtorContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

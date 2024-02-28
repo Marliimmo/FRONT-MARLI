@@ -96,7 +96,6 @@ function A_Propos() {
               Bienvenue chez Marli où votre satisfaction est notre première
               gratitude.
             </p>
-            <p>Crédit photo : Jean-Claude</p>
           </div>
         </div>
       </div>
