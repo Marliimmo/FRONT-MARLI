@@ -28,7 +28,8 @@ function Footer() {
               <div>
                 <FontAwesomeIcon icon={faMobileScreen} />
                 <p>
-                  <Link to='tel:+33 6 51 31 03 81'>+33 6 51 31 03 81</Link>
+                  <Link to='tel:+33 6 51 31 03 81'>06 51 31 03 81</Link>
+                  {/* <Link to='tel:+33 6 51 31 03 81'>+33 6 51 31 03 81</Link> */}
                 </p>
               </div>
               <div>
@@ -47,7 +48,7 @@ function Footer() {
                     to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
                     target='_blank'
                   >
-                    2b rue des Jardins, 25 000 Besançon
+                    2b rue des Jardins, 25000 Besançon
                   </Link>
                 </p>
               </div>
@@ -93,7 +94,7 @@ function Footer() {
         </div>
       </div>
       <div className={styles.linkPoweredBy}>
-        <Link to='https://choosews.com/kmaraab' target='_blank'>
+        <Link to='https://choosews.com' target='_blank'>
           Powered by <span>choosews</span>
         </Link>
         <div>|</div>

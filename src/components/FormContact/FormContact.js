@@ -4,7 +4,7 @@ import styles from './FormContact.module.scss'
 
 function FormContact() {
   const [titleMessage, setTitleMessage] = useState('')
-  const [motif, setMotif] = useState('Autres')
+  const [motif, setMotif] = useState('Acheter un bien')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -89,11 +89,11 @@ function FormContact() {
             id='contextMessage'
             required
           >
-            <option value='Autres'>Autres</option>
             <option value='Acheter un bien'>Acheter un bien</option>
             <option value="J'ai un bien que l'un de vos clients recherche">
               J'ai un bien que l'un de vos clients recheche
             </option>
+            <option value='Autre'>Autre</option>
           </select>
         </div>
         <label htmlFor='name'>Nom & prénom*</label> <br />
@@ -140,7 +140,7 @@ function FormContact() {
             setSuccesSend('')
           }}
           rows='5'
-          placeholder='pour approfondir*'
+          placeholder='Votre message*'
           required
         ></textarea>
         <br />

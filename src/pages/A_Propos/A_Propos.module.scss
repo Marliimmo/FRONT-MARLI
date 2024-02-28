@@ -34,14 +34,15 @@
 
         .imageContainer{
             flex: 1 0 30%;
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row-reverse;
-            align-items: flex-end;
+            // display: flex;
+            // justify-content: space-between;
+            // flex-direction: row-reverse;
+            // align-items: flex-end;
             
             div{
                 text-transform: uppercase;
-                margin-right: -20px;
+                // margin-right: -20px;
+                margin-top: 10px;
                 z-index: 9;
                 h3{
                     font-size: 30px;

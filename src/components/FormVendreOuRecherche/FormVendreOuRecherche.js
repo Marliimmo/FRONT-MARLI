@@ -4,7 +4,7 @@ import styles from './FormVendreOuRecherche.module.scss'
 
 function FormVendreOuRecherche({ context }) {
   const [localisation, setLocalisation] = useState('')
-  const [typeBien, setTypeBien] = useState('Autres')
+  const [typeBien, setTypeBien] = useState('Appartement')
   const [superficie, setSuperficie] = useState('')
   const [pieces, setPieces] = useState('')
   const [budget, setBudget] = useState('')
@@ -145,10 +145,10 @@ function FormVendreOuRecherche({ context }) {
               id='typeDbien'
               required
             >
-              <option value='Autres'>Autres</option>
               <option value='Appartement'>Appartement</option>
               <option value='Immeuble'>Immeuble</option>
               <option value='Maison'>Maison</option>
+              <option value='Autre'>Autre</option>
             </select>
           </div>
 
@@ -246,9 +246,10 @@ function FormVendreOuRecherche({ context }) {
           }}
           rows='5'
           placeholder={
-            context === 'vendre'
-              ? 'un mot pour accompagner ?'
-              : 'plus de details ?'
+            // context === 'vendre'
+            //   ? 'un mot pour accompagner ?'
+            //   : 'plus de details ?'
+            'Votre message'
           }
         ></textarea>
         <br />

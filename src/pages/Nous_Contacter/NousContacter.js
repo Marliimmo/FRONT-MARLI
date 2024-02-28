@@ -4,8 +4,12 @@ import FormContact from '../../components/FormContact/FormContact'
 // import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 // import Image from '../../assets/images/united-states-spokane.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot, faPhoneFlip } from '@fortawesome/free-solid-svg-icons'
-import WhatsAppIcone from '../../assets/images/whatsapp.svg'
+import {
+  faEnvelope,
+  faLocationDot,
+  faPhoneFlip,
+} from '@fortawesome/free-solid-svg-icons'
+// import WhatsAppIcone from '../../assets/images/whatsapp.svg'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 
@@ -31,7 +35,8 @@ function NousContacter() {
             <Link to='tel:+33651310381'>
               <div>
                 <h4>Appelez-nous</h4>
-                <p>+33 6 51 31 03 81</p>
+                {/* <p>+33 6 51 31 03 81</p> */}
+                <p>06 51 31 03 81</p>
               </div>
             </Link>
           </div>
@@ -50,14 +55,15 @@ function NousContacter() {
               target='_blank'
             >
               <div>
-                <h4>Pour boire un café</h4>
-                <p>2b rue des Jardins, 25 000 Besançon</p>
+                {/* <h4>Pour boire un café</h4> */}
+                <h4>Notre adresse</h4>
+                <p>2b rue des Jardins, 25000 Besançon</p>
               </div>
             </Link>
           </div>
 
           <div className={styles.coordonnee}>
-            <Link to='https://wa.me/33688740621' target='_blank'>
+            {/* <Link to='https://wa.me/33688740621' target='_blank'>
               <p className={styles.iconeContainer}>
                 <img src={WhatsAppIcone} alt='whatsapp-icone' />
               </p>
@@ -66,6 +72,18 @@ function NousContacter() {
               <div>
                 <h4>WhatsApp</h4>
                 <p>+33 6 88 74 06 21</p>
+              </div>
+            </Link> */}
+
+            <Link to='mailto:marli.immobilier@gmail.com'>
+              <p className={styles.iconeContainer}>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </p>
+            </Link>
+            <Link to='mailto:marli.immobilier@gmail.com'>
+              <div>
+                <h4>E-mail</h4>
+                <p>marli.immobilier@gmail.com</p>
               </div>
             </Link>
           </div>

@@ -209,8 +209,8 @@ function Accueil() {
               <p className={styles.borderStyle}></p>
               <p>
                 Nous souhaitons faciliter vos projets immobiliers de leur
-                conception à leur aboutissement
-                <br /> Votre satisfaction sera notre première gratitude
+                conception à leur aboutissement.
+                <br /> Votre satisfaction sera notre première gratitude.
               </p>
 
               <p>A vous d’écrire la suite de l’histoire...</p>
@@ -303,7 +303,7 @@ function Accueil() {
                 <Link to='/marli/acheter'>Nos autres histoires</Link>
               </div>
 
-              <h3>Que faisons-nous pour vous</h3>
+              <h3>Que faisons-nous pour vous ?</h3>
             </div>
           </FadeIn>
 
