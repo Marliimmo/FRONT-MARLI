@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
+import CookieConsent from './components/CookieConsent/CookieConsent'
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
         <Outlet />
       </div>
       <Footer />
+      <CookieConsent />
     </>
   )
 }

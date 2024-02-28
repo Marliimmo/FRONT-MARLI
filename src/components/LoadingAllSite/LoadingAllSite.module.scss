@@ -12,14 +12,14 @@
     width: 100vw;
     height: 100vh;
     background-color: $font-color;
-    z-index: 9999;
-    animation: animationAffichage 3s ease both;
+    z-index: 99999;
+    animation: animationAffichage 2s ease both;
 
     .logo{
         margin: 0;
         img{
             width: 100px;
-            animation: animationOpacity 2s ease both;
+            animation: animationOpacity 1s ease both;
         }
     }
 
