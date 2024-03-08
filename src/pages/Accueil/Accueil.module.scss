@@ -299,6 +299,30 @@
         margin-bottom: 30px;
         overflow: hidden;
         position: relative;
+
+        .allNewBienCard{
+            width: 100%;
+            height: fit-content;
+            // background-color: red;
+            padding-left: 8px;
+            .slidebtn{
+                display: none;
+            }
+
+            &:hover{
+                .slidebtn{
+                    display: block;
+                }
+            }
+
+            @media screen and (max-width: 899px) {
+                padding-left: 0px;
+                padding-right: 5px;
+                .slidebtn{
+                    display: block;
+                }
+            }
+        }
             
         h3{
             display: flex;
@@ -311,7 +335,7 @@
             margin-bottom: 55px;
         }
 
-        .slideButton{
+        .slideButton, .slideButtonForMobile{
             width: 100%;
             display: flex;
             justify-content: space-between;
@@ -358,11 +382,17 @@
 
         }
 
-        @media screen and (min-width: 900px) {
-            .slideButtonForMobile{
-                display: none;
-            }
-        }
+        // @media screen and (min-width: 899px) {
+        //     .slideButtonForMobile{
+        //         display: none;
+        //     }
+        // }
+
+        // @media screen and (max-width: 900px) {
+        //     .slideButton{
+        //         display: none;
+        //     }
+        // }
     }
     
     .sectionChecked{

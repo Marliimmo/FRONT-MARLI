@@ -32,7 +32,7 @@ import { Helmet } from 'react-helmet'
 
 function Accueil() {
   const sliderRef = useRef(null)
-  const [handleHover, setHandleHover] = useState(false)
+  // const [handleHover, setHandleHover] = useState(false)
   const [dataBienNouveau, setDataBienNouveau] = useState([])
   const [dataReviews, setDataReviews] = useState([])
   const [showFormAvis, setShowFormAvis] = useState(false)
@@ -48,33 +48,34 @@ function Accueil() {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 2,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+    slidesToShow: window.innerWidth > 768 ? 2 : 1,
+    initialSlide: 0,
+    // responsive: [
+    //   {
+    //     breakpoint: 1200,
+    //     settings: {
+    //       slidesToShow: 2,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 1024,
+    //     settings: {
+    //       slidesToShow: 2,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 768,
+    //     settings: {
+    //       slidesToShow: 1,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 480,
+    //     settings: {
+    //       slidesToShow: 1,
+    //     },
+    //   },
+    // ],
   }
 
   const settingsSliderAvis = {
@@ -86,6 +87,7 @@ function Accueil() {
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1200,
@@ -248,55 +250,56 @@ function Accueil() {
             <div className={styles.NouveautesContainer}>
               <h3>Nos nouvelles histoires</h3>
 
-              {dataBienNouveau.length > 2 && handleHover && (
-                <div
-                  className={styles.slideButton}
-                  onMouseEnter={() => setHandleHover(true)}
-                  onMouseLeave={() => setHandleHover(false)}
-                >
-                  <div onClick={slidePrev}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+              <div className={styles.allNewBienCard}>
+                {dataBienNouveau.length > 2 && (
+                  <div className={styles.slidebtn}>
+                    <div
+                      // onMouseEnter={() => setHandleHover(true)}
+                      // onMouseLeave={() => setHandleHover(false)}
+                      className={styles.slideButton}
+                    >
+                      <div onClick={slidePrev}>
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                      </div>
+                      <div onClick={slideNext}>
+                        <FontAwesomeIcon icon={faArrowRight} />
+                      </div>
+                    </div>
                   </div>
-                  <div onClick={slideNext}>
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </div>
-                </div>
-              )}
+                )}
 
-              {/* button slider for mobile */}
-              {dataBienNouveau.length > 2 && (
-                <div
-                  className={`${styles.slideButtonForMobile} ${styles.slideButton}`}
-                  onMouseEnter={() => setHandleHover(true)}
-                  onMouseLeave={() => setHandleHover(false)}
-                >
-                  <div onClick={slidePrev}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+                {/* button slider for mobile */}
+                {/* {dataBienNouveau.length > 2 && (
+                  <div className={`${styles.slideButtonForMobile}`}>
+                    <div onClick={slidePrev}>
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                    </div>
+                    <div onClick={slideNext}>
+                      <FontAwesomeIcon icon={faArrowRight} />
+                    </div>
                   </div>
-                  <div onClick={slideNext}>
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </div>
-                </div>
-              )}
+                )} */}
 
-              {/* slider  */}
-              <div
-                onMouseEnter={() => setHandleHover(true)}
-                onMouseLeave={() => setHandleHover(false)}
-              >
-                <Slider ref={sliderRef} {...settings}>
-                  {dataBienNouveau.map((bien) => (
-                    <CardSlider
-                      key={bien.ref}
-                      image={bien?._medias?.image_galerie_0?.url}
-                      price={bien?.prix}
-                      localisation={bien?.localisation}
-                      caracteristiques={bien?.caracteristiques}
-                      status={bien?.status}
-                      reference={bien?.ref}
-                    />
-                  ))}
-                </Slider>
+                {/* slider  */}
+                <div
+                // onMouseEnter={() => setHandleHover(true)}
+                // onMouseLeave={() => setHandleHover(false)}
+                >
+                  <Slider ref={sliderRef} {...settings}>
+                    {dataBienNouveau.map((bien) => (
+                      <div key={bien.ref}>
+                        <CardSlider
+                          image={bien?._medias?.image_galerie_0?.url}
+                          price={bien?.prix}
+                          localisation={bien?.localisation}
+                          caracteristiques={bien?.caracteristiques}
+                          status={bien?.status}
+                          reference={bien?.ref}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
+                </div>
               </div>
 
               <div className={styles.btnContainer}>
@@ -438,8 +441,10 @@ function Accueil() {
             </div>
             {dataReviews.length > 0 && (
               <Slider {...settingsSliderAvis}>
-                {dataReviews.map((review) => (
-                  <CardAvis avis={review} />
+                {dataReviews.map((review, index) => (
+                  <div key={index}>
+                    <CardAvis avis={review} />
+                  </div>
                 ))}
               </Slider>
             )}
