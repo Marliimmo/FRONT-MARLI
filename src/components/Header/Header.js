@@ -15,7 +15,7 @@ function Header() {
   return (
     <>
       <div className={styles.allContainer}>
-        <Link to='/marli/'>
+        <Link to='/'>
           <div className={styles.LogoContainer}>
             <p>
               <img src={Logo} alt='Logo Marli' />
@@ -32,7 +32,7 @@ function Header() {
               className={({ isActive }) =>
                 isActive ? `link_active` : 'link_menu'
               }
-              to='/marli/'
+              to='/'
             >
               Accueil
               <p></p>
@@ -42,7 +42,7 @@ function Header() {
               className={({ isActive }) =>
                 isActive ? `link_active` : 'link_menu'
               }
-              to='/marli/acheter'
+              to='/acheter'
             >
               Acheter
               <p></p>
@@ -52,7 +52,7 @@ function Header() {
               className={({ isActive }) =>
                 isActive ? `link_active` : 'link_menu'
               }
-              to='/marli/vendre'
+              to='/vendre'
             >
               Vendre
               <p></p>
@@ -62,7 +62,7 @@ function Header() {
               className={({ isActive }) =>
                 isActive ? `link_active` : 'link_menu'
               }
-              to='/marli/avis-de-recherche'
+              to='/avis-de-recherche'
             >
               Avis de recherche
               <p></p>
@@ -72,7 +72,7 @@ function Header() {
               className={({ isActive }) =>
                 isActive ? `link_active` : 'link_menu'
               }
-              to='/marli/nous-contacter'
+              to='/nous-contacter'
             >
               Contact
               <p></p>
@@ -80,7 +80,7 @@ function Header() {
           </div>
 
           <div className={styles.iconApropos}>
-            <Link to='/marli/a-propos'>
+            <Link to='/a-propos'>
               <FontAwesomeIcon icon={faInfoCircle} />
             </Link>
           </div>
@@ -124,7 +124,7 @@ function Header() {
             className={({ isActive }) =>
               isActive ? `link_active_mobile` : 'link_menu_mobile'
             }
-            to='/marli/'
+            to='/'
           >
             Accueil
             <p></p>
@@ -135,7 +135,7 @@ function Header() {
             className={({ isActive }) =>
               isActive ? `link_active_mobile` : 'link_menu_mobile'
             }
-            to='/marli/acheter'
+            to='/acheter'
           >
             Acheter
             <p></p>
@@ -146,7 +146,7 @@ function Header() {
             className={({ isActive }) =>
               isActive ? `link_active_mobile` : 'link_menu_mobile'
             }
-            to='/marli/vendre'
+            to='/vendre'
           >
             Vendre
             <p></p>
@@ -157,7 +157,7 @@ function Header() {
             className={({ isActive }) =>
               isActive ? `link_active_mobile` : 'link_menu_mobile'
             }
-            to='/marli/avis-de-recherche'
+            to='/avis-de-recherche'
           >
             Avis de recherche
             <p></p>
@@ -168,7 +168,7 @@ function Header() {
             className={({ isActive }) =>
               isActive ? `link_active_mobile` : 'link_menu_mobile'
             }
-            to='/marli/nous-contacter'
+            to='/nous-contacter'
           >
             Contact
             <p></p>

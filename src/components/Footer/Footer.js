@@ -63,13 +63,13 @@ function Footer() {
             <h2>Infos utiles</h2>
             <div className={styles.LinkText}>
               <p>
-                <Link to='/marli/honoraires'>Nos honoraires</Link>
+                <Link to='/honoraires'>Nos honoraires</Link>
               </p>
               <p>
-                <Link to='/marli/nous-contacter'>Nous contacter</Link>
+                <Link to='/nous-contacter'>Nous contacter</Link>
               </p>
               <p>
-                <Link to='/marli/mentions-legales'>Mentions légales</Link>
+                <Link to='/mentions-legales'>Mentions légales</Link>
               </p>
             </div>
           </div>

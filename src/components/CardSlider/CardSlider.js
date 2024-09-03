@@ -12,7 +12,7 @@ function CardSlider({
   isHomePage,
 }) {
   return (
-    <Link className={styles.linkCard} to={`/marli/bien/${reference}`}>
+    <Link className={styles.linkCard} to={`/bien/${reference}`}>
       <div
         className={`${status === 'vendu' ? styles.statusBienVendu : status === 'sous-compromis' ? styles.statusSousCompromis : null} ${styles.allContainer}`}
       >

@@ -255,7 +255,7 @@ function PageDunBien() {
               <p className={styles.reference}>REF : {reference}</p>
 
               <div className={styles.btnSection}>
-                <Link to='/marli/nous-contacter'>
+                <Link to='/nous-contacter'>
                   <button>Intéressé(e) par ce bien</button>
                 </Link>
               </div>

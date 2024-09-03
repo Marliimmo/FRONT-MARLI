@@ -90,7 +90,7 @@ function AvisDeRecherche() {
               ))}
           </Slider>
           <p></p>
-          <Link to='/marli/nous-contacter'>
+          <Link to='/nous-contacter'>
             <button>Si vous avez un de ces biens</button>
           </Link>
         </div>

@@ -17,48 +17,48 @@ import NotFound from './not-found'
 
 export const router = createBrowserRouter([
   {
-    path: '/marli/',
+    path: '/',
     element: <App />,
     children: [
       {
-        path: '/marli/*',
+        path: '/*',
         caseSensitive: true,
         element: <NotFound />,
       },
       {
-        path: '/marli/',
+        path: '/',
         element: <HomePage />,
       },
       {
-        path: '/marli/acheter',
+        path: '/acheter',
         element: <Acheter />,
       },
       {
-        path: '/marli/vendre',
+        path: '/vendre',
         element: <Vendre />,
       },
       {
-        path: '/marli/avis-de-recherche',
+        path: '/avis-de-recherche',
         element: <AvisDeRecherche />,
       },
       {
-        path: '/marli/nous-contacter',
+        path: '/nous-contacter',
         element: <NousContacter />,
       },
       {
-        path: '/marli/bien/:reference',
+        path: '/bien/:reference',
         element: <PageDunBien />,
       },
       {
-        path: '/marli/mentions-legales',
+        path: '/mentions-legales',
         element: <MentionsLegales />,
       },
       {
-        path: '/marli/honoraires',
+        path: '/honoraires',
         element: <Honoraires />,
       },
       {
-        path: '/marli/a-propos',
+        path: '/a-propos',
         element: <APropos />,
       },
     ],

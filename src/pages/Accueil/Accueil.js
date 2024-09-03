@@ -241,7 +241,7 @@ function Accueil() {
         </Slider>
 
         <div className={styles.btnContainer}>
-          <Link to='/marli/acheter'>Découvrir toutes nos histoires</Link>
+          <Link to='/acheter'>Découvrir toutes nos histoires</Link>
         </div>
       </div> */}
 
@@ -303,7 +303,7 @@ function Accueil() {
               </div>
 
               <div className={styles.btnContainer}>
-                <Link to='/marli/acheter'>Nos autres histoires</Link>
+                <Link to='/acheter'>Nos autres histoires</Link>
               </div>
 
               <h3>Que faisons-nous pour vous ?</h3>
@@ -356,7 +356,7 @@ function Accueil() {
                 </div>
 
                 <SlideOfRight>
-                  <Link to='/marli/acheter'>Toutes nos histoires</Link>
+                  <Link to='/acheter'>Toutes nos histoires</Link>
                 </SlideOfRight>
               </div>
             </div>
@@ -410,7 +410,7 @@ function Accueil() {
                 </div>
 
                 <SlideOfRight>
-                  <Link to='/marli/vendre'>Estimer votre bien</Link>
+                  <Link to='/vendre'>Estimer votre bien</Link>
                 </SlideOfRight>
               </div>
             </div>

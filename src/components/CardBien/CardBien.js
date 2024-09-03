@@ -12,7 +12,7 @@ function CardBien({
   reference,
 }) {
   return (
-    <Link to={`/marli/bien/${reference}`}>
+    <Link to={`/bien/${reference}`}>
       <div className={styles.allContainer}>
         <div className={styles.imageContainer}>
           <img

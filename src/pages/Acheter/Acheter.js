@@ -279,7 +279,7 @@ function Acheter() {
                 dénicher le bien qui correspond à vos attentes
               </li>
             </ul>
-            <Link to='/marli/nous-contacter'>Nous contacter</Link>
+            <Link to='/nous-contacter'>Nous contacter</Link>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ function A_Propos() {
             <p>
               Aujourd’hui, avec audace et efficacité, j’ai créé Marli
               Immobilier. Je vous propose des services à la mesure de vos
-              attentes pour l’ensemble de vos projets immobilier.
+              attentes pour l’ensemble de vos projets immobiliers.
             </p>
             <p>
               Comme dans toutes les fonctions que j’ai eues à occuper jusqu’ici,
