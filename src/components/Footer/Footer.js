@@ -10,7 +10,6 @@ import styles from './Footer.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 import FacebookIcon from '../../assets/images/facebook-f.svg'
 import LinkedInIcon from '../../assets/images/linkedin-in.svg'
-import image_author from '../../assets/images/author_image.jpg'
 
 function Footer() {
   return (
@@ -28,15 +27,14 @@ function Footer() {
               <div>
                 <FontAwesomeIcon icon={faMobileScreen} />
                 <p>
-                  <Link to='tel:+33 6 51 31 03 81'>06 51 31 03 81</Link>
-                  {/* <Link to='tel:+33 6 51 31 03 81'>+33 6 51 31 03 81</Link> */}
+                  <Link to='tel:+33688740621'>06 88 74 06 21</Link>
                 </p>
               </div>
               <div>
                 <FontAwesomeIcon icon={faEnvelope} />
                 <p>
-                  <Link to='mailto:marli.immobilier@gmail.com'>
-                    marli.immobilier@gmail.com
+                  <Link to='mailto:contact@marli-immobilier.com'>
+                    contact@marli-immobilier.com
                   </Link>
                 </p>
               </div>
@@ -48,14 +46,10 @@ function Footer() {
                     to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
                     target='_blank'
                   >
-                    2b rue des Jardins, 25000 Besançon
+                    7 rue Henri Weil 25000 Besançon
                   </Link>
                 </p>
               </div>
-
-              {/* <div className={styles.imageAuhtorContainer}>
-                <img src={image_author} alt='img_author' />
-              </div> */}
             </div>
           </div>
 
@@ -94,13 +88,7 @@ function Footer() {
         </div>
       </div>
       <div className={styles.linkPoweredBy}>
-        <Link to='https://choosews.com' target='_blank'>
-          Powered by <span>choosews</span>
-        </Link>
-        <div>|</div>
-        <div className={styles.imageAuhtorContainer}>
-          Crédit photo : <img src={image_author} alt='img_author' />
-        </div>
+        <div>Crédit photo : Sylvie Barras</div>
       </div>
     </>
   )
