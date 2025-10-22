@@ -1,3 +1,4 @@
+
 import React from 'react'
 import styles from './CardBien.module.scss'
 import { Link } from 'react-router-dom'
@@ -57,5 +58,6 @@ function CardBien({
     </Link>
   )
 }
+
 
 export default CardBien
