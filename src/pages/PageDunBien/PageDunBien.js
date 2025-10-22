@@ -25,6 +25,14 @@ function PageDunBien() {
   const [data, setData] = useState([])
   const [dataBienDispo, setDataBienDispo] = useState([])
 
+  // Fonction pour gérer les URLs Cloudinary
+  const getImageUrl = (url) => {
+    if (!url) return '';
+    return url.includes('cloudinary.com') || url.startsWith('http')
+      ? url
+      : `${process.env.REACT_APP_URL_BASE_IMAGE}${url}`;
+  };
+
   const settings = {
     dots: false,
     infinite: true,
@@ -167,7 +175,7 @@ function PageDunBien() {
                             return (
                               <img
                                 key={index}
-                                src={`${process.env.REACT_APP_URL_BASE_IMAGE}${media.url}`}
+                                src={getImageUrl(media.url)}
                                 alt={`imag slider ${index + 1}`}
                               />
                             )
@@ -217,7 +225,7 @@ function PageDunBien() {
                         return (
                           <img
                             key={index}
-                            src={`${process.env.REACT_APP_URL_BASE_IMAGE}${media.url}`}
+                            src={getImageUrl(media.url)}
                             alt={`imag slider ${index + 1}`}
                             onClick={() => setCurrentIndex(index)}
                           />
@@ -231,7 +239,7 @@ function PageDunBien() {
 
             <div className={styles.detailsBien}>
               <div className={styles.histoireContainer}>
-                <h3>L’histoire</h3>
+                <h3>L'histoire</h3>
                 <p style={{ whiteSpace: 'pre-line' }}>{data.histoire}</p>
               </div>
 
@@ -244,8 +252,8 @@ function PageDunBien() {
 
                 <div className={styles.caracteristique}>
                   <h3>Caractéristiques</h3>
-                  {data?.caracteristiques.split('#').map((value) => (
-                    <p>- {value}</p>
+                  {data?.caracteristiques.split('#').map((value, index) => (
+                    <p key={index}>- {value}</p>
                   ))}
                 </div>
               </div>
@@ -282,7 +290,7 @@ function PageDunBien() {
                           return (
                             <img
                               key={index}
-                              src={`${process.env.REACT_APP_URL_BASE_IMAGE}${media.url}`}
+                              src={getImageUrl(media.url)}
                               alt={`imag slider ${index + 1}`}
                             />
                           )
@@ -329,3 +337,4 @@ function PageDunBien() {
 }
 
 export default PageDunBien
+
