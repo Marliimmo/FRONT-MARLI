@@ -36,7 +36,7 @@ function NousContacter() {
               <div>
                 <h4>Appelez-nous</h4>
                 {/* <p>+33 6 88 74 06 21</p> */}
-                <p>06 51 31 03 81</p>
+                <p>06 88 74 06 21</p>
               </div>
             </Link>
           </div>
