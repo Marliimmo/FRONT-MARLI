@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/1.jpg'
@@ -72,7 +73,6 @@ function AvisDeRecherche() {
       <Helmet>
         <title>Marli - Avis de recherche</title>
         <meta name='robots' content='noindex' />
-        {/* <meta name="robots" content="index, follow" /> */}
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={styles.allContainer}>
@@ -83,11 +83,19 @@ function AvisDeRecherche() {
 
           <Slider {...settings}>
             {wanteds.length > 0 &&
-              wanteds.map((wanted) => (
-                <CardAvisRecherche
-                  urlImage={`${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`}
-                />
-              ))}
+              wanteds.map((wanted) => {
+                // Gérer les URLs Cloudinary
+                const imageUrl = wanted.urlImage?.includes('cloudinary.com') || wanted.urlImage?.startsWith('http')
+                  ? wanted.urlImage
+                  : `${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`;
+                
+                return (
+                  <CardAvisRecherche
+                    key={wanted._id}
+                    urlImage={imageUrl}
+                  />
+                );
+              })}
           </Slider>
           <p></p>
           <Link to='/nous-contacter'>

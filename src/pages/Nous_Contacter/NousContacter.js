@@ -27,16 +27,16 @@ function NousContacter() {
 
         <div className={styles.coodonneeContainer}>
           <div className={styles.coordonnee}>
-            <Link to='tel:+33651310381'>
+            <Link to='tel:+33688740621'>
               <p className={styles.iconeContainer}>
                 <FontAwesomeIcon icon={faPhoneFlip} />
               </p>
             </Link>
-            <Link to='tel:+33651310381'>
+            <Link to='tel:+33688740621'>
               <div>
                 <h4>Appelez-nous</h4>
-                {/* <p>+33 6 51 31 03 81</p> */}
-                <p>06 51 31 03 81</p>
+                {/* <p>+33 6 88 74 06 21</p> */}
+                <p>06 88 74 06 21</p>
               </div>
             </Link>
           </div>
@@ -57,7 +57,7 @@ function NousContacter() {
               <div>
                 {/* <h4>Pour boire un café</h4> */}
                 <h4>Notre adresse</h4>
-                <p>2b rue des Jardins, 25000 Besançon</p>
+                <p>7 rue Henri Weil, 25000 Besançon</p>
               </div>
             </Link>
           </div>
@@ -75,15 +75,15 @@ function NousContacter() {
               </div>
             </Link> */}
 
-            <Link to='mailto:marli.immobilier@gmail.com'>
+            <Link to='mailto:contact@marli-immobilier.com'>
               <p className={styles.iconeContainer}>
                 <FontAwesomeIcon icon={faEnvelope} />
               </p>
             </Link>
-            <Link to='mailto:marli.immobilier@gmail.com'>
+            <Link to='mailto:contact@marli-immobilier.com'>
               <div>
                 <h4>E-mail</h4>
-                <p>marli.immobilier@gmail.com</p>
+                <p>contact@marli.immobilier.com</p>
               </div>
             </Link>
           </div>

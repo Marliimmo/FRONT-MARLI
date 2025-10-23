@@ -3,8 +3,8 @@ import styles from './CardAvisRecherche.module.scss'
 
 function CardAvisRecherche({ urlImage }) {
   return (
-    <div className={styles.allContainer}>
-      <img src={urlImage} alt='imag-avis-seach' />
+    <div className={styles.cardContainer}>
+      <img src={urlImage} alt='Avis de recherche' />
     </div>
   )
 }

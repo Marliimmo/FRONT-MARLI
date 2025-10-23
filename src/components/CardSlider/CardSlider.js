@@ -1,3 +1,4 @@
+
 import React from 'react'
 import styles from './CardSlider.module.scss'
 import { Link } from 'react-router-dom'
@@ -11,6 +12,11 @@ function CardSlider({
   reference,
   isHomePage,
 }) {
+  // Gérer les URLs Cloudinary
+  const imageUrl = image?.includes('cloudinary.com') || image?.startsWith('http')
+    ? image 
+    : `${process.env.REACT_APP_URL_BASE_IMAGE}${image}`;
+
   return (
     <Link className={styles.linkCard} to={`/bien/${reference}`}>
       <div
@@ -18,7 +24,7 @@ function CardSlider({
       >
         <div className={styles.imageEprixContainer}>
           <img
-            src={`${process.env.REACT_APP_URL_BASE_IMAGE}${image}`}
+            src={imageUrl}
             alt='imag-bien'
           />
           <h2 className={styles.prixBien}>
@@ -37,7 +43,7 @@ function CardSlider({
               {caracteristiques.split('#').map(
                 (value, index) =>
                   index <= 3 && (
-                    <div className={styles.oneCaractq}>
+                    <div className={styles.oneCaractq} key={index}>
                       <p></p>
                       <p>{value}</p>
                     </div>
