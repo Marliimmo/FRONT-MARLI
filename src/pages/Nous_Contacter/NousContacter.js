@@ -75,15 +75,15 @@ function NousContacter() {
               </div>
             </Link> */}
 
-            <Link to='mailto:support@marli-immobilier.com'>
+            <Link to='mailto:contact@marli-immobilier.com'>
               <p className={styles.iconeContainer}>
                 <FontAwesomeIcon icon={faEnvelope} />
               </p>
             </Link>
-            <Link to='mailto:support@marli-immobilier.com'>
+            <Link to='mailto:contact@marli-immobilier.com'>
               <div>
                 <h4>E-mail</h4>
-                <p>support@marli.immobilier.com</p>
+                <p>contact@marli.immobilier.com</p>
               </div>
             </Link>
           </div>
