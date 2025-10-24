@@ -30,7 +30,7 @@ function PageDunBien() {
   if (!url) return '';
   return url.includes('cloudinary.com') || url.startsWith('http')
     ? url
-    : `https://marli-backend.onrender.com/bien/images/${url}`;
+    : `https://marli-backend.onrender.com/bien/images/${url.replace('imagesBienMarli/', '')}`;
 };
   };
 
