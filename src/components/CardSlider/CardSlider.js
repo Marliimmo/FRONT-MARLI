@@ -14,9 +14,8 @@ function CardSlider({
 }) {
   // Gérer les URLs Cloudinary
   const imageUrl = image?.includes('cloudinary.com') || image?.startsWith('http')
-    ? image 
-    : `${process.env.REACT_APP_URL_BASE_IMAGE}${image}`;
-
+  ? image 
+  : `https://marli-backend.onrender.com/bien/images/${image}`;
   return (
     <Link className={styles.linkCard} to={`/bien/${reference}`}>
       <div
