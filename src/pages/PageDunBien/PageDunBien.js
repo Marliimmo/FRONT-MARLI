@@ -27,10 +27,11 @@ function PageDunBien() {
 
   // Fonction pour gérer les URLs Cloudinary
   const getImageUrl = (url) => {
-    if (!url) return '';
-    return url.includes('cloudinary.com') || url.startsWith('http')
-      ? url
-      : `${process.env.REACT_APP_URL_BASE_IMAGE}${url}`;
+  if (!url) return '';
+  return url.includes('cloudinary.com') || url.startsWith('http')
+    ? url
+    : `https://marli-backend.onrender.com/bien/images/${url}`;
+};
   };
 
   const settings = {
