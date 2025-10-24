@@ -15,8 +15,8 @@ function CardBien({
   // Si l'URL contient déjà cloudinary, on l'utilise directement
   // Sinon on garde l'ancienne méthode pour compatibilité
   const imageUrl = imgUrl?.includes('cloudinary.com') 
-    ? imgUrl 
-    : `${process.env.REACT_APP_URL_BASE_IMAGE}${imgUrl}`;
+  ? imgUrl 
+  : `${process.env.REACT_APP_URL_BASE_IMAGE}${imgUrl}`;
 
   return (
     <Link to={`/bien/${reference}`}>
