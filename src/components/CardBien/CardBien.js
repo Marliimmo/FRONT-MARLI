@@ -14,9 +14,7 @@ function CardBien({
 }) {
   // Si l'URL contient déjà cloudinary, on l'utilise directement
   // Sinon on garde l'ancienne méthode pour compatibilité
-  const imageUrl = imgUrl?.includes('cloudinary.com') || imgUrl?.startsWith('http')
-  ? imgUrl 
-  : `https://marli-backend.onrender.com/bien/images/${imgUrl}`;
+  const imageUrl = imgUrl;
   return (
     <Link to={`/bien/${reference}`}>
       <div className={styles.allContainer}>
