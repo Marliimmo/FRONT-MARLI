@@ -24,12 +24,8 @@ function PageDunBien() {
   const { reference } = useParams()
   const [data, setData] = useState([])
   const [dataBienDispo, setDataBienDispo] = useState([])
-
-  // Fonction pour gérer les URLs Cloudinary
+  
 const getImageUrl = (url) => url || '';
-
-  };
-
   const settings = {
     dots: false,
     infinite: true,
