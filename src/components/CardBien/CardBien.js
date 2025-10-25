@@ -16,7 +16,7 @@ function CardBien({
   // Sinon on garde l'ancienne méthode pour compatibilité
   const imageUrl = imgUrl?.includes('cloudinary.com') || imgUrl?.startsWith('http')
   ? imgUrl 
-  : `https://marli-backend.onrender.com/bien/images/${imgUrl?.replace('imagesBienMarli/', '') || imgUrl}`;
+  : `https://marli-backend.onrender.com/bien/images/${imgUrl}`;
   return (
     <Link to={`/bien/${reference}`}>
       <div className={styles.allContainer}>
