@@ -31,7 +31,7 @@ const getImageUrl = (url) => {
   return url.includes('cloudinary.com') || url.startsWith('http')
     ? url
     : `https://marli-backend.onrender.com/bien/images/${url}`;
-};
+
 
   };
 
