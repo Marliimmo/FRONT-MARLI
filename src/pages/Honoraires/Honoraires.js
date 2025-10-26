@@ -6,7 +6,7 @@ function Honoraires() {
     <div className="honoraires-container">
       <h1>Nos Honoraires</h1>
       <p>Consultez notre tableau d'honoraires ci-dessous :</p>
-      {/* Ajoutez votre tableau ou lien ici */}
+      <iframe src="https://drive.google.com/file/d/1HvskFlQYiabOfkzZ7VnqG_CZv8Jzd7FI/preview" width="100%" height="600px" frameBorder="0"></iframe>
     </div>
   );
 }
