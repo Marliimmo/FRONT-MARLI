@@ -1,14 +1,36 @@
-import React from 'react';
-import './Honoraires.module.scss';
+import React from 'react'
+import styles from './Honoraires.module.scss'
 
-function Honoraires() {
+const Honoraires = () => {
+  const tarifs = [
+    { range: '< 50 000 €', tarif: 'forfait de 5 000 €' },
+    { range: 'De 50 001 € à 99 999 €', tarif: '9%' },
+    { range: 'De 100 000 € à 149 999 €', tarif: '8%' },
+    { range: 'De 150 000 € à 249 999 €', tarif: '7%' },
+    { range: 'De 250 000 € à 349 999 €', tarif: '6%' },
+    { range: '> 350 000 €', tarif: '5%' }
+  ]
+
   return (
-    <div className="honoraires-container">
-      <h1>Nos Honoraires</h1>
-      <p>Consultez notre tableau d'honoraires ci-dessous :</p>
-      {/* Ajoutez votre tableau ou lien ici */}
+    <div className={styles.pageContainer}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h1>NOS HONORAIRES TTC</h1>
+          <p className={styles.subtitle}>
+            calculés sur le prix de vente à la charge du vendeur
+          </p>
+        </div>
+        
+        <div className={styles.tableContent}>
+          {tarifs.map((item, index) => (
+            <div key={index} className={styles.row}>
+              {item.range} : {item.tarif}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default Honoraires;
+export default Honoraires
