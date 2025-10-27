@@ -21,8 +21,8 @@ const AjouterBien = () => {
     
     try {
       const token = localStorage.getItem('token')
+      const response = await fetch('https://marli-backend.onrender.com/bien/create', {
       
-      const response = await fetch('http://localhost:8090/bien/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
