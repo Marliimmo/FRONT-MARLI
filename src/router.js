@@ -10,6 +10,8 @@ import PageDunBien from './pages/PageDunBien/PageDunBien'
 import MentionsLegales from './pages/MentionsLegales/MentionsLegales'
 import Honoraires from './pages/Honoraires/Honoraires'
 import APropos from './pages/A_Propos/A_Propos'
+import AjouterBien from './pages/AjouterBien/AjouterBien'
+
 // configuration des routes
 const router = createBrowserRouter([
   {
@@ -25,8 +27,10 @@ const router = createBrowserRouter([
       { path: '/mentions-legales', element: <MentionsLegales /> },
       { path: '/honoraires', element: <Honoraires /> },
       { path: '/a-propos', element: <APropos /> },
+      { path: '/ajouter-bien', element: <AjouterBien /> },
     ]
   }
 ])
+
 export default router
 // redeploy trigger Thu Oct 23 15:35:23     2025
