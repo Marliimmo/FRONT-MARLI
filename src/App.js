@@ -22,7 +22,7 @@ function App() {
         <Outlet />
       </div>
       <Footer />
-      <CookieConsent />
+      {/* <CookieConsent /> */}
     </>
   )
 }
