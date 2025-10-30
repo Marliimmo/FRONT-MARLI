@@ -33,6 +33,7 @@ import { Helmet } from 'react-helmet'
 function Accueil() {
   const sliderRef = useRef(null)
   // const [handleHover, setHandleHover] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [dataBienNouveau, setDataBienNouveau] = useState([])
   const [dataReviews, setDataReviews] = useState([])
   const [showFormAvis, setShowFormAvis] = useState(false)
@@ -146,12 +147,14 @@ function Accueil() {
 
   useEffect(() => {
     const fecthBienDisponible = async () => {
+      setLoading(true)
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=10`,
       )
       if (response.ok) {
         const result = await response.json()
         setDataBienNouveau(result.biens)
+        setLoading(false)
       }
     }
 
