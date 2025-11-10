@@ -32,8 +32,6 @@ import { Helmet } from 'react-helmet'
 
 function Accueil() {
   const sliderRef = useRef(null)
-  // const [handleHover, setHandleHover] = useState(false)
-  const [loading, setLoading] = useState(true)
   const [dataBienNouveau, setDataBienNouveau] = useState([])
   const [dataReviews, setDataReviews] = useState([])
   const [showFormAvis, setShowFormAvis] = useState(false)
@@ -43,7 +41,6 @@ function Accueil() {
     setIsSuccesSend(value)
   }
 
-  // const sliderRef2 = useRef(null)
   const settings = {
     dots: false,
     infinite: true,
@@ -51,32 +48,6 @@ function Accueil() {
     slidesToScroll: 1,
     slidesToShow: window.innerWidth > 768 ? 2 : 1,
     initialSlide: 0,
-    // responsive: [
-    //   {
-    //     breakpoint: 1200,
-    //     settings: {
-    //       slidesToShow: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1024,
-    //     settings: {
-    //       slidesToShow: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 768,
-    //     settings: {
-    //       slidesToShow: 1,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 480,
-    //     settings: {
-    //       slidesToShow: 1,
-    //     },
-    //   },
-    // ],
   }
 
   const settingsSliderAvis = {
@@ -129,32 +100,18 @@ function Accueil() {
     }
   }
 
-  // const slidePrev2 = () => {
-  //   if (sliderRef2.current) {
-  //     sliderRef2.current.slickPrev()
-  //   }
-  // }
-
-  // const slideNext2 = () => {
-  //   if (sliderRef2.current) {
-  //     sliderRef2.current.slickNext()
-  //   }
-  // }
-
   const handleChange = () => {
     setShowFormAvis(!showFormAvis)
   }
 
   useEffect(() => {
     const fecthBienDisponible = async () => {
-      setLoading(true)
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=10`,
       )
       if (response.ok) {
         const result = await response.json()
         setDataBienNouveau(result.biens)
-        setLoading(false)
       }
     }
 
@@ -177,7 +134,6 @@ function Accueil() {
       <Helmet>
         <title>Marli - Passeur d'histoires immobilières</title>
         <meta name='robots' content='noindex' />
-        {/* <meta name="robots" content="index, follow" /> */}
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={`fadinAnimation`}>
@@ -218,35 +174,10 @@ function Accueil() {
                 <br /> Votre satisfaction sera notre première gratitude.
               </p>
 
-              <p>A vous d’écrire la suite de l’histoire...</p>
+              <p>A vous d'écrire la suite de l'histoire...</p>
             </div>
           </div>
         </FadeIn>
-
-        {/* <div className={styles.NouveautesContainer2}>
-        <div className={styles.titleEslideBtn}>
-          <h3>De nouvelles histoires</h3>
-          <div className={styles.slideButton}>
-            <div onClick={slidePrev2}>
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </div>
-            <div onClick={slideNext2}>
-              <FontAwesomeIcon icon={faArrowRight} />
-            </div>
-          </div>
-        </div>
-
-        <Slider ref={sliderRef2} {...settings}>
-          <CardSlider />
-          <CardSlider />
-          <CardSlider />
-          <CardSlider />
-        </Slider>
-
-        <div className={styles.btnContainer}>
-          <Link to='/acheter'>Découvrir toutes nos histoires</Link>
-        </div>
-      </div> */}
 
         <div className={styles.widget}>
           <FadeIn>
@@ -256,11 +187,7 @@ function Accueil() {
               <div className={styles.allNewBienCard}>
                 {dataBienNouveau.length > 2 && (
                   <div className={styles.slidebtn}>
-                    <div
-                      // onMouseEnter={() => setHandleHover(true)}
-                      // onMouseLeave={() => setHandleHover(false)}
-                      className={styles.slideButton}
-                    >
+                    <div className={styles.slideButton}>
                       <div onClick={slidePrev}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                       </div>
@@ -271,23 +198,7 @@ function Accueil() {
                   </div>
                 )}
 
-                {/* button slider for mobile */}
-                {/* {dataBienNouveau.length > 2 && (
-                  <div className={`${styles.slideButtonForMobile}`}>
-                    <div onClick={slidePrev}>
-                      <FontAwesomeIcon icon={faArrowLeft} />
-                    </div>
-                    <div onClick={slideNext}>
-                      <FontAwesomeIcon icon={faArrowRight} />
-                    </div>
-                  </div>
-                )} */}
-
-                {/* slider  */}
-                <div
-                // onMouseEnter={() => setHandleHover(true)}
-                // onMouseLeave={() => setHandleHover(false)}
-                >
+                <div>
                   <Slider ref={sliderRef} {...settings}>
                     {dataBienNouveau.map((bien) => (
                       <div key={bien.ref}>
@@ -423,7 +334,7 @@ function Accueil() {
         <FadeIn>
           <div className={styles.investerSection}>
             <div>
-              <h2>INVESTIR DANS L’IMMOBILIER</h2>
+              <h2>INVESTIR DANS L'IMMOBILIER</h2>
               <ul>
                 <li>Chasseur de bien</li>
                 <li>
@@ -453,9 +364,6 @@ function Accueil() {
             )}
             {!showFormAvis && (
               <div className={styles.btnSection}>
-                {/* <Link>
-              <button>Voir plus d’avis</button>
-            </Link> */}
                 {isSuccesSend !== true && (
                   <ScrollLink smooth to='formAddReview' onClick={handleChange}>
                     <button
