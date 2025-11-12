@@ -19,13 +19,13 @@ function Actualite() {
   return (
     <>
       <Helmet>
-        <title>Marli Immobilier - Actualité Immobilière Besançon</title>
+        <title>Marli Immobilier - Actualités Immobilières Besançon</title>
         <meta name='description' content="Actualité immobilière à Besançon et Franche-Comté" />
       </Helmet>
       <div className={styles.allContainer}>
-        <FirstSectionPage ImgPremierePlan={Image} title='ACTUALITÉ' />
+        <FirstSectionPage ImgPremierePlan={Image} title='ACTUALITÉS' />
         <div className={styles.articlesContainer}>
-          <h2>Actualité Immobilière</h2>
+          <h2>Actualités Immobilières</h2>
           <div className={styles.articlesGrid}>
             {articles.map(article => (
               <article key={article.id} className={styles.articleCard}>
