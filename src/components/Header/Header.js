@@ -72,6 +72,16 @@ function Header() {
               className={({ isActive }) =>
                 isActive ? `link_active` : 'link_menu'
               }
+              to='/actualite'
+            >
+              Actualité
+              <p></p>
+            </NavLink>
+
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `link_active` : 'link_menu'
+              }
               to='/nous-contacter'
             >
               Contact
@@ -105,15 +115,6 @@ function Header() {
               }
             ></p>
           </div>
-
-          {/* <div>
-                    <Link to="tel:+33651310381">
-                        <div className={styles.TelButton}>
-                            <FontAwesomeIcon icon={faMobileScreen}/>
-                            <p>+33 6 51 31 03 81</p>
-                        </div>
-                    </Link>
-                </div> */}
         </div>
       </div>
 
@@ -160,6 +161,17 @@ function Header() {
             to='/avis-de-recherche'
           >
             Avis de recherche
+            <p></p>
+          </NavLink>
+
+          <NavLink
+            onClick={displaySousMenu}
+            className={({ isActive }) =>
+              isActive ? `link_active_mobile` : 'link_menu_mobile'
+            }
+            to='/actualite'
+          >
+            Actualité
             <p></p>
           </NavLink>
 
