@@ -120,10 +120,26 @@
         
         .image-placeholder {
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            color: #999;
+            font-size: 16px;
+            color: #666;
             text-align: center;
             padding: 20px;
+            cursor: pointer;
+            z-index: 10;
+            pointer-events: auto;
+        }
+        
+        .image-placeholder:hover {
+            color: #000;
+        }
+        
+        #uploadedImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         /* Contenu Article */
@@ -439,11 +455,11 @@
             <!-- Image principale avec upload -->
             <div class="featured-image" id="featuredImageContainer">
                 <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-                <div class="image-placeholder" id="imagePlaceholder" style="cursor: pointer;">
-                    📸 Cliquez ici pour ajouter votre image<br>
-                    <small style="font-size: 12px; color: #aaa;">(Format recommandé : 900x450px, en noir et blanc)</small>
+                <div class="image-placeholder" id="imagePlaceholder">
+                    📸 <strong>Cliquez ici pour ajouter votre image</strong><br><br>
+                    <small style="font-size: 13px; color: #999;">Format recommandé : 900x450px • Noir et blanc privilégié</small>
                 </div>
-                <img id="uploadedImage" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                <img id="uploadedImage" style="display: none;">
             </div>
 
             <!-- Contenu de l'article -->
@@ -652,20 +668,30 @@
         const uploadedImage = document.getElementById('uploadedImage');
         const featuredImageContainer = document.getElementById('featuredImageContainer');
 
-        // Clic sur le placeholder pour ouvrir le sélecteur de fichier
-        imagePlaceholder.addEventListener('click', () => {
+        // Clic sur tout le conteneur pour ouvrir le sélecteur
+        featuredImageContainer.addEventListener('click', function(e) {
+            // Ne pas ouvrir si une image est déjà présente
+            if (uploadedImage.style.display !== 'block') {
+                imageUpload.click();
+            }
+        });
+
+        // Double-clic pour changer l'image si déjà uploadée
+        featuredImageContainer.addEventListener('dblclick', function(e) {
             imageUpload.click();
         });
 
         // Gestion de l'upload
         imageUpload.addEventListener('change', function(e) {
             const file = e.target.files[0];
-            if (file) {
+            if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     uploadedImage.src = event.target.result;
                     uploadedImage.style.display = 'block';
                     imagePlaceholder.style.display = 'none';
+                    featuredImageContainer.style.border = '1px solid #ddd';
+                    featuredImageContainer.title = 'Double-cliquez pour changer l\'image';
                 };
                 reader.readAsDataURL(file);
             }
@@ -673,14 +699,9 @@
 
         // Fonction de téléchargement
         function downloadArticle() {
-            // Masquer le bouton avant l'impression
             const printButton = document.querySelector('.print-button');
             printButton.style.display = 'none';
-            
-            // Lancer l'impression (qui permet "Enregistrer en PDF")
             window.print();
-            
-            // Réafficher le bouton après impression
             setTimeout(() => {
                 printButton.style.display = 'block';
             }, 1000);
@@ -697,9 +718,7 @@
             });
         });
 
-        // Analytics tracking (à remplacer par votre code analytics)
         console.log('Article Blog - Marché Immobilier Besançon Novembre 2025');
-        console.log('Mots-clés SEO : immobilier Besançon, prix immobilier 2025, marché Besançon, Planoise');
     </script>
 </body>
 </html>
