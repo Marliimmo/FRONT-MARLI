@@ -1,6 +1,6 @@
 import React from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/1.jpg'
+import Image from '../../assets/images/banniere-actualites.jpg'
 import styles from './Actualite.module.scss'
 import { Helmet } from 'react-helmet'
 
