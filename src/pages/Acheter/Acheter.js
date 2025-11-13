@@ -24,13 +24,11 @@ function Acheter() {
     `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant&page=1&pageSize=6`,
   )
 
-  // les constante pour gerer la recherche et filtre des biens
   const [typeBien, setTypeBien] = useState('tous')
   const [budgets, setBudgets] = useState('')
   const [localisation, setLocalisation] = useState('')
   const [superficie, setSuperficie] = useState('')
 
-  // Filtre pfunction
   const typeBienFunction = (e) => {
     if (
       e.target.value !== '' &&
@@ -70,9 +68,7 @@ function Acheter() {
     }
     setPage(1)
   }
-  //
 
-  // function de création du lien de la requette de recherche ou filtre
   const NewUrlFecth = (e) => {
     e.preventDefault()
     setLoading('filtre')
@@ -96,9 +92,7 @@ function Acheter() {
       setPage(1)
     }, 1000)
   }
-  //
 
-  // La fonction pour faire un fecth en recupérant des user en paginant la reponse.
   const loadMoreData = async () => {
     setLoading('seeMore')
 
@@ -111,9 +105,11 @@ function Acheter() {
       }
       const result = await response.json()
       setTimeout(() => {
-        const { biens, hasMore } = result
-        setData([...data, ...biens])
-        setHasMore(hasMore)
+        const newBiens = result.biens
+        const newDisponibles = newBiens.filter(b => b.status !== 'vendu')
+        const newVendus = newBiens.filter(b => b.status === 'vendu')
+        setData([...data, ...newDisponibles, ...newVendus])
+        setHasMore(result.hasMore)
         setPage(page + 1)
         setLoading('')
       }, 1000)
@@ -123,9 +119,6 @@ function Acheter() {
     }
   }
 
-  // On englobe resquestOptions dans useMemo pour eviter de le recalculer si tokenLog ne change pas
-
-  // Le premier rendu de la pagination
   useEffect(() => {
     setLoading('fecthLoad')
     const fetchInitialData = async () => {
@@ -137,7 +130,9 @@ function Acheter() {
         }
         const result = await response.json()
         const { biens, hasMore } = result
-        setData(biens)
+        const disponibles = biens.filter(b => b.status !== 'vendu')
+        const vendus = biens.filter(b => b.status === 'vendu')
+        setData([...disponibles, ...vendus])
         setHasMore(hasMore)
         setLoading('')
       } catch (error) {
@@ -168,7 +163,6 @@ function Acheter() {
       <Helmet>
         <title>Marli - Acheter</title>
         <meta name='robots' content='noindex' />
-        {/* <meta name="robots" content="index, follow" /> */}
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={styles.allContainer}>
@@ -180,7 +174,6 @@ function Acheter() {
           <FirstSectionPage
             ImgPremierePlan={Image}
             title='Nos adresses'
-            // description='Choisissez(ou trouvez) le bien qui vous correspond pour y écrire votre(ou la suite) histoire'
           />
         </div>
 
@@ -259,7 +252,7 @@ function Acheter() {
                 {hasMore && (
                   <div className={styles.showMoreBtn}>
                     <button onClick={loadMoreData}>
-                      {loading === 'seeMore' ? 'Chargement...' : 'Voir plus'}
+                      {loading === 'seeMore' ? 'Chargement...' : 'La suite'}
                     </button>
                   </div>
                 )}
@@ -270,12 +263,12 @@ function Acheter() {
 
         <div className={styles.investerSection}>
           <div>
-            <h2>INVESTIR DANS L’IMMOBILIER</h2>
+            <h2>INVESTIR DANS L'IMMOBILIER</h2>
             <ul>
               <li>Accompagnement, étude de rentabilité</li>
               <li>Recherche de biens en France et au Sénégal</li>
               <li>
-                Sénégal, destination soleil durant toute l’année, pour vous
+                Sénégal, destination soleil durant toute l'année, pour vous
                 dénicher le bien qui correspond à vos attentes
               </li>
             </ul>

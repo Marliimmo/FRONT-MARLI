@@ -55,7 +55,7 @@ function Vendre() {
   useEffect(() => {
     const fecthBienVendu = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bien/all-biens?status=vendu&triPar=decroissant&pageSize=5`,
+        `${process.env.REACT_APP_API_URL}/bien/all-biens?status=vendu&triPar=decroissant&pageSize=999`,
       )
       if (response.ok) {
         const result = await response.json()
