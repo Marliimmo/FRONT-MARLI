@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/1.jpg'
 import styles from './AvisDeRecherche.module.scss'
@@ -30,12 +30,12 @@ function AvisDeRecherche() {
     fecthWanteds()
   }, [])
 
-  const settings = {
+  const settings = useMemo(() => ({
     dots: false,
     infinite: wanteds.length >= 3,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length,
+    slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length || 1,
     autoplay: wanteds.length >= 3,
     autoplaySpeed: 2000,
     pauseOnHover: true,
@@ -43,19 +43,19 @@ function AvisDeRecherche() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length,
+          slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length || 1,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length,
+          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length || 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length,
+          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length || 1,
         },
       },
       {
@@ -65,7 +65,7 @@ function AvisDeRecherche() {
         },
       },
     ],
-  }
+  }), [wanteds.length])
 
   return (
     <>
@@ -81,15 +81,13 @@ function AvisDeRecherche() {
           <div className={styles.AvisDrechercheContainer}>
             <h3>Nos clients cherchent</h3>
             <Slider {...settings}>
-              {wanteds.map((wanted) => {
-                const imageUrl = `https://marli-backend.onrender.com/bien/images/imagesWanted/${wanted.urlImage}`;
-                return (
+              {wanteds.map((wanted) => (
+                <div key={wanted._id}>
                   <CardAvisRecherche
-                    key={wanted._id}
-                    urlImage={imageUrl}
+                    urlImage={`https://marli-backend.onrender.com/bien/images/${wanted.urlImage}`}
                   />
-                );
-              })}
+                </div>
+              ))}
             </Slider>
             <p></p>
             <Link to='/nous-contacter'>
