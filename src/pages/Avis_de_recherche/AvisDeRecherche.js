@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/1.jpg'
@@ -14,32 +13,49 @@ import { Helmet } from 'react-helmet'
 function AvisDeRecherche() {
   const [wanteds, setWanteds] = useState([])
 
+  useEffect(() => {
+    const fecthWanteds = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/get-wanteds`,
+        )
+        if (response.ok) {
+          const result = await response.json()
+          setWanteds(result)
+        }
+      } catch (error) {
+        console.log('Erreur serveur', error)
+      }
+    }
+    fecthWanteds()
+  }, [])
+
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: wanteds.length >= 3,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 3,
-    autoplay: true,
+    slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length,
+    autoplay: wanteds.length >= 3,
     autoplaySpeed: 2000,
     pauseOnHover: true,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length,
         },
       },
       {
@@ -51,23 +67,6 @@ function AvisDeRecherche() {
     ],
   }
 
-  useEffect(() => {
-    try {
-      const fecthWanteds = async () => {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/bien/get-wanteds`,
-        )
-        if (response.ok) {
-          const result = await response.json()
-          setWanteds(result)
-        }
-      }
-      fecthWanteds()
-    } catch (error) {
-      console.log('Erreur serveur', error)
-    }
-  }, [])
-
   return (
     <>
       <Helmet>
@@ -78,17 +77,12 @@ function AvisDeRecherche() {
       <div className={styles.allContainer}>
         <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
 
-        <div className={styles.AvisDrechercheContainer}>
-          <h3>Nos clients cherchent</h3>
-
-          <Slider {...settings}>
-            {wanteds.length > 0 &&
-              wanteds.map((wanted) => {
-                // Gérer les URLs Cloudinary
-                const imageUrl = wanted.urlImage?.includes('cloudinary.com') || wanted.urlImage?.startsWith('http')
-                  ? wanted.urlImage
-                  : `${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`;
-                
+        {wanteds.length > 0 && (
+          <div className={styles.AvisDrechercheContainer}>
+            <h3>Nos clients cherchent</h3>
+            <Slider {...settings}>
+              {wanteds.map((wanted) => {
+                const imageUrl = `https://marli-backend.onrender.com/bien/images/imagesWanted/${wanted.urlImage}`;
                 return (
                   <CardAvisRecherche
                     key={wanted._id}
@@ -96,12 +90,13 @@ function AvisDeRecherche() {
                   />
                 );
               })}
-          </Slider>
-          <p></p>
-          <Link to='/nous-contacter'>
-            <button>Si vous avez un de ces biens</button>
-          </Link>
-        </div>
+            </Slider>
+            <p></p>
+            <Link to='/nous-contacter'>
+              <button>Si vous avez un de ces biens</button>
+            </Link>
+          </div>
+        )}
 
         <div className={styles.formContainer}>
           <h3>Votre recherche</h3>
