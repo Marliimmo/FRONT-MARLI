@@ -74,7 +74,7 @@ function Header() {
               }
               to='/actualite'
             >
-              Actualité
+              Actualités
               <p></p>
             </NavLink>
 
