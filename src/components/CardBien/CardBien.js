@@ -6,7 +6,6 @@ function CardBien({
   imgUrl,
   prix,
   localisation,
-  caracteristique,
   title,
   status,
   reference,
@@ -27,7 +26,6 @@ function CardBien({
         <h3>{title}</h3>
         <p className={styles.price}>{prix?.toLocaleString()} €</p>
         <p className={styles.location}>{localisation}</p>
-        <p className={styles.caracteristiques}>{caracteristique}</p>
       </div>
     </Link>
   )
