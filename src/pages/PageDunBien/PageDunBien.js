@@ -247,10 +247,10 @@ const getImageUrl = (url) => {
 
               <div className={styles.RightContainer}>
                 <div className={styles.prixElocalisation}>
-                  <h3>{data.prix.toLocaleString('fr-FR')} €</h3>
-                  <p>{data.localisation}</p>
-                  <p>{data.title}</p>
-                </div>
+  <h3>{data.prix.toLocaleString('fr-FR')} €</h3>
+  <p>{data.caracteristiques.split('#')[1]}</p>
+  <p>{data.localisation}</p>
+</div>
 
                 <div className={styles.caracteristique}>
                   <h3>Caractéristiques</h3>
