@@ -28,12 +28,13 @@ function PageDunBien() {
   // Fonction pour gérer les URLs Cloudinary
 const getImageUrl = (url) => {
   if (!url) return '';
-  return url.includes('cloudinary.com') || url.startsWith('http')
-    ? url
-    : `https://marli-backend.onrender.com/bien/images/${url}`;
-
-
-  };
+  if (url.includes('cloudinary.com') || url.startsWith('http')) {
+    return url;
+  }
+  // Enlever "imagesBienMarli/" du début si présent pour éviter la duplication
+  const cleanUrl = url.replace(/^imagesBienMarli\//, '');
+  return `https://marli-backend.onrender.com/bien/images/imagesBienMarli/${cleanUrl}`;
+};
 
   const settings = {
     dots: false,
