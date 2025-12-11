@@ -156,7 +156,7 @@ const getImageUrl = (url) => {
           <p className={styles.notFoundBien}>Aucun bien trouver</p>
         ) : (
           <FadeIn>
-            {data?._medias?.image_galerie_0?.url && (
+            {(data?._medias?.image_galerie_0?.url || data?._medias?.image_galerie_1?.url) && (
               <div className={styles.imageContainer}>
                 <div className={styles.CrousselContainer}>
                   <div className={styles.slideButton}>
@@ -172,7 +172,7 @@ const getImageUrl = (url) => {
                   <div className={styles.sliderContainer}>
                     <Slider ref={sliderRef} {...settings}>
                       {data._medias &&
-                        Object.keys(data._medias).map((key, index) => {
+                        Object.keys(data._medias).filter(key => data._medias[key]?.url).map((key, index) => {
                           const media = data._medias[key]
                           if (media.url) {
                             return (
