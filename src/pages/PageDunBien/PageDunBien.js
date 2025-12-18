@@ -25,16 +25,16 @@ function PageDunBien() {
   const [data, setData] = useState([])
   const [dataBienDispo, setDataBienDispo] = useState([])
 
-  // Fonction pour gérer les URLs Cloudinary
-const getImageUrl = (url) => {
-  if (!url) return '';
-  if (url.includes('cloudinary.com') || url.startsWith('http')) {
-    return url;
-  }
-  // Enlever "imagesBienMarli/" du début si présent pour éviter la duplication
-  const cleanUrl = url.replace(/^imagesBienMarli\//, '');
-  return `https://marli-backend.onrender.com/bien/images/imagesBienMarli/${cleanUrl}`;
-};
+  // Fonction pour gérer les URLs des images
+  const getImageUrl = (url) => {
+    if (!url) return '';
+    // Si c'est déjà une URL complète, la retourner telle quelle
+    if (url.startsWith('http')) {
+      return url;
+    }
+    // Sinon construire l'URL complète
+    return `https://marli-backend.onrender.com/bien/images/${url}`;
+  };
 
   const settings = {
     dots: false,
@@ -148,7 +148,6 @@ const getImageUrl = (url) => {
     <>
       <Helmet>
         <title>Marli - Page de bien</title>
-        <meta name='robots' content='noindex' />
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={`fadinAnimation ${styles.allContainer}`}>
@@ -248,10 +247,10 @@ const getImageUrl = (url) => {
 
               <div className={styles.RightContainer}>
                 <div className={styles.prixElocalisation}>
-  <h3>{data.prix.toLocaleString('fr-FR')} €</h3>
-  <p>{data.caracteristiques.split('#')[1]}</p>
-  <p>{data.localisation}</p>
-</div>
+                  <h3>{data.prix.toLocaleString('fr-FR')} €</h3>
+                  <p>{data.caracteristiques.split('#')[1]}</p>
+                  <p>{data.localisation}</p>
+                </div>
 
                 <div className={styles.caracteristique}>
                   <h3>Caractéristiques</h3>
@@ -340,4 +339,3 @@ const getImageUrl = (url) => {
 }
 
 export default PageDunBien
-
