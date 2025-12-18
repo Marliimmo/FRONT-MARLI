@@ -133,7 +133,7 @@ function Accueil() {
     <>
       <Helmet>
         <title>Marli - Passeur d'histoires immobilières</title>
-        <meta name='robots' content='noindex' />
+  
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={`fadinAnimation`}>
