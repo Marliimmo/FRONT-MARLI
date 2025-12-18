@@ -27,14 +27,10 @@ function PageDunBien() {
 
   // Fonction pour gérer les URLs des images
   const getImageUrl = (url) => {
-    if (!url) return '';
-    // Si c'est déjà une URL complète, la retourner telle quelle
-    if (url.startsWith('http')) {
-      return url;
-    }
-    // Sinon construire l'URL complète
-    return `https://marli-backend.onrender.com/bien/images/${url}`;
-  };
+  if (!url) return '';
+  // Retourner l'URL telle quelle (Cloudinary ou autre)
+  return url;
+};
 
   const settings = {
     dots: false,
