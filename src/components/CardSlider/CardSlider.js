@@ -1,3 +1,4 @@
+
 import React from 'react'
 import styles from './CardSlider.module.scss'
 import { Link } from 'react-router-dom'
@@ -11,10 +12,10 @@ function CardSlider({
   reference,
   isHomePage,
 }) {
-  // Gérer les URLs Cloudinary et backend
+  // Gérer les URLs Cloudinary
   const imageUrl = image?.includes('cloudinary.com') || image?.startsWith('http')
     ? image.replace('/upload/', '/upload/f_auto,q_auto,w_800/') 
-    : `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${image}`;
+    : `https://marli-backend.onrender.com/bien/images/${image}`;
 
   return (
     <Link className={styles.linkCard} to={`/bien/${reference}`}>
