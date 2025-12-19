@@ -14,8 +14,14 @@ function CardSlider({
 }) {
   // Gérer les URLs Cloudinary
   const imageUrl = image?.includes('cloudinary.com') || image?.startsWith('http')
+<<<<<<< HEAD
   ? image.replace('/upload/', '/upload/f_auto,q_auto,w_800/') 
   : `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${image}`;
+=======
+    ? image.replace('/upload/', '/upload/f_auto,q_auto,w_800/') 
+    : `https://marli-backend.onrender.com/bien/images/${image}`;
+
+>>>>>>> 7113e9a1f964afe5d335278730932d4339303f95
   return (
     <Link className={styles.linkCard} to={`/bien/${reference}`}>
       <div
@@ -34,7 +40,6 @@ function CardSlider({
                 : `${price.toLocaleString('fr-FR')} €`}
           </h2>
         </div>
-
         <div className={styles.partialInfoBien}>
           <h2>{localisation}</h2>
           {isHomePage !== true && (
