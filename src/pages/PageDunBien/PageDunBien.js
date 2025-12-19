@@ -25,21 +25,14 @@ function PageDunBien() {
   const [data, setData] = useState([])
   const [dataBienDispo, setDataBienDispo] = useState([])
 
-  // Fonction pour gérer les URLs des images
   const getImageUrl = (url) => {
-  if (!url) return '';
-<<<<<<< HEAD
-  if (url.includes('cloudinary.com') || url.startsWith('http')) {
-    return url;
-  }
-  // Enlever "imagesBienMarli/" du début si présent pour éviter la duplication
-  const cleanUrl = url.replace(/^imagesBienMarli\//, '');
-  return `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${cleanUrl}`;
-=======
-  // Retourner l'URL telle quelle (Cloudinary ou autre)
-  return url;
->>>>>>> 7113e9a1f964afe5d335278730932d4339303f95
-};
+    if (!url) return '';
+    if (url.includes('cloudinary.com') || url.startsWith('http')) {
+      return url;
+    }
+    const cleanUrl = url.replace(/^imagesBienMarli\//, '');
+    return `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${cleanUrl}`;
+  };
 
   const settings = {
     dots: false,
@@ -172,7 +165,6 @@ function PageDunBien() {
                     </div>
                   </div>
 
-                  {/* slider  */}
                   <div className={styles.sliderContainer}>
                     <Slider ref={sliderRef} {...settings}>
                       {data._medias &&
@@ -193,7 +185,6 @@ function PageDunBien() {
                   </div>
 
                   <div>
-                    {/* status bien */}
                     {data.status !== 'disponible' && (
                       <div
                         style={
@@ -213,7 +204,6 @@ function PageDunBien() {
                       </div>
                     )}
 
-                    {/* icone fullScreen */}
                     <div
                       className={styles.fullScreenIcone}
                       onClick={() => setFullScreen(!fullScreen)}
@@ -287,7 +277,6 @@ function PageDunBien() {
                   </div>
                 </div>
 
-                {/* slider  */}
                 <div className={styles.sliderContainer}>
                   <Slider ref={sliderRefFullScreen} {...settings}>
                     {data._medias &&
