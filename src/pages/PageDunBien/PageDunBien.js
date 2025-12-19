@@ -33,7 +33,7 @@ const getImageUrl = (url) => {
   }
   // Enlever "imagesBienMarli/" du début si présent pour éviter la duplication
   const cleanUrl = url.replace(/^imagesBienMarli\//, '');
-  return `https://marli-backend.onrender.com/bien/images/imagesBienMarli/${cleanUrl}`;
+  return `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${cleanUrl}`;
 };
 
   const settings = {

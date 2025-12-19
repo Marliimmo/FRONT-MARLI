@@ -13,7 +13,7 @@ function CardBien({
 }) {
   const imageUrl = imgUrl?.includes('cloudinary.com') || imgUrl?.startsWith('http')
     ? imgUrl
-    : `https://marli-backend.onrender.com/bien/images/${imgUrl}`;
+    : `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${imgUrl}`;
 
   const caracteristiques = caracteristique?.split('#').filter(c => c.trim() !== '');
 

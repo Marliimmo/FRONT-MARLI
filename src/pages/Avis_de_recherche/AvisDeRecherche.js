@@ -84,7 +84,7 @@ function AvisDeRecherche() {
               {wanteds.map((wanted) => (
                 <div key={wanted._id}>
                   <CardAvisRecherche
-                    urlImage={`https://marli-backend.onrender.com/bien/images/${wanted.urlImage}`}
+                    urlImage={`https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${wanted.urlImage}`}
                   />
                 </div>
               ))}
