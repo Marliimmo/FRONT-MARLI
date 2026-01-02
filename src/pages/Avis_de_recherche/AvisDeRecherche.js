@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/1.jpg'
 import styles from './AvisDeRecherche.module.scss'
@@ -13,49 +13,32 @@ import { Helmet } from 'react-helmet'
 function AvisDeRecherche() {
   const [wanteds, setWanteds] = useState([])
 
-  useEffect(() => {
-    const fecthWanteds = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/bien/get-wanteds`,
-        )
-        if (response.ok) {
-          const result = await response.json()
-          setWanteds(result)
-        }
-      } catch (error) {
-        console.log('Erreur serveur', error)
-      }
-    }
-    fecthWanteds()
-  }, [])
-
-  const settings = useMemo(() => ({
+  const settings = {
     dots: false,
-    infinite: wanteds.length >= 3,
+    infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length || 1,
-    autoplay: wanteds.length >= 3,
+    slidesToShow: 3,
+    autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: wanteds.length >= 3 ? 3 : wanteds.length || 1,
+          slidesToShow: 3,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length || 1,
+          slidesToShow: 2,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: wanteds.length >= 2 ? 2 : wanteds.length || 1,
+          slidesToShow: 2,
         },
       },
       {
@@ -65,7 +48,24 @@ function AvisDeRecherche() {
         },
       },
     ],
-  }), [wanteds.length])
+  }
+
+  useEffect(() => {
+    try {
+      const fecthWanteds = async () => {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/get-wanteds`,
+        )
+        if (response.ok) {
+          const result = await response.json()
+          setWanteds(result)
+        }
+      }
+      fecthWanteds()
+    } catch (error) {
+      console.log('Erreur serveur', error)
+    }
+  }, [])
 
   return (
     <>
@@ -77,24 +77,30 @@ function AvisDeRecherche() {
       <div className={styles.allContainer}>
         <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
 
-        {wanteds.length > 0 && (
-          <div className={styles.AvisDrechercheContainer}>
-            <h3>Nos clients cherchent</h3>
-            <Slider {...settings}>
-              {wanteds.map((wanted) => (
-                <div key={wanted._id}>
+        <div className={styles.AvisDrechercheContainer}>
+          <h3>Nos clients cherchent</h3>
+
+          <Slider {...settings}>
+            {wanteds.length > 0 &&
+              wanteds.map((wanted) => {
+                // Gérer les URLs Cloudinary
+                const imageUrl = wanted.urlImage?.includes('cloudinary.com') || wanted.urlImage?.startsWith('http')
+                  ? wanted.urlImage
+                  : `${process.env.REACT_APP_URL_BASE_IMAGE}${wanted.urlImage}`;
+                
+                return (
                   <CardAvisRecherche
-                    urlImage={`https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${wanted.urlImage}`}
+                    key={wanted._id}
+                    urlImage={imageUrl}
                   />
-                </div>
-              ))}
-            </Slider>
-            <p></p>
-            <Link to='/nous-contacter'>
-              <button>Si vous avez un de ces biens</button>
-            </Link>
-          </div>
-        )}
+                );
+              })}
+          </Slider>
+          <p></p>
+          <Link to='/nous-contacter'>
+            <button>Si vous avez un de ces biens</button>
+          </Link>
+        </div>
 
         <div className={styles.formContainer}>
           <h3>Votre recherche</h3>
