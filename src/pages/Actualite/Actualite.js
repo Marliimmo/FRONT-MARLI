@@ -6,6 +6,15 @@ import { Helmet } from 'react-helmet'
 
 function Actualite() {
 const articles = [
+      {
+      id: 11,
+      title: "Prêt Immobilier 2026 : Les Nouveaux Critères des Banques Pour Obtenir Votre Financement",
+      excerpt: "En 2026, emprunter pour acheter n'a jamais été aussi encadré.",
+      date: "9 Février 2026",
+      urlImage: "/articles/article_pret_immobilier_2026.jpg",
+      link: "/articles/article_pret_immobilier_2026.html"
+    },
+
                 {
       id: 10,
       title: "Plus-Value Immobilière 2026 : Calcul, Exonérations et Astuces d'Optimisation",
