@@ -6,6 +6,15 @@ import { Helmet } from 'react-helmet'
 
 function Actualite() {
 const articles = [
+        {
+      id: 7,
+      title: "DPE 2026 : L'Interdiction des Logements Classés G Arrive - Êtes-Vous Prêt ?",
+      excerpt: "À partir du 1er janvier 2025, les logements classés G+ étaient déjà interdits à la location.",
+      date: "12 Janvier 2026",
+      urlImage: "/articles/22.jpg",
+      link: "/articles/article_dpe_2026.html"
+    },
+
     {
       id: 1,
       title: "Marché Immobilier Besançon Novembre 2025 : La Stabilisation Tant Attendue",
