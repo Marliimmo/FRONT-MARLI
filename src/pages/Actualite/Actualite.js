@@ -14,7 +14,7 @@ const articles = [
       urlImage: "/articles/article_plusvalue_2026.jpg",
       link: "/articles/article_plusvalue_2026.html"
     },
-
+          {
       id: 9,
       title: "Vendre en 2026 : Toutes les Obligations du Vendeur Immobilier",
       excerpt: "Vendre un bien immobilier en 2026 implique de respecter un cadre légal de plus en plus strict",
