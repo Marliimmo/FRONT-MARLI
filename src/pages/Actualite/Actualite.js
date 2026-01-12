@@ -8,8 +8,7 @@ function Actualite() {
 const articles = [
             {
       id: _8,
-      title: "Investissement Locatif 2026 : Pourquoi Besançon Tire Son Épingle du Jeu
-",
+      title: "Investissement Locatif 2026 : Pourquoi Besançon Tire Son Épingle du Jeu",
       excerpt: "Face aux grandes métropoles surchauffées et aux petites villes en déclin",
       date: "19 Janvier 2026",
       urlImage: "/articles/article_investissement_2026.jpg",
