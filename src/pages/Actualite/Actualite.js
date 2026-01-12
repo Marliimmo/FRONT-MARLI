@@ -7,6 +7,15 @@ import { Helmet } from 'react-helmet'
 function Actualite() {
 const articles = [
                 {
+                      {
+      id: 10,
+      title: "Plus-Value Immobilière 2026 : Calcul, Exonérations et Astuces d'Optimisation",
+      excerpt: "Vous vendez un bien immobilier en 2026 ?",
+      date: "2 Février 2026",
+      urlImage: "/articles/article_plusvalue_2026.jpg",
+      link: "/articles/article_plusvalue_2026.html"
+    },
+
       id: 9,
       title: "Vendre en 2026 : Toutes les Obligations du Vendeur Immobilier",
       excerpt: "Vendre un bien immobilier en 2026 implique de respecter un cadre légal de plus en plus strict",
