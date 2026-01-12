@@ -6,6 +6,15 @@ import { Helmet } from 'react-helmet'
 
 function Actualite() {
 const articles = [
+                {
+      id: 9,
+      title: "Vendre en 2026 : Toutes les Obligations du Vendeur Immobilier",
+      excerpt: "Vendre un bien immobilier en 2026 implique de respecter un cadre légal de plus en plus strict",
+      date: "26 Janvier 2026",
+      urlImage: "/articles/article_obligations_vendeur_2026.jpg",
+      link: "/articles/article_obligations_vendeur_2026.html"
+    },
+
             {
       id: 8,
       title: "Investissement Locatif 2026 : Pourquoi Besançon Tire Son Épingle du Jeu",
