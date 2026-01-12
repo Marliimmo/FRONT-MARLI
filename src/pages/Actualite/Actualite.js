@@ -7,7 +7,6 @@ import { Helmet } from 'react-helmet'
 function Actualite() {
 const articles = [
                 {
-                      {
       id: 10,
       title: "Plus-Value Immobilière 2026 : Calcul, Exonérations et Astuces d'Optimisation",
       excerpt: "Vous vendez un bien immobilier en 2026 ?",
