@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 function Actualite() {
 const articles = [
             {
-      id: _8,
+      id: 8,
       title: "Investissement Locatif 2026 : Pourquoi Besançon Tire Son Épingle du Jeu",
       excerpt: "Face aux grandes métropoles surchauffées et aux petites villes en déclin",
       date: "19 Janvier 2026",
