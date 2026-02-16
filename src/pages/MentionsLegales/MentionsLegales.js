@@ -30,7 +30,7 @@ function MentionsLegales() {
 
           <p>Directeur de la publication du site web : Mar Néné</p>
 
-          <p>Le prestataire assurant l’hébergement du site est </p>
+          <p>Le prestataire assurant l’hébergement du site est LWS</p>
 
           <p>
             Médiateur de la consommation : MÉDIATION CONSOMMATION DÉVELOPPEMENT 
