@@ -36,7 +36,7 @@ function MentionsLegales() {
             Médiateur de la consommation : MÉDIATION CONSOMMATION DÉVELOPPEMENT 
 Centre d’Affaires Stéphanois - Immeuble l’Horizon 
 Esplanade de France - 3 rue J. Constant Milleret 
-42000 SAINT-ETIENNE  <p>
+42000 SAINT-ETIENNE  </p>
 
           <h3>2. Limitation de responsabilité</h3>
           <p>
