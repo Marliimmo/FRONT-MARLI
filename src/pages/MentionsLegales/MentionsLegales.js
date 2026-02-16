@@ -30,13 +30,13 @@ function MentionsLegales() {
 
           <p>Directeur de la publication du site web : Mar Néné</p>
 
-          <p>Le prestataire assurant l’hébergement du site est LWS</p>
+          <p>Le prestataire assurant l’hébergement du site est LWS </p>
 
           <p>
             Médiateur de la consommation : MÉDIATION CONSOMMATION DÉVELOPPEMENT 
 Centre d’Affaires Stéphanois - Immeuble l’Horizon 
 Esplanade de France - 3 rue J. Constant Milleret 
-42000 SAINT-ETIENNE
+42000 SAINT-ETIENNE  <p>
 
           <h3>2. Limitation de responsabilité</h3>
           <p>
