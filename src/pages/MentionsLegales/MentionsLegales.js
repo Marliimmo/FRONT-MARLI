@@ -33,9 +33,10 @@ function MentionsLegales() {
           <p>Le prestataire assurant l’hébergement du site est </p>
 
           <p>
-            Médiateur de la consommation : CNPM – MEDIATION – CONSOMMATION – 27
-            Avenue de la Libération 42400 SAINT-CHAMOND
-          </p>
+            Médiateur de la consommation : MÉDIATION CONSOMMATION DÉVELOPPEMENT 
+Centre d’Affaires Stéphanois - Immeuble l’Horizon 
+Esplanade de France - 3 rue J. Constant Milleret 
+42000 SAINT-ETIENNE
 
           <h3>2. Limitation de responsabilité</h3>
           <p>
