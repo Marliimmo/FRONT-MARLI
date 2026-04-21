@@ -135,6 +135,7 @@ function Accueil() {
         <title>Marli - Passeur d'histoires immobilières</title>
   
         <meta name='description' content="Passeur d'histoires immobilières" />
+        <meta name='robots' content='index, follow' />
       </Helmet>
       <div className={`fadinAnimation`}>
         <div className={styles.firstSectionContainer}>

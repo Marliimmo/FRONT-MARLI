@@ -106,6 +106,7 @@ const articles = [
       <Helmet>
         <title>Marli Immobilier - Actualités Immobilières Besançon</title>
         <meta name='description' content="Actualité immobilière à Besançon et Franche-Comté" />
+        <meta name='robots' content='index, follow' />
       </Helmet>
       <div className={styles.allContainer}>
         <FirstSectionPage ImgPremierePlan={Image} title='ACTUALITÉS' />
