@@ -69,7 +69,7 @@ function Vendre() {
     <>
       <Helmet>
         <title>Marli - Vendre</title>
-        <meta name='robots' content='noindex' />
+        <meta name='robots' content='index, follow' />
         {/* <meta name="robots" content="index, follow" /> */}
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>

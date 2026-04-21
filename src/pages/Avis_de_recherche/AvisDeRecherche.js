@@ -71,7 +71,7 @@ function AvisDeRecherche() {
     <>
       <Helmet>
         <title>Marli - Avis de recherche</title>
-        <meta name='robots' content='noindex' />
+        <meta name='robots' content='index, follow' />
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={styles.allContainer}>

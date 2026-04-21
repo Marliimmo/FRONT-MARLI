@@ -162,7 +162,7 @@ function Acheter() {
     <>
       <Helmet>
         <title>Marli - Acheter</title>
-        <meta name='robots' content='noindex' />
+        <meta name='robots' content='index, follow' />
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
       <div className={styles.allContainer}>
