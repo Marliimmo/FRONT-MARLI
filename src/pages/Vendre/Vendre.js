@@ -9,7 +9,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import FormVendreOuRecherche from '../../components/FormVendreOuRecherche/FormVendreOuRecherche'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { SlideOfRight } from '../../components/AnimatedComponents/AnimatedComponents'
 
 function Vendre() {

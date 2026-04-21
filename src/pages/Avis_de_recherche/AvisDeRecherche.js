@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Link } from 'react-router-dom'
 import CardAvisRecherche from '../../components/CardAvisRecherche/CardAvisRecherche'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 function AvisDeRecherche() {
   const [wanteds, setWanteds] = useState([])

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './A_Propos.module.scss'
 import ImageFondatrice from '../../assets/images/fondatrice.jpeg'
 import LogoMarli from '../../assets/images/marli-logo.png'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 function A_Propos() {
   return (

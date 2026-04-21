@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './MentionsLegales.module.scss'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 function MentionsLegales() {
   return (

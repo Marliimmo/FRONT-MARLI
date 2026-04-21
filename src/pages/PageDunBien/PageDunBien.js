@@ -12,7 +12,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import CardSlider from '../../components/CardSlider/CardSlider'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { FadeIn } from '../../components/AnimatedComponents/AnimatedComponents'
 
 function PageDunBien() {

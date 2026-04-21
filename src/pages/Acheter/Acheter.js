@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import CardBien from '../../components/CardBien/CardBien'
 import GifLoading from '../../components/GifLoading/GifLoading'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 function Acheter() {
   const [showFiltre, setShowFiltre] = useState(false)

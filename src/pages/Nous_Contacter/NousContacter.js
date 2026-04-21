@@ -10,7 +10,7 @@ import {
   faPhoneFlip,
 } from '@fortawesome/free-solid-svg-icons'
 // import WhatsAppIcone from '../../assets/images/whatsapp.svg'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 
 function NousContacter() {
