@@ -28,7 +28,7 @@ import {
   SlideUp,
 } from '../../components/AnimatedComponents/AnimatedComponents'
 import { Link as ScrollLink } from 'react-scroll'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 function Accueil() {
   const sliderRef = useRef(null)

@@ -2,7 +2,7 @@ import React from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/banniere-actualites.jpg'
 import styles from './Actualite.module.scss'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 function Actualite() {
 const articles = [
