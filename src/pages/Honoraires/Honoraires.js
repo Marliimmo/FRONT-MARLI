@@ -36,7 +36,9 @@ const Honoraires = () => {
         </div>
       </div>
     </div>
+  </>
   )
 }
+
 
 export default Honoraires
