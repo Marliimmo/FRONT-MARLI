@@ -8,10 +8,10 @@ function A_Propos() {
   return (
     <>
       <Helmet>
-        <title>Marli - A propos</title>
+        <title>Agence immobilière à Besançon - Marli, Passeur d'histoires immobilières</title>
         <meta name='robots' content='index, follow' />
         {/* <meta name="robots" content="index, follow" /> */}
-        <meta name='description' content="Passeur d'histoires immobilières" />
+        <meta name='description' content='Marli Immobilier, agence indépendante à Besançon. Néné vous accompagne dans votre projet immobilier avec expertise et passion dans le Doubs et la région.' />
       </Helmet>
       <div className={`fadinAnimation ${styles.allContainer}`}>
         <div className={styles.presentationFondatrice}>

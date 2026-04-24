@@ -17,10 +17,10 @@ function NousContacter() {
   return (
     <>
       <Helmet>
-        <title>Marli - Contact</title>
+        <title>Contacter Marli Immobilier à Besançon - Estimation et conseil gratuits</title>
         <meta name='robots' content='index, follow' />
         {/* <meta name="robots" content="index, follow" /> */}
-        <meta name='description' content="Passeur d'histoires immobilières" />
+        <meta name='description' content='Contactez Marli Immobilier à Besançon pour une estimation gratuite ou un conseil personnalisé. Agence indépendante dans le Doubs, disponible 7j/7.' />
       </Helmet>
       <div className={`fadinAnimation ${styles.allContainer}`}>
         {/* <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' /> */}

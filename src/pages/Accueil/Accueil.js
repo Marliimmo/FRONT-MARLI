@@ -132,9 +132,9 @@ function Accueil() {
   return (
     <>
       <Helmet>
-        <title>Marli - Passeur d'histoires immobilières</title>
+        <title>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</title>
   
-        <meta name='description' content="Passeur d'histoires immobilières" />
+        <meta name='description' content='Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs et à 50km alentours. Votre passeur d histoires immobilières.' />
         <meta name='robots' content='index, follow' />
       </Helmet>
       <div className={`fadinAnimation`}>
