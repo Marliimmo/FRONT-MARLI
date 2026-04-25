@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Honoraires.module.scss'
-
+import { Helmet } from 'react-helmet';
 const Honoraires = () => {
   const tarifs = [
     { range: '< 50 000 €', tarif: 'forfait de 5 000 €' },
