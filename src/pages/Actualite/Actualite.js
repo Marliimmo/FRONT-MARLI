@@ -10,9 +10,9 @@ const articles = [
       id: 12,
       title: "article-marche-besancon",
       excerpt: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
-      date: "Date",
-      urlImage: "/articles/nom-image.jpg",
-      link: "/articles/nom-article.html"
+      date: "24 avril 2026",
+      urlImage: "/articles/article-marche-besancon.jpg",
+      link: "/articles/article-marche-besancon.html"
     },
 
       {
