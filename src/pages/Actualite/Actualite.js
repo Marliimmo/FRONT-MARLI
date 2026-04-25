@@ -8,11 +8,11 @@ function Actualite() {
 const articles = [
       {
       id: 12,
-      title: "article-marche-besancon",
+      title: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
       excerpt: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
-      date: "24 avril 2026",
-      urlImage: "/articles/article-marche-besancon.jpg",
-      link: "/articles/article-marche-besancon.html"
+      date: "28 Avril 2026",
+      urlImage: "/articles/article-marche-besancon-2026.jpg",
+      link: "/articles/article-marche-besancon-2026.html"
     },
 
       {
