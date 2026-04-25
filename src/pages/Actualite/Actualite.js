@@ -7,6 +7,15 @@ import { Helmet } from 'react-helmet-async'
 function Actualite() {
 const articles = [
       {
+      id: 12,
+      title: "article-marche-besancon",
+      excerpt: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
+      date: "Date",
+      urlImage: "/articles/nom-image.jpg",
+      link: "/articles/nom-article.html"
+    },
+
+      {
       id: 11,
       title: "Prêt Immobilier 2026 : Les Nouveaux Critères des Banques Pour Obtenir Votre Financement",
       excerpt: "En 2026, emprunter pour acheter n'a jamais été aussi encadré.",
