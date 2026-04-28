@@ -10,7 +10,7 @@ const articles = [
       id: 1777365880,
       title: "DPE 2026 à Besançon : ce que la réforme change concrètement pour les propriétaires",
       excerpt: "Passoires thermiques interdites à la location, décotes à la vente, audit énergétique obligatoire",
-      date: "2 ami 2026",
+      date: "2 Mai 2026",
       urlImage: "/articles/article-dpe-renovation-besancon.jpg",
       link: "/articles/article-dpe-renovation-besancon.html"
     },
