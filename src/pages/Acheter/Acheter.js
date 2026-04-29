@@ -163,6 +163,7 @@ function Acheter() {
       <Helmet>
         <title>Acheter un bien immobilier à Besançon et alentours - Marli Immobilier</title>
         <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://marli-immobilier.com/acheter' />
         <meta name='description' content='Trouvez votre appartement ou maison à Besançon et dans un rayon de 50km. Marli Immobilier sélectionne les meilleures opportunités pour vous.' />
       </Helmet>
       <div className={styles.allContainer}>

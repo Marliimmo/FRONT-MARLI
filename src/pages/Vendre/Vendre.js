@@ -70,6 +70,7 @@ function Vendre() {
       <Helmet>
         <title>Vendre votre bien immobilier à Besançon et alentours - Marli Immobilier</title>
         <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://marli-immobilier.com/vendre' />
         {/* <meta name="robots" content="index, follow" /> */}
         <meta name='description' content='Estimation gratuite et vente de votre bien immobilier à Besançon et dans un rayon de 50km. Marli Immobilier vous accompagne de A à Z.' />
       </Helmet>
