@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualite() {
 const articles = [
     {
+      id: 1778161700,
+      title: "Agence indépendante à Besançon : pourquoi ça change tout pour votre vente",
+      excerpt: "Entre les grands réseaux nationaux et les agences locales indépendantes, la différence n'est pas qu'une question de taille.",
+      date: "12 mai 2026",
+      urlImage: "/articles/article-agence-independante-besancon.jpg",
+      link: "/articles/article-agence-independante-besancon.html"
+    },
+    {
       id: 1778161554,
       title: "Premier achat immobilier à Besançon : le guide du primo-accédant",
       excerpt: "Acheter pour la première fois à Besançon, c'est souvent une décision mûrie pendant des années.",
