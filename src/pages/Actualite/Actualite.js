@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualite() {
 const articles = [
     {
+      id: 1778161409,
+      title: "Investissement locatif à Besançon en 2026 : quels quartiers, quel rendement ?",
+      excerpt: "Besançon cumule des atouts sérieux pour l'investisseur immobilier : ville universitaire dynamique, prix d'achat modérés, demande locative structurelle.",
+      date: "5 mai 2026",
+      urlImage: "/articles/article-investissement-locatif-besancon.jpg",
+      link: "/articles/article-investissement-locatif-besancon.html"
+    },
+    {
       id: 1777365880,
       title: "DPE 2026 à Besançon : ce que la réforme change concrètement pour les propriétaires",
       excerpt: "Passoires thermiques interdites à la location, décotes à la vente, audit énergétique obligatoire",
