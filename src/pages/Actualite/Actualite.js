@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualite() {
 const articles = [
     {
+      id: 1778161554,
+      title: "Premier achat immobilier à Besançon : le guide du primo-accédant",
+      excerpt: "Acheter pour la première fois à Besançon, c'est souvent une décision mûrie pendant des années.",
+      date: "9 mai 2026",
+      urlImage: "/articles/article-primo-accedant-besancon.jpg",
+      link: "/articles/article-primo-accedant-besancon.html"
+    },
+    {
       id: 1778161409,
       title: "Investissement locatif à Besançon en 2026 : quels quartiers, quel rendement ?",
       excerpt: "Besançon cumule des atouts sérieux pour l'investisseur immobilier : ville universitaire dynamique, prix d'achat modérés, demande locative structurelle.",
