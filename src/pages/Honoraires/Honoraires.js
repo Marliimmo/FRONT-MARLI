@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Honoraires.module.scss'
-
+import { Helmet } from 'react-helmet-async';
 const Honoraires = () => {
   const tarifs = [
     { range: '< 50 000 €', tarif: 'forfait de 5 000 €' },
@@ -12,6 +12,12 @@ const Honoraires = () => {
   ]
 
   return (
+    <>
+      <Helmet>
+        <title>Honoraires agence immobilière Besançon - Tarifs transparents Marli Immobilier</title>
+        <meta name='robots' content='index, follow' />
+        <meta name='description' content='Découvrez les honoraires de Marli Immobilier à Besançon. Tarifs clairs et transparents pour la vente et achat immobilier dans le Doubs.' />
+      </Helmet>
     <div className={styles.pageContainer}>
       <div className={styles.container}>
         <div className={styles.header}>
@@ -30,7 +36,9 @@ const Honoraires = () => {
         </div>
       </div>
     </div>
+  </>
   )
 }
+
 
 export default Honoraires

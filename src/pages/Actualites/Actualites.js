@@ -6,6 +6,47 @@ import { Helmet } from 'react-helmet-async'
 
 function Actualites() {
 const articles = [
+    {
+      id: 1778161700,
+      title: "Agence indépendante à Besançon : pourquoi ça change tout pour votre vente",
+      excerpt: "Entre les grands réseaux nationaux et les agences locales indépendantes, la différence n'est pas qu'une question de taille.",
+      date: "12 mai 2026",
+      urlImage: "/articles/article-agence-independante-besancon.jpg",
+      link: "/articles/article-agence-independante-besancon.html"
+    },
+    {
+      id: 1778161554,
+      title: "Premier achat immobilier à Besançon : le guide du primo-accédant",
+      excerpt: "Acheter pour la première fois à Besançon, c'est souvent une décision mûrie pendant des années.",
+      date: "9 mai 2026",
+      urlImage: "/articles/article-primo-accedant-besancon.jpg",
+      link: "/articles/article-primo-accedant-besancon.html"
+    },
+    {
+      id: 1778161409,
+      title: "Investissement locatif à Besançon en 2026 : quels quartiers, quel rendement ?",
+      excerpt: "Besançon cumule des atouts sérieux pour l'investisseur immobilier : ville universitaire dynamique, prix d'achat modérés, demande locative structurelle.",
+      date: "5 mai 2026",
+      urlImage: "/articles/article-investissement-locatif-besancon.jpg",
+      link: "/articles/article-investissement-locatif-besancon.html"
+    },
+    {
+      id: 1777365880,
+      title: "DPE 2026 à Besançon : ce que la réforme change concrètement pour les propriétaires",
+      excerpt: "Passoires thermiques interdites à la location, décotes à la vente, audit énergétique obligatoire",
+      date: "2 Mai 2026",
+      urlImage: "/articles/article-dpe-renovation-besancon.jpg",
+      link: "/articles/article-dpe-renovation-besancon.html"
+    },
+      {
+      id: 12,
+      title: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
+      excerpt: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
+      date: "28 Avril 2026",
+      urlImage: "/articles/article_marche_besancon_2026.jpg",
+      link: "/articles/article-marche-besancon-2026.html"
+    },
+
       {
       id: 11,
       title: "Prêt Immobilier 2026 : Les Nouveaux Critères des Banques Pour Obtenir Votre Financement",
@@ -107,6 +148,7 @@ const articles = [
         <title>Marli Immobilier - Actualités Immobilières Besançon</title>
         <meta name='description' content="Actualité immobilière à Besançon et Franche-Comté" />
         <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://marli-immobilier.com/actualite' />
       </Helmet>
       <div className={styles.allContainer}>
         <FirstSectionPage ImgPremierePlan={Image} title='ACTUALITÉS' />

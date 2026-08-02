@@ -70,9 +70,10 @@ function AvisDeRecherche() {
   return (
     <>
       <Helmet>
-        <title>Marli - Avis de recherche</title>
+        <title>Avis de recherche immobilier à Besançon et dans le Doubs - Marli Immobilier</title>
         <meta name='robots' content='index, follow' />
-        <meta name='description' content="Passeur d'histoires immobilières" />
+        <link rel='canonical' href='https://marli-immobilier.com/avis-de-recherche' />
+        <meta name='description' content='Déposez votre avis de recherche immobilier à Besançon et dans le Doubs. Marli Immobilier trouve le bien qui correspond à vos critères.' />
       </Helmet>
       <div className={styles.allContainer}>
         <FirstSectionPage ImgPremierePlan={Image} title='AVIS DE RECHERCHE' />
