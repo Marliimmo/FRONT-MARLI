@@ -4,7 +4,7 @@ import HomePage from './pages/Accueil/Accueil'
 import Acheter from './pages/Acheter/Acheter'
 import Vendre from './pages/Vendre/Vendre'
 import AvisDeRecherche from './pages/Avis_de_recherche/AvisDeRecherche'
-import Actualite from './pages/Actualite/Actualite'
+import Actualites from './pages/Actualites/Actualites'
 import NousContacter from './pages/Nous_Contacter/NousContacter'
 import PageDunBien from './pages/PageDunBien/PageDunBien'
 import MentionsLegales from './pages/MentionsLegales/MentionsLegales'
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       { path: '/acheter', element: <Acheter /> },
       { path: '/vendre', element: <Vendre /> },
       { path: '/avis-de-recherche', element: <AvisDeRecherche /> },
-      { path: '/actualite', element: <Actualite /> },
+      { path: '/actualite', element: <Actualites /> },
       { path: '/nous-contacter', element: <NousContacter /> },
       { path: '/bien/:reference', element: <PageDunBien /> },
       { path: '/mentions-legales', element: <MentionsLegales /> },

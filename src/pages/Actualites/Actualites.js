@@ -1,10 +1,10 @@
 import React from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
 import Image from '../../assets/images/banniere-actualites.jpg'
-import styles from './Actualite.module.scss'
+import styles from './Actualites.module.scss'
 import { Helmet } from 'react-helmet-async'
 
-function Actualite() {
+function Actualites() {
 const articles = [
       {
       id: 11,
@@ -135,4 +135,4 @@ const articles = [
   )
 }
 
-export default Actualite
+export default Actualites
