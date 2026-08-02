@@ -1,45 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Pages principales -->
   <url>
     <loc>https://marli-immobilier.com/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/acheter</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://marli-immobilier.com/vendre</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/vendre</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://marli-immobilier.com/acheter</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://marli-immobilier.com/avis-de-recherche</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://marli-immobilier.com/a-propos</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/actualite</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://marli-immobilier.com/nous-contacter</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Articles -->
+  <url>
+    <loc>https://marli-immobilier.com/articles/article-dpe-renovation-besancon.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article-marche-besancon-2026.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article-agence-independante-besancon.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article-primo-accedant-besancon.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article-investissement-locatif-besancon.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article_pret_immobilier_2026.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/actualite</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://marli-immobilier.com/articles/article_plusvalue_2026.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article_obligations_vendeur_2026.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article_investissement_2026.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/article_dpe_2026.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/marche-besancon-nov-2025.html</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/primo-accedants-2025.html</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/taux-credit-2025.html</loc>
+    <lastmod>2025-11-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/ecoquartiers-besancon.html</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/dpe-renovation-2025.html</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/heritage-succession-2025.html</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
