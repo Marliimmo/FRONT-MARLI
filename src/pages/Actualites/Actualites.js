@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualites() {
 const articles = [
     {
+      id: 1786020729,
+      title: "Rentrée immobilière à Besançon : pourquoi septembre est le meilleur moment pour vendre",
+      excerpt: "L'été touche à sa fin, les valises se rangent — et le marché immobilier bisontin se réveille. Septembre est, avec le printemps, l'un des deux grands moments de l'année où les acheteurs sont les plus actifs",
+      date: "4 Aout 2026",
+      urlImage: "/articles/article_rentree_immobiliere_besancon.jpg",
+      link: "/articles/article_rentree_immobiliere_besancon.html"
+    },
+    {
       id: 1778161700,
       title: "Agence indépendante à Besançon : pourquoi ça change tout pour votre vente",
       excerpt: "Entre les grands réseaux nationaux et les agences locales indépendantes, la différence n'est pas qu'une question de taille.",
