@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualites() {
 const articles = [
     {
+      id: 1786021329,
+      title: "Préparer son bien pour la vente à la rentrée à Besançon : les bons réflexes de l'été",
+      excerpt: "L'été est le moment idéal pour préparer une vente — pas pour la lancer. Pendant que le marché bisontin est au ralenti, vous avez le temps de faire les choses bien : diagnostics, petits travaux, mise en valeur",
+      date: "8 Aout 2026",
+      urlImage: "/articles/article_preparer_vente_rentree_besancon.jpg",
+      link: "/articles/article_preparer_vente_rentree_besancon.html"
+    },
+    {
       id: 1786020729,
       title: "Rentrée immobilière à Besançon : pourquoi septembre est le meilleur moment pour vendre",
       excerpt: "L'été touche à sa fin, les valises se rangent — et le marché immobilier bisontin se réveille. Septembre est, avec le printemps, l'un des deux grands moments de l'année où les acheteurs sont les plus actifs",
