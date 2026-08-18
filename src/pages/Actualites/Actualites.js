@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualites() {
 const articles = [
     {
+      id: 1787071718,
+      title: "Immobilier dans le Haut-Doubs et à Maîche : le marché hors Besançon en 2026",
+      excerpt: "Marché immobilier dans le Haut-Doubs et à Maîche en 2026 : prix, dynamiques, opportunités. Analyse de terrain par Marli Immobilier, agence présente sur Besançon et le Doubs.",
+      date: "18 Aout 2026",
+      urlImage: "/articles/article_immobilier_haut_doubs_maiche.jpg",
+      link: "/articles/article_immobilier_haut_doubs_maiche.html"
+    },
+    {
       id: 1786021329,
       title: "Préparer son bien pour la vente à la rentrée à Besançon : les bons réflexes de l'été",
       excerpt: "L'été est le moment idéal pour préparer une vente — pas pour la lancer. Pendant que le marché bisontin est au ralenti, vous avez le temps de faire les choses bien : diagnostics, petits travaux, mise en valeur",
