@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/marli-immobilier",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/marli-immobilier/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/articles/:file",
