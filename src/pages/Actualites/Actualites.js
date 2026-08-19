@@ -15,21 +15,7 @@ const articles = [
       link: "/articles/article_immobilier_haut_doubs_maiche.html"
     },
     {
-      id: 1787129901,
-      title: "Acheter à Besançon à la rentrée : pourquoi septembre est le bon moment pour les acquéreurs",
-      excerpt: "[A[A[A[A[A[A[A[A[A[A[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[2[B[B[B[B[B[B[B[B[B[B[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C",
-      date: "15 Aout 2026",
-      urlImage: "/articles/const articles = [
-    {
       id: 1787129962,
-      title: "Immobilier dans le Haut-Doubs et à Maîche : le marché hors Besançon en 2026",
-      excerpt: "Marché immobilier dans le Haut-Doubs et à Maîche en 2026 : prix, dynamiques, opportunités. Analyse de terrain par Marli Immobilier, agence présente sur Besançon et le Doubs.",
-      date: "18 Aout 2026",
-      urlImage: "/articles/article_estimation_bien_besancon.jpg",
-      link: "/articles/article_immobilier_haut_doubs_maiche.html"
-    },.jpg",
-      link: "/articles/article_acheter_besancon_rentree.html"
-    },
     {
       id: 1787129510,
       title: "Estimer son bien à Besançon : comment ça marche vraiment",
