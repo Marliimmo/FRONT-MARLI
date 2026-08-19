@@ -134,7 +134,7 @@ function Accueil() {
       <Helmet>
         <title>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</title>
   
-        <meta name='description' content='Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs et à 50km alentours. Votre passeur d histoires immobilières.' />
+        <meta name='description' content='Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs et à 50km alentours. Votre passeur d'histoires immobilières.' />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/' />
       </Helmet>
@@ -146,6 +146,7 @@ function Accueil() {
             alt='img-immobilier'
           />
           <div className={styles.opacityBlack}></div>
+          <h1 style={{position:"absolute",width:"1px",height:"1px",overflow:"hidden",clip:"rect(0,0,0,0)"}}>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</h1>
           <div className={styles.TextContent}>
             <SlideDown>
               <p>
