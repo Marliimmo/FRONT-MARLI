@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualites() {
 const articles = [
     {
+      id: 1787129901,
+      title: "Acheter à Besançon à la rentrée : pourquoi septembre est le bon moment pour les acquéreurs",
+      excerpt: "[A[A[A[A[A[A[A[A[A[A[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[2[B[B[B[B[B[B[B[B[B[B[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C",
+      date: "15 Aout 2026",
+      urlImage: "/articles/const articles = [.jpg",
+      link: "/articles/article_acheter_besancon_rentree.html"
+    },
+    {
       id: 1787129510,
       title: "Estimer son bien à Besançon : comment ça marche vraiment",
       excerpt: "Comment est estimé un bien immobilier à Besançon ? Prix au m², critères, méthodes : tout ce que les vendeurs bisontins doivent comprendre avant de fixer leur prix.",
