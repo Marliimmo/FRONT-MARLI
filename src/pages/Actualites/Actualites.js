@@ -19,7 +19,7 @@ const articles = [
       title: "Estimer son bien à Besançon : comment ça marche vraiment",
       excerpt: "Comment est estimé un bien immobilier à Besançon ? Prix au m², critères, méthodes : tout ce que les vendeurs bisontins doivent comprendre avant de fixer leur prix.",
       date: "11 Aout 2026",
-      urlImage: "/articles/article-immobilier-haut-doubs-maiche.jpg",
+      urlImage: "/articles/article-estimation-bien-besancon.jpg",
       link: "/articles/article-estimation-bien-besancon.html"
     },
     {
