@@ -15,8 +15,6 @@ const articles = [
       link: "/articles/article_immobilier_haut_doubs_maiche.html"
     },
     {
-      id: 1787129962,
-    {
       id: 1787129510,
       title: "Estimer son bien à Besançon : comment ça marche vraiment",
       excerpt: "Comment est estimé un bien immobilier à Besançon ? Prix au m², critères, méthodes : tout ce que les vendeurs bisontins doivent comprendre avant de fixer leur prix.",
@@ -37,16 +35,16 @@ const articles = [
       title: "Préparer son bien pour la vente à la rentrée à Besançon : les bons réflexes de l'été",
       excerpt: "L'été est le moment idéal pour préparer une vente — pas pour la lancer. Pendant que le marché bisontin est au ralenti, vous avez le temps de faire les choses bien : diagnostics, petits travaux, mise en valeur",
       date: "8 Aout 2026",
-      urlImage: "/articles/article_preparer_vente_rentree_besancon.jpg",
-      link: "/articles/article_preparer_vente_rentree_besancon.html"
+      urlImage: "/articles/article-preparer-vente-rentree-besancon.jpg",
+      link: "/articles/article-preparer-vente-rentree-besancon.html"
     },
     {
       id: 1786020729,
       title: "Rentrée immobilière à Besançon : pourquoi septembre est le meilleur moment pour vendre",
       excerpt: "L'été touche à sa fin, les valises se rangent — et le marché immobilier bisontin se réveille. Septembre est, avec le printemps, l'un des deux grands moments de l'année où les acheteurs sont les plus actifs",
       date: "4 Aout 2026",
-      urlImage: "/articles/article_rentree_immobiliere_besancon.jpg",
-      link: "/articles/article_rentree_immobiliere_besancon.html"
+      urlImage: "/articles/article-rentree-immobiliere-besancon.jpg",
+      link: "/articles/article-rentree-immobiliere-besancon.html"
     },
     {
       id: 1778161700,
