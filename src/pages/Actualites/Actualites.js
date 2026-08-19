@@ -23,14 +23,6 @@ const articles = [
       link: "/articles/article-estimation-bien-besancon.html"
     },
     {
-      id: 1787071718,
-      title: "Immobilier dans le Haut-Doubs et à Maîche : le marché hors Besançon en 2026",
-      excerpt: "Marché immobilier dans le Haut-Doubs et à Maîche en 2026 : prix, dynamiques, opportunités. Analyse de terrain par Marli Immobilier, agence présente sur Besançon et le Doubs.",
-      date: "18 Aout 2026",
-      urlImage: "/articles/article_immobilier_haut_doubs_maiche.jpg",
-      link: "/articles/article-immobilier-haut-doubs-maiche.html"
-    },
-    {
       id: 1786021329,
       title: "Préparer son bien pour la vente à la rentrée à Besançon : les bons réflexes de l'été",
       excerpt: "L'été est le moment idéal pour préparer une vente — pas pour la lancer. Pendant que le marché bisontin est au ralenti, vous avez le temps de faire les choses bien : diagnostics, petits travaux, mise en valeur",
@@ -83,7 +75,7 @@ const articles = [
       title: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
       excerpt: "Marché immobilier à Besançon en 2026 : ce que les chiffres ne racontent pas",
       date: "28 Avril 2026",
-      urlImage: "/articles/article_marche_besancon_2026.jpg",
+      urlImage: "/articles/article-marche-besancon-2026.jpg",
       link: "/articles/article-marche-besancon-2026.html"
     },
 
@@ -92,8 +84,8 @@ const articles = [
       title: "Prêt Immobilier 2026 : Les Nouveaux Critères des Banques Pour Obtenir Votre Financement",
       excerpt: "En 2026, emprunter pour acheter n'a jamais été aussi encadré.",
       date: "9 Février 2026",
-      urlImage: "/articles/article_pret_immobilier_2026.jpg",
-      link: "/articles/article_pret_immobilier_2026.html"
+      urlImage: "/articles/article-pret-immobilier-2026.jpg",
+      link: "/articles/article-pret-immobilier-2026.html"
     },
 
                 {
@@ -101,16 +93,16 @@ const articles = [
       title: "Plus-Value Immobilière 2026 : Calcul, Exonérations et Astuces d'Optimisation",
       excerpt: "Vous vendez un bien immobilier en 2026 ?",
       date: "2 Février 2026",
-      urlImage: "/articles/article_plusvalue_2026.jpg",
-      link: "/articles/article_plusvalue_2026.html"
+      urlImage: "/articles/article-plusvalue-2026.jpg",
+      link: "/articles/article-plusvalue-2026.html"
     },
           {
       id: 9,
       title: "Vendre en 2026 : Toutes les Obligations du Vendeur Immobilier",
       excerpt: "Vendre un bien immobilier en 2026 implique de respecter un cadre légal de plus en plus strict",
       date: "26 Janvier 2026",
-      urlImage: "/articles/article_obligations_vendeur_2026.jpg",
-      link: "/articles/article_obligations_vendeur_2026.html"
+      urlImage: "/articles/article-obligations-vendeur-2026.jpg",
+      link: "/articles/article-obligations-vendeur-2026.html"
     },
 
             {
@@ -118,8 +110,8 @@ const articles = [
       title: "Investissement Locatif 2026 : Pourquoi Besançon Tire Son Épingle du Jeu",
       excerpt: "Face aux grandes métropoles surchauffées et aux petites villes en déclin",
       date: "19 Janvier 2026",
-      urlImage: "/articles/article_investissement_2026.jpg",
-      link: "/articles/article_investissement_2026.html"
+      urlImage: "/articles/article-investissement-2026.jpg",
+      link: "/articles/article-investissement-2026.html"
     },
 
         {
@@ -127,8 +119,8 @@ const articles = [
       title: "DPE 2026 : L'Interdiction des Logements Classés G Arrive - Êtes-Vous Prêt ?",
       excerpt: "À partir du 1er janvier 2025, les logements classés G+ étaient déjà interdits à la location.",
       date: "12 Janvier 2026",
-      urlImage: "/articles/article_dpe_2026.jpg",
-      link: "/articles/article_dpe_2026.html"
+      urlImage: "/articles/article-dpe-2026.jpg",
+      link: "/articles/article-dpe-2026.html"
     },
 
     {
