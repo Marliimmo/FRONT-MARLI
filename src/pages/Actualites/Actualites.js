@@ -7,6 +7,14 @@ import { Helmet } from 'react-helmet-async'
 function Actualites() {
 const articles = [
     {
+      id: 1787129510,
+      title: "Estimer son bien à Besançon : comment ça marche vraiment",
+      excerpt: "Comment est estimé un bien immobilier à Besançon ? Prix au m², critères, méthodes : tout ce que les vendeurs bisontins doivent comprendre avant de fixer leur prix.",
+      date: "11 Aout 2026",
+      urlImage: "/articles/article_estimation_bien_besancon.jpg",
+      link: "/articles/article_estimation_bien_besancon.html"
+    },
+    {
       id: 1787071718,
       title: "Immobilier dans le Haut-Doubs et à Maîche : le marché hors Besançon en 2026",
       excerpt: "Marché immobilier dans le Haut-Doubs et à Maîche en 2026 : prix, dynamiques, opportunités. Analyse de terrain par Marli Immobilier, agence présente sur Besançon et le Doubs.",
