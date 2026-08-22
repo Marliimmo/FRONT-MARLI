@@ -34,6 +34,26 @@ function PageDunBien() {
     return `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${cleanUrl}`;
   };
 
+  // Retourne une URL "embed" si la vidéo vient de YouTube ou Vimeo, sinon null
+  // (dans ce cas on affiche la vidéo directement avec une balise <video>, ex: fichier mp4 hébergé)
+  const getVideoEmbed = (url) => {
+    if (!url) return null;
+
+    const youtubeMatch = url.match(
+      /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/
+    );
+    if (youtubeMatch) {
+      return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
+    }
+
+    const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vimeoMatch) {
+      return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+    }
+
+    return null;
+  };
+
   const settings = {
     dots: false,
     infinite: true,
@@ -255,6 +275,25 @@ function PageDunBien() {
                 </div>
               </div>
             </div>
+
+            {data?.video_url && (
+              <div className={styles.videoSection}>
+                <h3>Visite vidéo</h3>
+                <div className={styles.videoWrapper}>
+                  {getVideoEmbed(data.video_url) ? (
+                    <iframe
+                      src={getVideoEmbed(data.video_url)}
+                      title='Visite vidéo du bien'
+                      frameBorder='0'
+                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video src={data.video_url} controls playsInline />
+                  )}
+                </div>
+              </div>
+            )}
 
             <div className={styles.sectionRef}>
               <p className={styles.reference}>REF : {reference}</p>

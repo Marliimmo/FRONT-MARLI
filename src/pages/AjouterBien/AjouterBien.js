@@ -8,7 +8,8 @@ const AjouterBien = () => {
     localisation: '',
     prix: '',
     caracteristiques: '',
-    status: 'disponible'
+    status: 'disponible',
+    video_url: ''
   })
   
   const [loading, setLoading] = useState(false)
@@ -41,7 +42,8 @@ const AjouterBien = () => {
           localisation: '',
           prix: '',
           caracteristiques: '',
-          status: 'disponible'
+          status: 'disponible',
+          video_url: ''
         })
       } else {
         setMessage('❌ Erreur lors de la création')
@@ -128,6 +130,18 @@ const AjouterBien = () => {
             <small>Format: Type#Surface#Nombre de pièces</small>
           </div>
           
+          <div className={styles.field}>
+            <label>Vidéo de présentation (lien YouTube, Vimeo ou fichier .mp4)</label>
+            <input
+              type="text"
+              name="video_url"
+              placeholder="Ex: https://youtu.be/xxxxxxxx"
+              value={formData.video_url}
+              onChange={handleChange}
+            />
+            <small>Facultatif — laisser vide si le bien n'a pas de vidéo</small>
+          </div>
+
           <div className={styles.field}>
             <label>Statut</label>
             <select
