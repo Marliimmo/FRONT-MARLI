@@ -10,8 +10,6 @@ import PageDunBien from './pages/PageDunBien/PageDunBien'
 import MentionsLegales from './pages/MentionsLegales/MentionsLegales'
 import Honoraires from './pages/Honoraires/Honoraires'
 import APropos from './pages/A_Propos/A_Propos'
-import AjouterBien from './pages/AjouterBien/AjouterBien'
-import LoginAdmin from './pages/LoginAdmin/LoginAdmin'
 
 const router = createBrowserRouter([
   {
@@ -28,8 +26,6 @@ const router = createBrowserRouter([
       { path: '/mentions-legales', element: <MentionsLegales /> },
       { path: '/honoraires', element: <Honoraires /> },
       { path: '/a-propos', element: <APropos /> },
-      { path: '/ajouter-bien', element: <AjouterBien /> },
-      { path: '/admin/login', element: <LoginAdmin /> },
     ]
   }
 ])
