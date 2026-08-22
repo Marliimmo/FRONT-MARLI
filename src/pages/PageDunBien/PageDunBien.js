@@ -276,20 +276,20 @@ function PageDunBien() {
               </div>
             </div>
 
-            {data?.video_url && (
+            {data?._medias?.video_bien?.url && (
               <div className={styles.videoSection}>
                 <h3>Visite vidéo</h3>
                 <div className={styles.videoWrapper}>
-                  {getVideoEmbed(data.video_url) ? (
+                  {getVideoEmbed(data._medias.video_bien.url) ? (
                     <iframe
-                      src={getVideoEmbed(data.video_url)}
+                      src={getVideoEmbed(data._medias.video_bien.url)}
                       title='Visite vidéo du bien'
                       frameBorder='0'
                       allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                       allowFullScreen
                     />
                   ) : (
-                    <video src={data.video_url} controls playsInline />
+                    <video src={data._medias.video_bien.url} controls playsInline />
                   )}
                 </div>
               </div>
