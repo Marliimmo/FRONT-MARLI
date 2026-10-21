@@ -3,6 +3,7 @@
 // Deux sources :
 //   1. le dashboard (API backend /article/get-articles) — source principale
 //   2. des fichiers Markdown dans content/articles/ (optionnel)
+//   3. des pages HTML déjà prêtes déposées directement dans public/articles/ (avec leur image .jpg)
 // Un article est publié quand sa date de publication est atteinte. Un article modifié dans le
 // dashboard est régénéré ; un article supprimé du dashboard est retiré du site.
 // Options : --dry-run (ne rien écrire), --force (ignorer les dates), --sitemap (régénérer le sitemap).
@@ -214,9 +215,40 @@ async function syncMarkdown(index) {
   return { index, changed };
 }
 
+// ---------- Source 3 : pages HTML déposées à la main dans public/articles/
+// Toute page .html absente de articles.json y est ajoutée (titre, résumé, date et image lus dans la page).
+async function syncHtmlDeposes(index) {
+  let changed = 0;
+  const pick = (html, re) => { const m = html.match(re); return m ? m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : ''; };
+  const decode = (t) => t.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;|&rsquo;/g, '’').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  for (const file of fs.readdirSync(OUT).filter((f) => f.endsWith('.html')).sort()) {
+    const link = `/articles/${file}`;
+    if (index.some((e) => e.link === link)) continue;
+    const html = fs.readFileSync(path.join(OUT, file), 'utf8');
+    const title = decode(pick(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i) || pick(html, /<meta property="og:title" content="([^"]*)"/i)
+      || pick(html, /<title>([\s\S]*?)<\/title>/i).split(' | ')[0]);
+    const excerpt = decode(pick(html, /<meta name="description" content="([^"]*)"/i) || pick(html, /<p[^>]*>([\s\S]*?)<\/p>/i)).slice(0, 300);
+    const dateISO = pick(html, /"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/) || TODAY;
+    if (!FORCE && dateISO > TODAY) { log(`… ${file} : programmé pour le ${dateISO}`); continue; }
+    const slug = file.replace(/\.html$/, '');
+    let image = fs.existsSync(path.join(OUT, `${slug}.jpg`)) ? `/articles/${slug}.jpg`
+      : (pick(html, /<meta property="og:image" content="https?:\/\/[^/]+(\/articles\/[^"]+)"/i) || '');
+    if (!title || !image) { log(`✗ ${file} : titre ou image (${slug}.jpg) introuvable, page ignorée`); continue; }
+    // image trop lourde : recompressée (1600 px, qualité 80)
+    const imgPath = path.join(ROOT, 'public', image);
+    if (!DRY && fs.existsSync(imgPath) && fs.statSync(imgPath).size > 400_000) {
+      const buf = await sharp(imgPath).rotate().resize({ width: 1600, withoutEnlargement: true }).jpeg({ quality: 80, mozjpeg: true }).toBuffer();
+      if (buf.length < fs.statSync(imgPath).size) fs.writeFileSync(imgPath, buf);
+    }
+    index = [...index, { id: Date.now() + changed, title, excerpt, date: dateFr(dateISO), dateISO, urlImage: image, link }];
+    log(`✓ ajouté à la liste : ${file} (${dateISO})`); changed++;
+  }
+  return { index, changed };
+}
+
 let index = readJson(INDEX, []);
 let total = 0;
-for (const sync of [syncDashboard, syncMarkdown]) {
+for (const sync of [syncDashboard, syncMarkdown, syncHtmlDeposes]) {
   const r = await sync(index); index = r.index; total += r.changed;
 }
 index.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || (b.id || 0) - (a.id || 0));

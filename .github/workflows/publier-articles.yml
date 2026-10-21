@@ -6,7 +6,7 @@ on:
   workflow_dispatch:       # bouton "Run workflow" pour publier tout de suite
   push:
     branches: [main]
-    paths: ['content/articles/**']   # publie dès qu'un brouillon daté du jour (ou passé) est poussé
+    paths: ['content/articles/**', 'public/articles/**']   # brouillon Markdown ou page HTML déposée
 
 permissions:
   contents: write
