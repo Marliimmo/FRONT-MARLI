@@ -38,6 +38,6 @@ jobs:
           # Même auteur que les commits manuels, pour que Vercel accepte le déploiement
           git config user.name "Marliimmo"
           git config user.email "marli.immobilier@gmail.com"
-          git add -A public/articles public/sitemap.xml content
+          git add -A public/articles public/sitemap.xml public/rss.xml content
           git commit -m "Publication automatique d'article(s) - $(date +%F)"
           git push

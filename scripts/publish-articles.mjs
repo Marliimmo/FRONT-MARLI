@@ -20,6 +20,7 @@ const DONE = path.join(ROOT, 'content/publies');
 const OUT = path.join(ROOT, 'public/articles');
 const INDEX = path.join(OUT, 'articles.json');
 const SITEMAP = path.join(ROOT, 'public/sitemap.xml');
+const RSS = path.join(ROOT, 'public/rss.xml');
 const TEMPLATE = fs.readFileSync(path.join(ROOT, 'scripts/article-template.html'), 'utf8');
 const SITE = 'https://marli-immobilier.com';
 const API = process.env.MARLI_API_URL || 'https://marli-backend.onrender.com';
@@ -127,6 +128,40 @@ function updateSitemap(index) {
     <priority>0.7</priority>
   </url>`).join('');
   return xml.replace('</urlset>', `${entries}\n</urlset>`);
+}
+
+// Flux RSS des articles : lu par Metricool (ou tout autre outil) pour préparer les posts
+// Google, Facebook et LinkedIn à chaque nouvel article.
+function buildRss(index) {
+  const x = (t) => String(t ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const items = index.slice(0, 30).map((a) => {
+    const url = `${SITE}${a.link}`;
+    const img = `${SITE}${a.urlImage}`;
+    const imgFile = path.join(ROOT, 'public', a.urlImage);
+    const size = fs.existsSync(imgFile) ? fs.statSync(imgFile).size : 0;
+    return `
+    <item>
+      <title>${x(a.title)}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <pubDate>${new Date(`${a.dateISO}T08:00:00+02:00`).toUTCString()}</pubDate>
+      <description>${x(a.excerpt)}</description>
+      <enclosure url="${img}" length="${size}" type="image/jpeg" />
+      <media:content url="${img}" medium="image" type="image/jpeg" />
+    </item>`;
+  }).join('');
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Marli Immobilier · Actualités</title>
+    <link>${SITE}/actualite</link>
+    <description>Conseils et actualités immobilières à Besançon, dans le Doubs et le Haut-Doubs, par Marli Immobilier.</description>
+    <language>fr-fr</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />${items}
+  </channel>
+</rss>
+`;
 }
 
 // ---------- Source 1 : dashboard
@@ -256,4 +291,6 @@ if (!DRY && (total || process.argv.includes('--sitemap'))) {
   fs.writeFileSync(INDEX, JSON.stringify(index, null, 2) + '\n');
   fs.writeFileSync(SITEMAP, updateSitemap(index));
 }
+// Le flux RSS est (re)créé s'il manque ou si la liste a changé
+if (!DRY && (total || !fs.existsSync(RSS) || process.argv.includes('--sitemap'))) fs.writeFileSync(RSS, buildRss(index));
 log(`${total} changement(s)${DRY ? ' (aperçu, rien écrit)' : ''}.`);
