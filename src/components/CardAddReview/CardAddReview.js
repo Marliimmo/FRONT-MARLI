@@ -76,6 +76,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
       // formData.append('stars', review)
 
       const formData = JSON.stringify({
+        website: e.target.elements?.website?.value || '',
         urlImage: selectedAvatar,
         pseudo: pseudo,
         description: description,
@@ -117,7 +118,16 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
 
   return (
     <div className={styles.allContainer}>
-      <form id='form' onSubmit={handleSubmit} encType='multipart/form-data'>
+      <form id='form' onSubmit={handleSubmit}>
+        {/* Champ piège anti-robot : invisible pour les visiteurs, rempli seulement par les robots */}
+        <input
+          type='text'
+          name='website'
+          tabIndex='-1'
+          autoComplete='off'
+          aria-hidden='true'
+          style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+        />
         <h2>Déposer un avis</h2>
         <div className={styles.noteContainer}>
           <label>Votre note d'étoile :</label>

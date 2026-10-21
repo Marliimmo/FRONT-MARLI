@@ -14,6 +14,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import CardSlider from '../../components/CardSlider/CardSlider'
 import { Helmet } from 'react-helmet-async'
 import { FadeIn } from '../../components/AnimatedComponents/AnimatedComponents'
+import { imageUrl, photosDuBien } from '../../utils/images'
 
 function PageDunBien() {
   const sliderRef = useRef(null)
@@ -25,14 +26,6 @@ function PageDunBien() {
   const [data, setData] = useState([])
   const [dataBienDispo, setDataBienDispo] = useState([])
 
-  const getImageUrl = (url) => {
-    if (!url) return '';
-    if (url.includes('cloudinary.com') || url.startsWith('http')) {
-      return url;
-    }
-    const cleanUrl = url.replace(/^imagesBienMarli\//, '');
-    return `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${cleanUrl}`;
-  };
 
   // Retourne une URL "embed" si la vidéo vient de YouTube ou Vimeo, sinon null
   // (dans ce cas on affiche la vidéo directement avec une balise <video>, ex: fichier mp4 hébergé)
@@ -188,14 +181,14 @@ function PageDunBien() {
                   <div className={styles.sliderContainer}>
                     <Slider ref={sliderRef} {...settings}>
                       {data._medias &&
-                        Object.keys(data._medias).filter(key => data._medias[key]?.url).map((key, index) => {
-                          const media = data._medias[key]
-                          if (media.url) {
+                        photosDuBien(data._medias).map((url, index) => {
+                          if (url) {
                             return (
                               <img
                                 key={index}
-                                src={getImageUrl(media.url)}
-                                alt={`imag slider ${index + 1}`}
+                                src={imageUrl(url, 1600)}
+                                alt={`${data.title || 'Bien'} – vue ${index + 1}`}
+                                loading={index === 0 ? 'eager' : 'lazy'}
                               />
                             )
                           }
@@ -236,14 +229,14 @@ function PageDunBien() {
 
                 <div className={styles.galerieMiniature}>
                   {data._medias &&
-                    Object.keys(data._medias).map((key, index) => {
-                      const media = data._medias[key]
-                      if (media.url) {
+                    photosDuBien(data._medias).map((url, index) => {
+                      if (url) {
                         return (
                           <img
                             key={index}
-                            src={getImageUrl(media.url)}
-                            alt={`imag slider ${index + 1}`}
+                            src={imageUrl(url, 300)}
+                            alt={`${data.title || 'Bien'} – miniature ${index + 1}`}
+                            loading='lazy'
                             onClick={() => setCurrentIndex(index)}
                           />
                         )
@@ -319,14 +312,14 @@ function PageDunBien() {
                 <div className={styles.sliderContainer}>
                   <Slider ref={sliderRefFullScreen} {...settings}>
                     {data._medias &&
-                      Object.keys(data._medias).map((key, index) => {
-                        const media = data._medias[key]
-                        if (media.url) {
+                      photosDuBien(data._medias).map((url, index) => {
+                        if (url) {
                           return (
                             <img
                               key={index}
-                              src={getImageUrl(media.url)}
-                              alt={`imag slider ${index + 1}`}
+                              src={imageUrl(url, 2000)}
+                              alt={`${data.title || 'Bien'} – vue ${index + 1}`}
+                              loading='lazy'
                             />
                           )
                         }

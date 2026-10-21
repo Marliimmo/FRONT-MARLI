@@ -32,6 +32,7 @@ function FormVendreOuRecherche({ context }) {
     // vente de bien
     if (context === 'vendre') {
       const dataSelling = JSON.stringify({
+        website: e.target.elements?.website?.value || '',
         localisation: localisation,
         typeBien: typeBien,
         superficie: superficie,
@@ -76,6 +77,7 @@ function FormVendreOuRecherche({ context }) {
     // avis de recherche
     if (context === 'avis') {
       const dataWanted = JSON.stringify({
+        website: e.target.elements?.website?.value || '',
         localisation: localisation,
         typeBien: typeBien,
         superficie: superficie,
@@ -123,6 +125,15 @@ function FormVendreOuRecherche({ context }) {
   return (
     <>
       <form id='form' onSubmit={SubmitForm}>
+        {/* Champ piège anti-robot : invisible pour les visiteurs, rempli seulement par les robots */}
+        <input
+          type='text'
+          name='website'
+          tabIndex='-1'
+          autoComplete='off'
+          aria-hidden='true'
+          style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+        />
         <label htmlFor='localisation'>Emplacement / Localisation*</label> <br />
         <input
           onChange={(e) => {

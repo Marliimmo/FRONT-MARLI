@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './CardSlider.module.scss'
 import { Link } from 'react-router-dom'
+import { imageUrl } from '../../utils/images'
 
 function CardSlider({
   image,
@@ -11,9 +12,7 @@ function CardSlider({
   reference,
   isHomePage,
 }) {
-  const imageUrl = image?.includes('cloudinary.com') || image?.startsWith('http')
-    ? image.replace('/upload/', '/upload/f_auto,q_auto,w_800/')
-    : `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${image}`;
+  const src = imageUrl(image, 800)
 
   return (
     <Link className={styles.linkCard} to={`/bien/${reference}`}>
@@ -22,7 +21,7 @@ function CardSlider({
       >
         <div className={styles.imageEprixContainer}>
           <img
-            src={imageUrl}
+            src={src}
             alt='imag-bien'
           />
           <h2 className={styles.prixBien}>

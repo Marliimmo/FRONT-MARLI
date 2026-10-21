@@ -26,6 +26,7 @@ function FormContact() {
     // if (isCaptchaVerified) {
     setLoading(true)
     const data = JSON.stringify({
+        website: e.target.elements?.website?.value || '',
       titleMessage: titleMessage,
       motif: motif,
       name: name,
@@ -69,6 +70,15 @@ function FormContact() {
   return (
     <div className={styles.allContainer}>
       <form id='form' onSubmit={SubmitForm}>
+        {/* Champ piège anti-robot : invisible pour les visiteurs, rempli seulement par les robots */}
+        <input
+          type='text'
+          name='website'
+          tabIndex='-1'
+          autoComplete='off'
+          aria-hidden='true'
+          style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+        />
         <label htmlFor='titleMessage'>Sujet</label> <br />
         <input
           id='titleMessage'

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './CardBien.module.scss'
 import { Link } from 'react-router-dom'
+import { imageUrl } from '../../utils/images'
 
 function CardBien({
   imgUrl,
@@ -11,16 +12,14 @@ function CardBien({
   status,
   reference,
 }) {
-  const imageUrl = imgUrl?.includes('cloudinary.com') || imgUrl?.startsWith('http')
-    ? imgUrl
-    : `https://marli-backend.onrender.com/api/images-bien/images/imagesBienMarli/${imgUrl}`;
+  const src = imageUrl(imgUrl, 800)
 
   const caracteristiques = caracteristique?.split('#').filter(c => c.trim() !== '');
 
   return (
     <Link to={`/bien/${reference}`} className={styles.allContainer}>
       <div className={styles.imageContainer}>
-        <img src={imageUrl} alt={title} loading="lazy" />
+        <img src={src} alt={title} loading="lazy" />
         {status === 'vendu' && (
           <div className={styles.statusBienVendu}>VENDU</div>
         )}
