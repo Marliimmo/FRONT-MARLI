@@ -47,7 +47,12 @@
 
   <!-- Articles -->
 
-
+  <url>
+    <loc>https://marli-immobilier.com/articles/article-hausse-taux-immobilier-acquereurs-2026.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://marli-immobilier.com/articles/article-immobilier-haut-doubs-maiche.html</loc>
     <lastmod>2026-08-18</lastmod>
@@ -139,19 +144,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/articles/primo-accedants-2025.html</loc>
-    <lastmod>2025-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://marli-immobilier.com/articles/taux-credit-2025.html</loc>
-    <lastmod>2025-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://marli-immobilier.com/articles/ecoquartiers-besancon.html</loc>
+    <loc>https://marli-immobilier.com/articles/heritage-succession-2025.html</loc>
     <lastmod>2025-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -163,7 +156,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/articles/heritage-succession-2025.html</loc>
+    <loc>https://marli-immobilier.com/articles/ecoquartiers-besancon.html</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/taux-credit-2025.html</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/articles/primo-accedants-2025.html</loc>
     <lastmod>2025-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

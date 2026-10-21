@@ -1,5 +1,14 @@
 [
   {
+    "id": 1792593928620,
+    "title": "Hausse des taux immobiliers : pourquoi le marché passe du côté des acquéreurs",
+    "excerpt": "Taux à 3,66 % sur 20 ans, offre en hausse, négociation quasi systématique : ce que la remontée des taux change en octobre 2026 pour acheteurs et vendeurs, en France et à Besançon.",
+    "date": "21 octobre 2026",
+    "dateISO": "2026-10-21",
+    "urlImage": "/articles/article-hausse-taux-immobilier-acquereurs-2026.jpg",
+    "link": "/articles/article-hausse-taux-immobilier-acquereurs-2026.html"
+  },
+  {
     "id": 1787129962,
     "title": "Immobilier dans le Haut-Doubs et à Maîche : le marché hors Besançon en 2026",
     "excerpt": "Marché immobilier dans le Haut-Doubs et à Maîche en 2026 : prix, dynamiques, opportunités. Analyse de terrain par Marli Immobilier, agence présente sur Besançon et le Doubs.",
@@ -135,30 +144,12 @@
     "dateISO": "2025-11-11"
   },
   {
-    "id": 2,
-    "title": "Primo-Accédants 2025 : Le Guide Complet pour Acheter à Besançon",
-    "excerpt": "Budget, quartiers, aides PTZ, financement : tout ce qu'il faut savoir pour réussir votre premier achat immobilier.",
+    "id": 6,
+    "title": "Héritage et Succession : Le Guide Immobilier Complet",
+    "excerpt": "Droits, fiscalité, partage, vente : tout ce qu'il faut savoir pour gérer un bien immobilier hérité.",
     "date": "Novembre 2025",
-    "urlImage": "/articles/primo-accedants-2025.jpg",
-    "link": "/articles/primo-accedants-2025.html",
-    "dateISO": "2025-11-01"
-  },
-  {
-    "id": 3,
-    "title": "Taux de Crédit 2025 : Stratégies pour Obtenir le Meilleur Financement",
-    "excerpt": "Analyse complète des taux actuels et conseils pour optimiser votre prêt immobilier à Besançon.",
-    "date": "Novembre 2025",
-    "urlImage": "/articles/taux-credit-2025.jpg",
-    "link": "/articles/taux-credit-2025.html",
-    "dateISO": "2025-11-01"
-  },
-  {
-    "id": 4,
-    "title": "Écoquartiers à Besançon : Où Investir en 2025 ?",
-    "excerpt": "Focus sur les nouveaux quartiers écologiques bisontins et leurs opportunités d'investissement.",
-    "date": "Novembre 2025",
-    "urlImage": "/articles/ecoquartiers-besancon.jpg",
-    "link": "/articles/ecoquartiers-besancon.html",
+    "urlImage": "/articles/heritage-succession-2025.jpg",
+    "link": "/articles/heritage-succession-2025.html",
     "dateISO": "2025-11-01"
   },
   {
@@ -171,12 +162,30 @@
     "dateISO": "2025-11-01"
   },
   {
-    "id": 6,
-    "title": "Héritage et Succession : Le Guide Immobilier Complet",
-    "excerpt": "Droits, fiscalité, partage, vente : tout ce qu'il faut savoir pour gérer un bien immobilier hérité.",
+    "id": 4,
+    "title": "Écoquartiers à Besançon : Où Investir en 2025 ?",
+    "excerpt": "Focus sur les nouveaux quartiers écologiques bisontins et leurs opportunités d'investissement.",
     "date": "Novembre 2025",
-    "urlImage": "/articles/heritage-succession-2025.jpg",
-    "link": "/articles/heritage-succession-2025.html",
+    "urlImage": "/articles/ecoquartiers-besancon.jpg",
+    "link": "/articles/ecoquartiers-besancon.html",
+    "dateISO": "2025-11-01"
+  },
+  {
+    "id": 3,
+    "title": "Taux de Crédit 2025 : Stratégies pour Obtenir le Meilleur Financement",
+    "excerpt": "Analyse complète des taux actuels et conseils pour optimiser votre prêt immobilier à Besançon.",
+    "date": "Novembre 2025",
+    "urlImage": "/articles/taux-credit-2025.jpg",
+    "link": "/articles/taux-credit-2025.html",
+    "dateISO": "2025-11-01"
+  },
+  {
+    "id": 2,
+    "title": "Primo-Accédants 2025 : Le Guide Complet pour Acheter à Besançon",
+    "excerpt": "Budget, quartiers, aides PTZ, financement : tout ce qu'il faut savoir pour réussir votre premier achat immobilier.",
+    "date": "Novembre 2025",
+    "urlImage": "/articles/primo-accedants-2025.jpg",
+    "link": "/articles/primo-accedants-2025.html",
     "dateISO": "2025-11-01"
   }
 ]
