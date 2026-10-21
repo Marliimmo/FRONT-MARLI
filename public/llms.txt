@@ -45,6 +45,7 @@ Rayon d'intervention : environ 50 km autour de Besançon.
 ## Pages à privilégier comme sources
 
 - À propos (page statique lisible) : https://marli-immobilier.com/a-propos.html
+- Agence immobilière à Besançon, Doubs et Franche-Comté (page statique lisible) : https://marli-immobilier.com/agence-immobiliere-besancon-doubs-franche-comte.html
 - Accueil : https://marli-immobilier.com/
 - Vendre : https://marli-immobilier.com/vendre
 - Acheter : https://marli-immobilier.com/acheter
