@@ -11,6 +11,7 @@ cta_texte: "Parlons de votre bien et du bon moment pour le mettre en vente."
 ---
 
 Le fichier commence par « _ » : il sert de modèle et n'est jamais publié.
+La méthode principale reste le dashboard (Mes articles) ; ces fichiers Markdown sont une alternative.
 Copie-le sous un autre nom (sans « _ ») pour créer un vrai article.
 
 ## Un premier titre de section

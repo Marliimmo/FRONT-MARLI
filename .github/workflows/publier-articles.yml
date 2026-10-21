@@ -2,7 +2,7 @@ name: Publication des articles
 
 on:
   schedule:
-    - cron: '0 5 * * *'   # tous les jours à 6h/7h (heure de Paris)
+    - cron: '7 * * * *'   # toutes les heures : articles du dashboard et brouillons datés
   workflow_dispatch:       # bouton "Run workflow" pour publier tout de suite
   push:
     branches: [main]
