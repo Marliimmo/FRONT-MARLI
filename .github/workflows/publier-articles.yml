@@ -1,0 +1,43 @@
+name: Publication des articles
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # tous les jours à 6h/7h (heure de Paris)
+  workflow_dispatch:       # bouton "Run workflow" pour publier tout de suite
+  push:
+    branches: [main]
+    paths: ['content/articles/**']   # publie dès qu'un brouillon daté du jour (ou passé) est poussé
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publier-articles
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installer les dépendances du script
+        run: npm install --no-audit --no-fund
+        working-directory: scripts
+
+      - name: Publier les articles dont la date est atteinte
+        run: node scripts/publish-articles.mjs
+
+      - name: Commit et push (déclenche le déploiement Vercel)
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "Rien à publier."; exit 0; fi
+          # Même auteur que les commits manuels, pour que Vercel accepte le déploiement
+          git config user.name "Marliimmo"
+          git config user.email "marli.immobilier@gmail.com"
+          git add -A public/articles public/sitemap.xml content
+          git commit -m "Publication automatique d'article(s) - $(date +%F)"
+          git push
