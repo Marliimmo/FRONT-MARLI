@@ -26,7 +26,7 @@ function FormContact() {
     // if (isCaptchaVerified) {
     setLoading(true)
     const data = JSON.stringify({
-        website: e.target.elements?.website?.value || '',
+        hp_marli: e.target.elements?.hp_marli?.value || '',
       titleMessage: titleMessage,
       motif: motif,
       name: name,
@@ -73,7 +73,7 @@ function FormContact() {
         {/* Champ piège anti-robot : invisible pour les visiteurs, rempli seulement par les robots */}
         <input
           type='text'
-          name='website'
+          name='hp_marli'
           tabIndex='-1'
           autoComplete='off'
           aria-hidden='true'

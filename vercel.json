@@ -13,6 +13,28 @@
   ],
   "rewrites": [
     {
+      "source": "/bien/:ref",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-User|Claude-SearchBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|Applebot|MistralAI-User|bingbot|CCBot|meta-externalagent|Amazonbot|DuckAssistBot|YouBot).*"
+        }
+      ],
+      "destination": "/biens/:ref/index.html"
+    },
+    {
+      "source": "/acheter",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-User|Claude-SearchBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|Applebot|MistralAI-User|bingbot|CCBot|meta-externalagent|Amazonbot|DuckAssistBot|YouBot).*"
+        }
+      ],
+      "destination": "/biens/index.html"
+    },
+    {
       "source": "/articles/:file",
       "destination": "/articles/:file"
     },

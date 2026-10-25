@@ -21,6 +21,7 @@ const OUT = path.join(ROOT, 'public/articles');
 const INDEX = path.join(OUT, 'articles.json');
 const SITEMAP = path.join(ROOT, 'public/sitemap.xml');
 const RSS = path.join(ROOT, 'public/rss.xml');
+const BIENS_DIR = path.join(ROOT, 'public/biens');
 const TEMPLATE = fs.readFileSync(path.join(ROOT, 'scripts/article-template.html'), 'utf8');
 const SITE = 'https://marli-immobilier.com';
 const API = process.env.MARLI_API_URL || 'https://marli-backend.onrender.com';
@@ -117,9 +118,22 @@ function uniqueSlug(base, index, ownSourceId) {
   return slug;
 }
 
-function updateSitemap(index) {
+function updateSitemap(index, biens = null) {
   let xml = fs.readFileSync(SITEMAP, 'utf8');
   xml = xml.replace(/\s*<url>\s*<loc>[^<]*\/articles\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
+  if (!xml.includes(`${SITE}/honoraires</loc>`)) {
+    xml = xml.replace('</urlset>', `  <url>\n    <loc>${SITE}/honoraires</loc>\n    <changefreq>yearly</changefreq>\n    <priority>0.5</priority>\n  </url>\n</urlset>`);
+  }
+  if (biens) { // fiches des biens (si l'API a répondu ; sinon on garde celles déjà présentes)
+    xml = xml.replace(/\s*<url>\s*<loc>[^<]*\/bien\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
+    const entriesBiens = biens.map((b) => `
+  <url>
+    <loc>${SITE}/bien/${encodeURIComponent(b.ref)}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>${b.status === 'vendu' ? '0.4' : '0.8'}</priority>
+  </url>`).join('');
+    xml = xml.replace('</urlset>', `${entriesBiens}\n</urlset>`);
+  }
   const entries = index.map((a) => `
   <url>
     <loc>${SITE}${a.link}</loc>
@@ -162,6 +176,164 @@ function buildRss(index) {
   </channel>
 </rss>
 `;
+}
+
+
+// ---------- Fiches des biens en HTML statique
+// Les pages React ne sont lisibles qu'en exécutant du JavaScript, ce que ne font pas les robots
+// des IA (ChatGPT, Claude, Perplexity...). Une version HTML de chaque fiche et de la liste est
+// générée ici ; vercel.json la sert à ces robots aux mêmes adresses (/bien/REF et /acheter).
+const PRIX = (n) => (Number(n) ? `${Number(n).toLocaleString('fr-FR').replace(/\u202f/g, ' ')} €` : 'Prix sur demande');
+const STATUT = { disponible: 'Disponible', 'sous-compromis': 'Sous compromis', vendu: 'Vendu' };
+const photoUrl = (u, w) => (u && u.includes('res.cloudinary.com') && !/\/upload\/[^/]*w_/.test(u) ? u.replace('/upload/', `/upload/f_auto,q_auto,c_limit,w_${w}/`) : u);
+const photosDe = (m) => Object.keys(m || {}).filter((k) => /^image_galerie_\d+$/.test(k) && m[k]?.url)
+  .sort((a, b) => parseInt(a.split('_').pop(), 10) - parseInt(b.split('_').pop(), 10)).map((k) => m[k].url);
+const caracts = (c) => String(c || '').split('#').map((x) => x.trim()).filter(Boolean);
+const paragraphes = (t) => String(t || '').split(/\n+/).map((x) => x.trim()).filter(Boolean).map((x) => `<p>${esc(x)}</p>`).join('\n      ');
+
+const STYLE_BIEN = `<style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; background: #fff; line-height: 1.7; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 60px; }
+    .top { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+    .top a { color: #000; text-decoration: none; }
+    h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 34px; line-height: 1.25; margin: 24px 0 8px; }
+    .meta { color: #555; font-size: 15px; margin-bottom: 24px; }
+    .prix { font-size: 22px; font-weight: 600; margin: 8px 0 24px; }
+    .statut { display: inline-block; border: 1px solid #000; padding: 2px 10px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-left: 10px; }
+    .photos img { width: 100%; height: auto; display: block; margin: 0 0 12px; }
+    h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 24px; margin: 36px 0 12px; }
+    ul.carac { padding-left: 20px; }
+    .cta { margin: 40px 0; padding: 24px; background: #f5f1ea; }
+    .cta a { color: #000; font-weight: 600; }
+    .liste a { color: #000; }
+    .liste li { margin-bottom: 14px; }
+    footer { margin-top: 50px; font-size: 13px; color: #666; border-top: 1px solid #ddd; padding-top: 20px; }
+  </style>`;
+
+function pageBien(b) {
+  const url = `${SITE}/bien/${encodeURIComponent(b.ref)}`;
+  const photos = photosDe(b._medias);
+  const titre = b.title || `Bien ${b.ref}`;
+  const desc = `${titre} à ${b.localisation || 'Besançon'}, ${PRIX(b.prix)}. ${caracts(b.caracteristiques).slice(0, 3).join(', ')}. Marli Immobilier, agence immobilière à Besançon.`.slice(0, 300);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'RealEstateListing',
+    name: titre, url, description: String(b.histoire || desc).slice(0, 1000),
+    image: photos.slice(0, 5).map((p) => photoUrl(p, 1200)),
+    offers: { '@type': 'Offer', price: Number(b.prix) || undefined, priceCurrency: 'EUR',
+      availability: b.status === 'vendu' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' },
+    address: { '@type': 'PostalAddress', addressLocality: b.localisation || 'Besançon', addressCountry: 'FR' },
+    broker: { '@type': 'RealEstateAgent', name: 'Marli Immobilier', url: SITE, telephone: '+33688740621' },
+  };
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${esc(titre)} · ${esc(b.localisation || '')} | Marli Immobilier</title>
+  <meta name="description" content="${esc(desc)}">
+  <link rel="canonical" href="${url}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${esc(titre)}">
+  <meta property="og:description" content="${esc(desc)}">
+  <meta property="og:url" content="${url}">
+  ${photos[0] ? `<meta property="og:image" content="${photoUrl(photos[0], 1200)}">` : ''}
+  ${STYLE_BIEN}
+  <script type="application/ld+json">
+${JSON.stringify(ld, null, 2)}
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top"><a href="${SITE}/acheter">← Tous les biens Marli Immobilier</a></div>
+    <h1>${esc(titre)}</h1>
+    <div class="meta">${esc(b.localisation || '')} · Référence ${esc(b.ref)}<span class="statut">${STATUT[b.status] || esc(b.status || '')}</span></div>
+    <div class="prix">${PRIX(b.prix)}</div>
+    <div class="photos">
+      ${photos.slice(0, 12).map((p, i) => `<img src="${photoUrl(p, 1200)}" alt="${esc(titre)}, vue ${i + 1}" loading="${i ? 'lazy' : 'eager'}">`).join('\n      ')}
+    </div>
+    <h2>Caractéristiques</h2>
+    <ul class="carac">
+      ${caracts(b.caracteristiques).map((c) => `<li>${esc(c)}</li>`).join('\n      ')}
+    </ul>
+    ${b.histoire ? `<h2>L'histoire du lieu</h2>\n      ${paragraphes(b.histoire)}` : ''}
+    <div class="cta">Ce bien vous intéresse ? Contactez Néné Mar, Marli Immobilier : 06 88 74 06 21 ou
+      <a href="${SITE}/nous-contacter">via le formulaire de contact</a>.</div>
+    <footer>Marli Immobilier, passeur d'histoires immobilières · 7 rue Henri Weil, 25000 Besançon · <a href="${SITE}">marli-immobilier.com</a></footer>
+  </div>
+</body>
+</html>
+`;
+}
+
+function pageListe(biens) {
+  const groupe = (st) => biens.filter((b) => b.status === st);
+  const li = (b) => `<li><a href="${SITE}/bien/${encodeURIComponent(b.ref)}">${esc(b.title || b.ref)}</a>, ${esc(b.localisation || '')}, ${PRIX(b.prix)}<br>${esc(caracts(b.caracteristiques).slice(0, 4).join(' · '))}</li>`;
+  const section = (titre, liste) => (liste.length ? `<h2>${titre}</h2>\n    <ul class="liste">\n      ${liste.map(li).join('\n      ')}\n    </ul>` : '');
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biens à vendre à Besançon et dans le Doubs | Marli Immobilier</title>
+  <meta name="description" content="Maisons, appartements et propriétés à vendre à Besançon, dans le Doubs et le Haut-Doubs, présentés par Marli Immobilier, agence immobilière indépendante à Besançon.">
+  <link rel="canonical" href="${SITE}/acheter">
+  ${STYLE_BIEN}
+</head>
+<body>
+  <div class="wrap">
+    <div class="top"><a href="${SITE}">Marli Immobilier · Besançon</a></div>
+    <h1>Biens à vendre avec Marli Immobilier</h1>
+    <p>Agence immobilière indépendante à Besançon, Marli Immobilier accompagne la vente de maisons, d'appartements et de propriétés à Besançon, dans le Doubs et le Haut-Doubs. Interlocutrice unique : Néné Mar, 06 88 74 06 21.</p>
+    ${section('Disponibles', groupe('disponible'))}
+    ${section('Sous compromis', groupe('sous-compromis'))}
+    ${section('Vendus récemment', groupe('vendu'))}
+    <footer>Marli Immobilier, passeur d'histoires immobilières · 7 rue Henri Weil, 25000 Besançon · <a href="${SITE}">marli-immobilier.com</a></footer>
+  </div>
+</body>
+</html>
+`;
+}
+
+async function fetchBiens() {
+  for (let i = 1; i <= 4; i++) {
+    try {
+      const r = await fetch(`${API}/bien/all-biens?pageSize=1000`, { signal: AbortSignal.timeout(90_000) });
+      if (r.ok) { const d = await r.json(); if (Array.isArray(d?.biens)) return d.biens; }
+      log(`API biens : réponse ${r.status} (essai ${i}/4)`);
+    } catch (e) { log(`API biens : ${e.message} (essai ${i}/4)`); }
+    await new Promise((res) => setTimeout(res, 20_000));
+  }
+  return null;
+}
+
+// Écrit les pages ; renvoie la liste des biens (ou null si l'API est injoignable) et le nombre de fichiers modifiés
+async function syncBiens() {
+  const biens = await fetchBiens();
+  if (!biens) { log('⚠ API injoignable : fiches des biens non régénérées cette fois-ci.'); return { biens: null, changed: 0 }; }
+  const publics = biens.filter((b) => b.ref && b.status !== 'non-disponible');
+  let changed = 0;
+  const ecrire = (file, contenu) => {
+    const f = path.join(BIENS_DIR, file);
+    if (fs.existsSync(f) && fs.readFileSync(f, 'utf8') === contenu) return;
+    if (!DRY) fs.writeFileSync(f, contenu);
+    changed++;
+  };
+  if (!DRY) fs.mkdirSync(BIENS_DIR, { recursive: true });
+  // Une fiche = public/biens/<REF>/index.html (servie aux robots IA à l'adresse /bien/<REF>)
+  const attendus = new Set(['index.html']);
+  for (const b of publics) {
+    const dossier = String(b.ref).replace(/[^\w.-]/g, '_');
+    attendus.add(dossier);
+    if (!DRY) fs.mkdirSync(path.join(BIENS_DIR, dossier), { recursive: true });
+    ecrire(path.join(dossier, 'index.html'), pageBien(b));
+  }
+  ecrire('index.html', pageListe(publics));
+  if (fs.existsSync(BIENS_DIR)) for (const f of fs.readdirSync(BIENS_DIR)) {
+    if (!attendus.has(f)) { if (!DRY) fs.rmSync(path.join(BIENS_DIR, f), { recursive: true, force: true }); changed++; }
+  }
+  log(`Fiches des biens : ${publics.length} bien(s), ${changed} fichier(s) modifié(s).`);
+  return { biens: publics, changed };
 }
 
 // ---------- Source 1 : dashboard
@@ -287,10 +459,14 @@ for (const sync of [syncDashboard, syncMarkdown, syncHtmlDeposes]) {
   const r = await sync(index); index = r.index; total += r.changed;
 }
 index.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || (b.id || 0) - (a.id || 0));
-if (!DRY && (total || process.argv.includes('--sitemap'))) {
+const { biens, changed: biensChanged } = await syncBiens();
+// La liste des biens n'est comparée qu'aux biens publics actuels : le sitemap n'est réécrit que s'il change
+const sitemapAvant = fs.readFileSync(SITEMAP, 'utf8');
+const sitemapApres = updateSitemap(index, biens);
+if (!DRY && (total || sitemapApres !== sitemapAvant || process.argv.includes('--sitemap'))) {
   fs.writeFileSync(INDEX, JSON.stringify(index, null, 2) + '\n');
-  fs.writeFileSync(SITEMAP, updateSitemap(index));
+  fs.writeFileSync(SITEMAP, sitemapApres);
 }
 // Le flux RSS est (re)créé s'il manque ou si la liste a changé
 if (!DRY && (total || !fs.existsSync(RSS) || process.argv.includes('--sitemap'))) fs.writeFileSync(RSS, buildRss(index));
-log(`${total} changement(s)${DRY ? ' (aperçu, rien écrit)' : ''}.`);
+log(`${total} changement(s) d'articles, ${biensChanged} fichier(s) de biens${DRY ? ' (aperçu, rien écrit)' : ''}.`);

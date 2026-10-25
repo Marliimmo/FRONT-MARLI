@@ -32,7 +32,7 @@ function FormVendreOuRecherche({ context }) {
     // vente de bien
     if (context === 'vendre') {
       const dataSelling = JSON.stringify({
-        website: e.target.elements?.website?.value || '',
+        hp_marli: e.target.elements?.hp_marli?.value || '',
         localisation: localisation,
         typeBien: typeBien,
         superficie: superficie,
@@ -77,7 +77,7 @@ function FormVendreOuRecherche({ context }) {
     // avis de recherche
     if (context === 'avis') {
       const dataWanted = JSON.stringify({
-        website: e.target.elements?.website?.value || '',
+        hp_marli: e.target.elements?.hp_marli?.value || '',
         localisation: localisation,
         typeBien: typeBien,
         superficie: superficie,
@@ -128,7 +128,7 @@ function FormVendreOuRecherche({ context }) {
         {/* Champ piège anti-robot : invisible pour les visiteurs, rempli seulement par les robots */}
         <input
           type='text'
-          name='website'
+          name='hp_marli'
           tabIndex='-1'
           autoComplete='off'
           aria-hidden='true'

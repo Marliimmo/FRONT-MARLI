@@ -76,7 +76,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
       // formData.append('stars', review)
 
       const formData = JSON.stringify({
-        website: e.target.elements?.website?.value || '',
+        hp_marli: e.target.elements?.hp_marli?.value || '',
         urlImage: selectedAvatar,
         pseudo: pseudo,
         description: description,
@@ -122,7 +122,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
         {/* Champ piège anti-robot : invisible pour les visiteurs, rempli seulement par les robots */}
         <input
           type='text'
-          name='website'
+          name='hp_marli'
           tabIndex='-1'
           autoComplete='off'
           aria-hidden='true'
