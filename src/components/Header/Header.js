@@ -1,192 +1,101 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Header.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
-import { Link, NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+
+const LIENS = [
+  { to: '/acheter', label: 'Acheter' },
+  { to: '/vendre', label: 'Vendre' },
+  { to: '/avis-de-recherche', label: 'Avis de recherche' },
+  { to: '/actualite', label: 'Actualités' },
+  { to: '/a-propos', label: 'À propos' },
+  { to: '/nous-contacter', label: 'Contact' },
+]
 
 function Header() {
-  const [sousMenu, setSousMenu] = useState(false)
+  const [menuOuvert, setMenuOuvert] = useState(false)
+  const [reduit, setReduit] = useState(false)
+  const location = useLocation()
 
-  const displaySousMenu = () => {
-    setSousMenu(!sousMenu)
-  }
+  // L'en-tête s'affine dès qu'on commence à faire défiler la page
+  useEffect(() => {
+    const surDefilement = () => setReduit(window.scrollY > 40)
+    surDefilement()
+    window.addEventListener('scroll', surDefilement, { passive: true })
+    return () => window.removeEventListener('scroll', surDefilement)
+  }, [])
+
+  // Le menu mobile se referme à chaque changement de page
+  useEffect(() => {
+    setMenuOuvert(false)
+  }, [location.pathname])
+
+  // Pas de défilement de la page derrière le menu mobile ouvert
+  useEffect(() => {
+    document.body.style.overflow = menuOuvert ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOuvert])
+
+  const classeLien = ({ isActive }) =>
+    isActive ? `${styles.lien} ${styles.lienActif}` : styles.lien
 
   return (
     <>
-      <div className={styles.allContainer}>
-        <Link to='/'>
-          <div className={styles.LogoContainer}>
-            <p>
-              <img src={Logo} alt='Logo Marli' />
-            </p>
-            <p className={styles.slogan}>
-              Passeur d'histoires <br /> immobilières
-            </p>
-          </div>
+      <header className={`${styles.entete} ${reduit ? styles.reduit : ''}`}>
+        <Link to='/' className={styles.marque} aria-label='Marli Immobilier, accueil'>
+          <img src={Logo} alt='Logo Marli' />
+          <span>
+            Passeur d’histoires
+            <br />
+            immobilières
+          </span>
         </Link>
 
-        <div className={styles.LinkContainer}>
-          <div className={styles.TextLink}>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? `link_active` : 'link_menu'
-              }
-              to='/'
-            >
-              Accueil
-              <p></p>
+        <nav className={styles.navigation} aria-label='Navigation principale'>
+          {LIENS.map((l) => (
+            <NavLink key={l.to} to={l.to} className={classeLien}>
+              {l.label}
             </NavLink>
+          ))}
+        </nav>
 
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? `link_active` : 'link_menu'
-              }
-              to='/acheter'
-            >
-              Acheter
-              <p></p>
-            </NavLink>
+        <button
+          type='button'
+          className={`${styles.burger} ${menuOuvert ? styles.burgerOuvert : ''}`}
+          onClick={() => setMenuOuvert(!menuOuvert)}
+          aria-label={menuOuvert ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-expanded={menuOuvert}
+        >
+          <span></span>
+          <span></span>
+        </button>
+      </header>
 
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? `link_active` : 'link_menu'
-              }
-              to='/vendre'
-            >
-              Vendre
-              <p></p>
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? `link_active` : 'link_menu'
-              }
-              to='/avis-de-recherche'
-            >
-              Avis de recherche
-              <p></p>
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? `link_active` : 'link_menu'
-              }
-              to='/actualite'
-            >
-              Actualités
-              <p></p>
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? `link_active` : 'link_menu'
-              }
-              to='/nous-contacter'
-            >
-              Contact
-              <p></p>
-            </NavLink>
-          </div>
-
-          <div className={styles.iconApropos}>
-            <Link to='/a-propos'>
-              <FontAwesomeIcon icon={faInfoCircle} />
-            </Link>
-          </div>
-
-          <div onClick={displaySousMenu} className={styles.menuBurger}>
-            <p
-              className={
-                sousMenu
-                  ? `${styles.animationBarTop}`
-                  : sousMenu === false
-                    ? `${styles.BarTopSetAnim}`
-                    : ''
-              }
-            ></p>
-            <p
-              className={
-                sousMenu
-                  ? `${styles.animationBarBottom}`
-                  : sousMenu === false
-                    ? `${styles.BarBottomSetAnim}`
-                    : ''
-              }
-            ></p>
-          </div>
-        </div>
-      </div>
-
-      {sousMenu && (
-        <div className={styles.MenuMobile}>
-          <NavLink
-            onClick={displaySousMenu}
-            className={({ isActive }) =>
-              isActive ? `link_active_mobile` : 'link_menu_mobile'
-            }
-            to='/'
-          >
+      <div
+        className={`${styles.menuMobile} ${menuOuvert ? styles.menuMobileOuvert : ''}`}
+        aria-hidden={!menuOuvert}
+      >
+        <nav aria-label='Navigation mobile'>
+          <NavLink to='/' end className={classeLien} tabIndex={menuOuvert ? 0 : -1}>
             Accueil
-            <p></p>
           </NavLink>
-
-          <NavLink
-            onClick={displaySousMenu}
-            className={({ isActive }) =>
-              isActive ? `link_active_mobile` : 'link_menu_mobile'
-            }
-            to='/acheter'
-          >
-            Acheter
-            <p></p>
-          </NavLink>
-
-          <NavLink
-            onClick={displaySousMenu}
-            className={({ isActive }) =>
-              isActive ? `link_active_mobile` : 'link_menu_mobile'
-            }
-            to='/vendre'
-          >
-            Vendre
-            <p></p>
-          </NavLink>
-
-          <NavLink
-            onClick={displaySousMenu}
-            className={({ isActive }) =>
-              isActive ? `link_active_mobile` : 'link_menu_mobile'
-            }
-            to='/avis-de-recherche'
-          >
-            Avis de recherche
-            <p></p>
-          </NavLink>
-
-          <NavLink
-            onClick={displaySousMenu}
-            className={({ isActive }) =>
-              isActive ? `link_active_mobile` : 'link_menu_mobile'
-            }
-            to='/actualite'
-          >
-            Actualités
-            <p></p>
-          </NavLink>
-
-          <NavLink
-            onClick={displaySousMenu}
-            className={({ isActive }) =>
-              isActive ? `link_active_mobile` : 'link_menu_mobile'
-            }
-            to='/nous-contacter'
-          >
-            Contact
-            <p></p>
-          </NavLink>
-        </div>
-      )}
+          {LIENS.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              className={classeLien}
+              tabIndex={menuOuvert ? 0 : -1}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </nav>
+        <a className={styles.telephoneMobile} href='tel:+33688740621' tabIndex={menuOuvert ? 0 : -1}>
+          06 88 74 06 21
+        </a>
+      </div>
     </>
   )
 }

@@ -1,237 +1,93 @@
 @import "../../assets/styles/variables";
 
-.allContainer{
-    width: 100%;
-    padding: 50px 10%;
-    background-color: $gray-color;
-    
-    p{
-        margin: 0;
-    }
-
-    .LogoContainer{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 80px;
-
-        img{
-            width: 80px;
-        }
-
-        p{
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 2px solid $white-color;
-            font-size: 15px;
-            text-transform: uppercase;
-            font-family: 'Jost', sans-serif;
-            letter-spacing: 0;
-            font-weight: bold;
-        }
-    }
-
-    .FooterLinkContainer{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        row-gap: 50px;
-
-        .widgetFooter1, .widgetFooter2, .widgetFooter3{
-            h2{
-                font-size: 17px;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 20px;
-            }
-        }
-
-        .widgetFooter1{
-            .LinkText{
-                div{
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    column-gap: 10px;
-                    font-size: 15px;
-                    font-weight: 400;
-                    margin: 12px 0px;
-                }
-            }
-
-            .imageAuhtorContainer{
-                width: 120px;
-                margin-top: 25px !important;
-                border-radius: 100px;
-                overflow: hidden;
-                img{
-                    width: 120px;
-                    object-fit: cover;
-                }
-            }
-        }
-
-        .widgetFooter2{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            .LinkText{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 12px;
-                p{
-                    position: relative;
-                    font-size: 16px;
-                    width: fit-content;
-                    padding-bottom: 5px;
-
-                    &:hover::before {
-                        content: "";
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                        height: 1px;
-                        background-color: $white-color;
-                        transform-origin: center;
-                        animation: borderAnimation 0.3s ease;
-                        animation-fill-mode: forwards;
-                    }
-
-                    
-                    &::before {
-                        animation: none;
-                    }
-                }
-
-            }
-        }
-
-        .widgetFooter3{
-            .LinkText{
-                display: flex;
-                justify-content: center;
-                text-align: center;
-                column-gap: 20px;
-
-                a{
-                    border: 1px solid $white-color;
-                    padding: 12px;
-                    border-radius: 100px;
-                    width: 40px;
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    &:nth-child(1){
-                        padding: 14px;
-                    }
-                    
-                    &:hover{
-                        background-color: blue;
-                        border: 1px solid blue;
-                        transition: all 300ms;
-                    }
-
-                    &:nth-child(2){
-                        &:hover{
-                            background-color: #0e76a8;
-                            border: 1px solid #0e76a8;
-                            transition: all 300ms;
-                        }
-                    }
-                }
-                img{
-                    object-fit: cover;
-                    width: 25px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-    }
-
-    @media screen and (max-width: 650px) {
-        .FooterLinkContainer{
-            text-align: center;
-            justify-content: center;
-        }
-
-        .widgetFooter1, .widgetFooter2, .widgetFooter3{
-            width: 100%;
-        }
-
-        .widgetFooter1{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            align-items: center;
-            .LinkText{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                div{
-                    text-align: center;
-                    align-items: center;
-                }
-            }
-        }
-
-        .LogoContainer{
-            img{
-                width: 60px;
-            }
-    
-            p{
-                font-size: 14px;
-                text-align: center;
-            }
-        }
-    }
+.piedDePage {
+  background-color: $noir;
+  color: $blanc;
+  font-family: $police-texte;
 }
 
-.linkPoweredBy{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    text-align: center;
-    font-weight: 500;
-    padding: 15px 0px 15px 0px;
-    border-top: 1px solid rgba(128, 128, 128, 0.308);
-    background-color: $gray-color;
-
-    img{
-        width: 100px;
-    }
-
-    span{
-        text-decoration: underline;
-    }
-
-    .imageAuhtorContainer{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.haut {
+  padding: 100px $marge-page 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 64px;
 }
 
-@keyframes borderAnimation {
-    from {
-      transform: scaleX(0);
+.marque {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: $blanc;
+  text-decoration: none;
+
+  img {
+    width: 90px;
+    height: 90px;
+  }
+
+  span {
+    font-family: $police-etiquette;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $texte-discret;
+  }
+}
+
+.colonnes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+}
+
+.colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 180px;
+
+  :global(.etiquette) {
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  a {
+    color: $texte-doux;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5;
+    transition: color $transition-douce;
+
+    &:hover {
+      color: $blanc;
     }
-    to {
-      transform: scaleX(1);
-    }
+  }
+}
+
+.bas {
+  padding: 28px $marge-page;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid $ligne;
+  font-family: $police-etiquette;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $texte-discret;
+}
+
+@media screen and (max-width: $ecran-mobile) {
+  .haut {
+    padding: 70px $marge-page 56px;
+    gap: 48px;
+  }
+
+  .colonnes {
+    gap: 40px;
+  }
 }
