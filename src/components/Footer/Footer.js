@@ -23,6 +23,14 @@ function Footer() {
           </div>
 
           <div className={styles.colonne}>
+            <span className='etiquette'>Notre secteur</span>
+            <span>Besançon et le Grand Besançon</span>
+            <span>Doubs et Haut-Doubs</span>
+            <span>Haute-Saône</span>
+            <span>Jura, jusqu’à Lons-le-Saunier</span>
+          </div>
+
+          <div className={styles.colonne}>
             <span className='etiquette'>Infos utiles</span>
             <Link to='/honoraires'>Nos honoraires</Link>
             <Link to='/a-propos'>L’agence</Link>
@@ -43,8 +51,8 @@ function Footer() {
       </div>
 
       <div className={styles.bas}>
-        <span>© {new Date().getFullYear()} Marli Immobilier · Besançon, Doubs, Franche-Comté</span>
-        <span>Crédits photo : J. Jacottot · Sylvie Barras</span>
+        <span>© {new Date().getFullYear()} Marli Immobilier · Besançon, Franche-Comté</span>
+        <span>Photos : Jean-Claude Jacottot</span>
       </div>
     </footer>
   )

@@ -38,7 +38,7 @@
 .colonnes {
   display: flex;
   flex-wrap: wrap;
-  gap: 80px;
+  gap: 64px;
 }
 
 .colonne {
@@ -53,7 +53,8 @@
     margin-bottom: 8px;
   }
 
-  a {
+  a,
+  > span:not(:global(.etiquette)) {
     color: $texte-doux;
     text-decoration: none;
     font-weight: 300;
