@@ -7,7 +7,7 @@ import CarteBien, { resumeBien, soigner } from '../../components/Refonte/CarteBi
 import Apparition from '../../components/Refonte/Apparition'
 import Visionneuse from '../../components/Refonte/Visionneuse'
 import BlocSerie from '../../components/Refonte/BlocSerie'
-import { cleSerie, racineSerie, rangDansSerie } from '../../components/Refonte/series'
+import { cleSerie, racineSerie, trierSerie } from '../../components/Refonte/series'
 
 const TELEPHONE = '06 88 74 06 21'
 const TELEPHONE_LIEN = 'tel:+33688740621'
@@ -138,7 +138,7 @@ function PageDunBien() {
       ? {
           cle,
           titre: racineSerie(bien.title || ''),
-          chapitres: [...membres].sort((x, y) => rangDansSerie(x.title) - rangDansSerie(y.title)),
+          chapitres: trierSerie(membres),
         }
       : null
     const refsSerie = new Set(membres.map((b) => b.ref))
@@ -207,7 +207,11 @@ function PageDunBien() {
             {vue.chapitre && <span className={styles.chapitre}>{vue.chapitre}</span>}
           </div>
           <div className={styles.arriveePrix}>
-            {bien.status !== 'disponible' && <span className={styles.statut}>{vue.statut}</span>}
+            {bien.status !== 'disponible' && (
+              <span className={bien.status === 'sous-compromis' ? `${styles.statut} ${styles.statutCompromis}` : styles.statut}>
+                {vue.statut}
+              </span>
+            )}
             {bien.status !== 'vendu' && <span className={styles.prix}>{vue.prix}</span>}
             <span className='etiquette'>{vue.chiffres.slice(0, 2).join(' · ')}</span>
             {photos.length > 1 && (
@@ -261,7 +265,9 @@ function PageDunBien() {
           </article>
 
           <aside className={styles.encadre}>
-            <span className='etiquette'>{vue.statut}</span>
+            <span className={bien.status === 'sous-compromis' ? `etiquette ${styles.etiquetteCompromis}` : 'etiquette'}>
+              {vue.statut}
+            </span>
             <span className={styles.encadrePrix}>{vue.prix}</span>
             <span className={styles.encadreInfos}>{vue.chiffres.slice(0, 2).join(' · ')}</span>
             {bien.status !== 'vendu' && (

@@ -104,6 +104,23 @@ a:hover .photo-bien,
   transform: scale(1.02);
 }
 
+// Pastille de statut posée sur une photo (« Sous compromis »)
+.pastille {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  padding: 8px 14px;
+  background-color: $accent;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  color: $blanc;
+  font-family: $police-etiquette;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
 // Curseur clignotant de la machine à écrire
 .curseur {
   display: inline-block;

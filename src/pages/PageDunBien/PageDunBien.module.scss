@@ -121,6 +121,15 @@ $respiration-mobile: 64px;
   }
 }
 
+.statutCompromis {
+  background-color: $accent;
+  border-color: $accent;
+}
+
+.etiquetteCompromis {
+  color: $accent !important;
+}
+
 .prix {
   font-weight: 300;
   font-size: clamp(26px, 2.4vw, 36px);

@@ -23,6 +23,11 @@ export function rangDansSerie(titre) {
   return 1
 }
 
+// Ordre dans une série : les biens disponibles d'abord, ceux sous compromis à la fin
+const poidsStatut = (b) => (b.status === 'sous-compromis' ? 1 : 0)
+export const trierSerie = (biens) =>
+  [...biens].sort((x, y) => poidsStatut(x) - poidsStatut(y) || rangDansSerie(x.title) - rangDansSerie(y.title))
+
 export const cleSerie = (b) =>
   `${racineSerie(b.title || '').toLowerCase()}|${soigner(b.localisation || '').toLowerCase()}`
 
@@ -42,7 +47,7 @@ export function regrouper(biens) {
     places.add(cle)
     const groupe = groupes.get(cle)
     if (groupe.length > 1) {
-      const chapitres = [...groupe].sort((x, y) => rangDansSerie(x.title) - rangDansSerie(y.title))
+      const chapitres = trierSerie(groupe)
       elements.push({ type: 'serie', cle, titre: racineSerie(chapitres[0].title), chapitres })
     } else {
       elements.push({ type: 'bien', cle: b.ref, bien: b })
@@ -51,10 +56,10 @@ export function regrouper(biens) {
   return elements
 }
 
-// Fourchette de prix des biens encore à vendre d'une série
+// Fourchette de prix des biens disponibles d'une série (hors sous compromis)
 export function fourchettePrix(chapitres) {
   const prix = chapitres
-    .filter((c) => c.status !== 'vendu' && typeof c.prix === 'number')
+    .filter((c) => c.status === 'disponible' && typeof c.prix === 'number')
     .map((c) => c.prix)
   if (!prix.length) return ''
   if (prix.length === 1) return `${prix[0].toLocaleString('fr-FR')} €`
