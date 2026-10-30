@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import styles from './PageDunBien.module.scss'
 import { imageUrl, photosDuBien } from '../../utils/images'
-import CarteBien, { resumeBien } from '../../components/Refonte/CarteBien'
+import CarteBien, { resumeBien, soigner } from '../../components/Refonte/CarteBien'
 import Apparition from '../../components/Refonte/Apparition'
 import Visionneuse from '../../components/Refonte/Visionneuse'
 
@@ -11,7 +11,7 @@ const TELEPHONE = '06 88 74 06 21'
 const TELEPHONE_LIEN = 'tel:+33688740621'
 
 // Lignes de caractéristiques qui relèvent des mentions réglementaires
-const REGLEMENTAIRE = /(DPE|GES|diagnostic|dépenses|énergie|risques|g[ée]orisques|proc[ée]dure|copropri[ée]t[ée]|lots?\b|charges)/i
+const REGLEMENTAIRE = /(DPE|GES|diagnostic|dépenses|énergie|risques|g[ée]orisques|proc[ée]dure|copropri[ée]t[ée]|lots?\b|charges|honoraires|taxe fonci[èe]re|\bTF\b)/i
 
 // Retourne une URL « embed » pour YouTube ou Vimeo, sinon null (vidéo hébergée lue directement)
 const urlVideoIntegree = (url) => {
@@ -28,7 +28,7 @@ const urlVideoIntegree = (url) => {
 function decouperRecit(histoire, titre) {
   const paragraphes = (histoire || '')
     .split(/\n+/)
-    .map((p) => p.trim())
+    .map((p) => soigner(p))
     .filter(Boolean)
   const titreSimple = (titre || '').toLowerCase()
   const debut = []
@@ -102,12 +102,14 @@ function PageDunBien() {
     const r = resumeBien(bien)
     const carac = (bien.caracteristiques || '')
       .split('#')
-      .map((c) => c.replace(/\s+/g, ' ').trim())
+      .map((c) => soigner(c).replace(/\s+/g, ' '))
       .filter(Boolean)
     const reglementaire = carac.filter((c) => REGLEMENTAIRE.test(c))
     const descriptif = carac.filter((c) => !REGLEMENTAIRE.test(c))
     // sans doublons (une même ligne saisie deux fois)
-    const details = descriptif.filter((c, k) => descriptif.indexOf(c) === k)
+    const details = descriptif.filter(
+      (c, k) => descriptif.findIndex((d) => d.toLowerCase() === c.toLowerCase()) === k,
+    )
     return {
       ...r,
       photos: photosDuBien(bien._medias),

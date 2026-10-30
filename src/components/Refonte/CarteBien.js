@@ -7,8 +7,20 @@ import styles from './CarteBien.module.scss'
 const surEcranTactile = () =>
   typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(hover: none)').matches
 
+// Petites corrections typographiques à l'affichage (le texte du dashboard n'est pas modifié) :
+// apostrophes courbes, « m² », espaces en trop, emoji en début de ligne.
+export function soigner(texte) {
+  return (texte || '')
+    .replace(/^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\uFE0F?\s*/u, '')
+    .replace(/([A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])/g, '$1’')
+    .replace(/(\d)\s?m2\b/g, '$1 m²')
+    .replace(/(\d)m²/g, '$1 m²')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim()
+}
+
 export function resumeBien(bien) {
-  const carac = (bien.caracteristiques || '').split('#').map((c) => c.trim()).filter(Boolean)
+  const carac = (bien.caracteristiques || '').split('#').map((c) => soigner(c)).filter(Boolean)
   const prix =
     bien.status === 'vendu'
       ? 'Vendu'
@@ -18,12 +30,12 @@ export function resumeBien(bien) {
           ? `${bien.prix.toLocaleString('fr-FR')} €`
           : ''
   // « Chez Corneille Chapitre deux » → titre « Chez Corneille » + ligne « Chapitre deux »
-  const titreComplet = (bien.title || bien.localisation || '').trim()
+  const titreComplet = soigner(bien.title || bien.localisation || '')
   const m = titreComplet.match(/^(.*?)[\s:,.–-]*\b(chapitre\s+.+)$/i)
   return {
     titre: m && m[1] ? m[1] : titreComplet,
     chapitre: m && m[1] ? m[2].charAt(0).toUpperCase() + m[2].slice(1) : '',
-    lieu: bien.localisation,
+    lieu: soigner(bien.localisation),
     details: carac.slice(0, 2).join(' · '),
     prix,
   }
