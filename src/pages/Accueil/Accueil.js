@@ -150,7 +150,7 @@ function Accueil() {
           <span className='etiquette'>Marli</span>
           <span className='filet'></span>
           <p>Nous souhaitons faciliter vos projets immobiliers de leur conception à leur aboutissement.</p>
-          <p className={styles.promesseFin}>Votre satisfaction sera notre première gratitude.</p>
+          <p className={styles.promesseFin}>Votre satisfaction est notre première gratitude.</p>
         </Apparition>
       </section>
 
@@ -211,7 +211,7 @@ function Accueil() {
         <div className={styles.avisContenu}>
         <div className={styles.avisResume}>
           <span className='etiquette'>Parole libre</span>
-          <h2 className='titre-grand'>Ils nous ont confié leur histoire</h2>
+          <h2 className='titre-grand'>Leur histoire avec Marli</h2>
           {avis.length > 0 && (
             <div className={styles.avisNote}>
               <span className={styles.avisMoyenne}>{noteMoyenne}</span>

@@ -213,6 +213,9 @@
 .avis {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0 7%;
+  padding: 140px $marge-page;
   background-color: $fond;
 
   button:global(.lien-souligne) {
@@ -227,7 +230,8 @@
 
 .avisPhoto {
   flex: 0 0 34%;
-  min-height: 760px;
+  min-height: 640px;
+  overflow: hidden;
   background-color: $surface;
 
   img {
@@ -235,18 +239,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 45%;
+    object-position: 50% 62%;
   }
 }
 
 .avisContenu {
   flex: 1;
   min-width: 0;
-  padding: 120px 7%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 64px;
+  gap: 56px;
 }
 
 .avisResume {
@@ -399,8 +402,7 @@
 
 .avisFormulaire {
   flex: 0 0 100%;
-  padding: 0 $marge-page 80px;
-  box-sizing: border-box;
+  padding-top: 56px;
   display: flex;
   justify-content: center;
 
@@ -508,14 +510,18 @@
     white-space: normal;
   }
 
+  .avis {
+    padding: 100px $marge-page;
+    gap: 56px;
+  }
+
   .avisPhoto {
     flex: 0 0 100%;
     min-height: 0;
-    height: 420px;
+    height: 460px;
   }
 
   .avisContenu {
-    padding: 80px $marge-page;
     gap: 48px;
   }
 
