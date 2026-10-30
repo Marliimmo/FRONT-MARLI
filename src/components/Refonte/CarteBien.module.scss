@@ -34,6 +34,16 @@
   line-height: 1.15;
 }
 
+.chapitre {
+  display: block;
+  margin-top: 8px;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: $texte-doux;
+}
+
 .ligneInfos {
   display: flex;
   flex-wrap: wrap;

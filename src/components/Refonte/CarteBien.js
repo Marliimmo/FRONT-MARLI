@@ -17,8 +17,12 @@ export function resumeBien(bien) {
         : typeof bien.prix === 'number'
           ? `${bien.prix.toLocaleString('fr-FR')} €`
           : ''
+  // « Chez Corneille Chapitre deux » → titre « Chez Corneille » + ligne « Chapitre deux »
+  const titreComplet = (bien.title || bien.localisation || '').trim()
+  const m = titreComplet.match(/^(.*?)[\s:,.–-]*\b(chapitre\s+.+)$/i)
   return {
-    titre: bien.title || bien.localisation,
+    titre: m && m[1] ? m[1] : titreComplet,
+    chapitre: m && m[1] ? m[2].charAt(0).toUpperCase() + m[2].slice(1) : '',
     lieu: bien.localisation,
     details: carac.slice(0, 2).join(' · '),
     prix,
@@ -46,7 +50,10 @@ function CarteBien({ bien, hauteurPhoto = 520, largeurImage = 1200 }) {
         ) : null}
       </div>
       <span className='etiquette'>{r.lieu}</span>
-      <h3 className={styles.titre}>{r.titre}</h3>
+      <h3 className={styles.titre}>
+        {r.titre}
+        {r.chapitre && <span className={styles.chapitre}>{r.chapitre}</span>}
+      </h3>
       <div className={styles.ligneInfos}>
         <span>{r.details}</span>
         <span className={styles.prix}>{r.prix}</span>

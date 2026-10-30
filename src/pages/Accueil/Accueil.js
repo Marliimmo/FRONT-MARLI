@@ -4,6 +4,11 @@ import { Helmet } from 'react-helmet-async'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 import ImgCouverture from '../../assets/images/couverture-accueil.jpg'
+import ImgReflet from '../../assets/images/4.jpg'
+import ImgRefletCouleur from '../../assets/images/5.jpg'
+import ImgAcheter from '../../assets/images/2.jpg'
+import ImgVendre from '../../assets/images/30.jpg'
+import ImgInvestir from '../../assets/images/13.jpg'
 import CardAddReview from '../../components/CardAddReview/CardAddReview'
 import Apparition from '../../components/Refonte/Apparition'
 import MachineAEcrire from '../../components/Refonte/MachineAEcrire'
@@ -13,6 +18,7 @@ const SERVICES = [
   {
     num: '01',
     titre: 'Acheter un bien',
+    photo: ImgAcheter,
     points: [
       'Identification de votre besoin',
       'Sélection et visite ciblées',
@@ -24,6 +30,7 @@ const SERVICES = [
   {
     num: '02',
     titre: 'Vendre un bien',
+    photo: ImgVendre,
     points: [
       'Estimation',
       'Valorisation et mise en lumière',
@@ -35,6 +42,7 @@ const SERVICES = [
   {
     num: '03',
     titre: 'Investir dans l’immobilier',
+    photo: ImgInvestir,
     points: [
       'Chasseur de bien',
       'Résidences secondaires au Sénégal, destination soleil 365/365j',
@@ -85,8 +93,15 @@ function Accueil() {
     if (avis.length < 2) return undefined
     const minuteur = setInterval(() => setAvisActif((i) => (i + 1) % avis.length), 8000)
     return () => clearInterval(minuteur)
-  }, [avis.length])
+  }, [avis.length, avisActif])
 
+  const changerAvis = (sens) => setAvisActif((i) => (i + sens + avis.length) % avis.length)
+  const noteMoyenne = avis.length
+    ? (avis.reduce((t, a) => t + (Number(a.stars) || 5), 0) / avis.length).toLocaleString('fr-FR', {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      })
+    : ''
   const avisCourant = avis[avisActif]
   const avisLong = avisCourant && avisCourant.description && avisCourant.description.length > 280
 
@@ -125,23 +140,25 @@ function Accueil() {
       </section>
 
       {/* La promesse */}
-      <Apparition as='section' className={styles.promesse}>
-        <span className='etiquette'>Marli</span>
-        <p>Nous souhaitons faciliter vos projets immobiliers de leur conception à leur aboutissement.</p>
-        <p className={styles.promesseFin}>Votre satisfaction sera notre première gratitude.</p>
-      </Apparition>
+      <section className={styles.promesse}>
+        <Apparition className={styles.promessePhotos}>
+          <img className={styles.photoArriere} src={ImgReflet} alt='Reflet d’une rue de Besançon dans une flaque' loading='lazy' />
+          <img className={styles.photoAvant} src={ImgRefletCouleur} alt='Reflet d’un arbre au bord de l’eau' loading='lazy' />
+        </Apparition>
+        <Apparition className={styles.promesseTexte}>
+          <span className='etiquette'>Marli</span>
+          <span className='filet'></span>
+          <p>Nous souhaitons faciliter vos projets immobiliers de leur conception à leur aboutissement.</p>
+          <p className={styles.promesseFin}>Votre satisfaction sera notre première gratitude.</p>
+        </Apparition>
+      </section>
 
       {/* Nos nouvelles histoires */}
       {biens.length > 0 && (
         <section className={styles.histoires}>
           <Apparition className={styles.enteteSection}>
-            <div>
-              <span className='etiquette'>À découvrir</span>
-              <h2 className='titre-grand'>Nos nouvelles histoires</h2>
-            </div>
-            <Link to='/acheter' className='lien-souligne'>
-              Nos autres histoires
-            </Link>
+            <span className='etiquette'>À découvrir</span>
+            <h2 className='titre-grand'>Nos nouvelles histoires</h2>
           </Apparition>
           <div className={styles.grilleBiens}>
             {biens.map((bien) => (
@@ -150,20 +167,26 @@ function Accueil() {
               </Apparition>
             ))}
           </div>
+          <div className={styles.lienSousGrille}>
+            <Link to='/acheter' className='lien-souligne'>
+              Nos autres histoires
+            </Link>
+          </div>
         </section>
       )}
 
       {/* Nos services */}
       <section className={styles.services}>
         <Apparition className={styles.enteteSection}>
-          <div>
-            <span className='etiquette'>Nos services</span>
-            <h2 className='titre-grand'>Que faisons-nous pour vous ?</h2>
-          </div>
+          <span className='etiquette'>Nos services</span>
+          <h2 className='titre-grand'>Que faisons-nous pour vous ?</h2>
         </Apparition>
         <div className={styles.grilleServices}>
           {SERVICES.map((s) => (
             <Apparition key={s.num} className={styles.service}>
+              <div className={styles.servicePhoto}>
+                <img src={s.photo} alt='' loading='lazy' />
+              </div>
               <span className={styles.serviceNum}>{s.num}</span>
               <h3>{s.titre}</h3>
               <ul>
@@ -181,42 +204,60 @@ function Accueil() {
 
       {/* Parole libre */}
       <section className={styles.avis} id='avisContainer'>
-        <span className='etiquette'>Parole libre</span>
-
-        {avisCourant && (
-          <figure key={avisActif} className={styles.avisCitation}>
-            <blockquote className={avisLong ? styles.avisTexteLong : styles.avisTexte}>
-              « {avisCourant.description} »
-            </blockquote>
-            <figcaption className='etiquette'>{avisCourant.pseudo}</figcaption>
-          </figure>
-        )}
-
-        {avis.length > 1 && (
-          <div className={styles.avisReperes}>
-            {avis.map((a, i) => (
-              <button
-                key={i}
-                type='button'
-                className={i === avisActif ? styles.repereActif : styles.repere}
-                onClick={() => setAvisActif(i)}
-                aria-label={`Afficher l’avis ${i + 1}`}
-              >
-                <span></span>
+        <div className={styles.avisResume}>
+          <span className='etiquette'>Parole libre</span>
+          <h2 className='titre-grand'>Ils nous ont confié leur histoire</h2>
+          {avis.length > 0 && (
+            <div className={styles.avisNote}>
+              <span className={styles.avisMoyenne}>{noteMoyenne}</span>
+              <span className={styles.avisSur}>/ 5</span>
+              <span className={styles.etoiles} aria-hidden='true'>★★★★★</span>
+              <span className={styles.avisNombre}>
+                {avis.length} avis
+              </span>
+            </div>
+          )}
+          {avisEnvoye ? (
+            <p className={styles.avisMerci}>Merci pour votre avis !</p>
+          ) : (
+            !formulaireAvis && (
+              <button type='button' className='lien-souligne' onClick={() => setFormulaireAvis(true)}>
+                Laisser un avis
               </button>
-            ))}
-          </div>
-        )}
+            )
+          )}
+        </div>
 
-        {avisEnvoye ? (
-          <p className={styles.avisMerci}>Merci pour votre avis !</p>
-        ) : (
-          !formulaireAvis && (
-            <button type='button' className='lien-souligne' onClick={() => setFormulaireAvis(true)}>
-              Laisser un avis
-            </button>
-          )
-        )}
+        <div className={styles.avisLecture}>
+          {avisCourant && (
+            <figure key={avisActif} className={styles.avisCitation}>
+              <span className={styles.guillemet} aria-hidden='true'>“</span>
+              <blockquote className={avisLong ? styles.avisTexteLong : styles.avisTexte}>
+                {avisCourant.description}
+              </blockquote>
+              <figcaption>
+                <span className={styles.avisAuteur}>{avisCourant.pseudo}</span>
+                <span className={styles.etoilesPetites} aria-label={`${avisCourant.stars || 5} étoiles sur 5`}>
+                  {'★'.repeat(Math.max(0, Math.min(5, Number(avisCourant.stars) || 5)))}
+                </span>
+              </figcaption>
+            </figure>
+          )}
+
+          {avis.length > 1 && (
+            <div className={styles.avisNavigation}>
+              <button type='button' onClick={() => changerAvis(-1)} aria-label='Avis précédent'>
+                ←
+              </button>
+              <span>
+                {String(avisActif + 1).padStart(2, '0')} / {String(avis.length).padStart(2, '0')}
+              </span>
+              <button type='button' onClick={() => changerAvis(1)} aria-label='Avis suivant'>
+                →
+              </button>
+            </div>
+          )}
+        </div>
 
         <div id='formAddReview' className={styles.avisFormulaire}>
           {formulaireAvis && (
