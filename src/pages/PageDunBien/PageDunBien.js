@@ -6,6 +6,8 @@ import { imageUrl, photosDuBien } from '../../utils/images'
 import CarteBien, { resumeBien, soigner } from '../../components/Refonte/CarteBien'
 import Apparition from '../../components/Refonte/Apparition'
 import Visionneuse from '../../components/Refonte/Visionneuse'
+import BlocSerie from '../../components/Refonte/BlocSerie'
+import { cleSerie, racineSerie, rangDansSerie } from '../../components/Refonte/series'
 
 const TELEPHONE = '06 88 74 06 21'
 const TELEPHONE_LIEN = 'tel:+33688740621'
@@ -56,7 +58,7 @@ function PageDunBien() {
   const { reference } = useParams()
   const [bien, setBien] = useState(null)
   const [chargement, setChargement] = useState(true)
-  const [autres, setAutres] = useState([])
+  const [tousLesBiens, setTousLesBiens] = useState([])
   const [visionneuse, setVisionneuse] = useState(null)
 
   useEffect(() => {
@@ -77,14 +79,15 @@ function PageDunBien() {
       }
       if (actif) setChargement(false)
     }
+    // tous les biens : pour retrouver ceux de la même série et en proposer d'autres
     const chargerAutres = async () => {
       try {
         const reponse = await fetch(
-          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=4`,
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant&page=1&pageSize=200`,
         )
         if (reponse.ok) {
           const resultat = await reponse.json()
-          if (actif) setAutres((resultat.biens || []).filter((b) => b.ref !== reference).slice(0, 3))
+          if (actif) setTousLesBiens(resultat.biens || [])
         }
       } catch (e) {
         // idem
@@ -123,6 +126,27 @@ function PageDunBien() {
         bien.status === 'vendu' ? 'Vendu' : bien.status === 'sous-compromis' ? 'Sous compromis' : 'Disponible',
     }
   }, [bien])
+
+  // La série du bien (au moins un autre bien encore en vente avec le même début de titre)
+  const { serie, autres } = useMemo(() => {
+    if (!bien) return { serie: null, autres: [] }
+    const cle = cleSerie(bien)
+    const freres = tousLesBiens.filter((b) => cleSerie(b) === cle && b.status !== 'vendu')
+    const membres = freres.some((b) => b.ref === bien.ref) ? freres : [bien, ...freres]
+    const enSerie = membres.length > 1
+    const s = enSerie
+      ? {
+          cle,
+          titre: racineSerie(bien.title || ''),
+          chapitres: [...membres].sort((x, y) => rangDansSerie(x.title) - rangDansSerie(y.title)),
+        }
+      : null
+    const refsSerie = new Set(membres.map((b) => b.ref))
+    const a = tousLesBiens
+      .filter((b) => b.status === 'disponible' && b.ref !== bien.ref && !(enSerie && refsSerie.has(b.ref)))
+      .slice(0, 3)
+    return { serie: s, autres: a }
+  }, [bien, tousLesBiens])
 
   if (chargement) {
     return <div className={styles.attente} aria-busy='true'></div>
@@ -184,7 +208,7 @@ function PageDunBien() {
           </div>
           <div className={styles.arriveePrix}>
             {bien.status !== 'disponible' && <span className={styles.statut}>{vue.statut}</span>}
-            {bien.status === 'disponible' && <span className={styles.prix}>{vue.prix}</span>}
+            {bien.status !== 'vendu' && <span className={styles.prix}>{vue.prix}</span>}
             <span className='etiquette'>{vue.chiffres.slice(0, 2).join(' · ')}</span>
             {photos.length > 1 && (
               <button type='button' className='lien-souligne' onClick={() => setVisionneuse(0)}>
@@ -324,6 +348,13 @@ function PageDunBien() {
           </div>
         )}
       </section>
+
+      {/* La série */}
+      {serie && (
+        <section className={styles.serie}>
+          <BlocSerie serie={serie} refCourante={bien.ref} titreSection='La série' />
+        </section>
+      )}
 
       {/* D'autres histoires */}
       {autres.length > 0 && (

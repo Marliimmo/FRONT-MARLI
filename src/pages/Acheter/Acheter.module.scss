@@ -91,6 +91,7 @@ $respiration-mobile: 64px;
 }
 
 .vedettePhoto {
+  position: relative;
   flex: 3;
   min-width: 0;
   height: 620px;
@@ -153,99 +154,6 @@ $respiration-mobile: 64px;
 
 .blocSerie {
   padding: 56px $marge-page 0;
-}
-
-// Une série (Dépendances, Chez Corneille…)
-.serie {
-  display: flex;
-  gap: 56px;
-  align-items: stretch;
-  padding: 48px 0;
-  border-top: 1px solid $ligne;
-  border-bottom: 1px solid $ligne;
-}
-
-.seriePhoto {
-  flex: 3;
-  min-width: 0;
-  min-height: 480px;
-  overflow: hidden;
-  background-color: $surface;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.serieTexte {
-  flex: 2;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
-
-  h3 {
-    margin: 0;
-    font-weight: 200;
-    font-size: clamp(30px, 2.8vw, 42px);
-    line-height: 1.1;
-  }
-}
-
-.serieSousTitre {
-  font-weight: 300;
-  font-size: 13px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: $texte-doux;
-}
-
-.serieFourchette {
-  font-weight: 300;
-  font-size: 18px;
-}
-
-.serieListe {
-  display: flex;
-  flex-direction: column;
-  margin-top: 14px;
-  border-top: 1px solid $ligne;
-}
-
-.serieLigne {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr) auto;
-  gap: 16px;
-  align-items: baseline;
-  padding: 18px 0;
-  border-bottom: 1px solid $ligne;
-  color: $blanc;
-  text-decoration: none;
-  transition: padding-left $transition-douce;
-
-  &:hover {
-    padding-left: 8px;
-  }
-}
-
-.serieNom {
-  font-weight: 300;
-  font-size: 16px;
-}
-
-.serieDetails {
-  font-size: 13px;
-  color: $texte-doux;
-}
-
-.seriePrix {
-  font-weight: 300;
-  font-size: 15px;
-  white-space: nowrap;
 }
 
 // Les histoires déjà écrites
@@ -339,8 +247,7 @@ $respiration-mobile: 64px;
 
 // Tablette
 @media screen and (max-width: 1100px) {
-  .vedette,
-  .serie {
+  .vedette {
     gap: 40px;
   }
 
@@ -387,25 +294,6 @@ $respiration-mobile: 64px;
 
   .blocSerie {
     padding-top: 40px;
-  }
-
-  .serie {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .seriePhoto {
-    flex: none;
-    min-height: 0;
-    height: 340px;
-  }
-
-  .serieLigne {
-    grid-template-columns: minmax(0, 1fr) auto;
-
-    .serieDetails {
-      display: none;
-    }
   }
 
   .vendus,

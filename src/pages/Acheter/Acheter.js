@@ -5,7 +5,9 @@ import styles from './Acheter.module.scss'
 import Image from '../../assets/images/jacottot/bandeau-acheter.jpg' // photo : J. Jacottot
 import BandeauPage from '../../components/Refonte/BandeauPage'
 import Apparition from '../../components/Refonte/Apparition'
-import CarteBien, { resumeBien, soigner } from '../../components/Refonte/CarteBien'
+import CarteBien, { resumeBien } from '../../components/Refonte/CarteBien'
+import BlocSerie from '../../components/Refonte/BlocSerie'
+import { regrouper } from '../../components/Refonte/series'
 import { imageUrl } from '../../utils/images'
 
 const ONGLETS = [
@@ -21,88 +23,6 @@ function categorie(bien) {
   if (/appartement|duplex|studio|loft/.test(type)) return 'appartements'
   if (/maison|propri[ée]t[ée]|immeuble|villa|ferme|ch[âa]teau/.test(type)) return 'maisons'
   return 'pro'
-}
-
-// Racine d'un titre de série : « Dépendances SUITE » → « Dépendances », « Chez Corneille Chapitre deux » → « Chez Corneille »
-const NUMEROS = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6 }
-function racineSerie(titre) {
-  const t = soigner(titre)
-  const m = t.match(/^(.*?)[\s:,.–-]*\b(chapitre\s+\S+|suite|fin|\d+)$/i)
-  return m && m[1] ? m[1].trim() : t
-}
-function rangDansSerie(titre) {
-  const t = soigner(titre).toLowerCase()
-  const chapitre = t.match(/chapitre\s+(\S+)$/)
-  if (chapitre) return NUMEROS[chapitre[1]] || parseInt(chapitre[1], 10) || 1
-  if (/\bsuite$/.test(t)) return 2
-  if (/\bfin$/.test(t)) return 9
-  const nombre = t.match(/(\d+)$/)
-  if (nombre) return parseInt(nombre[1], 10)
-  return 1
-}
-
-// Regroupe en séries les biens qui partagent un même titre de départ
-function regrouper(biens) {
-  const groupes = new Map()
-  biens.forEach((b) => {
-    const cle = `${racineSerie(b.title || '').toLowerCase()}|${(b.localisation || '').toLowerCase()}`
-    if (!groupes.has(cle)) groupes.set(cle, [])
-    groupes.get(cle).push(b)
-  })
-  const elements = []
-  const dejaPlaces = new Set()
-  biens.forEach((b) => {
-    const cle = `${racineSerie(b.title || '').toLowerCase()}|${(b.localisation || '').toLowerCase()}`
-    if (dejaPlaces.has(cle)) return
-    dejaPlaces.add(cle)
-    const groupe = groupes.get(cle)
-    if (groupe.length > 1) {
-      const chapitres = [...groupe].sort((x, y) => rangDansSerie(x.title) - rangDansSerie(y.title))
-      elements.push({ type: 'serie', cle, titre: racineSerie(chapitres[0].title), chapitres })
-    } else {
-      elements.push({ type: 'bien', cle: b.ref, bien: b })
-    }
-  })
-  return elements
-}
-
-function CarteSerie({ serie }) {
-  const premier = serie.chapitres[0]
-  const photo = premier?._medias?.image_galerie_0?.url
-  const prix = serie.chapitres.filter((c) => c.status === 'disponible' && typeof c.prix === 'number').map((c) => c.prix)
-  const fourchette = prix.length
-    ? prix.length > 1
-      ? `De ${Math.min(...prix).toLocaleString('fr-FR')} € à ${Math.max(...prix).toLocaleString('fr-FR')} €`
-      : `${prix[0].toLocaleString('fr-FR')} €`
-    : ''
-  return (
-    <div className={styles.serie}>
-      <Link to={`/bien/${premier.ref}`} className={styles.seriePhoto} aria-label={serie.titre}>
-        {photo && <img className='photo-bien' src={imageUrl(photo, 1400)} alt={serie.titre} loading='lazy' />}
-      </Link>
-      <div className={styles.serieTexte}>
-        <span className='etiquette'>{soigner(premier.localisation)}</span>
-        <h3>{serie.titre}</h3>
-        <span className={styles.serieSousTitre}>Une série de {serie.chapitres.length} biens</span>
-        {fourchette && <span className={styles.serieFourchette}>{fourchette}</span>}
-        <div className={styles.serieListe}>
-          {serie.chapitres.map((c) => {
-            const r = resumeBien(c)
-            return (
-              <Link key={c.ref} to={`/bien/${c.ref}`} className={styles.serieLigne}>
-                <span className={styles.serieNom}>
-                  {r.titre}
-                  {r.chapitre ? ` · ${r.chapitre}` : ''}
-                </span>
-                <span className={styles.serieDetails}>{r.details}</span>
-                <span className={styles.seriePrix}>{r.prix}</span>
-              </Link>
-            )
-          })}
-        </div>
-      </div>
-    </div>
-  )
 }
 
 function Acheter() {
@@ -200,6 +120,7 @@ function Acheter() {
         <Apparition>
           <Link to={`/bien/${vedette.bien.ref}`} className={styles.vedette}>
             <div className={styles.vedettePhoto}>
+              {resumeBien(vedette.bien).statut && <span className='pastille'>{resumeBien(vedette.bien).statut}</span>}
               {vedette.bien?._medias?.image_galerie_0?.url && (
                 <img
                   className='photo-bien'
@@ -225,7 +146,7 @@ function Acheter() {
       {/* Les séries, puis les autres biens deux par deux */}
       {series.map((el) => (
         <Apparition key={el.cle} className={styles.blocSerie}>
-          <CarteSerie serie={el} />
+          <BlocSerie serie={el} />
         </Apparition>
       ))}
 

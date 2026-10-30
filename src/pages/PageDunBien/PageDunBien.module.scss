@@ -396,6 +396,11 @@ $respiration-mobile: 64px;
   }
 }
 
+// La série
+.serie {
+  padding: $respiration $marge-page 0;
+}
+
 // D'autres histoires
 .autres {
   padding: $respiration $marge-page;
@@ -488,6 +493,10 @@ $respiration-mobile: 64px;
     padding: 22px 12px;
     font-size: 15px;
     border-bottom: 1px solid $ligne;
+  }
+
+  .serie {
+    padding-top: $respiration-mobile;
   }
 
   .recit,
