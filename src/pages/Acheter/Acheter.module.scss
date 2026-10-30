@@ -1,211 +1,429 @@
 @import "../../assets/styles/variables";
 
-.allContainer{
-    .firstSection{
-        h2{
-            margin-top: 50px;
-        }
-    }
+$respiration: 104px;
+$respiration-mobile: 64px;
 
-    .investerSection{
-        padding: 100px 10%;
-        margin-top: -5px;
-        background-color: $gray-color;
-    
-        div{
-            padding: 50px;
-            padding-bottom: 80px;
-            background-color: $white-color;
-            color: $gray-color;
-            border-radius: 18px;
-            
-            ul{
-                margin-bottom: 70px;
-                padding-left: 16px;
-                li{
-                    list-style: initial;
-                    font-size: 20px;
-                    line-height: 28px;
-                    margin: 20px 0px;
-                }
-            }
-        
-            h2{
-                font-size: 30px;
-                letter-spacing: 1.3px;
-                margin-bottom: 35px;
-            }
-        
-            a{
-                width: fit-content;
-                padding: 20px 35px;
-                background-color: $gray-color;
-                color: $white-color;
-                border-radius: 100px;
-                letter-spacing: 1.3px;
-            }
-        
-            @media screen and (max-width: 750px) {
-                h2{
-                    font-size: 25px;
-                }
-        
-                ul{
-                    li{
-                        font-size: 17px;
-                    }
-                }
-            }
-        }
-    
-        @media screen and (max-width: 750px) {
-            padding: 50px 30px;
-        }
-    
-        @media screen and (max-width: 420px) {
-            div{
-                padding: 30px;
-                padding-bottom: 60px;
-            }
-        }
-    }
-    
-    .BienContainer{
-        padding: 50px 10%;
-    
-        .showFiltre{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid $white-color;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            cursor: pointer;
-            p{
-                margin: 0;
-            }
-        }
-    
-        .filtreContainer{
-            display: flex;
-            column-gap: 20px;
-    
-            input{
-                width: 100%;
-                border: none;
-                outline: none;
-                background-color: transparent;
-                padding: 10px 2px;
-                font-size: 16px;
-                font-weight: 300;
-                color: $white-color;
-                border-bottom: 1px solid $white-color;
-                margin-bottom: 40px;
-                appearance: textfield;
-    
-                &::placeholder{
-                    color: $white-color;
-                }
-            }
-    
-            select{
-                width: 100%;
-                border: none;
-                outline: none;
-                background-color: transparent;
-                padding: 10px 2px;
-                font-size: 16px;
-                font-weight: 300;
-                color: $white-color;
-                border-bottom: 1px solid $white-color;
-                margin-bottom: 40px;
-    
-                option{
-                    color: $gray-color;
-                }
-            }
-    
-            .btnSearchContainer{
-                width: 35px;
-                height: 35px;
-                padding: 15px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: $white-color;
-                border: 1px solid $white-color;
-                border-radius: 5px;
-                margin-top: 10px;
-                cursor: pointer;
-                svg{
-                    color: $gray-color;
-                }
-            }
-    
-            @media screen and (max-width: 700px) {
-                flex-direction: column;
-                display: none;
-    
-                .btnSearchContainer{
-                    color: $gray-color;
-                    width: fit-content;
-                    span{
-                        margin-right: 20px;
-                    }
-                }
-            }
-    
-            @media screen and (min-width: 701px) {
-                .btnSearchContainer{
-                    span{
-                        display: none;
-                    }
-                }
-            }
-        }
-    
-        .ListeDBien{
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            row-gap: 30px;
-    
-            .notFoundBien{
-                display: flex;
-                margin: auto;
-                text-align: center;
-                margin-top: 50px;
-                font-size: 30px;
-                font-weight: 500;
-                color: rgb(80, 80, 80);
-            }
-        }
-    
-        .showMoreBtn{
-            margin: 50px 0px;
-            text-align: center;
-            
-            button{
-                font-size: 18px;
-                font-weight: 400;
-                background-color: $white-color;
-                border: 1px solid $white-color;
-                padding: 15px 35px;
-                border-radius: 100px;
-color: black;
-                cursor: pointer;
-            }
-        }
-    
-        @media screen and (max-width: 750px) {
-            padding: 40px 30px;
-        }
-    
-        @media screen and (min-width: 701px) {
-            .showFiltre{
-                display: none;
-            }
-        }
-    }
+// Filtres : quatre mots sur une ligne
+.filtres {
+  padding: 48px $marge-page 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  border-bottom: 1px solid $ligne;
 }
 
+.onglets {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.onglet,
+.ongletActif {
+  min-height: 44px;
+  padding: 0 0 20px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: $police-etiquette;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: $texte-discret;
+  transition: color $transition-douce, border-color $transition-douce;
+
+  &:hover {
+    color: $blanc;
+  }
+}
+
+.ongletActif {
+  color: $blanc;
+  border-bottom-color: $blanc;
+}
+
+.compte {
+  padding-bottom: 20px;
+  font-family: $police-etiquette;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $texte-discret;
+}
+
+.attente {
+  height: 60vh;
+  margin: 64px $marge-page;
+  background-color: $surface;
+}
+
+.vide {
+  margin: 0;
+  padding: $respiration $marge-page;
+  text-align: center;
+  font-weight: 300;
+  color: $texte-doux;
+}
+
+// Le premier bien, en grand
+.vedette {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  padding: 72px $marge-page 24px;
+  color: $blanc;
+  text-decoration: none;
+
+  &:hover :global(.photo-bien) {
+    filter: grayscale(0);
+    transform: scale(1.02);
+  }
+}
+
+.vedettePhoto {
+  flex: 3;
+  min-width: 0;
+  height: 620px;
+  overflow: hidden;
+  background-color: $surface;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.vedetteTexte {
+  flex: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  h2 {
+    margin: 0;
+    font-weight: 200;
+    font-size: clamp(32px, 3.2vw, 46px);
+    line-height: 1.1;
+  }
+
+  :global(.lien-souligne) {
+    margin-top: 12px;
+  }
+}
+
+.vedetteChapitre {
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: $texte-doux;
+}
+
+.vedetteDetails {
+  font-size: 14px;
+  color: $texte-doux;
+}
+
+.vedettePrix {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+// La grille des autres biens
+.grille {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 72px 40px;
+  padding: 56px $marge-page $respiration;
+}
+
+.blocSerie {
+  padding: 56px $marge-page 0;
+}
+
+// Une série (Dépendances, Chez Corneille…)
+.serie {
+  display: flex;
+  gap: 56px;
+  align-items: stretch;
+  padding: 48px 0;
+  border-top: 1px solid $ligne;
+  border-bottom: 1px solid $ligne;
+}
+
+.seriePhoto {
+  flex: 3;
+  min-width: 0;
+  min-height: 480px;
+  overflow: hidden;
+  background-color: $surface;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.serieTexte {
+  flex: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+
+  h3 {
+    margin: 0;
+    font-weight: 200;
+    font-size: clamp(30px, 2.8vw, 42px);
+    line-height: 1.1;
+  }
+}
+
+.serieSousTitre {
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: $texte-doux;
+}
+
+.serieFourchette {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.serieListe {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  border-top: 1px solid $ligne;
+}
+
+.serieLigne {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr) auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid $ligne;
+  color: $blanc;
+  text-decoration: none;
+  transition: padding-left $transition-douce;
+
+  &:hover {
+    padding-left: 8px;
+  }
+}
+
+.serieNom {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.serieDetails {
+  font-size: 13px;
+  color: $texte-doux;
+}
+
+.seriePrix {
+  font-weight: 300;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+// Les histoires déjà écrites
+.vendus {
+  background-color: $noir;
+  padding: $respiration $marge-page;
+}
+
+.entete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding-bottom: 48px;
+}
+
+.grilleVendus {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px 32px;
+}
+
+.vendu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: $blanc;
+  text-decoration: none;
+
+  :global(.etiquette) {
+    padding-top: 8px;
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+}
+
+.venduPhoto {
+  height: 240px;
+  overflow: hidden;
+  background-color: $surface;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    opacity: 0.85;
+    transition: opacity $transition-douce;
+  }
+}
+
+.vendu:hover .venduPhoto img {
+  opacity: 1;
+}
+
+.venduTitre {
+  font-weight: 300;
+  font-size: 19px;
+}
+
+.lienCentre {
+  display: flex;
+  justify-content: center;
+  padding-top: 56px;
+}
+
+// Avis de recherche
+.recherche {
+  padding: $respiration $marge-page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+}
+
+.recherchePhrase {
+  margin: 0;
+  font-weight: 200;
+  font-size: clamp(28px, 3vw, 42px);
+}
+
+.rechercheTexte {
+  margin: 0 0 8px;
+  font-weight: 300;
+  font-size: 17px;
+  color: $texte-doux;
+}
+
+// Tablette
+@media screen and (max-width: 1100px) {
+  .vedette,
+  .serie {
+    gap: 40px;
+  }
+
+  .vedettePhoto {
+    height: 480px;
+  }
+
+  .grilleVendus {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+// Téléphone
+@media screen and (max-width: $ecran-mobile) {
+  .filtres {
+    padding-top: 32px;
+  }
+
+  .onglets {
+    gap: 28px;
+  }
+
+  .compte {
+    display: none;
+  }
+
+  .vedette {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding-top: 40px;
+  }
+
+  .vedettePhoto {
+    flex: none;
+    height: 420px;
+  }
+
+  .grille {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+    padding-bottom: $respiration-mobile;
+  }
+
+  .blocSerie {
+    padding-top: 40px;
+  }
+
+  .serie {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .seriePhoto {
+    flex: none;
+    min-height: 0;
+    height: 340px;
+  }
+
+  .serieLigne {
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    .serieDetails {
+      display: none;
+    }
+  }
+
+  .vendus,
+  .recherche {
+    padding-top: $respiration-mobile;
+    padding-bottom: $respiration-mobile;
+  }
+
+  .grilleVendus {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 16px;
+  }
+
+  .venduPhoto {
+    height: 160px;
+  }
+
+  .venduTitre {
+    font-size: 16px;
+  }
+}
