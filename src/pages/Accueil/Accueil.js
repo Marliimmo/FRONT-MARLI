@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
 // import ImgImmeuble from '../../assets/images/united-states-spokane.jpg'
-import ImgImmeuble19 from '../../assets/images/19.jpg'
+import ImgCouverture from '../../assets/images/couverture-accueil.jpg'
 import ImgImmeuble4 from '../../assets/images/4.jpg'
 import ImgImmeuble2 from '../../assets/images/2.jpg'
 import ImgImmeuble30 from '../../assets/images/30.jpg'
@@ -139,12 +139,6 @@ function Accueil() {
       </Helmet>
       <div className={`fadinAnimation`}>
         <div className={styles.firstSectionContainer}>
-          <img
-            className={styles.ImgPremierePlan}
-            src={ImgImmeuble19}
-            alt='img-immobilier'
-          />
-          <div className={styles.opacityBlack}></div>
           <h1 style={{position:"absolute",width:"1px",height:"1px",overflow:"hidden",clip:"rect(0,0,0,0)"}}>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</h1>
           <div className={styles.TextContent}>
             <SlideDown>
@@ -152,6 +146,7 @@ function Accueil() {
                 <img src={Logo} alt='logo-marli' />
               </p>
             </SlideDown>
+            <span className={styles.filet}></span>
             <SlideUp>
               <h3>
                 Les transactions immobilières sont avant tout des histoires
@@ -159,6 +154,12 @@ function Accueil() {
               </h3>
             </SlideUp>
           </div>
+          <img
+            className={styles.ImgPremierePlan}
+            src={ImgCouverture}
+            alt='Portrait peint dans une rue de Besançon'
+          />
+          <div className={styles.opacityBlack}></div>
         </div>
 
         <FadeIn>
