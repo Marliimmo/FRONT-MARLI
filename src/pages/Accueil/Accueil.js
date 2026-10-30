@@ -9,6 +9,7 @@ import ImgRefletCouleur from '../../assets/images/5.jpg'
 import ImgAcheter from '../../assets/images/2.jpg'
 import ImgVendre from '../../assets/images/30.jpg'
 import ImgInvestir from '../../assets/images/13.jpg'
+import ImgPortraitCouleur from '../../assets/images/portrait-couleur.jpg'
 import CardAddReview from '../../components/CardAddReview/CardAddReview'
 import Apparition from '../../components/Refonte/Apparition'
 import MachineAEcrire from '../../components/Refonte/MachineAEcrire'
@@ -163,7 +164,7 @@ function Accueil() {
           <div className={styles.grilleBiens}>
             {biens.map((bien) => (
               <Apparition key={bien.ref}>
-                <CarteBien bien={bien} hauteurPhoto={560} largeurImage={900} />
+                <CarteBien bien={bien} hauteurPhoto={600} largeurImage={900} />
               </Apparition>
             ))}
           </div>
@@ -204,6 +205,10 @@ function Accueil() {
 
       {/* Parole libre */}
       <section className={styles.avis} id='avisContainer'>
+        <div className={styles.avisPhoto}>
+          <img src={ImgPortraitCouleur} alt='Portrait peint dans une rue de Besançon, en couleur' loading='lazy' />
+        </div>
+        <div className={styles.avisContenu}>
         <div className={styles.avisResume}>
           <span className='etiquette'>Parole libre</span>
           <h2 className='titre-grand'>Ils nous ont confié leur histoire</h2>
@@ -257,6 +262,7 @@ function Accueil() {
               </button>
             </div>
           )}
+        </div>
         </div>
 
         <div id='formAddReview' className={styles.avisFormulaire}>

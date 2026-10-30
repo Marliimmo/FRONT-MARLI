@@ -65,8 +65,8 @@
 
 .promessePhotos {
   position: relative;
-  flex: 0 0 42%;
-  height: 640px;
+  flex: 0 0 38%;
+  height: 520px;
 }
 
 .photoArriere,
@@ -184,7 +184,7 @@
 
 .servicePhoto {
   width: 100%;
-  height: 360px;
+  height: 260px;
   margin-bottom: 8px;
   overflow: hidden;
   background-color: $surface;
@@ -209,19 +209,11 @@
   color: $texte-discret;
 }
 
-// Parole libre
+// Parole libre : le portrait en couleur à gauche, les avis à droite
 .avis {
-  position: relative;
-  padding: 160px $marge-page;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 8%;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
   background-color: $fond;
-  background-image: linear-gradient(rgba(30, 30, 30, 0.82), rgba(30, 30, 30, 0.82)),
-    url('../../assets/images/image_vague_noir.jpg');
-  background-size: cover;
-  background-position: center;
 
   button:global(.lien-souligne) {
     align-self: flex-start;
@@ -231,6 +223,30 @@
     border-right: none;
     cursor: pointer;
   }
+}
+
+.avisPhoto {
+  flex: 0 0 34%;
+  min-height: 760px;
+  background-color: $surface;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+  }
+}
+
+.avisContenu {
+  flex: 1;
+  min-width: 0;
+  padding: 120px 7%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 64px;
 }
 
 .avisResume {
@@ -264,6 +280,7 @@
   margin-left: 8px;
   font-size: 16px;
   letter-spacing: 4px;
+  color: $accent;
 }
 
 .avisNombre {
@@ -280,8 +297,8 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding-left: 8%;
-  border-left: 1px solid $ligne;
+  padding-top: 48px;
+  border-top: 1px solid $ligne;
 }
 
 .avisCitation {
@@ -312,7 +329,7 @@
   font-weight: 200;
   font-size: 120px;
   line-height: 1;
-  color: $texte-discret;
+  color: $accent;
 }
 
 .avisTexte {
@@ -333,7 +350,7 @@
 .etoilesPetites {
   font-size: 12px;
   letter-spacing: 3px;
-  color: $texte-doux;
+  color: $accent;
 }
 
 @keyframes avis-fondu {
@@ -381,7 +398,9 @@
 }
 
 .avisFormulaire {
-  grid-column: 1 / -1;
+  flex: 0 0 100%;
+  padding: 0 $marge-page 80px;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
 
@@ -489,14 +508,15 @@
     white-space: normal;
   }
 
-  .avis {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 56px;
+  .avisPhoto {
+    flex: 0 0 100%;
+    min-height: 0;
+    height: 420px;
   }
 
-  .avisLecture {
-    padding-left: 0;
-    border-left: none;
+  .avisContenu {
+    padding: 80px $marge-page;
+    gap: 48px;
   }
 
   .servicePhoto {
@@ -514,7 +534,6 @@
   }
 
   .services,
-  .avis,
   .fin {
     padding-top: 100px;
     padding-bottom: 100px;
