@@ -8,7 +8,7 @@ const LIENS = [
   { to: '/vendre', label: 'Vendre' },
   { to: '/avis-de-recherche', label: 'Avis de recherche' },
   { to: '/actualite', label: 'Actualités' },
-  { to: '/a-propos', label: 'À propos' },
+  { to: '/a-propos', label: 'L’agence' },
   { to: '/nous-contacter', label: 'Contact' },
 ]
 

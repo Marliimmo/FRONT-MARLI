@@ -25,7 +25,7 @@ function Footer() {
           <div className={styles.colonne}>
             <span className='etiquette'>Infos utiles</span>
             <Link to='/honoraires'>Nos honoraires</Link>
-            <Link to='/a-propos'>À propos</Link>
+            <Link to='/a-propos'>L’agence</Link>
             <Link to='/nous-contacter'>Nous contacter</Link>
             <Link to='/mentions-legales'>Mentions légales</Link>
           </div>
