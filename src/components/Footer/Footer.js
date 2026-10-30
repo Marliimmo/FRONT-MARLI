@@ -23,7 +23,7 @@ function Footer() {
           </div>
 
           <div className={styles.colonne}>
-            <span className='etiquette'>Notre secteur</span>
+            <span className='etiquette'>Nos secteurs</span>
             <span>Besançon et le Grand Besançon</span>
             <span>Doubs et Haut-Doubs</span>
             <span>Haute-Saône</span>
