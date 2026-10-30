@@ -1,0 +1,104 @@
+@import "../../assets/styles/variables";
+
+.fond {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.985);
+  animation: visionneuse-entree 0.35s ease both;
+}
+
+@keyframes visionneuse-entree {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px $marge-page;
+  font-family: $police-etiquette;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: $texte-discret;
+
+  button {
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    color: $blanc;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+
+.scene {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 90px 40px;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    animation: visionneuse-entree 0.4s ease both;
+  }
+}
+
+.fleche {
+  position: absolute;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  background: none;
+  border: 1px solid $ligne;
+  border-radius: 50%;
+  color: $blanc;
+  font-size: 18px;
+  cursor: pointer;
+  transition: border-color $transition-douce;
+
+  &:hover {
+    border-color: $blanc;
+  }
+}
+
+.gauche {
+  left: 24px;
+}
+
+.droite {
+  right: 24px;
+}
+
+@media screen and (max-width: $ecran-mobile) {
+  .scene {
+    padding: 0 0 70px;
+  }
+
+  .fleche {
+    top: auto;
+    bottom: 20px;
+    margin-top: 0;
+  }
+
+  .gauche {
+    left: calc(50% - 64px);
+  }
+
+  .droite {
+    right: calc(50% - 64px);
+  }
+}

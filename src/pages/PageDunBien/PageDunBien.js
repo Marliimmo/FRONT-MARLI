@@ -1,364 +1,379 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from './PageDunBien.module.scss'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faChevronLeft,
-  faChevronRight,
-  faExpand,
-  faXmark,
-} from '@fortawesome/free-solid-svg-icons'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import CardSlider from '../../components/CardSlider/CardSlider'
 import { Helmet } from 'react-helmet-async'
-import { FadeIn } from '../../components/AnimatedComponents/AnimatedComponents'
+import styles from './PageDunBien.module.scss'
 import { imageUrl, photosDuBien } from '../../utils/images'
+import CarteBien, { resumeBien } from '../../components/Refonte/CarteBien'
+import Apparition from '../../components/Refonte/Apparition'
+import Visionneuse from '../../components/Refonte/Visionneuse'
+
+const TELEPHONE = '06 88 74 06 21'
+const TELEPHONE_LIEN = 'tel:+33688740621'
+
+// Lignes de caractéristiques qui relèvent des mentions réglementaires
+const REGLEMENTAIRE = /(DPE|GES|diagnostic|dépenses|énergie|risques|g[ée]orisques|proc[ée]dure|copropri[ée]t[ée]|lots?\b|charges)/i
+
+// Retourne une URL « embed » pour YouTube ou Vimeo, sinon null (vidéo hébergée lue directement)
+const urlVideoIntegree = (url) => {
+  if (!url) return null
+  const youtube = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/)
+  if (youtube) return `https://www.youtube.com/embed/${youtube[1]}`
+  const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)
+  if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`
+  return null
+}
+
+// Découpe le récit : les phrases courtes du début forment l'ouverture,
+// celles de la fin forment la signature, le reste se lit d'un seul tenant.
+function decouperRecit(histoire, titre) {
+  const paragraphes = (histoire || '')
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+  const titreSimple = (titre || '').toLowerCase()
+  const debut = []
+  let i = 0
+  // l'ouverture s'arrête après la première vraie phrase (terminée par un point)
+  while (i < paragraphes.length && paragraphes[i].length < 90) {
+    const p = paragraphes[i]
+    i += 1
+    if (p.toLowerCase() === titreSimple) continue
+    debut.push(p)
+    if (/[.!?…]$/.test(p)) break
+  }
+  let j = paragraphes.length
+  const fin = []
+  while (j > i && paragraphes[j - 1].length < 70) {
+    fin.unshift(paragraphes[j - 1])
+    j -= 1
+  }
+  // si tout le texte est court, on le garde dans le corps
+  if (j <= i) return { ouverture: [], corps: paragraphes, signature: [] }
+  return { ouverture: debut, corps: paragraphes.slice(i, j), signature: fin }
+}
 
 function PageDunBien() {
-  const sliderRef = useRef(null)
-  const sliderRefFullScreen = useRef(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [fullScreen, setFullScreen] = useState(false)
-  const [loading, setLoading] = useState(true)
   const { reference } = useParams()
-  const [data, setData] = useState([])
-  const [dataBienDispo, setDataBienDispo] = useState([])
-
-
-  // Retourne une URL "embed" si la vidéo vient de YouTube ou Vimeo, sinon null
-  // (dans ce cas on affiche la vidéo directement avec une balise <video>, ex: fichier mp4 hébergé)
-  const getVideoEmbed = (url) => {
-    if (!url) return null;
-
-    const youtubeMatch = url.match(
-      /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/
-    );
-    if (youtubeMatch) {
-      return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
-    }
-
-    const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-    if (vimeoMatch) {
-      return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
-    }
-
-    return null;
-  };
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: 1,
-    initialSlide: currentIndex,
-    afterChange: (index) => setCurrentIndex(index),
-  }
-
-  const settingsBienRecommander = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: dataBienDispo.length >= 2 ? 2 : dataBienDispo.length,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: dataBienDispo.length >= 2 ? 2 : dataBienDispo.length,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: dataBienDispo.length >= 2 ? 2 : dataBienDispo.length,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  }
-
-  const slidePrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPrev()
-    }
-  }
-
-  const slideNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickNext()
-    }
-  }
-
-  const slidePrevFullScreen = () => {
-    if (sliderRefFullScreen.current) {
-      sliderRefFullScreen.current.slickPrev()
-    }
-  }
-
-  const slideNextFullScreen = () => {
-    if (sliderRefFullScreen.current) {
-      sliderRefFullScreen.current.slickNext()
-    }
-  }
+  const [bien, setBien] = useState(null)
+  const [chargement, setChargement] = useState(true)
+  const [autres, setAutres] = useState([])
+  const [visionneuse, setVisionneuse] = useState(null)
 
   useEffect(() => {
-    if (sliderRef.current) {
-      sliderRef.current.slickGoTo(currentIndex)
-    }
+    let actif = true
+    setChargement(true)
+    setBien(null)
+    window.scrollTo(0, 0)
 
-    try {
-      const fecthData = async () => {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/bien/get-one?ref=${reference}`,
-        )
-        if (response.ok) {
-          const result = await response.json()
-          setData(result)
-          setLoading(false)
-        } else {
-          setLoading(false)
+    const charger = async () => {
+      try {
+        const reponse = await fetch(`${process.env.REACT_APP_API_URL}/bien/get-one?ref=${reference}`)
+        if (reponse.ok) {
+          const resultat = await reponse.json()
+          if (actif) setBien(resultat && resultat.ref ? resultat : null)
         }
+      } catch (e) {
+        // bien introuvable ou serveur indisponible
       }
-
-      const fecthBienDisponible = async () => {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=5`,
-        )
-        if (response.ok) {
-          const result = await response.json()
-          setDataBienDispo(result.biens)
-        }
-      }
-
-      fecthBienDisponible()
-      fecthData()
-    } catch (error) {
-      console.log('Erreur lors de la requette fecth', error)
-      setLoading(false)
+      if (actif) setChargement(false)
     }
-  }, [currentIndex, reference])
+    const chargerAutres = async () => {
+      try {
+        const reponse = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=4`,
+        )
+        if (reponse.ok) {
+          const resultat = await reponse.json()
+          if (actif) setAutres((resultat.biens || []).filter((b) => b.ref !== reference).slice(0, 3))
+        }
+      } catch (e) {
+        // idem
+      }
+    }
+    charger()
+    chargerAutres()
+    return () => {
+      actif = false
+    }
+  }, [reference])
+
+  const vue = useMemo(() => {
+    if (!bien) return null
+    const r = resumeBien(bien)
+    const carac = (bien.caracteristiques || '')
+      .split('#')
+      .map((c) => c.replace(/\s+/g, ' ').trim())
+      .filter(Boolean)
+    const reglementaire = carac.filter((c) => REGLEMENTAIRE.test(c))
+    const descriptif = carac.filter((c) => !REGLEMENTAIRE.test(c))
+    // sans doublons (une même ligne saisie deux fois)
+    const details = descriptif.filter((c, k) => descriptif.indexOf(c) === k)
+    return {
+      ...r,
+      photos: photosDuBien(bien._medias),
+      chiffres: details.slice(0, 4),
+      details: details.slice(2),
+      reglementaire,
+      recit: decouperRecit(bien.histoire, r.titre),
+      video: bien?._medias?.video_bien?.url,
+      vendu: bien.status === 'vendu',
+      statut:
+        bien.status === 'vendu' ? 'Vendu' : bien.status === 'sous-compromis' ? 'Sous compromis' : 'Disponible',
+    }
+  }, [bien])
+
+  if (chargement) {
+    return <div className={styles.attente} aria-busy='true'></div>
+  }
+
+  if (!bien || !vue) {
+    return (
+      <section className={styles.introuvable}>
+        <span className='etiquette'>Bien introuvable</span>
+        <h1 className='titre-grand'>Cette histoire n’est plus en ligne</h1>
+        <p>Le bien a peut-être été vendu ou retiré. D’autres histoires vous attendent.</p>
+        <Link to='/acheter' className='bouton-plein'>
+          Découvrir nos histoires
+        </Link>
+      </section>
+    )
+  }
+
+  const { photos } = vue
+  const filtrePhoto = vue.vendu ? { filter: 'grayscale(1)' } : undefined
+  // photos affichées après le récit : une pleine largeur, puis deux côte à côte, etc.
+  const suite = photos.slice(1, 8)
+  const blocsPhotos = []
+  for (let k = 0; k < suite.length; ) {
+    if (blocsPhotos.length % 2 === 0) {
+      blocsPhotos.push({ type: 'pleine', photos: [{ url: suite[k], index: k + 1 }] })
+      k += 1
+    } else {
+      const duo = suite.slice(k, k + 2).map((url, d) => ({ url, index: k + 1 + d }))
+      blocsPhotos.push({ type: duo.length === 2 ? 'duo' : 'pleine', photos: duo })
+      k += 2
+    }
+  }
+  const description = (bien.histoire || '').replace(/\s+/g, ' ').trim().slice(0, 155)
 
   return (
     <>
       <Helmet>
-        <title>Marli - Page de bien</title>
-        <meta name='description' content="Passeur d'histoires immobilières" />
+        <title>{`${vue.titre}${vue.chapitre ? ` · ${vue.chapitre}` : ''} · ${vue.lieu} · Marli Immobilier`}</title>
+        <meta name='description' content={description} />
+        <link rel='canonical' href={`https://marli-immobilier.com/bien/${bien.ref}`} />
       </Helmet>
-      <div className={`fadinAnimation ${styles.allContainer}`}>
-        {loading ? null : data.length <= 0 ? (
-          <p className={styles.notFoundBien}>Aucun bien trouver</p>
-        ) : (
-          <FadeIn>
-            {(data?._medias?.image_galerie_0?.url || data?._medias?.image_galerie_1?.url) && (
-              <div className={styles.imageContainer}>
-                <div className={styles.CrousselContainer}>
-                  <div className={styles.slideButton}>
-                    <div onClick={slidePrev}>
-                      <FontAwesomeIcon icon={faChevronLeft} />
-                    </div>
-                    <div onClick={slideNext}>
-                      <FontAwesomeIcon icon={faChevronRight} />
-                    </div>
-                  </div>
 
-                  <div className={styles.sliderContainer}>
-                    <Slider ref={sliderRef} {...settings}>
-                      {data._medias &&
-                        photosDuBien(data._medias).map((url, index) => {
-                          if (url) {
-                            return (
-                              <img
-                                key={index}
-                                src={imageUrl(url, 1600)}
-                                alt={`${data.title || 'Bien'} – vue ${index + 1}`}
-                                loading={index === 0 ? 'eager' : 'lazy'}
-                              />
-                            )
-                          }
-                          return null
-                        })}
-                    </Slider>
-                  </div>
-
-                  <div>
-                    {data.status !== 'disponible' && (
-                      <div
-                        style={
-                          data.status === 'vendu'
-                            ? { backgroundColor: 'red' }
-                            : data.status === 'sous-compromis'
-                              ? { backgroundColor: 'orange' }
-                              : null
-                        }
-                        className={styles.statusBien}
-                      >
-                        {data.status === 'vendu'
-                          ? 'vendu'
-                          : data.status === 'sous-compromis'
-                            ? 'sous compromis'
-                            : null}
-                      </div>
-                    )}
-
-                    <div
-                      className={styles.fullScreenIcone}
-                      onClick={() => setFullScreen(!fullScreen)}
-                      title='Plein ecran'
-                    >
-                      <FontAwesomeIcon icon={faExpand} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.galerieMiniature}>
-                  {data._medias &&
-                    photosDuBien(data._medias).map((url, index) => {
-                      if (url) {
-                        return (
-                          <img
-                            key={index}
-                            src={imageUrl(url, 300)}
-                            alt={`${data.title || 'Bien'} – miniature ${index + 1}`}
-                            loading='lazy'
-                            onClick={() => setCurrentIndex(index)}
-                          />
-                        )
-                      }
-                      return null
-                    })}
-                </div>
-              </div>
-            )}
-
-            <div className={styles.detailsBien}>
-              <div className={styles.histoireContainer}>
-                <h3>L'histoire</h3>
-                <p style={{ whiteSpace: 'pre-line' }}>{data.histoire}</p>
-              </div>
-
-              <div className={styles.RightContainer}>
-                <div className={styles.prixElocalisation}>
-                  <h3>{data.prix.toLocaleString('fr-FR')} €</h3>
-                  <p>{data.caracteristiques.split('#')[1]}</p>
-                  <p>{data.localisation}</p>
-                </div>
-
-                <div className={styles.caracteristique}>
-                  <h3>Caractéristiques</h3>
-                  {data?.caracteristiques.split('#').map((value, index) => (
-                    <p key={index}>- {value}</p>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {data?._medias?.video_bien?.url && (
-              <div className={styles.videoSection}>
-                <h3>Visite vidéo</h3>
-                <div className={styles.videoWrapper}>
-                  {getVideoEmbed(data._medias.video_bien.url) ? (
-                    <iframe
-                      src={getVideoEmbed(data._medias.video_bien.url)}
-                      title='Visite vidéo du bien'
-                      frameBorder='0'
-                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                      allowFullScreen
-                    />
-                  ) : (
-                    <video src={data._medias.video_bien.url} controls playsInline />
-                  )}
-                </div>
-              </div>
-            )}
-
-            <div className={styles.sectionRef}>
-              <p className={styles.reference}>REF : {reference}</p>
-
-              <div className={styles.btnSection}>
-                <Link to='/nous-contacter'>
-                  <button>Intéressé(e) par ce bien</button>
-                </Link>
-              </div>
-            </div>
-
-            {fullScreen && (
-              <div className={styles.sliderFullScreen}>
-                <div className={styles.slideButton}>
-                  <div onClick={slidePrevFullScreen}>
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                  </div>
-                  <div onClick={slideNextFullScreen}>
-                    <FontAwesomeIcon icon={faChevronRight} />
-                  </div>
-                </div>
-
-                <div className={styles.sliderContainer}>
-                  <Slider ref={sliderRefFullScreen} {...settings}>
-                    {data._medias &&
-                      photosDuBien(data._medias).map((url, index) => {
-                        if (url) {
-                          return (
-                            <img
-                              key={index}
-                              src={imageUrl(url, 2000)}
-                              alt={`${data.title || 'Bien'} – vue ${index + 1}`}
-                              loading='lazy'
-                            />
-                          )
-                        }
-                        return null
-                      })}
-                  </Slider>
-                </div>
-
-                <div
-                  className={styles.closeSliderButton}
-                  onClick={() => setFullScreen(!fullScreen)}
-                >
-                  <FontAwesomeIcon icon={faXmark} />
-                </div>
-              </div>
-            )}
-          </FadeIn>
+      {/* L'arrivée */}
+      <section className={styles.arrivee}>
+        {photos[0] && (
+          <img
+            className={styles.arriveePhoto}
+            src={imageUrl(photos[0], 2000)}
+            alt={vue.titre}
+            style={filtrePhoto}
+          />
         )}
-      </div>
-
-      {dataBienDispo.length > 0 && (
-        <div className={styles.BienRecommandeContainer}>
-          <h3>Biens qui pourraient vous plaire</h3>
-          <Slider {...settingsBienRecommander}>
-            {dataBienDispo.map((bien) =>
-              bien?.ref !== reference ? (
-                <CardSlider
-                  key={bien.ref}
-                  image={bien?._medias?.image_galerie_0?.url}
-                  price={bien?.prix}
-                  localisation={bien?.localisation}
-                  caracteristiques={bien?.caracteristiques}
-                  status={bien?.status}
-                  reference={bien?.ref}
-                />
-              ) : null,
+        <div className={styles.arriveeTexte}>
+          <div className={styles.arriveeTitre}>
+            <span className='etiquette'>{vue.lieu}</span>
+            <h1>{vue.titre}</h1>
+            {vue.chapitre && <span className={styles.chapitre}>{vue.chapitre}</span>}
+          </div>
+          <div className={styles.arriveePrix}>
+            {bien.status !== 'disponible' && <span className={styles.statut}>{vue.statut}</span>}
+            {bien.status === 'disponible' && <span className={styles.prix}>{vue.prix}</span>}
+            <span className='etiquette'>{vue.chiffres.slice(0, 2).join(' · ')}</span>
+            {photos.length > 1 && (
+              <button type='button' className='lien-souligne' onClick={() => setVisionneuse(0)}>
+                Voir les {photos.length} photos
+              </button>
             )}
-          </Slider>
+          </div>
         </div>
+      </section>
+
+      {/* Les chiffres clés */}
+      {vue.chiffres.length > 0 && (
+        <div className={styles.chiffres}>
+          {vue.chiffres.map((c) => (
+            <span key={c}>{c}</span>
+          ))}
+        </div>
+      )}
+
+      {/* Le récit, d'un seul tenant */}
+      <section className={styles.recit}>
+        <Apparition className={styles.ouverture}>
+          <span className='etiquette'>L’histoire du lieu</span>
+          {vue.recit.ouverture.map((p, k) =>
+            k === vue.recit.ouverture.length - 1 ? (
+              <p key={p} className={styles.ouverturePhrase}>
+                {p}
+              </p>
+            ) : (
+              <p key={p} className={styles.ouvertureSurtitre}>
+                {p}
+              </p>
+            ),
+          )}
+          <span className='filet'></span>
+        </Apparition>
+
+        <div className={styles.lecture}>
+          <article className={styles.texte}>
+            {vue.recit.corps.map((p, k) => (
+              <p key={k}>{p}</p>
+            ))}
+            {vue.recit.signature.length > 0 && (
+              <p className={styles.signature}>
+                {vue.recit.signature.map((s, k) => (
+                  <span key={k}>{s}</span>
+                ))}
+              </p>
+            )}
+          </article>
+
+          <aside className={styles.encadre}>
+            <span className='etiquette'>{vue.statut}</span>
+            <span className={styles.encadrePrix}>{vue.prix}</span>
+            <span className={styles.encadreInfos}>{vue.chiffres.slice(0, 2).join(' · ')}</span>
+            {bien.status !== 'vendu' && (
+              <Link to='/nous-contacter' state={{ reference: bien.ref, titre: vue.titre }} className='bouton-plein'>
+                Organiser une visite
+              </Link>
+            )}
+            <div className={styles.encadreContact}>
+              <span>Néné Mar, Marli Immobilier</span>
+              <a href={TELEPHONE_LIEN}>{TELEPHONE}</a>
+              <span className={styles.reference}>Réf. {bien.ref}</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* Les photos, après le récit */}
+      {blocsPhotos.length > 0 && (
+        <section className={styles.photos}>
+          {blocsPhotos.map((bloc, k) => (
+            <Apparition key={k} className={bloc.type === 'duo' ? styles.photosDuo : styles.photosPleine}>
+              {bloc.photos.map((p) => (
+                <button
+                  key={p.index}
+                  type='button'
+                  className={styles.photo}
+                  onClick={() => setVisionneuse(p.index)}
+                  aria-label={`Agrandir la photo ${p.index + 1}`}
+                >
+                  <img src={imageUrl(p.url, bloc.type === 'duo' ? 1200 : 2000)} alt='' loading='lazy' style={filtrePhoto} />
+                </button>
+              ))}
+            </Apparition>
+          ))}
+          {photos.length > 1 && (
+            <div className={styles.photosLien}>
+              <button type='button' className='bouton-contour' onClick={() => setVisionneuse(0)}>
+                Voir toutes les photos ({photos.length})
+              </button>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* La visite vidéo */}
+      {vue.video && (
+        <section className={styles.video}>
+          <span className='etiquette'>Visite vidéo</span>
+          <div className={styles.videoCadre}>
+            {urlVideoIntegree(vue.video) ? (
+              <iframe
+                src={urlVideoIntegree(vue.video)}
+                title='Visite vidéo du bien'
+                frameBorder='0'
+                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                allowFullScreen
+              />
+            ) : (
+              <video src={vue.video} controls playsInline />
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Le bien en détail */}
+      <section className={styles.details}>
+        <div className={styles.detailsColonne}>
+          <h2 className='titre-moyen'>Le bien en détail</h2>
+          <ul className={styles.listeDetails}>
+            {vue.details.map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+          </ul>
+        </div>
+        {vue.reglementaire.length > 0 && (
+          <div className={styles.detailsColonne}>
+            <h2 className='titre-moyen'>Informations réglementaires</h2>
+            <div className={styles.reglementaire}>
+              {vue.reglementaire.map((d) => (
+                <p key={d}>{d}</p>
+              ))}
+              <p>Réf. {bien.ref}</p>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* D'autres histoires */}
+      {autres.length > 0 && (
+        <section className={styles.autres}>
+          <Apparition className={styles.autresEntete}>
+            <span className='etiquette'>À découvrir aussi</span>
+            <h2 className='titre-grand'>D’autres histoires</h2>
+          </Apparition>
+          <div className={styles.autresGrille}>
+            {autres.map((b) => (
+              <Apparition key={b.ref}>
+                <CarteBien bien={b} hauteurPhoto={420} largeurImage={800} />
+              </Apparition>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* La fin */}
+      {bien.status !== 'vendu' && (
+        <section className={styles.fin}>
+          <p className={styles.finPhrase}>Ce lieu vous parle ?</p>
+          <p className={styles.finTexte}>Venez le découvrir et écrire la suite de son histoire.</p>
+          <div className={styles.finBoutons}>
+            <Link to='/nous-contacter' state={{ reference: bien.ref, titre: vue.titre }} className='bouton-plein'>
+              Organiser une visite
+            </Link>
+            <a href={TELEPHONE_LIEN} className='bouton-contour'>
+              {TELEPHONE}
+            </a>
+          </div>
+        </section>
+      )}
+
+      {/* Barre d'action fixe sur téléphone */}
+      {bien.status !== 'vendu' && (
+        <div className={styles.barreMobile}>
+          <span>{vue.prix}</span>
+          <Link to='/nous-contacter' state={{ reference: bien.ref, titre: vue.titre }} className='bouton-plein'>
+            Visiter
+          </Link>
+        </div>
+      )}
+
+      {visionneuse !== null && (
+        <Visionneuse
+          photos={photos}
+          depart={visionneuse}
+          titre={vue.titre}
+          noirEtBlanc={vue.vendu}
+          onFermer={() => setVisionneuse(null)}
+        />
       )}
     </>
   )

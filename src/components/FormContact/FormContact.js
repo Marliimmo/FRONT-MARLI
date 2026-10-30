@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import styles from './FormContact.module.scss'
 // import ReCAPTCHA from 'react-google-recaptcha'
 
 function FormContact() {
-  const [titleMessage, setTitleMessage] = useState('')
+  // Depuis la page d'un bien (« Organiser une visite »), le message est déjà préparé
+  const { state: depuisBien } = useLocation()
+  const [titleMessage, setTitleMessage] = useState(
+    depuisBien?.reference ? `Visite : ${depuisBien.titre || 'bien'} (réf. ${depuisBien.reference})` : '',
+  )
   const [motif, setMotif] = useState('Acheter un bien')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [contenu, setContenu] = useState('')
+  const [contenu, setContenu] = useState(
+    depuisBien?.reference ? 'Bonjour, je souhaite organiser une visite de ce bien.' : '',
+  )
   const [loading, setLoading] = useState(false)
   const [succesSend, setSuccesSend] = useState('')
   // const [isCaptchaVerified, setIsCaptchaVerified] = useState(false)
