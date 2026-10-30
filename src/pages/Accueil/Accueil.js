@@ -131,10 +131,9 @@ function Accueil() {
         <div className={styles.arriveeTexte}>
           <img className={styles.arriveeLogo} src={Logo} alt='Marli, passeur d’histoires immobilières' />
           <span className='filet'></span>
-          <MachineAEcrire
-            className={styles.arriveePhrase}
-            texte='Les transactions immobilières sont avant tout des histoires humaines et des passages de témoin'
-          />
+          <p className={styles.arriveePhrase}>
+            Les transactions immobilières sont avant tout des histoires humaines et des passages de témoin
+          </p>
           <Link to='/acheter' className='lien-souligne'>
             Découvrir nos histoires
           </Link>
@@ -151,7 +150,12 @@ function Accueil() {
           <span className='etiquette'>Marli</span>
           <span className='filet'></span>
           <p>Nous souhaitons faciliter vos projets immobiliers de leur conception à leur aboutissement.</p>
-          <p className={styles.promesseFin}>Votre satisfaction est notre première gratitude.</p>
+          <MachineAEcrire
+            className={styles.promesseFin}
+            texte='Votre satisfaction est notre première gratitude.'
+            vitesse={65}
+            aLaVue
+          />
         </Apparition>
       </section>
 
