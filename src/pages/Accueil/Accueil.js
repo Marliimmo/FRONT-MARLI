@@ -149,7 +149,7 @@ function Accueil() {
         <Apparition className={styles.promesseTexte}>
           <span className='etiquette'>Marli</span>
           <span className='filet'></span>
-          <p>Nous souhaitons faciliter vos projets immobiliers de leur conception à leur aboutissement.</p>
+          <p>Nous accompagnons votre projet immobilier, de sa conception à son aboutissement.</p>
           <MachineAEcrire
             className={styles.promesseFin}
             texte='Votre satisfaction est notre première gratitude.'
