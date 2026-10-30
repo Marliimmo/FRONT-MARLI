@@ -10,7 +10,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.7) 100%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 55%, rgba(0, 0, 0, 0.3) 100%);
   }
 }
 
@@ -35,12 +35,14 @@
 
 .texte {
   position: absolute;
-  left: $marge-page;
-  right: $marge-page;
-  bottom: 56px;
+  inset: 0;
   z-index: 1;
+  padding: 0 $marge-page;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 14px;
 
   :global(.etiquette) {
@@ -58,13 +60,9 @@
     margin: 0;
     font-weight: 300;
     font-size: clamp(17px, 1.5vw, 22px);
+    max-width: 760px;
+    text-wrap: balance;
     color: #E6E6E6;
-  }
-}
-
-@media screen and (max-width: $ecran-mobile) {
-  .texte {
-    bottom: 32px;
   }
 }
 
