@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/24.jpg'
+import Image from '../../assets/images/jacottot/bandeau-acheter.jpg' // photo : J. Jacottot
 import { Link } from 'react-router-dom'
 import styles from './Acheter.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

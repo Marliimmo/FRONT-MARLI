@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/1.jpg'
+import Image from '../../assets/images/jacottot/bandeau-avis-de-recherche.jpg' // photo : J. Jacottot
 import styles from './AvisDeRecherche.module.scss'
 import FormVendreOuRecherche from '../../components/FormVendreOuRecherche/FormVendreOuRecherche'
 import Slider from 'react-slick'

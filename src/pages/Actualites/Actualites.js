@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/banniere-actualites.jpg'
+import Image from '../../assets/images/jacottot/bandeau-actualites.jpg' // photo : J. Jacottot
 import styles from './Actualites.module.scss'
 import { Helmet } from 'react-helmet-async'
 

@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
-import ImgCouverture from '../../assets/images/couverture-accueil.jpg'
-import ImgReflet from '../../assets/images/4.jpg'
-import ImgRefletCouleur from '../../assets/images/5.jpg'
-import ImgAcheter from '../../assets/images/2.jpg'
-import ImgVendre from '../../assets/images/30.jpg'
-import ImgInvestir from '../../assets/images/13.jpg'
-import ImgPortraitCouleur from '../../assets/images/portrait-couleur.jpg'
+// Photos : J. Jacottot
+import ImgCouverture from '../../assets/images/jacottot/couverture-quais-nuit.jpg'
+import ImgReflet from '../../assets/images/jacottot/promesse-toits.jpg'
+import ImgRefletCouleur from '../../assets/images/jacottot/promesse-verre.jpg'
+import ImgAcheter from '../../assets/images/jacottot/service-acheter.jpg'
+import ImgVendre from '../../assets/images/jacottot/service-vendre.jpg'
+import ImgInvestir from '../../assets/images/jacottot/service-investir.jpg'
+import ImgAvis from '../../assets/images/jacottot/avis-ville-soir.jpg'
 import CardAddReview from '../../components/CardAddReview/CardAddReview'
 import Apparition from '../../components/Refonte/Apparition'
 import MachineAEcrire from '../../components/Refonte/MachineAEcrire'
@@ -124,6 +125,9 @@ function Accueil() {
 
       {/* L'arrivée */}
       <section className={styles.arrivee}>
+        <div className={styles.arriveePhoto}>
+          <img src={ImgCouverture} alt='Les quais du Doubs à Besançon, la nuit, et leurs reflets' />
+        </div>
         <div className={styles.arriveeTexte}>
           <img className={styles.arriveeLogo} src={Logo} alt='Marli, passeur d’histoires immobilières' />
           <span className='filet'></span>
@@ -135,16 +139,13 @@ function Accueil() {
             Découvrir nos histoires
           </Link>
         </div>
-        <div className={styles.arriveePhoto}>
-          <img src={ImgCouverture} alt='Portrait peint dans une rue de Besançon' />
-        </div>
       </section>
 
       {/* La promesse */}
       <section className={styles.promesse}>
         <Apparition className={styles.promessePhotos}>
-          <img className={styles.photoArriere} src={ImgReflet} alt='Reflet d’une rue de Besançon dans une flaque' loading='lazy' />
-          <img className={styles.photoAvant} src={ImgRefletCouleur} alt='Reflet d’un arbre au bord de l’eau' loading='lazy' />
+          <img className={styles.photoArriere} src={ImgReflet} alt='Les toits et clochers de Besançon' loading='lazy' />
+          <img className={styles.photoAvant} src={ImgRefletCouleur} alt='Besançon reflétée dans un verre' loading='lazy' />
         </Apparition>
         <Apparition className={styles.promesseTexte}>
           <span className='etiquette'>Marli</span>
@@ -206,7 +207,7 @@ function Accueil() {
       {/* Parole libre */}
       <section className={styles.avis} id='avisContainer'>
         <div className={styles.avisPhoto}>
-          <img src={ImgPortraitCouleur} alt='Portrait peint dans une rue de Besançon, en couleur' loading='lazy' />
+          <img src={ImgAvis} alt='Besançon à la tombée de la nuit, fenêtres éclairées' loading='lazy' />
         </div>
         <div className={styles.avisContenu}>
         <div className={styles.avisResume}>

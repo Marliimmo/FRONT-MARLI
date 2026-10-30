@@ -44,7 +44,7 @@ function Footer() {
 
       <div className={styles.bas}>
         <span>© {new Date().getFullYear()} Marli Immobilier · Besançon, Doubs, Franche-Comté</span>
-        <span>Crédit photo : Sylvie Barras</span>
+        <span>Crédits photo : J. Jacottot · Sylvie Barras</span>
       </div>
     </footer>
   )
