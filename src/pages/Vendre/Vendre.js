@@ -1,153 +1,154 @@
-import React, { useEffect, useRef, useState } from 'react'
-import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/jacottot/bandeau-vendre.jpg' // photo : J. Jacottot
-import styles from './Vendre.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-import CardSlider from '../../components/CardSlider/CardSlider'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import FormVendreOuRecherche from '../../components/FormVendreOuRecherche/FormVendreOuRecherche'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { SlideOfRight } from '../../components/AnimatedComponents/AnimatedComponents'
+import styles from './Vendre.module.scss'
+import Image from '../../assets/images/jacottot/bandeau-vendre.jpg' // photo : Jean-Claude Jacottot
+import BandeauPage from '../../components/Refonte/BandeauPage'
+import Apparition from '../../components/Refonte/Apparition'
+import { resumeBien } from '../../components/Refonte/CarteBien'
+import FormVendreOuRecherche from '../../components/FormVendreOuRecherche/FormVendreOuRecherche'
+import { imageUrl } from '../../utils/images'
+
+const CRITERES = [
+  'Chaque bien est unique : sa valeur dépend de plusieurs variables.',
+  'L’année de construction, le standing, la rareté, l’état général du bien et du bâtiment.',
+  'L’environnement visuel et sonore, la comparaison avec des biens similaires, le marché local.',
+  'Et notre petit doigt…',
+]
+
+const ETAPES = [
+  {
+    titre: 'L’estimation',
+    texte: 'Une visite attentive et une analyse du marché local pour fixer le prix juste, condition d’une vente sereine.',
+  },
+  {
+    titre: 'Le récit',
+    texte: 'Nous cherchons l’histoire de votre bien et nous l’écrivons : c’est elle qui donne envie de le visiter.',
+  },
+  {
+    titre: 'La mise en lumière',
+    texte: 'Des photos soignées, une annonce sur notre site, nos réseaux et les portails, auprès de notre portefeuille d’acquéreurs.',
+  },
+  {
+    titre: 'Le passage de témoin',
+    texte: 'Visites, négociation, compromis, signature : nous vous accompagnons jusqu’à la remise des clés.',
+  },
+]
 
 function Vendre() {
-  const sliderRef = useRef(null)
-  const [dataBienVendu, setDataBienVendu] = useState([])
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: dataBienVendu.length >= 2 ? 2 : dataBienVendu.length,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: dataBienVendu.length >= 2 ? 2 : dataBienVendu.length,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: dataBienVendu.length >= 2 ? 2 : dataBienVendu.length,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  }
+  const [vendus, setVendus] = useState([])
 
   useEffect(() => {
-    const fecthBienVendu = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bien/all-biens?status=vendu&triPar=decroissant&pageSize=999`,
-      )
-      if (response.ok) {
-        const result = await response.json()
-        setDataBienVendu(result.biens)
+    const charger = async () => {
+      try {
+        const reponse = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=vendu&triPar=decroissant&pageSize=6`,
+        )
+        if (reponse.ok) {
+          const resultat = await reponse.json()
+          setVendus((resultat.biens || []).slice(0, 6))
+        }
+      } catch (e) {
+        // la section reste simplement masquée
       }
     }
-
-    fecthBienVendu()
+    charger()
   }, [])
+
   return (
     <>
       <Helmet>
         <title>Vendre votre bien immobilier à Besançon et alentours - Marli Immobilier</title>
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/vendre' />
-        {/* <meta name="robots" content="index, follow" /> */}
-        <meta name='description' content='Estimation gratuite et vente de votre bien immobilier à Besançon et dans un rayon de 50km. Marli Immobilier vous accompagne de A à Z.' />
-      </Helmet>
-      <div className={styles.allContainer}>
-        <FirstSectionPage
-          ImgPremierePlan={Image}
-          title='Combien ça coûte ?'
-          // description='Une estimation au prix juste, condition sine qua non à la vente'
+        <meta
+          name='description'
+          content='Estimation au prix juste et vente de votre bien à Besançon, dans le Doubs, la Haute-Saône et le Jura. Marli Immobilier raconte l’histoire de votre bien et vous accompagne jusqu’à la signature.'
         />
+      </Helmet>
 
-        <div className={styles.chekedContainer}>
-          {/* <h3>Comment faisons-nous</h3> */}
-          <h3>Une estimation au prix juste</h3>
-          <div className={styles.ListeCheckContainer}>
-            <SlideOfRight>
-              <div className={styles.oneChecked}>
-                <FontAwesomeIcon icon={faCheckCircle} />
-                <p>
-                  Chaque bien est unique. Sa valeur dépend de plusieurs
-                  variables.
-                </p>
-              </div>
-            </SlideOfRight>
+      <BandeauPage
+        photo={Image}
+        alt='Les quais de Besançon et leurs reflets'
+        etiquette='Vendre'
+        titre='Combien ça coûte ?'
+        accroche='Une estimation au prix juste, puis une histoire racontée pour trouver ceux qui prendront le relais.'
+      />
 
-            <SlideOfRight>
-              <div className={styles.oneChecked}>
-                <FontAwesomeIcon icon={faCheckCircle} />
-                <p>
-                  Année de construction, standing, rareté, état général du bien
-                  et du bâtiment.
-                </p>
-              </div>
-            </SlideOfRight>
+      {/* L'estimation */}
+      <section className={styles.estimation}>
+        <Apparition className={styles.estimationTitre}>
+          <span className='etiquette'>L’estimation</span>
+          <h2 className='titre-grand'>Une estimation au prix juste</h2>
+        </Apparition>
+        <ol className={styles.criteres}>
+          {CRITERES.map((c, k) => (
+            <Apparition as='li' key={c}>
+              <span className={styles.numero}>{String(k + 1).padStart(2, '0')}</span>
+              <p>{c}</p>
+            </Apparition>
+          ))}
+        </ol>
+      </section>
 
-            <SlideOfRight>
-              <div className={styles.oneChecked}>
-                <FontAwesomeIcon icon={faCheckCircle} />
-                <p>
-                  Environnement visuel et sonore, positionnement par rapport à
-                  des biens similaires, marché local.
-                </p>
-              </div>
-            </SlideOfRight>
-
-            <SlideOfRight>
-              <div className={styles.oneChecked}>
-                <FontAwesomeIcon icon={faCheckCircle} />
-                <p>Plus notre petit doigt…</p>
-              </div>
-            </SlideOfRight>
-          </div>
+      {/* La méthode */}
+      <section className={styles.methode}>
+        <Apparition className={styles.entete}>
+          <span className='etiquette'>Notre méthode</span>
+          <h2 className='titre-grand'>De l’estimation à la remise des clés</h2>
+        </Apparition>
+        <div className={styles.etapes}>
+          {ETAPES.map((e, k) => (
+            <Apparition key={e.titre} className={styles.etape}>
+              <span className={styles.numero}>{String(k + 1).padStart(2, '0')}</span>
+              <h3>{e.titre}</h3>
+              <p>{e.texte}</p>
+            </Apparition>
+          ))}
         </div>
+      </section>
 
-        <div className={styles.formContainer}>
-          <h3>Parlez-nous de votre bien</h3>
+      {/* Le formulaire */}
+      <section className={styles.formulaire} id='estimation'>
+        <div className={styles.formulaireCadre}>
+          <span className='etiquette'>Estimation offerte</span>
+          <h2 className='titre-grand'>Parlez-nous de votre bien</h2>
+          <p className={styles.formulaireTexte}>
+            Quelques informations suffisent : nous revenons vers vous pour convenir d’une visite.
+          </p>
           <FormVendreOuRecherche context='vendre' />
         </div>
+      </section>
 
-        {dataBienVendu.length > 0 && (
-          <div className={styles.BienVenduContainer}>
-            <h3>Nos biens vendus</h3>
-            <Slider ref={sliderRef} {...settings}>
-              {dataBienVendu.map((bien) => (
-                <CardSlider
-                  key={bien.ref}
-                  image={bien?._medias?.image_galerie_0?.url}
-                  price={bien?.prix}
-                  localisation={bien?.localisation}
-                  caracteristiques={bien?.caracteristiques}
-                  status={bien?.status}
-                  reference={bien?.ref}
-                />
-              ))}
-            </Slider>
+      {/* Les histoires déjà écrites */}
+      {vendus.length > 0 && (
+        <section className={styles.vendus}>
+          <Apparition className={styles.entete}>
+            <span className='etiquette'>Ils nous ont fait confiance</span>
+            <h2 className='titre-grand'>Les histoires déjà écrites</h2>
+          </Apparition>
+          <div className={styles.grilleVendus}>
+            {vendus.map((b) => {
+              const r = resumeBien(b)
+              const photo = b?._medias?.image_galerie_0?.url
+              return (
+                <Link key={b.ref} to={`/bien/${b.ref}`} className={styles.vendu}>
+                  <div className={styles.venduPhoto}>
+                    {photo && <img src={imageUrl(photo, 700)} alt={r.titre} loading='lazy' />}
+                  </div>
+                  <span className='etiquette'>{r.lieu}</span>
+                  <span className={styles.venduTitre}>{r.titre}</span>
+                </Link>
+              )
+            })}
           </div>
-        )}
-      </div>
+          <div className={styles.lienCentre}>
+            <Link to='/acheter' className='lien-souligne'>
+              Toutes nos histoires
+            </Link>
+          </div>
+        </section>
+      )}
     </>
   )
 }
