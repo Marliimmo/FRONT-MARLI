@@ -72,7 +72,7 @@ function Vendre() {
         alt='Les quais de Besançon et leurs reflets'
         etiquette='Vendre'
         titre='Combien ça coûte ?'
-        accroche='Le prix juste, et une histoire à raconter.'
+        accroche='Le juste prix, et une histoire à raconter.'
       />
 
       {/* L'estimation */}
