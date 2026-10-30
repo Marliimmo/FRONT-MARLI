@@ -1,731 +1,351 @@
 @import "../../assets/styles/variables";
 
-.firstSectionContainer{
+.titreReferencement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+// L'arrivée
+.arrivee {
+  display: flex;
+  height: calc(100vh - #{$hauteur-entete});
+  min-height: 600px;
+  max-height: 1100px;
+  overflow: hidden;
+}
+
+.arriveeTexte {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 34px;
+  padding: 0 8%;
+}
+
+.arriveeLogo {
+  width: clamp(130px, 12vw, 200px);
+}
+
+.arriveePhrase {
+  max-width: 620px;
+  font-weight: 200;
+  font-size: clamp(30px, 3.2vw, 52px);
+  line-height: 1.3;
+}
+
+.arriveePhoto {
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  max-width: 48%;
+  background-color: $surface;
+
+  img {
+    display: block;
     width: 100%;
-    height: calc(100vh - 73px);
-    min-height: 560px;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+}
+
+// La promesse
+.promesse {
+  padding: 170px $marge-page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+
+  p {
+    margin: 0;
+    max-width: 980px;
+    font-weight: 200;
+    font-size: clamp(24px, 2.6vw, 40px);
+    line-height: 1.45;
+  }
+}
+
+.promesseFin {
+  white-space: nowrap;
+}
+
+// En-tête commun aux sections
+.enteteSection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 56px;
+
+  > div {
     display: flex;
-    align-items: stretch;
-    background-color: $font-color;
-    overflow: hidden;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+// Nos nouvelles histoires
+.histoires {
+  padding: 0 $marge-page 170px;
+}
+
+.grilleBiens {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+// Nos services
+.services {
+  background-color: $noir;
+  padding: 150px $marge-page;
+}
+
+.grilleServices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  padding-top: 32px;
+  border-top: 1px solid $ligne;
+
+  h3 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 28px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $texte-doux;
+  }
+
+  :global(.lien-souligne) {
+    margin-top: 10px;
+  }
+}
+
+.serviceNum {
+  font-weight: 200;
+  font-size: 15px;
+  letter-spacing: 3px;
+  color: $texte-discret;
+}
+
+// Parole libre
+.avis {
+  padding: 160px $marge-page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 36px;
+
+  button:global(.lien-souligne) {
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+  }
+}
+
+.avisCitation {
+  margin: 0;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  animation: avis-fondu 0.9s ease both;
+
+  blockquote {
+    margin: 0;
+    font-weight: 200;
+    line-height: 1.55;
+  }
+}
+
+.avisTexte {
+  font-size: clamp(22px, 2.2vw, 32px);
+}
+
+.avisTexteLong {
+  font-size: clamp(18px, 1.6vw, 22px);
+}
+
+@keyframes avis-fondu {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.avisReperes {
+  display: flex;
+  gap: 4px;
+}
+
+.repere,
+.repereActif {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background-color: #5A5A5A;
+    transition: background-color $transition-douce;
+  }
+}
+
+.repereActif span {
+  background-color: $blanc;
+}
+
+.avisMerci {
+  margin: 0;
+  font-weight: 300;
+  color: $texte-doux;
+}
+
+.avisFormulaire {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+// La fin
+.fin {
+  background-color: $noir;
+  padding: 150px $marge-page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+.finPhrase {
+  font-weight: 200;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.25;
+}
+
+.finBoutons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+// Tablette
+@media screen and (max-width: 1100px) {
+  .grilleBiens {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grilleServices {
+    gap: 36px;
+  }
+}
+
+// Téléphone
+@media screen and (max-width: $ecran-mobile) {
+  .arrivee {
     position: relative;
+    height: 75vh;
+    min-height: 520px;
+  }
 
-    .TextContent{
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        gap: clamp(20px, 2.2vw, 40px);
-        padding: 0 6%;
-        z-index: 2;
+  .arriveePhoto {
+    position: absolute;
+    inset: 0;
+    max-width: none;
+    aspect-ratio: auto;
 
-        p{
-            margin: 0;
-        }
-
-        img{
-            width: clamp(150px, 11vw, 240px);
-        }
-
-        .filet{
-            width: 70px;
-            height: 1px;
-            background-color: $white-color;
-            opacity: 0.6;
-        }
-
-        h3{
-            max-width: 18em;
-            font-weight: 300;
-            font-size: clamp(24px, 2.1vw, 44px);
-            line-height: 1.45;
-            letter-spacing: 0.5px;
-        }
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
     }
+  }
 
-    .ImgPremierePlan{
-        height: 100%;
-        width: auto;
-        aspect-ratio: 2 / 3;
-        max-width: 50%;
-        object-fit: cover;
-        object-position: 50% 60%;
-        display: block;
-        flex-shrink: 0;
-        z-index: 1;
-    }
-
-    .opacityBlack{
-        display: none;
-    }
-
-    @media screen and (max-width: 1100px) {
-        .TextContent{
-            padding: 0 5%;
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        height: 60vh;
-        min-height: 420px;
-        justify-content: center;
-
-        .ImgPremierePlan{
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            max-width: 100%;
-            height: 100%;
-            aspect-ratio: auto;
-            object-position: center 35%;
-        }
-
-        .opacityBlack{
-            display: block;
-            position: absolute;
-            inset: 0;
-            background-color: black;
-            opacity: 0.5;
-            z-index: 1;
-        }
-
-        .TextContent{
-            align-items: center;
-            text-align: center;
-            padding: 30px;
-            gap: 18px;
-
-            img{
-                width: 110px;
-            }
-
-            .filet{
-                display: none;
-            }
-
-            h3{
-                font-weight: 300;
-                font-size: 20px;
-            }
-        }
-    }
-
-    @media screen and (max-width: 420px) {
-        .TextContent{
-            h3{
-                font-size: 17px;
-            }
-        }
-    }
-}
-
-.borderStyle{
-    border-top: 3px solid $white-color;
-    width: 35%;
-    padding-top: 30px;
-}
-
-.presentationSection{
-    padding: 80px 10%;
-    padding-bottom: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  .arriveeTexte {
+    position: relative;
+    z-index: 1;
     align-items: center;
-    gap: 50px;
+    text-align: center;
+    padding: 0 30px;
+    gap: 24px;
 
-    .LeftContent{
-        height: 500px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 2px 2px 40px $font-color;
-        flex: 1 0 35%;
-        position: relative;
-        
-        img{
-            height: 70%;
-            width: 75%;
-            position: absolute;
-            object-fit: cover;
-            border-radius: 10px;
-
-            &:nth-child(1){
-                top: 0;
-                left: 0;
-            }
-
-            &:nth-child(2){
-                bottom: 5%;
-                right: 0;
-
-            }
-        }
+    :global(.filet) {
+      display: none;
     }
+  }
 
-    .RightContent{
-        flex: 1 0 45%;
+  .arriveePhrase {
+    font-size: 24px;
+    text-align: center !important;
+  }
 
-        // display: flex;
-        // flex-direction: column;
-        // align-items: center;
-        // text-align: center;
+  .promesse {
+    padding: 100px $marge-page;
+  }
 
-        p{
-            font-size: 18px;
-            font-weight: 200;
-            letter-spacing: 1px;
-            line-height: 35px;
-            
-            &:nth-child(3){
-                white-space: nowrap;
-                width: fit-content;
-                margin-top: 35px;
-                font-size: 28px;
-                font-weight: bold;
-                line-height: 50px;
-                position: relative;
-                color: transparent;
-                -webkit-text-stroke: 1px $white-color;
+  .promesseFin {
+    white-space: normal;
+  }
 
-                &::before{
-                    content: "A vous d'écrire la suite de l'histoire...";
-                    color: $white-color;
-                    position: absolute;
-                    top: 0;
-                    width: 0%;
-                    height: 100%;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    border-right: 2px solid $white-color;
-                    animation: animateX 7s linear infinite;
-                }
-            }
-        }
+  .histoires {
+    padding-bottom: 100px;
+  }
 
-        @keyframes animateX {
-            0%,10%,100% {
-                width: 0%;
-            }
-            70%, 90% {
-                width: 100%;
-            }
-        }
-    }
+  .grilleBiens,
+  .grilleServices {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
+  }
 
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-    }
-
-    @media screen and (max-width: 632px) {
-        .RightContent{
-            p{
-                &:nth-child(3){
-                    font-size: 18px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 460px) {
-        .RightContent{
-            p{
-                &:nth-child(3){
-                    font-size: 16px;
-                }
-            }
-        }
-        .LeftContent{
-            height: 300px;
-            flex: 1 0 100%;
-        }
-    }
-
-    @media screen and (max-width: 400px) {
-        .RightContent{
-            p{
-                &:nth-child(3){
-                    font-size: 13px;
-                }
-            }
-        }
-    }
-}
-
-// .NouveautesContainer2{
-//     width: 100%;
-//     overflow: hidden;
-//     padding: 30px 9% 0px 9%;
-
-//     .titleEslideBtn{
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//         padding: 10px 20px;
-//         flex-wrap: wrap;
-//         row-gap: 5px;
-//         margin-bottom: 25px;
-
-//         h3{
-//             font-weight: 500;
-//             font-size: 30px;
-//             letter-spacing: 1.3px;
-//         }
-
-//         .slideButton{
-//             width: 100px;
-//             display: flex;
-//             justify-content: space-between;
-
-//             div{
-//                 cursor: pointer;
-//                 width: 40px;
-//                 height: 40px;
-//                 min-width: 40px;
-//                 min-height: 40px;
-//                 background-color: $white-color;
-//                 border-radius: 100px;
-//                 display: flex;
-//                 justify-content: center;
-//                 align-items: center;
-//                 overflow: hidden;
-                
-//                 svg{
-//                     color: $gray-color;
-//                 }
-//             }
-//         }
-//     }
-
-//     .btnContainer{
-//         width: 100%;
-//         text-align: center;
-//         margin: 70px 0px 100px 0px;
-
-//         a{
-//             width: fit-content;
-//             padding: 20px 35px;
-//             border: 1px solid $white-color;
-//             border-radius: 100px;
-//             letter-spacing: 1.3px;
-//         }
-//     }
-// }
-
-.widget{
-    padding: 120px 9%;
-    background-color: $gray-color;
-
-    .NouveautesContainer{
-        width: 100%;
-        margin-bottom: 30px;
-        overflow: hidden;
-        position: relative;
-
-        .allNewBienCard{
-            width: 100%;
-            height: fit-content;
-            // background-color: red;
-            padding-left: 8px;
-            .slidebtn{
-                display: none;
-            }
-
-            &:hover{
-                .slidebtn{
-                    display: block;
-                }
-            }
-
-            @media screen and (max-width: 899px) {
-                padding-left: 0px;
-                padding-right: 5px;
-                .slidebtn{
-                    display: block;
-                }
-            }
-        }
-            
-        h3{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 200;
-            font-size: 30px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 55px;
-        }
-
-        .slideButton, .slideButtonForMobile{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            position: absolute;
-            top: 30%;
-            left: 0;
-
-            div{
-                cursor: pointer;
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
-                min-height: 40px;
-                background-color: $white-color;
-                border-radius: 100px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden;
-                z-index: 10;
-                
-                svg{
-                    color: $gray-color;
-                }
-            }
-        }
-
-        .btnContainer{
-            width: 100%;
-            text-align: center;
-            margin: 70px 0px 180px 0px;
-
-            a{
-                width: fit-content;
-                padding: 20px 35px;
-                // background-color: $white-color;
-                // border: 1px solid $white-color;
-                // color: $gray-color;
-                border: 1px solid $white-color;
-                color: $white-color;
-                font-size: 18px;
-                border-radius: 100px;
-            }
-
-        }
-
-        // @media screen and (min-width: 899px) {
-        //     .slideButtonForMobile{
-        //         display: none;
-        //     }
-        // }
-
-        // @media screen and (max-width: 900px) {
-        //     .slideButton{
-        //         display: none;
-        //     }
-        // }
-    }
-    
-    .sectionChecked{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        column-gap: 80px;
-
-        .LeftContent{
-            height: 575px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 2px 2px 40px $font-color;
-            width: 40%;
-            // flex: 0 0 40%;
-            // box-shadow: 2px 2px 100px $white-color;
-
-            img{
-                height: 575px;
-                width: 100%;
-                object-fit: cover;
-            }
-
-            // &:hover{
-            //     box-shadow: 2px 2px 100px $white-color;
-            //     transition: all 200ms;
-            // }
-        }
-    
-        .RightContent{
-            // width: 55%;
-            // flex: 0 0 55%;
-            width: 35%;
-
-            h2{
-                font-weight: 500;
-                font-size: 35px;
-                margin-bottom: 20px;
-            }
-
-            .ListeCheckContainer{
-                margin-bottom: 75px;
-                .oneChecked{
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    column-gap: 18px;
-                    margin: 25px 0px;
-                    
-                    svg{
-                        font-size: 25px;
-                    }
-
-                    p{
-                        font-size: 17px;
-                        line-height: 28px;
-                        margin: 0;
-                        font-weight: 300;
-                    }
-                }
-            }
-
-            a{
-                width: fit-content;
-                padding: 20px 35px;
-                // background-color: $white-color;
-                // border: 1px solid $white-color;
-                // color: $gray-color;
-                border: 1px solid $white-color;
-                color: $white-color;
-                font-size: 18px;
-                border-radius: 100px;
-            }
-        }
-    }
-
-    .sectionChecked2{
-        margin-top: 150px;
-        flex-direction: row-reverse;
-    }
-
-    @media screen and (max-width: 966px) {
-        .sectionChecked{
-            flex-direction: column;
-
-            .LeftContent{
-                height: 300px;
-                margin-bottom: 35px;
-                width: 100%;
-                
-                img{
-                    height: 300px;
-                }
-            }
-
-            .RightContent{
-                width: 100%;
-                margin-bottom: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-    
-                .ListeCheckContainer{
-                    margin-bottom: 40px;
-                    .oneChecked{
-                        justify-content: center;
-                        flex-direction: column;
-                        text-align: center;
-
-                        svg{
-                            display: none;
-                        }
-                    }
-                }
-
-                .borderStyle{
-                    padding-top: 0px;
-                }
-            }
-        }
-
-        .NouveautesContainer{
-            .btnContainer{
-                margin-bottom: 120px;
-            }
-        }
-
-        > div{
-            &:nth-child(3){
-                margin-top: 80px;
-                flex-direction: column;
-            }
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-        .NouveautesContainer{
-            .titleEslideBtn{
-                padding: 0px;
-            }
-
-            .btnContainer{
-                a{
-                    padding: 20px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 420px) {
-        .NouveautesContainer{
-            margin-bottom: 0px;
-            h3{
-                font-size: 20px;
-                margin-bottom: 25px;
-                line-height: 30px;
-            }
-        }
-
-        .sectionChecked{
-            .RightContent{
-                h2{
-                  font-size: 30px;  
-                }
-            }
-        }
-    }
-}
-
-.investerSection{
-    padding: 100px 10%;
-    padding-top: 30px;
-    background-color: $gray-color;
-
-    div{
-        padding: 50px;
-        padding-bottom: 80px;
-        background-color: $white-color;
-        color: $gray-color;
-        border-radius: 18px;
-        
-        ul{
-            margin-bottom: 70px;
-            padding-left: 16px;
-            li{
-                list-style: initial;
-                font-size: 20px;
-                margin: 20px 0px;
-                line-height: 28px;
-            }
-        }
-    
-        h2{
-            font-size: 30px;
-            letter-spacing: 1.3px;
-            margin-bottom: 35px;
-        }
-    
-        a{
-            width: fit-content;
-            padding: 20px 35px;
-            background-color: $gray-color;
-            color: $white-color;
-            border-radius: 100px;
-            letter-spacing: 1.3px;
-        }
-    
-        @media screen and (max-width: 750px) {
-            h2{
-                font-size: 25px;
-            }
-    
-            ul{
-                li{
-                    font-size: 17px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-    }
-
-    @media screen and (max-width: 420px) {
-        div{
-            padding: 30px;
-            padding-bottom: 60px;
-        }
-    }
-}
-
-.AvisSection{
-    padding: 100px 9%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/21.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    .barStyleContainer{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 30px;
-
-        p{
-            width: 15%;
-        }
-    }
-
-    h2{
-        text-align: center;
-        font-weight: 500;
-        font-size: 35px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-    }
-
-    .btnSection{
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-
-        a{
-            width: fit-content;
-            button{
-                padding: 20px 35px;
-                border: 1px solid $white-color;
-                border-radius: 100px;
-                letter-spacing: 1.3px;
-                font-size: 17px;
-                color: $white-color;
-                background-color: transparent;
-                cursor: pointer;
-            }
-        }
-
-    }
-
-    .MessageFeedBackSucces{
-        margin-top: 15px;
-        text-align: center;
-        border-radius: 5px;
-        width: fit-content;
-        padding: 15px 20px;
-        color: $white-color;
-        font-size: 18px;
-        font-weight: 500;
-        background-color: green;
-    }
-
-    @media screen and (max-width: 420px) {
-        .barStyleContainer{
-            margin-top: 20px;
-            margin-bottom: 10px;
-            p{
-                width: 50%;
-            }
-        }
-
-        h2{
-            font-size: 30px;
-        }
-    }
+  .services,
+  .avis,
+  .fin {
+    padding: 100px $marge-page;
+  }
 }

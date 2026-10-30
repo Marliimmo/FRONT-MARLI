@@ -110,6 +110,7 @@ a:hover .photo-bien,
   width: 2px;
   height: 0.95em;
   margin-left: 4px;
+  margin-right: -6px; // le curseur ne prend pas de place : pas de retour à la ligne
   vertical-align: -0.1em;
   background-color: $blanc;
   animation: curseur-clignote 1s steps(1) infinite;

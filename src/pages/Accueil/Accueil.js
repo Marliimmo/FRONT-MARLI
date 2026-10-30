@@ -1,403 +1,250 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import styles from './Accueil.module.scss'
 import Logo from '../../assets/images/marli-logo.png'
-// import ImgImmeuble from '../../assets/images/united-states-spokane.jpg'
 import ImgCouverture from '../../assets/images/couverture-accueil.jpg'
-import ImgImmeuble4 from '../../assets/images/4.jpg'
-import ImgImmeuble2 from '../../assets/images/2.jpg'
-import ImgImmeuble30 from '../../assets/images/30.jpg'
-import ImgImmeuble5 from '../../assets/images/5.jpg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faArrowLeft,
-  faArrowRight,
-  faCheckCircle,
-} from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
-import CardSlider from '../../components/CardSlider/CardSlider'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import { useRef } from 'react'
-import CardAvis from '../../components/CardAvis/CardAvis'
 import CardAddReview from '../../components/CardAddReview/CardAddReview'
-import {
-  FadeIn,
-  SlideOfRight,
-  SlideDown,
-  SlideUp,
-} from '../../components/AnimatedComponents/AnimatedComponents'
-import { Link as ScrollLink } from 'react-scroll'
-import { Helmet } from 'react-helmet-async'
+import Apparition from '../../components/Refonte/Apparition'
+import MachineAEcrire from '../../components/Refonte/MachineAEcrire'
+import CarteBien from '../../components/Refonte/CarteBien'
+
+const SERVICES = [
+  {
+    num: '01',
+    titre: 'Acheter un bien',
+    points: [
+      'Identification de votre besoin',
+      'Sélection et visite ciblées',
+      'Négociation financière',
+      'Compromis, signature',
+    ],
+    lien: { to: '/acheter', label: 'Toutes nos histoires' },
+  },
+  {
+    num: '02',
+    titre: 'Vendre un bien',
+    points: [
+      'Estimation',
+      'Valorisation et mise en lumière',
+      'Commercialisation',
+      'Portefeuille clients acquéreurs conséquent',
+    ],
+    lien: { to: '/vendre', label: 'Estimer votre bien' },
+  },
+  {
+    num: '03',
+    titre: 'Investir dans l’immobilier',
+    points: [
+      'Chasseur de bien',
+      'Résidences secondaires au Sénégal, destination soleil 365/365j',
+      'Accompagnement, étude de faisabilité et rentabilité',
+    ],
+    lien: { to: '/nous-contacter', label: 'Nous contacter' },
+  },
+]
 
 function Accueil() {
-  const sliderRef = useRef(null)
-  const [dataBienNouveau, setDataBienNouveau] = useState([])
-  const [dataReviews, setDataReviews] = useState([])
-  const [showFormAvis, setShowFormAvis] = useState(false)
-  const [isSuccesSend, setIsSuccesSend] = useState('')
-
-  const handleSuccesSend = (value) => {
-    setIsSuccesSend(value)
-  }
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: window.innerWidth > 768 ? 2 : 1,
-    initialSlide: 0,
-  }
-
-  const settingsSliderAvis = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: dataReviews.length >= 3 ? 3 : dataReviews.length,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: dataReviews.length >= 3 ? 3 : dataReviews.length,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: dataReviews.length >= 2 ? 2 : dataReviews.length,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  }
-
-  const slidePrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPrev()
-    }
-  }
-
-  const slideNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickNext()
-    }
-  }
-
-  const handleChange = () => {
-    setShowFormAvis(!showFormAvis)
-  }
+  const [biens, setBiens] = useState([])
+  const [avis, setAvis] = useState([])
+  const [avisActif, setAvisActif] = useState(0)
+  const [formulaireAvis, setFormulaireAvis] = useState(false)
+  const [avisEnvoye, setAvisEnvoye] = useState(false)
 
   useEffect(() => {
-    const fecthBienDisponible = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=10`,
-      )
-      if (response.ok) {
-        const result = await response.json()
-        setDataBienNouveau(result.biens)
+    const chargerBiens = async () => {
+      try {
+        const reponse = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?status=disponible&triPar=croissant&pageSize=3`,
+        )
+        if (reponse.ok) {
+          const resultat = await reponse.json()
+          setBiens(resultat.biens || [])
+        }
+      } catch (e) {
+        // en cas d'erreur réseau, la section reste simplement vide
       }
     }
-
-    const getReviews = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/user/reviews`,
-      )
-      if (response.ok) {
-        const result = await response.json()
-        setDataReviews(result)
+    const chargerAvis = async () => {
+      try {
+        const reponse = await fetch(`${process.env.REACT_APP_API_URL}/user/reviews`)
+        if (reponse.ok) {
+          const resultat = await reponse.json()
+          setAvis(Array.isArray(resultat) ? resultat : [])
+        }
+      } catch (e) {
+        // idem
       }
     }
-
-    fecthBienDisponible()
-    getReviews()
+    chargerBiens()
+    chargerAvis()
   }, [])
+
+  // Les avis défilent seuls, un à la fois
+  useEffect(() => {
+    if (avis.length < 2) return undefined
+    const minuteur = setInterval(() => setAvisActif((i) => (i + 1) % avis.length), 8000)
+    return () => clearInterval(minuteur)
+  }, [avis.length])
+
+  const avisCourant = avis[avisActif]
+  const avisLong = avisCourant && avisCourant.description && avisCourant.description.length > 280
 
   return (
     <>
       <Helmet>
         <title>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</title>
-        <meta name='description' content="Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs et à 50km alentours. Votre passeur d'histoires immobilières." />
+        <meta
+          name='description'
+          content="Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs et à 50km alentours. Votre passeur d'histoires immobilières."
+        />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/' />
       </Helmet>
-      <div className={`fadinAnimation`}>
-        <div className={styles.firstSectionContainer}>
-          <h1 style={{position:"absolute",width:"1px",height:"1px",overflow:"hidden",clip:"rect(0,0,0,0)"}}>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</h1>
-          <div className={styles.TextContent}>
-            <SlideDown>
-              <p>
-                <img src={Logo} alt='logo-marli' />
-              </p>
-            </SlideDown>
-            <span className={styles.filet}></span>
-            <SlideUp>
-              <h3>
-                Les transactions immobilières sont avant tout des histoires
-                humaines et des passages de témoin
-              </h3>
-            </SlideUp>
-          </div>
-          <img
-            className={styles.ImgPremierePlan}
-            src={ImgCouverture}
-            alt='Portrait peint dans une rue de Besançon'
+
+      <h1 className={styles.titreReferencement}>
+        Marli Immobilier - Agence immobilière à Besançon et dans le Doubs
+      </h1>
+
+      {/* L'arrivée */}
+      <section className={styles.arrivee}>
+        <div className={styles.arriveeTexte}>
+          <img className={styles.arriveeLogo} src={Logo} alt='Marli, passeur d’histoires immobilières' />
+          <span className='filet'></span>
+          <MachineAEcrire
+            className={styles.arriveePhrase}
+            texte='Les transactions immobilières sont avant tout des histoires humaines et des passages de témoin'
           />
-          <div className={styles.opacityBlack}></div>
+          <Link to='/acheter' className='lien-souligne'>
+            Découvrir nos histoires
+          </Link>
         </div>
-
-        <FadeIn>
-          <div className={styles.presentationSection}>
-            <div className={styles.LeftContent}>
-              <img src={ImgImmeuble4} alt='img dressing' />
-              <img src={ImgImmeuble5} alt='img immeuble' />
-            </div>
-
-            <div className={styles.RightContent}>
-              <p className={styles.borderStyle}></p>
-              <p>
-                Nous souhaitons faciliter vos projets immobiliers de leur
-                conception à leur aboutissement.
-                <br /> Votre satisfaction sera notre première gratitude.
-              </p>
-
-              <p>A vous d'écrire la suite de l'histoire...</p>
-            </div>
-          </div>
-        </FadeIn>
-
-        <div className={styles.widget}>
-          <FadeIn>
-            <div className={styles.NouveautesContainer}>
-              <h3>Nos nouvelles histoires</h3>
-
-              <div className={styles.allNewBienCard}>
-                {dataBienNouveau.length > 2 && (
-                  <div className={styles.slidebtn}>
-                    <div className={styles.slideButton}>
-                      <div onClick={slidePrev}>
-                        <FontAwesomeIcon icon={faArrowLeft} />
-                      </div>
-                      <div onClick={slideNext}>
-                        <FontAwesomeIcon icon={faArrowRight} />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <Slider ref={sliderRef} {...settings}>
-                    {dataBienNouveau.map((bien) => (
-                      <div key={bien.ref}>
-                        <CardSlider
-                          image={bien?._medias?.image_galerie_0?.url}
-                          price={bien?.prix}
-                          localisation={bien?.localisation}
-                          caracteristiques={bien?.caracteristiques}
-                          status={bien?.status}
-                          reference={bien?.ref}
-                        />
-                      </div>
-                    ))}
-                  </Slider>
-                </div>
-              </div>
-
-              <div className={styles.btnContainer}>
-                <Link to='/acheter'>Nos autres histoires</Link>
-              </div>
-
-              <h3>Que faisons-nous pour vous ?</h3>
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className={styles.sectionChecked}>
-              <div className={styles.LeftContent}>
-                <img
-                  src={ImgImmeuble2}
-                  alt='img illustration de vente de bien'
-                />
-              </div>
-
-              <div className={styles.RightContent}>
-                <SlideOfRight>
-                  <h2>Acheter un bien</h2>
-                </SlideOfRight>
-                <p className={styles.borderStyle}></p>
-
-                <div className={styles.ListeCheckContainer}>
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Identification de votre besoin</p>
-                    </div>
-                  </SlideOfRight>
-
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Sélection et visite ciblées</p>
-                    </div>
-                  </SlideOfRight>
-
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Négociation financière</p>
-                    </div>
-                  </SlideOfRight>
-
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Compromis, signature</p>
-                    </div>
-                  </SlideOfRight>
-                </div>
-
-                <SlideOfRight>
-                  <Link to='/acheter'>Toutes nos histoires</Link>
-                </SlideOfRight>
-              </div>
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div
-              className={`${styles.sectionChecked} ${styles.sectionChecked2}`}
-            >
-              <div className={styles.LeftContent}>
-                <img
-                  src={ImgImmeuble30}
-                  alt='img illustration de vente de bien'
-                />
-              </div>
-
-              <div className={styles.RightContent}>
-                <SlideOfRight>
-                  <h2>Vendre un bien</h2>
-                </SlideOfRight>
-                <p className={styles.borderStyle}></p>
-
-                <div className={styles.ListeCheckContainer}>
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Estimation</p>
-                    </div>
-                  </SlideOfRight>
-
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Valorisation et mise en lumière</p>
-                    </div>
-                  </SlideOfRight>
-
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Commercialisation</p>
-                    </div>
-                  </SlideOfRight>
-
-                  <SlideOfRight>
-                    <div className={styles.oneChecked}>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                      <p>Portefeuille clients acquéreurs conséquent</p>
-                    </div>
-                  </SlideOfRight>
-                </div>
-
-                <SlideOfRight>
-                  <Link to='/vendre'>Estimer votre bien</Link>
-                </SlideOfRight>
-              </div>
-            </div>
-          </FadeIn>
+        <div className={styles.arriveePhoto}>
+          <img src={ImgCouverture} alt='Portrait peint dans une rue de Besançon' />
         </div>
+      </section>
 
-        <FadeIn>
-          <div className={styles.investerSection}>
+      {/* La promesse */}
+      <Apparition as='section' className={styles.promesse}>
+        <span className='etiquette'>Marli</span>
+        <p>Nous souhaitons faciliter vos projets immobiliers de leur conception à leur aboutissement.</p>
+        <p className={styles.promesseFin}>Votre satisfaction sera notre première gratitude.</p>
+      </Apparition>
+
+      {/* Nos nouvelles histoires */}
+      {biens.length > 0 && (
+        <section className={styles.histoires}>
+          <Apparition className={styles.enteteSection}>
             <div>
-              <h2>INVESTIR DANS L'IMMOBILIER</h2>
+              <span className='etiquette'>À découvrir</span>
+              <h2 className='titre-grand'>Nos nouvelles histoires</h2>
+            </div>
+            <Link to='/acheter' className='lien-souligne'>
+              Nos autres histoires
+            </Link>
+          </Apparition>
+          <div className={styles.grilleBiens}>
+            {biens.map((bien) => (
+              <Apparition key={bien.ref}>
+                <CarteBien bien={bien} hauteurPhoto={560} largeurImage={900} />
+              </Apparition>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Nos services */}
+      <section className={styles.services}>
+        <Apparition className={styles.enteteSection}>
+          <div>
+            <span className='etiquette'>Nos services</span>
+            <h2 className='titre-grand'>Que faisons-nous pour vous ?</h2>
+          </div>
+        </Apparition>
+        <div className={styles.grilleServices}>
+          {SERVICES.map((s) => (
+            <Apparition key={s.num} className={styles.service}>
+              <span className={styles.serviceNum}>{s.num}</span>
+              <h3>{s.titre}</h3>
               <ul>
-                <li>Chasseur de bien</li>
-                <li>
-                  Résidences secondaires au Sénégal, destination soleil 365/365j
-                </li>
-                <li>Accompagnement, étude de faisabilité et rentabilité</li>
-              </ul>
-              <Link to='nous-contacter'>Nous contacter</Link>
-            </div>
-          </div>
-        </FadeIn>
-
-        <FadeIn>
-          <div id='avisContainer' className={styles.AvisSection}>
-            <h2>Parole libre</h2>
-            <div className={styles.barStyleContainer}>
-              <p className={styles.borderStyle}></p>
-            </div>
-            {dataReviews.length > 0 && (
-              <Slider {...settingsSliderAvis}>
-                {dataReviews.map((review, index) => (
-                  <div key={index}>
-                    <CardAvis avis={review} />
-                  </div>
+                {s.points.map((p) => (
+                  <li key={p}>{p}</li>
                 ))}
-              </Slider>
-            )}
-            {!showFormAvis && (
-              <div className={styles.btnSection}>
-                {isSuccesSend !== true && (
-                  <ScrollLink smooth to='formAddReview' onClick={handleChange}>
-                    <button
-                      style={
-                        dataReviews.length > 0 ? { marginTop: '50px' } : {}
-                      }
-                    >
-                      Je témoigne
-                    </button>
-                  </ScrollLink>
-                )}
+              </ul>
+              <Link to={s.lien.to} className='lien-souligne'>
+                {s.lien.label}
+              </Link>
+            </Apparition>
+          ))}
+        </div>
+      </section>
 
-                {isSuccesSend === true && (
-                  <div className={styles.MessageFeedBackSucces}>
-                    Merci pour votre avis !
-                  </div>
-                )}
-              </div>
-            )}
+      {/* Parole libre */}
+      <section className={styles.avis} id='avisContainer'>
+        <span className='etiquette'>Parole libre</span>
 
-            <div id='formAddReview'>
-              {showFormAvis && (
-                <CardAddReview
-                  visibilityForm={handleChange}
-                  isSuccesSend={handleSuccesSend}
-                />
-              )}
-            </div>
+        {avisCourant && (
+          <figure key={avisActif} className={styles.avisCitation}>
+            <blockquote className={avisLong ? styles.avisTexteLong : styles.avisTexte}>
+              « {avisCourant.description} »
+            </blockquote>
+            <figcaption className='etiquette'>{avisCourant.pseudo}</figcaption>
+          </figure>
+        )}
+
+        {avis.length > 1 && (
+          <div className={styles.avisReperes}>
+            {avis.map((a, i) => (
+              <button
+                key={i}
+                type='button'
+                className={i === avisActif ? styles.repereActif : styles.repere}
+                onClick={() => setAvisActif(i)}
+                aria-label={`Afficher l’avis ${i + 1}`}
+              >
+                <span></span>
+              </button>
+            ))}
           </div>
-        </FadeIn>
-      </div>
+        )}
+
+        {avisEnvoye ? (
+          <p className={styles.avisMerci}>Merci pour votre avis !</p>
+        ) : (
+          !formulaireAvis && (
+            <button type='button' className='lien-souligne' onClick={() => setFormulaireAvis(true)}>
+              Laisser un avis
+            </button>
+          )
+        )}
+
+        <div id='formAddReview' className={styles.avisFormulaire}>
+          {formulaireAvis && (
+            <CardAddReview
+              visibilityForm={() => setFormulaireAvis(!formulaireAvis)}
+              isSuccesSend={(valeur) => setAvisEnvoye(valeur === true)}
+            />
+          )}
+        </div>
+      </section>
+
+      {/* La fin */}
+      <section className={styles.fin}>
+        <MachineAEcrire
+          className={styles.finPhrase}
+          texte='À vous d’écrire la suite de l’histoire…'
+          vitesse={70}
+          aLaVue
+        />
+        <div className={styles.finBoutons}>
+          <Link to='/acheter' className='bouton-plein'>
+            Découvrir nos histoires
+          </Link>
+          <Link to='/nous-contacter' className='bouton-contour'>
+            Nous contacter
+          </Link>
+        </div>
+      </section>
     </>
   )
 }
