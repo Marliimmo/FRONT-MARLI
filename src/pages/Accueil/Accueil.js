@@ -191,7 +191,7 @@ function Accueil() {
           {SERVICES.map((s) => (
             <Apparition key={s.num} className={styles.service}>
               <div className={styles.servicePhoto}>
-                <img src={s.photo} alt='' loading='lazy' />
+                <img className='photo-illustration' src={s.photo} alt='' loading='lazy' />
               </div>
               <span className={styles.serviceNum}>{s.num}</span>
               <h3>{s.titre}</h3>

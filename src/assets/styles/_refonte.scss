@@ -121,6 +121,23 @@ a:hover .photo-bien,
   pointer-events: none;
 }
 
+// Photo d'illustration : noir et blanc, la couleur revient au survol de son bloc
+.photo-illustration {
+  filter: grayscale(1);
+  transition: filter $transition-photo, transform 1.2s ease;
+}
+
+.photo-illustration.en-vue {
+  filter: grayscale(0);
+}
+
+// sur téléphone (pas de survol possible), les illustrations restent en couleur
+@media (hover: none) {
+  .photo-illustration {
+    filter: none;
+  }
+}
+
 // Curseur clignotant de la machine à écrire
 .curseur {
   display: inline-block;
