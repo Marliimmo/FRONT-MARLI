@@ -1,87 +1,126 @@
 @import "../../assets/styles/variables";
 
-.allContainer{
-    h2{
-        margin-top: 50px;
+$respiration: 104px;
+$respiration-mobile: 64px;
+
+.entete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding-bottom: 56px;
+}
+
+// Les affiches des recherches en cours
+.recherches {
+  padding: $respiration $marge-page;
+}
+
+.grille {
+  // colonnes « en mosaïque » : les affiches gardent leur format sans laisser de vide
+  columns: 4;
+  column-gap: 28px;
+
+  > div {
+    break-inside: avoid;
+    margin-bottom: 28px;
+  }
+}
+
+.affiche {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background-color: $surface;
+  cursor: zoom-in;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 1.2s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.02);
+  }
+}
+
+.appel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+  padding-top: 64px;
+
+  p {
+    margin: 0;
+    font-weight: 200;
+    font-size: clamp(24px, 2.4vw, 34px);
+  }
+}
+
+// Le formulaire
+.formulaire {
+  padding: $respiration $marge-page;
+  background: linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.78)),
+    url('../../assets/images/jacottot/fond-avis-de-recherche.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.formulaireCadre {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+
+  form {
+    width: 100%;
+    margin-top: 32px;
+    text-align: left;
+  }
+}
+
+.formulaireTexte {
+  margin: 0;
+  max-width: 560px;
+  text-wrap: balance;
+  font-weight: 300;
+  font-size: 16px;
+  color: $texte-doux;
+}
+
+@media screen and (max-width: 1100px) {
+  .grille {
+    columns: 3;
+  }
+}
+
+@media screen and (max-width: $ecran-mobile) {
+  .recherches,
+  .formulaire {
+    padding-top: $respiration-mobile;
+    padding-bottom: $respiration-mobile;
+  }
+
+  .grille {
+    columns: 2;
+    column-gap: 14px;
+
+    > div {
+      margin-bottom: 14px;
     }
+  }
 
-    .formContainer{
-        padding: 100px 25%;
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/jacottot/fond-avis-de-recherche.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        h3{
-            text-align: center;
-            margin-bottom: 80px;
-            font-size: 30px;
-            letter-spacing: 1.3px;
-            font-weight: 500;
-        }
-    
-        @media screen and (max-width: 750px) {
-            padding: 50px 30px;
-            h3{
-                font-size: 25px;
-                margin-bottom: 50px;
-            }
-        }
-    }
-
-    .AvisDrechercheContainer{
-        padding: 80px 9%;
-        background-color: $gray-color;
-        text-align: center;
-        margin-top: -5px;
-    
-        h3{
-            text-align: center;
-            font-weight: 500;
-            font-size: 30px;
-            margin-bottom: -30px;
-        }
-
-        p{
-            margin: 20px;
-            margin-top: 45px;
-            margin-bottom: 40px 0px;
-            font-size: 17px;
-            line-height: 28px;
-        }
-
-        a{
-            width: fit-content;
-            button{
-                font-size: 17px;
-                padding: 20px 35px;
-                border: 1px solid $white-color;
-                border-radius: 100px;
-                letter-spacing: 1.3px;
-                color: $white-color;
-                background-color: transparent;
-                cursor: pointer;
-            }
-        }
-    
-        @media screen and (max-width: 750px) {
-            padding: 50px 30px;
-
-           p{
-                margin-bottom: 30px;
-           }
-
-           button{
-            margin-bottom: -40px;
-           }
-        }
-
-        @media screen and (max-width: 420px) {
-            padding-bottom: 80px;
-            h3{
-                font-size: 25px;
-            }
-
-        }
-    }
-
+  .appel {
+    padding-top: 48px;
+  }
 }
