@@ -132,7 +132,9 @@ function Accueil() {
           <img className={styles.arriveeLogo} src={Logo} alt='Marli, passeur d’histoires immobilières' />
           <span className='filet'></span>
           <p className={styles.arriveePhrase}>
-            Les transactions immobilières sont avant tout des histoires humaines et des passages de témoin
+            Un lieu se transmet.
+            <br />
+            Son histoire continue.
           </p>
           <Link to='/acheter' className='lien-souligne'>
             Découvrir nos histoires
