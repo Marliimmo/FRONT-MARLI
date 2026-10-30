@@ -72,7 +72,7 @@ function Vendre() {
         alt='Les quais de Besançon et leurs reflets'
         etiquette='Vendre'
         titre='Combien ça coûte ?'
-        accroche='Une estimation au prix juste, puis une histoire racontée pour trouver ceux qui prendront le relais.'
+        accroche='Le prix juste, et une histoire à raconter.'
       />
 
       {/* L'estimation */}
@@ -82,9 +82,8 @@ function Vendre() {
           <h2 className='titre-grand'>Une estimation au prix juste</h2>
         </Apparition>
         <ol className={styles.criteres}>
-          {CRITERES.map((c, k) => (
+          {CRITERES.map((c) => (
             <Apparition as='li' key={c}>
-              <span className={styles.numero}>{String(k + 1).padStart(2, '0')}</span>
               <p>{c}</p>
             </Apparition>
           ))}
