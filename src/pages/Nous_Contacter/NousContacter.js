@@ -1,101 +1,64 @@
 import React from 'react'
-import styles from './NousContacter.module.scss'
-import FormContact from '../../components/FormContact/FormContact'
-// import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-// import Image from '../../assets/images/united-states-spokane.jpg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faEnvelope,
-  faLocationDot,
-  faPhoneFlip,
-} from '@fortawesome/free-solid-svg-icons'
-// import WhatsAppIcone from '../../assets/images/whatsapp.svg'
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import styles from './NousContacter.module.scss'
+import Image from '../../assets/images/jacottot/fond-contact.jpg' // photo : Jean-Claude Jacottot
+import BandeauPage from '../../components/Refonte/BandeauPage'
+import FormContact from '../../components/FormContact/FormContact'
+
+const COORDONNEES = [
+  { etiquette: 'Appelez-nous', valeur: '06 88 74 06 21', lien: 'tel:+33688740621' },
+  { etiquette: 'Écrivez-nous', valeur: 'contact@marli-immobilier.com', lien: 'mailto:contact@marli-immobilier.com' },
+  {
+    etiquette: 'Rencontrons-nous',
+    valeur: '7 rue Henri Weil, 25000 Besançon',
+    lien: 'https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9',
+    externe: true,
+  },
+]
 
 function NousContacter() {
   return (
     <>
       <Helmet>
-        <title>Contacter Marli Immobilier à Besançon - Estimation et conseil gratuits</title>
+        <title>Contacter Marli Immobilier à Besançon - Estimation et conseil offerts</title>
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/nous-contacter' />
-        {/* <meta name="robots" content="index, follow" /> */}
-        <meta name='description' content='Contactez Marli Immobilier à Besançon pour une estimation gratuite ou un conseil personnalisé. Agence indépendante dans le Doubs, disponible 7j/7.' />
+        <meta
+          name='description'
+          content='Contactez Marli Immobilier à Besançon pour une estimation offerte ou un conseil personnalisé. Agence indépendante dans le Doubs, la Haute-Saône et le Jura, joignable 7 jours sur 7.'
+        />
       </Helmet>
-      <div className={`fadinAnimation ${styles.allContainer}`}>
-        {/* <FirstSectionPage ImgPremierePlan={Image} title='Nous contacter' /> */}
 
-        <div className={styles.coodonneeContainer}>
-          <div className={styles.coordonnee}>
-            <Link to='tel:+33688740621'>
-              <p className={styles.iconeContainer}>
-                <FontAwesomeIcon icon={faPhoneFlip} />
-              </p>
-            </Link>
-            <Link to='tel:+33688740621'>
-              <div>
-                <h4>Appelez-nous</h4>
-                {/* <p>+33 6 88 74 06 21</p> */}
-                <p>06 88 74 06 21</p>
-              </div>
-            </Link>
-          </div>
+      <BandeauPage
+        photo={Image}
+        alt='Un grand bâtiment des quais de Besançon à la tombée du jour'
+        etiquette='Contact'
+        titre='Parlons de votre projet'
+        accroche='Joignable 7 jours sur 7.'
+      />
 
-          <div className={styles.coordonnee}>
-            <Link
-              to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
-              target='_blank'
-            >
-              <p className={styles.iconeContainer}>
-                <FontAwesomeIcon icon={faLocationDot} />
-              </p>
-            </Link>
-            <Link
-              to='https://maps.app.goo.gl/CDSUa2ktTnv4gJGQ9'
-              target='_blank'
-            >
-              <div>
-                {/* <h4>Pour boire un café</h4> */}
-                <h4>Notre adresse</h4>
-                <p>7 rue Henri Weil, 25000 Besançon</p>
-              </div>
-            </Link>
-          </div>
+      <section className={styles.coordonnees}>
+        {COORDONNEES.map((c) => (
+          <a
+            key={c.etiquette}
+            href={c.lien}
+            className={styles.coordonnee}
+            {...(c.externe ? { target: '_blank', rel: 'noreferrer' } : {})}
+          >
+            <span className='etiquette'>{c.etiquette}</span>
+            <span className={styles.valeur}>{c.valeur}</span>
+          </a>
+        ))}
+      </section>
 
-          <div className={styles.coordonnee}>
-            {/* <Link to='https://wa.me/33688740621' target='_blank'>
-              <p className={styles.iconeContainer}>
-                <img src={WhatsAppIcone} alt='whatsapp-icone' />
-              </p>
-            </Link>
-            <Link to='https://wa.me/33688740621' target='_blank'>
-              <div>
-                <h4>WhatsApp</h4>
-                <p>+33 6 88 74 06 21</p>
-              </div>
-            </Link> */}
-
-            <Link to='mailto:contact@marli-immobilier.com'>
-              <p className={styles.iconeContainer}>
-                <FontAwesomeIcon icon={faEnvelope} />
-              </p>
-            </Link>
-            <Link to='mailto:contact@marli-immobilier.com'>
-              <div>
-                <h4>E-mail</h4>
-                <p>contact@marli-immobilier.com</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        <div className={styles.formContainer}>
-          <h3>Dites nous tout</h3>
-          <p>Nous vous reviendrons rapidement</p>
+      <section className={styles.formulaire}>
+        <div className={styles.formulaireCadre}>
+          <span className='etiquette'>Écrivez-nous</span>
+          <h2 className='titre-grand'>Dites-nous tout</h2>
+          <p className={styles.formulaireTexte}>Nous vous répondons rapidement.</p>
           <FormContact />
         </div>
-      </div>
+      </section>
     </>
   )
 }

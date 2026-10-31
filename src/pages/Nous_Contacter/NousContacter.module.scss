@@ -1,82 +1,85 @@
 @import "../../assets/styles/variables";
 
-.allContainer{
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/jacottot/fond-contact.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    h2{
-        margin-top: 50px;
+$respiration: 104px;
+$respiration-mobile: 64px;
+
+.coordonnees {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid $ligne;
+}
+
+.coordonnee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 56px 24px;
+  border-right: 1px solid $ligne;
+  color: $blanc;
+  text-decoration: none;
+  transition: background-color $transition-douce;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    background-color: $surface;
+  }
+}
+
+.valeur {
+  font-weight: 300;
+  font-size: clamp(17px, 1.5vw, 21px);
+  overflow-wrap: anywhere;
+}
+
+.formulaire {
+  padding: $respiration $marge-page;
+}
+
+.formulaireCadre {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+
+  form {
+    width: 100%;
+    margin-top: 32px;
+    text-align: left;
+  }
+}
+
+.formulaireTexte {
+  margin: 0;
+  font-weight: 300;
+  font-size: 16px;
+  color: $texte-doux;
+}
+
+@media screen and (max-width: $ecran-mobile) {
+  .coordonnees {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .coordonnee {
+    padding: 32px 24px;
+    border-right: none;
+    border-bottom: 1px solid $ligne;
+
+    &:last-child {
+      border-bottom: none;
     }
-    
-    .formContainer{
-        padding: 100px 25%;
-        h3{
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 30px;
-            letter-spacing: 1.3px;
-            font-weight: 500;
-        }
-        
-        p{
-            margin-bottom: 80px;
-            text-align: center;
-            font-size: 18px;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-    
-        @media screen and (max-width: 750px) {
-            padding: 50px 30px;
-            h3{
-                font-size: 25px;
-                margin-bottom: 20px;
-            }
+  }
 
-            p{
-                margin-bottom: 50px;
-            }
-        }
-    }
-
-    .coodonneeContainer{
-        padding: 80px 10%;
-        padding-bottom: 0px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-
-        .coordonnee{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.20);
-            flex: 0 0 330px;
-            border-radius: 15px;
-            padding: 35px 10px;
-
-            .iconeContainer{
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
-                min-height: 40px;
-                background-color: $white-color;
-                color: $gray-color;
-                border-radius: 100px;
-                padding: 10px;
-            }
-
-            h4{
-                font-weight: 500;
-                letter-spacing: 1px;
-                font-size: 17px;
-            }
-        }
-    }
+  .formulaire {
+    padding-top: $respiration-mobile;
+    padding-bottom: $respiration-mobile;
+  }
 }
