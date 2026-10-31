@@ -127,7 +127,8 @@ a:hover .photo-bien,
   transition: filter $transition-photo, transform 1.2s ease;
 }
 
-.photo-illustration.en-vue {
+.photo-illustration.en-vue,
+a:hover .photo-illustration {
   filter: grayscale(0);
 }
 

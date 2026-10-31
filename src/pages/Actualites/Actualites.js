@@ -1,53 +1,78 @@
 import React, { useEffect, useState } from 'react'
-import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/jacottot/bandeau-actualites.jpg' // photo : J. Jacottot
-import styles from './Actualites.module.scss'
 import { Helmet } from 'react-helmet-async'
+import styles from './Actualites.module.scss'
+import Image from '../../assets/images/jacottot/bandeau-actualites.jpg' // photo : Jean-Claude Jacottot
+import BandeauPage from '../../components/Refonte/BandeauPage'
+import Apparition from '../../components/Refonte/Apparition'
 
-function Actualites() {
 // La liste des articles est générée automatiquement dans public/articles/articles.json
-  // par scripts/publish-articles.mjs : plus besoin de modifier ce fichier pour publier.
+// par scripts/publish-articles.mjs : rien à modifier ici pour publier un article.
+function Actualites() {
   const [articles, setArticles] = useState([])
 
   useEffect(() => {
     fetch('/articles/articles.json', { cache: 'no-cache' })
       .then((r) => (r.ok ? r.json() : []))
-      .then(setArticles)
+      .then((liste) => setArticles(Array.isArray(liste) ? liste : []))
       .catch(() => setArticles([]))
   }, [])
 
+  const [premier, ...autres] = articles
 
   return (
     <>
       <Helmet>
-        <title>Marli Immobilier - Actualités Immobilières Besançon</title>
-        <meta name='description' content="Actualité immobilière à Besançon et Franche-Comté" />
+        <title>Actualités immobilières à Besançon et en Franche-Comté - Marli Immobilier</title>
+        <meta
+          name='description'
+          content='Marché immobilier, réglementation, conseils pour vendre ou acheter : l’actualité immobilière locale et nationale décryptée par Marli Immobilier, à Besançon.'
+        />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/actualite' />
       </Helmet>
-      <div className={styles.allContainer}>
-        <FirstSectionPage ImgPremierePlan={Image} title='ACTUALITÉS' />
-        <div className={styles.articlesContainer}>
-          <h2>Actualités Immobilières</h2>
-          <div className={styles.articlesGrid}>
-            {articles.map(article => (
-              <article key={article.id} className={styles.articleCard}>
-                <div className={styles.imageContainer}>
-                  <img src={article.urlImage} alt={article.title} loading="lazy" />
+
+      <BandeauPage
+        photo={Image}
+        alt='Les quais de Besançon la nuit'
+        etiquette='Actualités'
+        titre='Le journal de Marli'
+        accroche='L’immobilier, d’ici et d’ailleurs, décrypté.'
+      />
+
+      {/* Le dernier article, en grand */}
+      {premier && (
+        <Apparition>
+          <a href={premier.link} className={styles.une}>
+            <div className={styles.unePhoto}>
+              <img className='photo-illustration' src={premier.urlImage} alt={premier.title} />
+            </div>
+            <div className={styles.uneTexte}>
+              <span className='etiquette'>À la une · {premier.date}</span>
+              <h2>{premier.title}</h2>
+              <p>{premier.excerpt}</p>
+              <span className='lien-souligne'>Lire l’article</span>
+            </div>
+          </a>
+        </Apparition>
+      )}
+
+      {/* Les autres articles */}
+      {autres.length > 0 && (
+        <section className={styles.liste}>
+          {autres.map((a) => (
+            <Apparition key={a.id}>
+              <a href={a.link} className={styles.carte}>
+                <div className={styles.cartePhoto}>
+                  <img className='photo-illustration' src={a.urlImage} alt={a.title} loading='lazy' />
                 </div>
-                <div className={styles.contentContainer}>
-                  <h3>{article.title}</h3>
-                  <p className={styles.date}>{article.date}</p>
-                  <p className={styles.excerpt}>{article.excerpt}</p>
-                  <a href={article.link} className={styles.readMore}>
-                    Lire l'article →
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
+                <span className='etiquette'>{a.date}</span>
+                <h3>{a.title}</h3>
+                <p>{a.excerpt}</p>
+              </a>
+            </Apparition>
+          ))}
+        </section>
+      )}
     </>
   )
 }
