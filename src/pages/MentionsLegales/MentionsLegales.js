@@ -35,10 +35,11 @@ function MentionsLegales() {
           <p>
             Activité réglementée : transaction sur immeubles et fonds de commerce <br />
             Carte professionnelle n° CPI 2501 2022 000 000 021, délivrée le 01/12/2022 par la CCI de
-            Saône-Doubs <br />
+            Saône-Doubs, titulaire : Pierre-Omar Joly <br />
             Sans garantie financière : l’agence ne reçoit ni ne détient aucun fonds, effet ou valeur autres que
             ceux représentatifs de sa rémunération. <br />
-            Assurance responsabilité civile professionnelle : contrat n° 59 661 778 <br />
+            Assurance responsabilité civile professionnelle : Allianz IARD, 1 cours Michelet, CS 30051, 92076
+            Paris La Défense Cedex, contrat n° 59 661 778 <br />
           </p>
 
           <p>
