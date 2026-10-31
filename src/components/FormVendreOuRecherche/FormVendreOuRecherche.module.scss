@@ -1,89 +1,27 @@
 @import "../../assets/styles/variables";
+@import "../../assets/styles/formulaires";
 
-form{
-    label{
-        font-size: 17px;
-        font-weight: 400;
+form {
+  @include champs-marli;
+
+  .twoElement {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 35px;
+
+    > div {
+      flex: 1 0 200px;
     }
+  }
 
-    input{
-        width: 100%;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 10px 2px;
-        font-size: 16px;
-        font-weight: 300;
-        color: $white-color;
-        border-bottom: 1px solid $white-color;
-        margin-bottom: 40px;
-
-        &[type="file"]{
-            border: none;
-            padding-top: 20px;
-            cursor: pointer;
-        }
-    }
-
-    select{
-        width: 100%;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 10px 2px;
-        font-size: 16px;
-        font-weight: 300;
-        color: $white-color;
-        border-bottom: 1px solid $white-color;
-        margin-bottom: 40px;
-
-        option{
-            color: $gray-color;
-        }
-    }
-
-    .twoElement{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        column-gap: 35px;
-
-        >div{
-            flex: 1 0 200px;
-        }
-    }
-
-    textarea{
-        width: 100%;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 10px 2px;
-        font-size: 16px;
-        font-weight: 300;
-        color: $white-color;
-        border-bottom: 1px solid $white-color;
-        margin-bottom: 40px;
-    }
-
-    button{
-        border: none;
-        font-size: 18px;
-        color: $gray-color;
-        font-weight: 500;
-        border-radius: 100px;
-        background-color: $white-color;
-        padding: 20px 35px;
-        cursor: pointer;
-    }
-
-    .MessageFeedBack{
-        margin-top: 25px;
-        border-radius: 5px;
-        width: fit-content;
-        padding: 15px 20px;
-        color: $white-color;
-        font-size: 18px;
-        font-weight: 500;
-    }
+  .MessageFeedBack {
+    margin-top: 25px;
+    padding: 14px 18px;
+    width: fit-content;
+    border-radius: 0;
+    color: $blanc;
+    font-size: 15px;
+    font-weight: 400;
+  }
 }

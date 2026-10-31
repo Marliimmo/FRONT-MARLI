@@ -1,84 +1,92 @@
-.cookieConsentContainer {
-  width: fit-content;
-  position: relative;
-  z-index: 9999;
-  
-  .cookieConsent {
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 500px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin: 15px;
-    padding: 14px 18px;
-    background-color: #1a1a1a;
-    color: white;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    animation: slideUp 0.4s ease;
+@import "../../assets/styles/variables";
 
-    @keyframes slideUp {
-      from {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+.bandeau {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 95;
+  max-width: 420px;
+  box-sizing: border-box;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: $noir;
+  border: 1px solid $ligne;
+  color: $blanc;
+  animation: cookies-entree 0.5s ease both;
 
-    p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.4;
-    }
+  p {
+    margin: 0;
+    font-family: $police-texte;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.6;
+    color: $texte-doux;
+  }
 
-    div {
-      display: flex;
-      gap: 8px;
-    }
-
-    button {
-      flex: 1;
-      background-color: white;
-      color: black;
-      font-size: 13px;
-      padding: 10px 20px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s;
-
-      &:hover {
-        transform: scale(1.02);
-      }
-
-      &:last-child {
-        background-color: #dc2626;
-        color: white;
-      }
-    }
+  a {
+    color: $blanc;
   }
 }
 
-@media (max-width: 600px) {
-  .cookieConsentContainer .cookieConsent {
-    margin: 10px;
-    padding: 12px 16px;
-    max-width: calc(100vw - 40px);
+@keyframes cookies-entree {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 
-    p {
-      font-size: 12px;
-    }
+.boutons {
+  display: flex;
+  gap: 10px;
+}
 
-    button {
-      padding: 9px 16px;
-      font-size: 12px;
-    }
+.accepter,
+.refuser {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid $blanc;
+  border-radius: 0;
+  font-family: $police-etiquette;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color $transition-douce, color $transition-douce;
+}
+
+// Accepter et Refuser ont le même poids visuel : le refus doit être aussi simple que l'acceptation
+.accepter {
+  background-color: $blanc;
+  color: $noir;
+
+  &:hover {
+    background-color: transparent;
+    color: $blanc;
+  }
+}
+
+.refuser {
+  background-color: transparent;
+  color: $blanc;
+
+  &:hover {
+    background-color: $blanc;
+    color: $noir;
+  }
+}
+
+@media screen and (max-width: $ecran-mobile) {
+  .bandeau {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
   }
 }

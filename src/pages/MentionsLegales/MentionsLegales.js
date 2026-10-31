@@ -10,7 +10,7 @@ function MentionsLegales() {
         <meta name='robots' content='noindex' />
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>
-      <div className={`fadinAnimation ${styles.allContainer}`}>
+      <div className={styles.allContainer}>
         <h2>Mentions Légales</h2>
         <div>
           <h3>1. Informations légales</h3>
@@ -23,14 +23,29 @@ function MentionsLegales() {
           <p>
             Le présent site web est édité par : <br />
             Marli Immobilier, Entreprise Individuelle <br />
-            2b rue des Jardins, 25 000 Besançon <br />
+            7 rue Henri Weil, 25000 Besançon <br />
+            Téléphone : 06 88 74 06 21 <br />
+            E-mail : contact@marli-immobilier.com <br />
             SIRET : 92025630200018 <br />
             R.C.S. : Besançon 2022A00629 <br />
           </p>
 
           <p>Directeur de la publication du site web : Mar Néné</p>
 
-          <p>Le prestataire assurant l’hébergement du site est LWS </p>
+          <p>
+            Activité réglementée : transaction sur immeubles et fonds de commerce <br />
+            Carte professionnelle n° CPI 2501 2022 000 000 021, délivrée le 01/12/2022 par la CCI de
+            Saône-Doubs <br />
+            Sans garantie financière : l’agence ne reçoit ni ne détient aucun fonds, effet ou valeur autres que
+            ceux représentatifs de sa rémunération. <br />
+            Assurance responsabilité civile professionnelle : contrat n° 59 661 778 <br />
+          </p>
+
+          <p>
+            Hébergement du site : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis (vercel.com)
+            <br />
+            Nom de domaine enregistré auprès de LWS (Ligne Web Services)
+          </p>
 
           <p>
             Médiateur de la consommation : MÉDIATION CONSOMMATION DÉVELOPPEMENT 
