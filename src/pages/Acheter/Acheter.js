@@ -49,12 +49,11 @@ function Acheter() {
     charger()
   }, [])
 
-  const { elements, nombre, vendus } = useMemo(() => {
+  const { elements, vendus } = useMemo(() => {
     const enVente = biens.filter((b) => b.status === 'disponible' || b.status === 'sous-compromis')
     const filtres = enVente.filter((b) => onglet === 'tous' || categorie(b) === onglet)
     return {
       elements: regrouper(filtres),
-      nombre: filtres.length,
       vendus: biens.filter((b) => b.status === 'vendu'),
     }
   }, [biens, onglet])
@@ -102,11 +101,6 @@ function Acheter() {
             </button>
           ))}
         </div>
-        {!chargement && (
-          <span className={styles.compte}>
-            {nombre} {nombre > 1 ? 'biens disponibles' : 'bien disponible'}
-          </span>
-        )}
       </div>
 
       {chargement && <div className={styles.attente} aria-busy='true'></div>}
@@ -183,7 +177,7 @@ function Acheter() {
           {vendus.length > 6 && (
             <div className={styles.lienCentre}>
               <button type='button' className='bouton-contour' onClick={() => setTousLesVendus(!tousLesVendus)}>
-                {tousLesVendus ? 'Voir moins d’histoires' : `Voir les ${vendus.length} histoires`}
+                {tousLesVendus ? 'Voir moins d’histoires' : 'Voir d’autres histoires'}
               </button>
             </div>
           )}
@@ -192,8 +186,8 @@ function Acheter() {
 
       {/* Avis de recherche */}
       <section className={styles.recherche}>
-        <p className={styles.recherchePhrase}>Votre histoire n’est pas encore ici ?</p>
-        <p className={styles.rechercheTexte}>Décrivez le lieu que vous cherchez : nous le cherchons avec vous.</p>
+        <p className={styles.recherchePhrase}>Le lieu de votre prochaine histoire vous attend peut-être ailleurs.</p>
+        <p className={styles.rechercheTexte}>Décrivez-le-nous : nous le cherchons avec vous.</p>
         <Link to='/avis-de-recherche' className='bouton-plein'>
           Déposer un avis de recherche
         </Link>

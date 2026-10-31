@@ -19,12 +19,9 @@ function BlocSerie({ serie, refCourante = null, titreSection = null }) {
         <p className={styles.invitation}>Chaque bien a sa propre histoire : choisissez votre chapitre.</p>
       </div>
       <div className={styles.grille} style={{ '--colonnes': Math.min(n, 3) }}>
-        {serie.chapitres.map((c, k) => (
+        {serie.chapitres.map((c) => (
           <div key={c.ref} className={c.ref === refCourante ? styles.courant : undefined}>
-            <span className={styles.numero}>
-              {String(k + 1).padStart(2, '0')}
-              {c.ref === refCourante ? ' · Vous êtes ici' : ''}
-            </span>
+            {c.ref === refCourante && <span className={styles.numero}>Vous êtes ici</span>}
             <CarteBien bien={c} hauteurPhoto={n > 2 ? 380 : 460} largeurImage={900} />
           </div>
         ))}
