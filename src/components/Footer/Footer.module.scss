@@ -80,6 +80,18 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: $texte-discret;
+
+  a {
+    color: $texte-doux;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color $transition-douce, border-color $transition-douce;
+
+    &:hover {
+      color: $blanc;
+      border-bottom-color: $blanc;
+    }
+  }
 }
 
 @media screen and (max-width: $ecran-mobile) {

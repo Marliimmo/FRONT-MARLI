@@ -69,7 +69,7 @@ function FormContact() {
         setSuccesSend(false)
         setLoading('')
       }, 1500)
-      console.log('Erreur lors de la requette fecth', error)
+      console.log('Erreur lors de l’envoi du formulaire', error)
     }
     // }
   }
@@ -108,7 +108,7 @@ function FormContact() {
           >
             <option value='Acheter un bien'>Acheter un bien</option>
             <option value="J'ai un bien que l'un de vos clients recherche">
-              J'ai un bien que l'un de vos clients recheche
+              J’ai un bien que l’un de vos clients recherche
             </option>
             <option value='Autre'>Autre</option>
           </select>
@@ -171,22 +171,22 @@ function FormContact() {
           // style={!isCaptchaVerified ? { backgroundColor: 'gray' } : {}}
           type='submit'
         >
-          {loading ? 'Veuillez patienter...' : 'Envoyer'}
+          {loading ? 'Envoi en cours…' : 'Envoyer'}
         </button>
         <div
           style={
             succesSend === false
-              ? { backgroundColor: 'red' }
+              ? { borderLeft: '2px solid #C9824F', backgroundColor: '#2A2A2A' }
               : succesSend === true
-                ? { backgroundColor: 'green' }
+                ? { borderLeft: '2px solid #FFFFFF', backgroundColor: '#2A2A2A' }
                 : {}
           }
           className={styles.MessageFeedBack}
         >
           {succesSend === false
-            ? "Oups, une erreur s'est produite, verifiez vos informations saisies (email) et réessayez"
+            ? 'Oups, une erreur s’est produite. Vérifiez votre adresse e-mail et réessayez.'
             : succesSend === true
-              ? 'Votre message a été envoyé avec succès.'
+              ? 'Merci, votre message a bien été envoyé. Nous vous répondons rapidement.'
               : null}
         </div>
       </form>

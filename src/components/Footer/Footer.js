@@ -52,7 +52,12 @@ function Footer() {
 
       <div className={styles.bas}>
         <span>© {new Date().getFullYear()} Marli Immobilier · Besançon, Franche-Comté</span>
-        <span>Photos : Jean-Claude Jacottot</span>
+        <span>
+          Photos :{' '}
+          <a href='https://jacophottot.my.canva.site/photos' target='_blank' rel='noreferrer'>
+            Jean-Claude Jacottot
+          </a>
+        </span>
       </div>
     </footer>
   )
