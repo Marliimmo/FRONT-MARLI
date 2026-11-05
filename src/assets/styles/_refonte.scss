@@ -129,23 +129,17 @@ a:hover .photo-bien,
 
 .photo-illustration.en-vue,
 a:hover .photo-illustration {
-  filter: saturate(1.9);
+  filter: saturate(1.15);
 }
 
-// Photos des articles : couleurs atténuées au repos, couleurs d'origine au survol
+// Photos des articles : en couleur, légèrement ravivées au survol
 .photo-article {
-  filter: saturate(0.5) contrast(0.95);
+  filter: none;
   transition: filter $transition-photo, transform 1.2s ease;
 }
 
 a:hover .photo-article {
-  filter: none;
-}
-
-@media (hover: none) {
-  .photo-article {
-    filter: saturate(0.7);
-  }
+  filter: saturate(1.15);
 }
 
 // Curseur clignotant de la machine à écrire
