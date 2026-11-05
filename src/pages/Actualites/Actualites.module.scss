@@ -12,7 +12,7 @@ $respiration-mobile: 64px;
   color: $blanc;
   text-decoration: none;
 
-  &:hover :global(.photo-illustration) {
+  &:hover :global(.photo-article) {
     transform: scale(1.02);
   }
 }

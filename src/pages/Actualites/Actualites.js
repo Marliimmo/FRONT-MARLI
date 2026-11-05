@@ -44,7 +44,7 @@ function Actualites() {
         <Apparition>
           <a href={premier.link} className={styles.une}>
             <div className={styles.unePhoto}>
-              <img className='photo-illustration' src={premier.urlImage} alt={premier.title} />
+              <img className='photo-article' src={premier.urlImage} alt={premier.title} />
             </div>
             <div className={styles.uneTexte}>
               <span className='etiquette'>À la une · {premier.date}</span>
@@ -63,7 +63,7 @@ function Actualites() {
             <Apparition key={a.id}>
               <a href={a.link} className={styles.carte}>
                 <div className={styles.cartePhoto}>
-                  <img className='photo-illustration' src={a.urlImage} alt={a.title} loading='lazy' />
+                  <img className='photo-article' src={a.urlImage} alt={a.title} loading='lazy' />
                 </div>
                 <span className='etiquette'>{a.date}</span>
                 <h3>{a.title}</h3>

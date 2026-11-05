@@ -123,19 +123,28 @@ a:hover .photo-bien,
 
 // Photo d'illustration : noir et blanc, la couleur revient au survol de son bloc
 .photo-illustration {
-  filter: grayscale(1);
+  filter: saturate(1);
   transition: filter $transition-photo, transform 1.2s ease;
 }
 
 .photo-illustration.en-vue,
 a:hover .photo-illustration {
-  filter: grayscale(0);
+  filter: saturate(1.9);
 }
 
-// sur téléphone (pas de survol possible), les illustrations restent en couleur
+// Photos des articles : couleurs atténuées au repos, couleurs d'origine au survol
+.photo-article {
+  filter: saturate(0.5) contrast(0.95);
+  transition: filter $transition-photo, transform 1.2s ease;
+}
+
+a:hover .photo-article {
+  filter: none;
+}
+
 @media (hover: none) {
-  .photo-illustration {
-    filter: none;
+  .photo-article {
+    filter: saturate(0.7);
   }
 }
 

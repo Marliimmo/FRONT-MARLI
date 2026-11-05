@@ -242,7 +242,7 @@ $respiration-mobile: 64px;
 }
 
 .service:hover .servicePhoto img {
-  filter: grayscale(0);
+  filter: saturate(1.9);
   transform: scale(1.03);
 }
 
