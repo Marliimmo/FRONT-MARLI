@@ -75,7 +75,7 @@ function Vendre() {
         alt='Le quai Vauban et ses reflets dorés sur le Doubs'
         etiquette='Vendre'
         titre='Combien ça coûte ?'
-        accroche='Le juste prix, et une histoire à raconter.'
+        accroche='Le juste prix. Une histoire à raconter.'
       />
 
       {/* L'estimation */}
@@ -100,9 +100,8 @@ function Vendre() {
           <h2 className='titre-grand'>De l’estimation à la remise des clés</h2>
         </Apparition>
         <div className={styles.etapes}>
-          {ETAPES.map((e, k) => (
+          {ETAPES.map((e) => (
             <Apparition key={e.titre} className={styles.etape}>
-              <span className={styles.numero}>{String(k + 1).padStart(2, '0')}</span>
               <h3>{e.titre}</h3>
               <p>{e.texte}</p>
             </Apparition>

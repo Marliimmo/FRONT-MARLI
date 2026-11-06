@@ -18,14 +18,10 @@ $respiration-mobile: 64px;
 }
 
 .grille {
-  // colonnes « en mosaïque » : les affiches gardent leur format sans laisser de vide
-  columns: 4;
-  column-gap: 28px;
-
-  > div {
-    break-inside: avoid;
-    margin-bottom: 28px;
-  }
+  // grille régulière : chaque affiche occupe le même cadre, les rangées restent alignées
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
 }
 
 .affiche {
@@ -37,10 +33,14 @@ $respiration-mobile: 64px;
   cursor: zoom-in;
   overflow: hidden;
 
+  aspect-ratio: 4 / 5;
+  background-color: $noir;
+
   img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     transition: transform 1.2s ease;
   }
 
@@ -100,7 +100,7 @@ $respiration-mobile: 64px;
 
 @media screen and (max-width: 1100px) {
   .grille {
-    columns: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -112,12 +112,8 @@ $respiration-mobile: 64px;
   }
 
   .grille {
-    columns: 2;
-    column-gap: 14px;
-
-    > div {
-      margin-bottom: 14px;
-    }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
 
   .appel {

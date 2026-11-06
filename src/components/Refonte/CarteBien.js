@@ -15,8 +15,38 @@ export function soigner(texte) {
     .replace(/([A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])/g, '$1’')
     .replace(/(\d)\s?m2\b/g, '$1 m²')
     .replace(/(\d)m²/g, '$1 m²')
+    .replace(/‘/g, '’')
+    .replace(/([A-Za-zÀ-ÿ])([!?])(?=\s|$)/g, '$1\u202F$2')
     .replace(/[ \t]{2,}/g, ' ')
     .trim()
+    .replace(/^A (?=\S)/, 'À ')
+}
+
+// Codes postaux des communes du secteur, ajoutés quand l'annonce n'en indique pas
+const CODES_POSTAUX = {
+  besançon: '25000',
+  maîche: '25120',
+  gray: '70100',
+  geneuille: '25870',
+  abbenans: '25340',
+  'lons-le-saunier': '39000',
+  pontarlier: '25300',
+  ornans: '25290',
+  vesoul: '70000',
+}
+
+// Lieu d'un bien, présenté partout de la même façon : « Besançon, Vaîtes 25000 »
+export function soignerLieu(texte) {
+  let lieu = soigner(texte).replace(/\s+/g, ' ').trim()
+  if (!lieu) return ''
+  // code postal à 6 chiffres saisi par erreur (701000 → 70100)
+  lieu = lieu.replace(/\b(\d{5})\d\b/, '$1')
+  const commune = lieu.split(/[,\s]/)[0]
+  const code = CODES_POSTAUX[commune.toLowerCase()]
+  // quartier sans virgule : « Besançon Vaîtes » → « Besançon, Vaîtes »
+  lieu = lieu.replace(new RegExp(`^(${commune})\\s+(?!\\d)(?!,)`), '$1, ')
+  if (code && !/\b\d{5}\b/.test(lieu)) lieu = `${lieu} ${code}`
+  return lieu
 }
 
 export function resumeBien(bien) {
@@ -34,7 +64,7 @@ export function resumeBien(bien) {
   return {
     titre: m && m[1] ? m[1] : titreComplet,
     chapitre: m && m[1] ? m[2].charAt(0).toUpperCase() + m[2].slice(1) : '',
-    lieu: soigner(bien.localisation),
+    lieu: soignerLieu(bien.localisation),
     details: carac.slice(0, 2).join(' · '),
     prix,
     statut,

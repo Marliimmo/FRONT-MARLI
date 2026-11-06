@@ -1,5 +1,5 @@
 import React from 'react'
-import CarteBien, { soigner } from './CarteBien'
+import CarteBien, { soignerLieu } from './CarteBien'
 import { fourchettePrix } from './series'
 import styles from './BlocSerie.module.scss'
 
@@ -11,7 +11,7 @@ function BlocSerie({ serie, refCourante = null, titreSection = null }) {
   return (
     <div className={styles.serie}>
       <div className={styles.entete}>
-        <span className='etiquette'>{titreSection || soigner(serie.chapitres[0].localisation)}</span>
+        <span className='etiquette'>{titreSection || soignerLieu(serie.chapitres[0].localisation)}</span>
         <h2>{serie.titre}</h2>
         <p className={styles.sousTitre}>
           Une série de {n} biens{fourchette ? `, ${fourchette}` : ''}
