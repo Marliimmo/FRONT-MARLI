@@ -20,6 +20,20 @@ export function soigner(texte) {
     .replace(/[ \t]{2,}/g, ' ')
     .trim()
     .replace(/^A (?=\S)/, 'À ')
+    .replace(/\bvaites\b/gi, 'Vaîtes')
+}
+
+// Titres harmonisés : un titre entièrement en capitales passe en minuscules avec une majuscule initiale
+// (« LA DER » → « La der ») ; les sigles courts (« C&P ») et les capitales voulues au milieu
+// d'un titre (« L’histoire dans L’HISTOIRE ») sont conservés ; « SUITE », « FIN » → « Suite », « Fin ».
+export function harmoniserTitre(texte) {
+  let t = soigner(texte)
+  const lettres = t.replace(/[^A-Za-zÀ-ÿ]/g, '')
+  if (lettres.length > 3 && lettres === lettres.toUpperCase()) {
+    t = t.toLowerCase()
+    t = t.charAt(0).toUpperCase() + t.slice(1)
+  }
+  return t.replace(/\b(SUITE|FIN)$/, (m) => m.charAt(0) + m.slice(1).toLowerCase())
 }
 
 // Codes postaux des communes du secteur, ajoutés quand l'annonce n'en indique pas
@@ -59,7 +73,7 @@ export function resumeBien(bien) {
         : ''
   const statut = bien.status === 'sous-compromis' ? 'Sous compromis' : bien.status === 'vendu' ? 'Vendu' : ''
   // « Chez Corneille Chapitre deux » → titre « Chez Corneille » + ligne « Chapitre deux »
-  const titreComplet = soigner(bien.title || bien.localisation || '')
+  const titreComplet = harmoniserTitre(bien.title || bien.localisation || '')
   const m = titreComplet.match(/^(.*?)[\s:,.–-]*\b(chapitre\s+.+)$/i)
   return {
     titre: m && m[1] ? m[1] : titreComplet,

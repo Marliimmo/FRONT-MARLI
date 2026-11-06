@@ -1,4 +1,4 @@
-import { soigner } from './CarteBien'
+import { soigner, harmoniserTitre } from './CarteBien'
 
 // Les biens d'une même série partagent le début de leur titre et leur lieu :
 // « Dépendances », « Dépendances SUITE », « Dépendances FIN » ;
@@ -7,7 +7,7 @@ import { soigner } from './CarteBien'
 const NUMEROS = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8 }
 
 export function racineSerie(titre) {
-  const t = soigner(titre)
+  const t = harmoniserTitre(titre)
   const m = t.match(/^(.*?)[\s:,.–-]*\b(chapitre\s+\S+|suite|fin|\d+)$/i)
   return m && m[1] ? m[1].trim() : t
 }
