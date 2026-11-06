@@ -28,10 +28,10 @@ function A_Propos() {
 
       <BandeauPage
         photo={Image}
-        alt='Besançon et le Doubs reflétés dans un verre'
+        alt='La citadelle de Besançon au coucher du soleil'
         etiquette='L’agence'
         titre='Passeur d’histoires immobilières'
-        positionPhoto='50% 60%'
+        positionPhoto='68% 55%'
       />
 
       {/* La conviction */}

@@ -46,8 +46,9 @@ function AvisDeRecherche() {
       </Helmet>
 
       <BandeauPage
+        positionPhoto='50% 50%'
         photo={Image}
-        alt='La tour de la Pelote et son reflet dans le Doubs'
+        alt='Le quai Vauban et ses reflets dorés sur le Doubs'
         etiquette='Avis de recherche'
         titre='Nos clients cherchent'
         accroche='Leur prochain lieu est peut-être le vôtre.'
@@ -58,7 +59,7 @@ function AvisDeRecherche() {
         <section className={styles.recherches}>
           <Apparition className={styles.entete}>
             <span className='etiquette'>Recherches en cours</span>
-            <h2 className='titre-grand'>Ils attendent leur histoire</h2>
+            <h2 className='titre-grand'>Ils attendent la suite de leur histoire</h2>
           </Apparition>
           <div className={styles.grille}>
             {affiches.map((url, k) => (

@@ -24,11 +24,10 @@ export function resumeBien(bien) {
   const prix =
     bien.status === 'vendu'
       ? 'Vendu'
-      : bien.status === 'sous-compromis'
-        ? 'Sous compromis'
-        : typeof bien.prix === 'number'
-          ? `${bien.prix.toLocaleString('fr-FR')} €`
-          : ''
+      : typeof bien.prix === 'number'
+        ? `${bien.prix.toLocaleString('fr-FR')} €`
+        : ''
+  const statut = bien.status === 'sous-compromis' ? 'Sous compromis' : bien.status === 'vendu' ? 'Vendu' : ''
   // « Chez Corneille Chapitre deux » → titre « Chez Corneille » + ligne « Chapitre deux »
   const titreComplet = soigner(bien.title || bien.localisation || '')
   const m = titreComplet.match(/^(.*?)[\s:,.–-]*\b(chapitre\s+.+)$/i)
@@ -38,6 +37,7 @@ export function resumeBien(bien) {
     lieu: soigner(bien.localisation),
     details: carac.slice(0, 2).join(' · '),
     prix,
+    statut,
   }
 }
 
@@ -52,6 +52,7 @@ function CarteBien({ bien, hauteurPhoto = 520, largeurImage = 1200 }) {
   return (
     <Link to={`/bien/${bien.ref}`} className={styles.carte}>
       <div ref={ref} className={styles.cadrePhoto} style={{ height: hauteurPhoto }}>
+        {r.statut && <span className='pastille'>{r.statut}</span>}
         {photo ? (
           <img
             className={`photo-bien ${tactile && auCentre ? 'en-vue' : ''}`}

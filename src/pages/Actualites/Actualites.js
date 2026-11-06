@@ -32,8 +32,9 @@ function Actualites() {
       </Helmet>
 
       <BandeauPage
+        positionPhoto='50% 55%'
         photo={Image}
-        alt='Les quais de Besançon la nuit'
+        alt='Un pont de Besançon illuminé la nuit'
         etiquette='Actualités'
         titre='Le journal de Marli'
         accroche='L’immobilier, d’ici et d’ailleurs, décrypté.'
