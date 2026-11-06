@@ -79,11 +79,11 @@ function Acheter() {
 
       <BandeauPage
         photo={Image}
-        alt='La citadelle de Besançon illuminée au-dessus du Doubs'
+        alt='Besançon et sa citadelle au crépuscule'
         etiquette='Acheter'
         titre='Nos adresses'
         accroche='Chaque adresse a son histoire. À vous d’en écrire la suite.'
-        positionPhoto='50% 15%'
+        positionPhoto='50% 55%'
       />
 
       <div className={styles.filtres}>
