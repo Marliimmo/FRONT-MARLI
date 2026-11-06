@@ -70,9 +70,9 @@ function Vendre() {
       </Helmet>
 
       <BandeauPage
-        positionPhoto='50% 55%'
+        positionPhoto='50% 50%'
         photo={Image}
-        alt='Maisons sur l’eau au crépuscule'
+        alt='Le quai Vauban et ses reflets dorés sur le Doubs'
         etiquette='Vendre'
         titre='Combien ça coûte ?'
         accroche='Le juste prix, et une histoire à raconter.'

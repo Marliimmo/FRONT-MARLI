@@ -145,8 +145,8 @@ function Accueil() {
       {/* La promesse */}
       <section className={styles.promesse}>
         <Apparition className={styles.promessePhotos}>
-          <img className={styles.photoArriere} src={ImgReflet} alt='Les toits et clochers de Besançon' loading='lazy' />
-          <img className={styles.photoAvant} src={ImgRefletCouleur} alt='Besançon reflétée dans un verre' loading='lazy' />
+          <img className={styles.photoArriere} src={ImgReflet} alt='Le quai Vauban à l’heure bleue' loading='lazy' />
+          <img className={styles.photoAvant} src={ImgRefletCouleur} alt='Une place de Besançon vue sous une arche' loading='lazy' />
         </Apparition>
         <Apparition className={styles.promesseTexte}>
           <span className='etiquette'>Marli</span>
@@ -195,7 +195,6 @@ function Accueil() {
               <div className={styles.servicePhoto}>
                 <img className='photo-illustration' src={s.photo} alt='' loading='lazy' />
               </div>
-              <span className={styles.serviceNum}>{s.num}</span>
               <h3>{s.titre}</h3>
               <ul>
                 {s.points.map((p) => (
@@ -213,7 +212,7 @@ function Accueil() {
       {/* Parole libre */}
       <section className={styles.avis} id='avisContainer'>
         <div className={styles.avisPhoto}>
-          <img src={ImgAvis} alt='Besançon à la tombée de la nuit, fenêtres éclairées' loading='lazy' />
+          <img src={ImgAvis} alt='Le Doubs vu depuis un pont orné de cadenas' loading='lazy' />
         </div>
         <div className={styles.avisContenu}>
         <div className={styles.avisResume}>

@@ -46,9 +46,9 @@ function AvisDeRecherche() {
       </Helmet>
 
       <BandeauPage
-        positionPhoto='50% 50%'
+        positionPhoto='50% 55%'
         photo={Image}
-        alt='Le quai Vauban et ses reflets dorés sur le Doubs'
+        alt='Maisons sur l’eau au crépuscule'
         etiquette='Avis de recherche'
         titre='Nos clients cherchent'
         accroche='Leur prochain lieu est peut-être le vôtre.'
