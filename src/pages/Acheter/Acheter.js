@@ -79,11 +79,11 @@ function Acheter() {
 
       <BandeauPage
         photo={Image}
-        alt='La citadelle de Besançon dans la brume'
+        alt='La citadelle de Besançon illuminée au-dessus du Doubs'
         etiquette='Acheter'
         titre='Nos adresses'
         accroche='Chaque adresse a son histoire. À vous d’en écrire la suite.'
-        positionPhoto='50% 40%'
+        positionPhoto='50% 15%'
       />
 
       <div className={styles.filtres}>
@@ -186,8 +186,8 @@ function Acheter() {
 
       {/* Avis de recherche */}
       <section className={styles.recherche}>
-        <p className={styles.recherchePhrase}>Le lieu de votre prochaine histoire vous attend peut-être ailleurs.</p>
-        <p className={styles.rechercheTexte}>Décrivez-le-nous : nous le cherchons avec vous.</p>
+        <p className={styles.recherchePhrase}>Votre prochaine histoire est peut-être ailleurs.</p>
+        <p className={styles.rechercheTexte}>Décrivez-nous le lieu que vous imaginez : nous le cherchons avec vous.</p>
         <Link to='/avis-de-recherche' className='bouton-plein'>
           Déposer un avis de recherche
         </Link>
