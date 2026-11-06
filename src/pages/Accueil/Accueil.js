@@ -113,7 +113,7 @@ function Accueil() {
         <title>Marli Immobilier - Agence immobilière à Besançon et dans le Doubs</title>
         <meta
           name='description'
-          content="Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs, la Haute-Saône et le Jura. Un lieu se transmet, son histoire continue."
+          content="Marli Immobilier, agence indépendante à Besançon. Achat, vente et estimation immobilière dans le Doubs, la Haute-Saône et le Jura. Les lieux se transmettent, les histoires se poursuivent."
         />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/' />
@@ -132,9 +132,9 @@ function Accueil() {
           <img className={styles.arriveeLogo} src={Logo} alt='Marli, passeur d’histoires immobilières' />
           <span className='filet'></span>
           <p className={styles.arriveePhrase}>
-            Un lieu se transmet.
+            Les lieux se transmettent.
             <br />
-            Son histoire continue.
+            Les histoires se poursuivent.
           </p>
           <Link to='/acheter' className='lien-souligne'>
             Découvrir nos histoires
