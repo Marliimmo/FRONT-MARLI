@@ -32,7 +32,7 @@ function Actualites() {
       </Helmet>
 
       <BandeauPage
-        positionPhoto='50% 55%'
+        positionPhoto='50% 60%'
         photo={Image}
         alt='Un pont de Besançon illuminé la nuit'
         etiquette='Actualités'

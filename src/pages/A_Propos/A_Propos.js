@@ -31,7 +31,7 @@ function A_Propos() {
         alt='La citadelle de Besançon au coucher du soleil'
         etiquette='L’agence'
         titre='Passeur d’histoires immobilières'
-        positionPhoto='68% 55%'
+        positionPhoto='60% 42%'
       />
 
       {/* La conviction */}

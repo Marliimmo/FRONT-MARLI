@@ -30,9 +30,9 @@ function NousContacter() {
       </Helmet>
 
       <BandeauPage
-        positionPhoto='50% 25%'
+        positionPhoto='50% 45%'
         photo={Image}
-        alt='Un grand bâtiment des quais de Besançon illuminé, reflété dans le Doubs'
+        alt='Besançon et sa citadelle vues depuis une terrasse fleurie'
         etiquette='Contact'
         titre='Parlons de votre projet'
         accroche='Joignable 7 jours sur 7.'
