@@ -11,8 +11,10 @@ import { imageUrl } from '../../utils/images'
 
 const CRITERES = [
   'Chaque bien est unique : sa valeur dépend de plusieurs variables.',
-  'L’année de construction, le standing, la rareté, l’état général du bien et du bâtiment.',
-  'L’environnement visuel et sonore, la comparaison avec des biens similaires, le marché local.',
+  'L’emplacement et le marché local, au regard des biens similaires vendus dans le secteur.',
+  'L’environnement visuel et sonore : la vue, l’exposition, le calme.',
+  'L’état général du bien et du bâtiment, son standing et sa performance énergétique.',
+  'La rareté du bien et son année de construction.',
   'Et notre petit doigt…',
 ]
 
@@ -68,8 +70,9 @@ function Vendre() {
       </Helmet>
 
       <BandeauPage
+        positionPhoto='50% 55%'
         photo={Image}
-        alt='Les quais de Besançon et leurs reflets'
+        alt='Maisons sur l’eau au crépuscule'
         etiquette='Vendre'
         titre='Combien ça coûte ?'
         accroche='Le juste prix, et une histoire à raconter.'
