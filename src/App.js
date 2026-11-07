@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-import LoadingAllSite from './components/LoadingAllSite/LoadingAllSite'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
@@ -30,7 +29,6 @@ function App() {
     <>
       <ScrollToTopButton />
       <ScrollToTop />
-      <LoadingAllSite />
       <Header />
       <div style={{ minHeight: '100dvh', paddingTop: '73px' }}>
         <Outlet />

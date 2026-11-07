@@ -1,731 +1,583 @@
 @import "../../assets/styles/variables";
 
-.firstSectionContainer{
+.titreReferencement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+// L'arrivée : photo horizontale plein écran, texte posé à gauche
+.arrivee {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(100vh - #{$hauteur-entete});
+  min-height: 600px;
+  max-height: 1100px;
+  overflow: hidden;
+  background-color: $noir;
+}
+
+.arriveePhoto {
+  position: absolute;
+  inset: 0;
+
+  img {
+    display: block;
     width: 100%;
-    height: calc(100vh - 73px);
-    min-height: 560px;
+    height: 100%;
+    object-fit: cover;
+    object-position: 55% 30%;
+    animation: arrivee-zoom 14s ease-out both;
+  }
+
+  // voile sombre plus dense au centre, sous le logo et la phrase
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.28) 45%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+}
+
+// très lent recul de la photo à l'ouverture de la page
+@keyframes arrivee-zoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.arriveeTexte {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  padding: 0 8%;
+  box-sizing: border-box;
+}
+
+.arriveeLogo {
+  width: clamp(130px, 11vw, 190px);
+}
+
+.arriveePhrase {
+  margin: 0;
+  max-width: 720px;
+  text-wrap: balance;
+  font-weight: 200;
+  font-size: clamp(24px, 2.5vw, 40px);
+  line-height: 1.3;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arriveePhoto img {
+    animation: none;
+  }
+}
+
+// Rythme vertical commun : chaque bloc est cadré sur son contenu
+$respiration: 104px;
+$respiration-mobile: 64px;
+
+// La promesse, avec les deux photos en reflet
+.promesse {
+  padding: $respiration $marge-page;
+  display: flex;
+  align-items: center;
+  gap: 8%;
+}
+
+.promessePhotos {
+  position: relative;
+  flex: 0 0 38%;
+  height: 460px;
+}
+
+.photoArriere,
+.photoAvant {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+}
+
+.photoArriere {
+  top: 0;
+  left: 0;
+  width: 58%;
+  height: 82%;
+}
+
+.photoAvant {
+  right: 0;
+  bottom: 0;
+  width: 56%;
+  height: 74%;
+  box-shadow: -18px -18px 0 $fond;
+}
+
+.promesseTexte {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+
+  p {
+    margin: 0;
+    max-width: 600px;
+    text-wrap: balance;
+    font-weight: 200;
+    font-size: clamp(20px, 1.9vw, 30px);
+    line-height: 1.45;
+  }
+}
+
+.promesseFin {
+  white-space: nowrap;
+  max-width: none !important;
+  font-size: clamp(17px, 1.45vw, 22px) !important;
+  color: $texte-doux;
+}
+
+// En-tête commun aux sections, centré
+.enteteSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding-bottom: 48px;
+}
+
+.lienSousGrille {
+  display: flex;
+  justify-content: center;
+  padding-top: 48px;
+}
+
+// Nos nouvelles histoires
+.histoires {
+  padding: 0 $marge-page $respiration;
+}
+
+.grilleBiens {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+// Nos services
+.services {
+  background-color: $noir;
+  padding: $respiration $marge-page;
+}
+
+.grilleServices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+
+  h3 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 28px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     display: flex;
-    align-items: stretch;
-    background-color: $font-color;
-    overflow: hidden;
-    position: relative;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $texte-doux;
+  }
 
-    .TextContent{
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        gap: clamp(20px, 2.2vw, 40px);
-        padding: 0 6%;
-        z-index: 2;
-
-        p{
-            margin: 0;
-        }
-
-        img{
-            width: clamp(150px, 11vw, 240px);
-        }
-
-        .filet{
-            width: 70px;
-            height: 1px;
-            background-color: $white-color;
-            opacity: 0.6;
-        }
-
-        h3{
-            max-width: 18em;
-            font-weight: 300;
-            font-size: clamp(24px, 2.1vw, 44px);
-            line-height: 1.45;
-            letter-spacing: 0.5px;
-        }
-    }
-
-    .ImgPremierePlan{
-        height: 100%;
-        width: auto;
-        aspect-ratio: 2 / 3;
-        max-width: 50%;
-        object-fit: cover;
-        object-position: 50% 60%;
-        display: block;
-        flex-shrink: 0;
-        z-index: 1;
-    }
-
-    .opacityBlack{
-        display: none;
-    }
-
-    @media screen and (max-width: 1100px) {
-        .TextContent{
-            padding: 0 5%;
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        height: 60vh;
-        min-height: 420px;
-        justify-content: center;
-
-        .ImgPremierePlan{
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            max-width: 100%;
-            height: 100%;
-            aspect-ratio: auto;
-            object-position: center 35%;
-        }
-
-        .opacityBlack{
-            display: block;
-            position: absolute;
-            inset: 0;
-            background-color: black;
-            opacity: 0.5;
-            z-index: 1;
-        }
-
-        .TextContent{
-            align-items: center;
-            text-align: center;
-            padding: 30px;
-            gap: 18px;
-
-            img{
-                width: 110px;
-            }
-
-            .filet{
-                display: none;
-            }
-
-            h3{
-                font-weight: 300;
-                font-size: 20px;
-            }
-        }
-    }
-
-    @media screen and (max-width: 420px) {
-        .TextContent{
-            h3{
-                font-size: 17px;
-            }
-        }
-    }
+  :global(.lien-souligne) {
+    margin-top: 10px;
+  }
 }
 
-.borderStyle{
-    border-top: 3px solid $white-color;
-    width: 35%;
-    padding-top: 30px;
+.servicePhoto {
+  width: 100%;
+  height: 260px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background-color: $surface;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter $transition-photo, transform 1.2s ease;
+  }
 }
 
-.presentationSection{
-    padding: 80px 10%;
-    padding-bottom: 100px;
+.service:hover .servicePhoto img {
+  filter: saturate(1.15);
+  transform: scale(1.03);
+}
+
+.serviceNum {
+  font-weight: 200;
+  font-size: 15px;
+  letter-spacing: 3px;
+  color: $texte-discret;
+}
+
+// Parole libre : le portrait en couleur à gauche, les avis à droite
+.avis {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0 7%;
+  padding: $respiration $marge-page;
+  background-color: $fond;
+
+  button:global(.lien-souligne) {
+    align-self: flex-start;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+  }
+}
+
+.avisPhoto {
+  flex: 0 0 34%;
+  min-height: 480px;
+  overflow: hidden;
+  background-color: $surface;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 62%;
+  }
+}
+
+.avisContenu {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 44px;
+}
+
+.avisResume {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.avisNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  padding: 10px 0 6px;
+}
+
+.avisMoyenne {
+  font-weight: 200;
+  font-size: 56px;
+  line-height: 1;
+}
+
+.avisSur {
+  font-weight: 200;
+  font-size: 22px;
+  color: $texte-doux;
+}
+
+.etoiles {
+  margin-left: 8px;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: $accent;
+}
+
+.avisNombre {
+  flex-basis: 100%;
+  font-family: $police-etiquette;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: $texte-discret;
+}
+
+.avisLecture {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 48px;
+  border-top: 1px solid $ligne;
+}
+
+.avisCitation {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: avis-fondu 0.9s ease both;
+
+  blockquote {
+    margin: 0;
+    font-weight: 200;
+    line-height: 1.6;
+  }
+
+  figcaption {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
-    gap: 50px;
-
-    .LeftContent{
-        height: 500px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 2px 2px 40px $font-color;
-        flex: 1 0 35%;
-        position: relative;
-        
-        img{
-            height: 70%;
-            width: 75%;
-            position: absolute;
-            object-fit: cover;
-            border-radius: 10px;
-
-            &:nth-child(1){
-                top: 0;
-                left: 0;
-            }
-
-            &:nth-child(2){
-                bottom: 5%;
-                right: 0;
-
-            }
-        }
-    }
-
-    .RightContent{
-        flex: 1 0 45%;
-
-        // display: flex;
-        // flex-direction: column;
-        // align-items: center;
-        // text-align: center;
-
-        p{
-            font-size: 18px;
-            font-weight: 200;
-            letter-spacing: 1px;
-            line-height: 35px;
-            
-            &:nth-child(3){
-                white-space: nowrap;
-                width: fit-content;
-                margin-top: 35px;
-                font-size: 28px;
-                font-weight: bold;
-                line-height: 50px;
-                position: relative;
-                color: transparent;
-                -webkit-text-stroke: 1px $white-color;
-
-                &::before{
-                    content: "A vous d'écrire la suite de l'histoire...";
-                    color: $white-color;
-                    position: absolute;
-                    top: 0;
-                    width: 0%;
-                    height: 100%;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    border-right: 2px solid $white-color;
-                    animation: animateX 7s linear infinite;
-                }
-            }
-        }
-
-        @keyframes animateX {
-            0%,10%,100% {
-                width: 0%;
-            }
-            70%, 90% {
-                width: 100%;
-            }
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-    }
-
-    @media screen and (max-width: 632px) {
-        .RightContent{
-            p{
-                &:nth-child(3){
-                    font-size: 18px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 460px) {
-        .RightContent{
-            p{
-                &:nth-child(3){
-                    font-size: 16px;
-                }
-            }
-        }
-        .LeftContent{
-            height: 300px;
-            flex: 1 0 100%;
-        }
-    }
-
-    @media screen and (max-width: 400px) {
-        .RightContent{
-            p{
-                &:nth-child(3){
-                    font-size: 13px;
-                }
-            }
-        }
-    }
+    gap: 16px;
+  }
 }
 
-// .NouveautesContainer2{
-//     width: 100%;
-//     overflow: hidden;
-//     padding: 30px 9% 0px 9%;
-
-//     .titleEslideBtn{
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//         padding: 10px 20px;
-//         flex-wrap: wrap;
-//         row-gap: 5px;
-//         margin-bottom: 25px;
-
-//         h3{
-//             font-weight: 500;
-//             font-size: 30px;
-//             letter-spacing: 1.3px;
-//         }
-
-//         .slideButton{
-//             width: 100px;
-//             display: flex;
-//             justify-content: space-between;
-
-//             div{
-//                 cursor: pointer;
-//                 width: 40px;
-//                 height: 40px;
-//                 min-width: 40px;
-//                 min-height: 40px;
-//                 background-color: $white-color;
-//                 border-radius: 100px;
-//                 display: flex;
-//                 justify-content: center;
-//                 align-items: center;
-//                 overflow: hidden;
-                
-//                 svg{
-//                     color: $gray-color;
-//                 }
-//             }
-//         }
-//     }
-
-//     .btnContainer{
-//         width: 100%;
-//         text-align: center;
-//         margin: 70px 0px 100px 0px;
-
-//         a{
-//             width: fit-content;
-//             padding: 20px 35px;
-//             border: 1px solid $white-color;
-//             border-radius: 100px;
-//             letter-spacing: 1.3px;
-//         }
-//     }
-// }
-
-.widget{
-    padding: 120px 9%;
-    background-color: $gray-color;
-
-    .NouveautesContainer{
-        width: 100%;
-        margin-bottom: 30px;
-        overflow: hidden;
-        position: relative;
-
-        .allNewBienCard{
-            width: 100%;
-            height: fit-content;
-            // background-color: red;
-            padding-left: 8px;
-            .slidebtn{
-                display: none;
-            }
-
-            &:hover{
-                .slidebtn{
-                    display: block;
-                }
-            }
-
-            @media screen and (max-width: 899px) {
-                padding-left: 0px;
-                padding-right: 5px;
-                .slidebtn{
-                    display: block;
-                }
-            }
-        }
-            
-        h3{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 200;
-            font-size: 30px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 55px;
-        }
-
-        .slideButton, .slideButtonForMobile{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            position: absolute;
-            top: 30%;
-            left: 0;
-
-            div{
-                cursor: pointer;
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
-                min-height: 40px;
-                background-color: $white-color;
-                border-radius: 100px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden;
-                z-index: 10;
-                
-                svg{
-                    color: $gray-color;
-                }
-            }
-        }
-
-        .btnContainer{
-            width: 100%;
-            text-align: center;
-            margin: 70px 0px 180px 0px;
-
-            a{
-                width: fit-content;
-                padding: 20px 35px;
-                // background-color: $white-color;
-                // border: 1px solid $white-color;
-                // color: $gray-color;
-                border: 1px solid $white-color;
-                color: $white-color;
-                font-size: 18px;
-                border-radius: 100px;
-            }
-
-        }
-
-        // @media screen and (min-width: 899px) {
-        //     .slideButtonForMobile{
-        //         display: none;
-        //     }
-        // }
-
-        // @media screen and (max-width: 900px) {
-        //     .slideButton{
-        //         display: none;
-        //     }
-        // }
-    }
-    
-    .sectionChecked{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        column-gap: 80px;
-
-        .LeftContent{
-            height: 575px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 2px 2px 40px $font-color;
-            width: 40%;
-            // flex: 0 0 40%;
-            // box-shadow: 2px 2px 100px $white-color;
-
-            img{
-                height: 575px;
-                width: 100%;
-                object-fit: cover;
-            }
-
-            // &:hover{
-            //     box-shadow: 2px 2px 100px $white-color;
-            //     transition: all 200ms;
-            // }
-        }
-    
-        .RightContent{
-            // width: 55%;
-            // flex: 0 0 55%;
-            width: 35%;
-
-            h2{
-                font-weight: 500;
-                font-size: 35px;
-                margin-bottom: 20px;
-            }
-
-            .ListeCheckContainer{
-                margin-bottom: 75px;
-                .oneChecked{
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    column-gap: 18px;
-                    margin: 25px 0px;
-                    
-                    svg{
-                        font-size: 25px;
-                    }
-
-                    p{
-                        font-size: 17px;
-                        line-height: 28px;
-                        margin: 0;
-                        font-weight: 300;
-                    }
-                }
-            }
-
-            a{
-                width: fit-content;
-                padding: 20px 35px;
-                // background-color: $white-color;
-                // border: 1px solid $white-color;
-                // color: $gray-color;
-                border: 1px solid $white-color;
-                color: $white-color;
-                font-size: 18px;
-                border-radius: 100px;
-            }
-        }
-    }
-
-    .sectionChecked2{
-        margin-top: 150px;
-        flex-direction: row-reverse;
-    }
-
-    @media screen and (max-width: 966px) {
-        .sectionChecked{
-            flex-direction: column;
-
-            .LeftContent{
-                height: 300px;
-                margin-bottom: 35px;
-                width: 100%;
-                
-                img{
-                    height: 300px;
-                }
-            }
-
-            .RightContent{
-                width: 100%;
-                margin-bottom: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-    
-                .ListeCheckContainer{
-                    margin-bottom: 40px;
-                    .oneChecked{
-                        justify-content: center;
-                        flex-direction: column;
-                        text-align: center;
-
-                        svg{
-                            display: none;
-                        }
-                    }
-                }
-
-                .borderStyle{
-                    padding-top: 0px;
-                }
-            }
-        }
-
-        .NouveautesContainer{
-            .btnContainer{
-                margin-bottom: 120px;
-            }
-        }
-
-        > div{
-            &:nth-child(3){
-                margin-top: 80px;
-                flex-direction: column;
-            }
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-        .NouveautesContainer{
-            .titleEslideBtn{
-                padding: 0px;
-            }
-
-            .btnContainer{
-                a{
-                    padding: 20px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 420px) {
-        .NouveautesContainer{
-            margin-bottom: 0px;
-            h3{
-                font-size: 20px;
-                margin-bottom: 25px;
-                line-height: 30px;
-            }
-        }
-
-        .sectionChecked{
-            .RightContent{
-                h2{
-                  font-size: 30px;  
-                }
-            }
-        }
-    }
+.guillemet {
+  display: block;
+  height: 60px;
+  font-weight: 200;
+  font-size: 120px;
+  line-height: 1;
+  color: $accent;
 }
 
-.investerSection{
-    padding: 100px 10%;
-    padding-top: 30px;
-    background-color: $gray-color;
-
-    div{
-        padding: 50px;
-        padding-bottom: 80px;
-        background-color: $white-color;
-        color: $gray-color;
-        border-radius: 18px;
-        
-        ul{
-            margin-bottom: 70px;
-            padding-left: 16px;
-            li{
-                list-style: initial;
-                font-size: 20px;
-                margin: 20px 0px;
-                line-height: 28px;
-            }
-        }
-    
-        h2{
-            font-size: 30px;
-            letter-spacing: 1.3px;
-            margin-bottom: 35px;
-        }
-    
-        a{
-            width: fit-content;
-            padding: 20px 35px;
-            background-color: $gray-color;
-            color: $white-color;
-            border-radius: 100px;
-            letter-spacing: 1.3px;
-        }
-    
-        @media screen and (max-width: 750px) {
-            h2{
-                font-size: 25px;
-            }
-    
-            ul{
-                li{
-                    font-size: 17px;
-                }
-            }
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        padding: 50px 30px;
-    }
-
-    @media screen and (max-width: 420px) {
-        div{
-            padding: 30px;
-            padding-bottom: 60px;
-        }
-    }
+.avisTexte {
+  font-size: clamp(20px, 1.9vw, 28px);
 }
 
-.AvisSection{
-    padding: 100px 9%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/images/21.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.avisTexteLong {
+  font-size: clamp(17px, 1.4vw, 20px);
+}
 
-    .barStyleContainer{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 30px;
+.avisAuteur {
+  font-family: $police-etiquette;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 
-        p{
-            width: 15%;
-        }
+.etoilesPetites {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: $accent;
+}
+
+@keyframes avis-fondu {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.avisNavigation {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: $police-etiquette;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: $texte-discret;
+
+  button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: none;
+    border: 1px solid $ligne;
+    border-radius: 50%;
+    color: $blanc;
+    font-size: 16px;
+    cursor: pointer;
+    transition: border-color $transition-douce;
+
+    &:hover {
+      border-color: $blanc;
     }
+  }
+}
 
-    h2{
-        text-align: center;
-        font-weight: 500;
-        font-size: 35px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        margin-bottom: 20px;
+.avisMerci {
+  margin: 0;
+  font-weight: 300;
+  color: $texte-doux;
+}
+
+.avisFormulaire {
+  flex: 0 0 100%;
+  padding-top: 56px;
+  display: flex;
+  justify-content: center;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// La fin
+.fin {
+  background-color: $noir;
+  padding: $respiration $marge-page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+.finPhrase {
+  font-weight: 200;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.25;
+}
+
+.finBoutons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+// Tablette
+@media screen and (max-width: 1100px) {
+  .promesse {
+    gap: 6%;
+  }
+
+  .promesseFin {
+    white-space: normal;
+  }
+
+  .grilleBiens {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grilleServices {
+    gap: 36px;
+  }
+}
+
+// Téléphone
+@media screen and (max-width: $ecran-mobile) {
+  .arrivee {
+    height: 75vh;
+    min-height: 520px;
+  }
+
+  .arriveePhoto::after {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .arriveeTexte {
+    padding: 0 30px;
+    gap: 24px;
+
+    :global(.filet) {
+      display: none;
     }
+  }
 
-    .btnSection{
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
+  .arriveePhrase {
+    font-size: 24px;
+  }
 
-        a{
-            width: fit-content;
-            button{
-                padding: 20px 35px;
-                border: 1px solid $white-color;
-                border-radius: 100px;
-                letter-spacing: 1.3px;
-                font-size: 17px;
-                color: $white-color;
-                background-color: transparent;
-                cursor: pointer;
-            }
-        }
+  .promesse {
+    padding: $respiration-mobile $marge-page;
+    flex-direction: column;
+    gap: 40px;
+  }
 
-    }
+  .promessePhotos {
+    flex: none;
+    width: 100%;
+    height: 400px;
+  }
 
-    .MessageFeedBackSucces{
-        margin-top: 15px;
-        text-align: center;
-        border-radius: 5px;
-        width: fit-content;
-        padding: 15px 20px;
-        color: $white-color;
-        font-size: 18px;
-        font-weight: 500;
-        background-color: green;
-    }
+  .promesseFin {
+    white-space: normal;
+  }
 
-    @media screen and (max-width: 420px) {
-        .barStyleContainer{
-            margin-top: 20px;
-            margin-bottom: 10px;
-            p{
-                width: 50%;
-            }
-        }
+  .avis {
+    padding: $respiration-mobile $marge-page;
+    gap: 40px;
+  }
 
-        h2{
-            font-size: 30px;
-        }
-    }
+  .avisPhoto {
+    flex: 0 0 100%;
+    min-height: 0;
+    height: 380px;
+  }
+
+  .avisContenu {
+    gap: 48px;
+  }
+
+  .servicePhoto {
+    height: 300px;
+  }
+
+  .histoires {
+    padding-bottom: $respiration-mobile;
+  }
+
+  .enteteSection {
+    padding-bottom: 36px;
+  }
+
+  .lienSousGrille {
+    padding-top: 36px;
+  }
+
+  .grilleBiens,
+  .grilleServices {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+
+  .services,
+  .fin {
+    padding-top: $respiration-mobile;
+    padding-bottom: $respiration-mobile;
+  }
 }

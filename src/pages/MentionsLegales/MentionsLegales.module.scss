@@ -1,26 +1,41 @@
-.allContainer{
-    padding: 50px 10%;
+@import "../../assets/styles/variables";
 
-    h2{
-        font-size: 30px;
-        margin-bottom: 30px;
-        font-weight: 500;
-    }
+.allContainer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 96px $marge-page;
+  box-sizing: content-box;
 
-    h3{
-        font-size: 20px;
-        margin-top: 30px;
-        font-weight: 500;
-    }
+  h2 {
+    margin: 0 0 48px;
+    font-weight: 200;
+    font-size: clamp(32px, 3.4vw, 48px);
+  }
 
-    p{
-        font-weight: 200;
-        line-height: 28px;
-        font-size: 16px;
-        letter-spacing: 0.3px;
-    }
+  h3 {
+    margin: 48px 0 18px;
+    padding-top: 28px;
+    border-top: 1px solid $ligne;
+    font-family: $police-etiquette;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $texte-discret;
+  }
 
-    @media screen and (max-width: 750px) {
-        padding: 30px;
-    }
+  p {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.85;
+    color: $texte-doux;
+  }
+
+  a {
+    color: $blanc;
+  }
+
+  @media screen and (max-width: $ecran-mobile) {
+    padding: 64px $marge-page;
+  }
 }

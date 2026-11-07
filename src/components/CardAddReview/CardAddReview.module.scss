@@ -1,4 +1,5 @@
 @import "../../assets/styles/variables";
+@import "../../assets/styles/formulaires";
 .allContainer{
     width: 100%;
     padding: 40px 1.4%;
@@ -172,4 +173,26 @@
             }
         }
     }
+}
+
+
+// Harmonisation avec les autres formulaires du site
+.allContainer form {
+  @include champs-marli;
+  text-align: left;
+
+  h2 {
+    font-weight: 200;
+    font-size: clamp(26px, 2.4vw, 34px);
+  }
+
+  button + button {
+    background-color: transparent;
+    color: $blanc;
+
+    &:hover {
+      background-color: $blanc;
+      color: $noir;
+    }
+  }
 }

@@ -1,162 +1,69 @@
-import React, { useEffect, useState } from 'react'
-import FirstSectionPage from '../../components/FirstSectionPage/FirstSectionPage'
-import Image from '../../assets/images/24.jpg'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Acheter.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faChevronDown,
-  faChevronUp,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons'
-import CardBien from '../../components/CardBien/CardBien'
-import GifLoading from '../../components/GifLoading/GifLoading'
 import { Helmet } from 'react-helmet-async'
+import styles from './Acheter.module.scss'
+import Image from '../../assets/images/jacottot/bandeau-acheter.jpg' // photo : J. Jacottot
+import BandeauPage from '../../components/Refonte/BandeauPage'
+import Apparition from '../../components/Refonte/Apparition'
+import CarteBien, { resumeBien } from '../../components/Refonte/CarteBien'
+import BlocSerie from '../../components/Refonte/BlocSerie'
+import { regrouper } from '../../components/Refonte/series'
+import { imageUrl } from '../../utils/images'
+
+const ONGLETS = [
+  { id: 'tous', label: 'Tous les biens' },
+  { id: 'appartements', label: 'Appartements' },
+  { id: 'maisons', label: 'Maisons et propriétés' },
+  { id: 'pro', label: 'Programmes et locaux' },
+]
+
+// Catégorie d'un bien d'après la première ligne de ses caractéristiques
+function categorie(bien) {
+  const type = ((bien.caracteristiques || '').split('#')[0] || '').toLowerCase()
+  if (/appartement|duplex|studio|loft/.test(type)) return 'appartements'
+  if (/maison|propri[ée]t[ée]|immeuble|villa|ferme|ch[âa]teau/.test(type)) return 'maisons'
+  return 'pro'
+}
 
 function Acheter() {
-  const [showFiltre, setShowFiltre] = useState(false)
-  const [data, setData] = useState([])
-  const [page, setPage] = useState(1)
-  const [pageSize] = useState(6)
-  const [loading, setLoading] = useState('fecthLoad')
-  const [hasMore, setHasMore] = useState(false)
-  const [fecthUrl, setFecthUrl] = useState(
-    `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant&page=1&pageSize=6`,
-  )
-
-  const [typeBien, setTypeBien] = useState('tous')
-  const [budgets, setBudgets] = useState('')
-  const [localisation, setLocalisation] = useState('')
-  const [superficie, setSuperficie] = useState('')
-
-  const typeBienFunction = (e) => {
-    if (
-      e.target.value !== '' &&
-      e.target.value !== null &&
-      e.target.value !== 'tous'
-    ) {
-      setTypeBien(`&typeBien=${e.target.value}`)
-    } else {
-      setTypeBien('')
-    }
-    setPage(1)
-  }
-
-  const budgetsFunction = (e) => {
-    if (e.target.value !== '' && e.target.value !== null) {
-      setBudgets(`&budgets=${e.target.value}`)
-    } else {
-      setBudgets('')
-    }
-    setPage(1)
-  }
-
-  const localisationFunction = (e) => {
-    if (e.target.value !== '' && e.target.value !== null) {
-      setLocalisation(`&localisation=${e.target.value}`)
-    } else {
-      setLocalisation('')
-    }
-    setPage(1)
-  }
-
-  const superficieFunction = (e) => {
-    if (e.target.value !== '' && e.target.value !== null) {
-      setSuperficie(`&superficie=${e.target.value}`)
-    } else {
-      setSuperficie('')
-    }
-    setPage(1)
-  }
-
-  const NewUrlFecth = (e) => {
-    e.preventDefault()
-    setLoading('filtre')
-    let newUrl = `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant`
-    if (typeBien !== '') {
-      newUrl = `${newUrl}${typeBien}`
-    }
-    if (budgets !== '') {
-      newUrl = `${newUrl}${budgets}`
-    }
-    if (localisation !== '') {
-      newUrl = `${newUrl}${localisation}`
-    }
-    if (superficie !== '') {
-      newUrl = `${newUrl}${superficie}`
-    }
-
-    setTimeout(() => {
-      setLoading('')
-      setFecthUrl(`${newUrl}&page=1&pageSize=6`)
-      setPage(1)
-    }, 1000)
-  }
-
-  const loadMoreData = async () => {
-    setLoading('seeMore')
-
-    try {
-      const response = await fetch(
-        `${fecthUrl.split('&page')[0]}&page=${page + 1}&pageSize=${pageSize}`,
-      )
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP : ${response.status}`)
-      }
-      const result = await response.json()
-      setTimeout(() => {
-        const newBiens = result.biens
-        const newDisponibles = newBiens.filter(b => b.status !== 'vendu')
-        const newVendus = newBiens.filter(b => b.status === 'vendu')
-        setData([...data, ...newDisponibles, ...newVendus])
-        setHasMore(result.hasMore)
-        setPage(page + 1)
-        setLoading('')
-      }, 1000)
-    } catch (error) {
-      setLoading('')
-      console.log('error lors de la requette fecth', error)
-    }
-  }
+  const [biens, setBiens] = useState([])
+  const [chargement, setChargement] = useState(true)
+  const [onglet, setOnglet] = useState('tous')
+  const [tousLesVendus, setTousLesVendus] = useState(false)
 
   useEffect(() => {
-    setLoading('fecthLoad')
-    const fetchInitialData = async () => {
+    const charger = async () => {
       try {
-        const response = await fetch(fecthUrl)
-        if (!response.ok) {
-          setLoading('')
-          throw new Error(`Erreur HTTP : ${response.status}`)
+        const reponse = await fetch(
+          `${process.env.REACT_APP_API_URL}/bien/all-biens?filter&triPar=croissant&page=1&pageSize=200`,
+        )
+        if (reponse.ok) {
+          const resultat = await reponse.json()
+          setBiens(resultat.biens || [])
         }
-        const result = await response.json()
-        const { biens, hasMore } = result
-        const disponibles = biens.filter(b => b.status !== 'vendu')
-        const vendus = biens.filter(b => b.status === 'vendu')
-        setData([...disponibles, ...vendus])
-        setHasMore(hasMore)
-        setLoading('')
-      } catch (error) {
-        setLoading('')
-        console.log('error lors de la requette fecth', error)
+      } catch (e) {
+        // serveur indisponible : la page affiche simplement le message d'attente
       }
+      setChargement(false)
     }
+    charger()
+  }, [])
 
-    fetchInitialData()
-  }, [fecthUrl])
-
-  const handleKeyDown = (event) => {
-    const keyCode = event.keyCode || event.which
-    if (
-      (keyCode >= 48 && keyCode <= 57) ||
-      (keyCode >= 96 && keyCode <= 105) ||
-      [8, 9, 13, 27, 37, 39, 46].includes(keyCode)
-    ) {
-      return true
+  const { elements, vendus } = useMemo(() => {
+    const enVente = biens.filter((b) => b.status === 'disponible' || b.status === 'sous-compromis')
+    const filtres = enVente.filter((b) => onglet === 'tous' || categorie(b) === onglet)
+    return {
+      elements: regrouper(filtres),
+      vendus: biens.filter((b) => b.status === 'vendu'),
     }
+  }, [biens, onglet])
 
-    event.preventDefault()
-    return false
-  }
+  // le premier bien isolé passe en vedette ; les séries suivent ; les autres biens viennent en grille
+  const indexVedette = elements.findIndex((e) => e.type === 'bien')
+  const vedette = indexVedette >= 0 ? elements[indexVedette] : null
+  const series = elements.filter((e) => e.type === 'serie')
+  const seuls = elements.filter((e, k) => e.type === 'bien' && k !== indexVedette)
+  const vendusAffiches = tousLesVendus ? vendus : vendus.slice(0, 6)
 
   return (
     <>
@@ -164,119 +71,127 @@ function Acheter() {
         <title>Acheter un bien immobilier à Besançon et alentours - Marli Immobilier</title>
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://marli-immobilier.com/acheter' />
-        <meta name='description' content='Trouvez votre appartement ou maison à Besançon et dans un rayon de 50km. Marli Immobilier sélectionne les meilleures opportunités pour vous.' />
+        <meta
+          name='description'
+          content='Appartements, maisons et propriétés à Besançon, Maîche et dans le Doubs. Chaque adresse a son histoire : découvrez les biens de Marli Immobilier.'
+        />
       </Helmet>
-      <div className={styles.allContainer}>
-        {loading === 'filtre' || loading === 'fecthLoad' ? (
-          <GifLoading positionDiv='fixed' />
-        ) : null}
 
-        <div className={styles.firstSection}>
-          <FirstSectionPage
-            ImgPremierePlan={Image}
-            title='Nos adresses'
-          />
-        </div>
+      <BandeauPage
+        photo={Image}
+        alt='Besançon et sa citadelle au crépuscule'
+        etiquette='Acheter'
+        titre='Nos adresses'
+        accroche='Chaque adresse a son histoire. À vous d’en écrire la suite.'
+        positionPhoto='50% 55%'
+      />
 
-        <div className={styles.BienContainer}>
-          <div
-            className={styles.showFiltre}
-            onClick={() => setShowFiltre(!showFiltre)}
-          >
-            <p>Filtrer les biens par catégories</p>
-            {showFiltre ? (
-              <FontAwesomeIcon icon={faChevronUp} />
-            ) : (
-              <FontAwesomeIcon icon={faChevronDown} />
-            )}
-          </div>
-
-          <div
-            style={showFiltre ? { display: 'flex' } : {}}
-            className={styles.filtreContainer}
-          >
-            <select onChange={typeBienFunction}>
-              <option value='tous'>Tous les biens</option>
-              <option value='appartement'>Appartement</option>
-              <option value='immeuble'>Immeuble</option>
-              <option value='maison'>Maison</option>
-            </select>
-
-            <input
-              onChange={budgetsFunction}
-              onKeyDown={handleKeyDown}
-              min={1}
-              type='number'
-              placeholder='Budgets max (€)'
-            />
-
-            <input
-              onChange={localisationFunction}
-              type='text'
-              placeholder='Localisation'
-            />
-
-            <input
-              onChange={superficieFunction}
-              min={1}
-              onKeyDown={handleKeyDown}
-              type='number'
-              placeholder='Superficie (m²)'
-            />
-
-            <div className={styles.btnSearchContainer} onClick={NewUrlFecth}>
-              <span>Appliquer le filtre</span>
-              <FontAwesomeIcon icon={faSearch} />
-            </div>
-          </div>
-
-          <div className={styles.ListeDBien}>
-            {loading === 'fecthLoad' ? null : (
-              <>
-                {data.map((bien) => (
-                  <div key={bien?._id}>
-                    <CardBien
-                      imgUrl={bien?._medias?.image_galerie_0?.url}
-                      prix={bien?.prix}
-                      localisation={bien?.localisation}
-                      caracteristique={bien?.caracteristiques}
-                      title={bien?.title}
-                      status={bien?.status}
-                      reference={bien?.ref}
-                    />
-                  </div>
-                ))}
-                {loading === 'fecthLoad' ? null : data.length > 0 ? null : (
-                  <div className={styles.notFoundBien}>Aucun bien trouver</div>
-                )}
-
-                {hasMore && (
-                  <div className={styles.showMoreBtn}>
-                    <button onClick={loadMoreData}>
-                      {loading === 'seeMore' ? 'Chargement...' : 'La suite'}
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className={styles.investerSection}>
-          <div>
-            <h2>INVESTIR DANS L'IMMOBILIER</h2>
-            <ul>
-              <li>Accompagnement, étude de rentabilité</li>
-              <li>Recherche de biens en France et au Sénégal</li>
-              <li>
-                Sénégal, destination soleil durant toute l'année, pour vous
-                dénicher le bien qui correspond à vos attentes
-              </li>
-            </ul>
-            <Link to='/nous-contacter'>Nous contacter</Link>
-          </div>
+      <div className={styles.filtres}>
+        <div className={styles.onglets} role='tablist' aria-label='Type de bien'>
+          {ONGLETS.map((o) => (
+            <button
+              key={o.id}
+              type='button'
+              role='tab'
+              aria-selected={onglet === o.id}
+              className={onglet === o.id ? styles.ongletActif : styles.onglet}
+              onClick={() => setOnglet(o.id)}
+            >
+              {o.label}
+            </button>
+          ))}
         </div>
       </div>
+
+      {chargement && <div className={styles.attente} aria-busy='true'></div>}
+
+      {!chargement && elements.length === 0 && (
+        <p className={styles.vide}>Aucun bien dans cette catégorie pour le moment.</p>
+      )}
+
+      {/* Le premier bien, en grand */}
+      {vedette && vedette.type === 'bien' && (
+        <Apparition>
+          <Link to={`/bien/${vedette.bien.ref}`} className={styles.vedette}>
+            <div className={styles.vedettePhoto}>
+              {resumeBien(vedette.bien).statut && <span className='pastille'>{resumeBien(vedette.bien).statut}</span>}
+              {vedette.bien?._medias?.image_galerie_0?.url && (
+                <img
+                  className='photo-bien'
+                  src={imageUrl(vedette.bien._medias.image_galerie_0.url, 1600)}
+                  alt={resumeBien(vedette.bien).titre}
+                />
+              )}
+            </div>
+            <div className={styles.vedetteTexte}>
+              <span className='etiquette'>{resumeBien(vedette.bien).lieu}</span>
+              <h2>{resumeBien(vedette.bien).titre}</h2>
+              {resumeBien(vedette.bien).chapitre && (
+                <span className={styles.vedetteChapitre}>{resumeBien(vedette.bien).chapitre}</span>
+              )}
+              <span className={styles.vedetteDetails}>{resumeBien(vedette.bien).details}</span>
+              <span className={styles.vedettePrix}>{resumeBien(vedette.bien).prix}</span>
+              <span className='lien-souligne'>Lire son histoire</span>
+            </div>
+          </Link>
+        </Apparition>
+      )}
+
+      {/* Les séries, puis les autres biens deux par deux */}
+      {series.map((el) => (
+        <Apparition key={el.cle} className={styles.blocSerie}>
+          <BlocSerie serie={el} />
+        </Apparition>
+      ))}
+
+      {seuls.length > 0 && (
+        <div className={styles.grille}>
+          {seuls.map((el) => (
+            <Apparition key={el.cle}>
+              <CarteBien bien={el.bien} hauteurPhoto={480} largeurImage={1000} />
+            </Apparition>
+          ))}
+        </div>
+      )}
+
+      {/* Les histoires déjà écrites */}
+      {vendus.length > 0 && (
+        <section className={styles.vendus}>
+          <Apparition className={styles.entete}>
+            <span className='etiquette'>Vendus</span>
+            <h2 className='titre-grand'>Les histoires déjà écrites</h2>
+          </Apparition>
+          <div className={styles.grilleVendus}>
+            {vendusAffiches.map((b) => (
+              <Link key={b.ref} to={`/bien/${b.ref}`} className={styles.vendu}>
+                <div className={styles.venduPhoto}>
+                  {b?._medias?.image_galerie_0?.url && (
+                    <img src={imageUrl(b._medias.image_galerie_0.url, 700)} alt={resumeBien(b).titre} loading='lazy' />
+                  )}
+                </div>
+                <span className='etiquette'>{resumeBien(b).lieu}</span>
+                <span className={styles.venduTitre}>{resumeBien(b).titre}</span>
+              </Link>
+            ))}
+          </div>
+          {vendus.length > 6 && (
+            <div className={styles.lienCentre}>
+              <button type='button' className='bouton-contour' onClick={() => setTousLesVendus(!tousLesVendus)}>
+                {tousLesVendus ? 'Voir moins d’histoires' : 'Voir d’autres histoires'}
+              </button>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Avis de recherche */}
+      <section className={styles.recherche}>
+        <p className={styles.recherchePhrase}>Votre prochaine histoire est peut-être ailleurs.</p>
+        <p className={styles.rechercheTexte}>Décrivez-nous le lieu que vous imaginez : nous le cherchons avec vous.</p>
+        <Link to='/avis-de-recherche' className='bouton-plein'>
+          Déposer un avis de recherche
+        </Link>
+      </section>
     </>
   )
 }

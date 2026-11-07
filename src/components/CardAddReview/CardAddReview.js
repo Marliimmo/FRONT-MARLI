@@ -128,9 +128,9 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
           aria-hidden='true'
           style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
         />
-        <h2>Déposer un avis</h2>
+        <h2>Votre histoire avec Marli</h2>
         <div className={styles.noteContainer}>
-          <label>Votre note d'étoile :</label>
+          <label>Votre note</label>
           <div className={`${styles.starContent} ${stars}`}>
             <FontAwesomeIcon
               title='1 étoile'
@@ -278,7 +278,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
             onChange={handleImageChange}
           /> */}
         </div>
-        <label htmlFor='pseudo'>Entrez votre nom ou pseudo*</label>
+        <label htmlFor='pseudo'>Votre prénom ou pseudo*</label>
         <br />
         <input
           onChange={(e) => {
@@ -290,7 +290,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
           required
         />
         <br />
-        <label htmlFor='description'>Description*</label>
+        <label htmlFor='description'>Votre avis*</label>
         <br />
         <textarea
           onChange={(e) => {
@@ -329,7 +329,7 @@ function CardAddReview({ visibilityForm, isSuccesSend }) {
         </div>
         {succesSend === false && (
           <div className={styles.MessageFeedBackError}>
-            Oups, une erreur s'est produite, vérifier vos saisies et réessayer.
+            Oups, une erreur s’est produite. Vérifiez vos informations et réessayez.
           </div>
         )}
       </form>
