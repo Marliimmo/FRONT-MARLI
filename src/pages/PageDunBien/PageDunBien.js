@@ -58,6 +58,8 @@ function PageDunBien() {
   const { reference } = useParams()
   const [bien, setBien] = useState(null)
   const [chargement, setChargement] = useState(true)
+  // photo de couverture verticale ou presque carrée : on l'affiche en entier, sur un fond flouté
+  const [couvertureEntiere, setCouvertureEntiere] = useState(false)
   const [tousLesBiens, setTousLesBiens] = useState([])
   const [visionneuse, setVisionneuse] = useState(null)
 
@@ -192,12 +194,27 @@ function PageDunBien() {
 
       {/* L'arrivée */}
       <section className={styles.arrivee}>
+        {photos[0] && couvertureEntiere && (
+          <img
+            className={styles.arriveeFond}
+            src={imageUrl(photos[0], 800)}
+            alt=''
+            aria-hidden='true'
+            style={vue.vendu ? { filter: 'blur(36px) brightness(0.45) grayscale(1)' } : undefined}
+          />
+        )}
         {photos[0] && (
           <img
-            className={styles.arriveePhoto}
+            className={couvertureEntiere ? `${styles.arriveePhoto} ${styles.arriveePhotoEntiere}` : styles.arriveePhoto}
             src={imageUrl(photos[0], 2000)}
             alt={vue.titre}
             style={filtrePhoto}
+            onLoad={(e) => {
+              const { naturalWidth: w, naturalHeight: h } = e.currentTarget
+              // sur un écran large, une photo moins large que 4:3 serait trop coupée
+              const ecranLarge = window.innerWidth / window.innerHeight > 1.2
+              setCouvertureEntiere(ecranLarge && w / h < 1.34)
+            }}
           />
         )}
         <div className={styles.arriveeTexte}>
