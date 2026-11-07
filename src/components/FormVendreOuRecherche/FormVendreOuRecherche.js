@@ -134,7 +134,7 @@ function FormVendreOuRecherche({ context }) {
           aria-hidden='true'
           style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
         />
-        <label htmlFor='localisation'>Emplacement / Localisation*</label> <br />
+        <label htmlFor='localisation'>Localisation*</label> <br />
         <input
           onChange={(e) => {
             setLocalisation(e.target.value)
@@ -213,7 +213,7 @@ function FormVendreOuRecherche({ context }) {
             )}
           </div>
         </div>
-        <label htmlFor='name'>Nom & prénom*</label> <br />
+        <label htmlFor='name'>Nom et prénom*</label> <br />
         <input
           onChange={(e) => {
             setName(e.target.value)

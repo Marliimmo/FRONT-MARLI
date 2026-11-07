@@ -6,7 +6,7 @@ function MentionsLegales() {
   return (
     <>
       <Helmet>
-        <title>Marli - Mentions légales</title>
+        <title>Mentions légales - Marli Immobilier</title>
         <meta name='robots' content='noindex' />
         <meta name='description' content="Passeur d'histoires immobilières" />
       </Helmet>

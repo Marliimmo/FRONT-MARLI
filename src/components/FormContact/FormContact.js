@@ -113,7 +113,7 @@ function FormContact() {
             <option value='Autre'>Autre</option>
           </select>
         </div>
-        <label htmlFor='name'>Nom & prénom*</label> <br />
+        <label htmlFor='name'>Nom et prénom*</label> <br />
         <input
           onChange={(e) => {
             setName(e.target.value)
