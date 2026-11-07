@@ -51,22 +51,6 @@ $respiration-mobile: 64px;
   animation: arrivee-recul 14s ease-out both;
 }
 
-// Photo verticale sur grand écran : la photo entière au centre, la même photo floutée en fond
-.arriveeFond {
-  position: absolute;
-  inset: -40px;
-  width: calc(100% + 80px);
-  height: calc(100% + 80px);
-  object-fit: cover;
-  filter: blur(36px) brightness(0.45);
-  transform: scale(1.1);
-}
-
-.arriveePhotoEntiere {
-  object-fit: contain;
-  z-index: 0;
-}
-
 @keyframes arrivee-recul {
   from {
     transform: scale(1.05);
