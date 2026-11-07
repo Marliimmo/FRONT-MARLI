@@ -115,6 +115,7 @@ function CarteBien({ bien, hauteurPhoto = 520, largeurImage = 1200 }) {
         <span>{r.details}</span>
         <span className={styles.prix}>{r.prix}</span>
       </div>
+      <span className={`lien-souligne ${styles.lire}`}>Lire son histoire</span>
     </Link>
   )
 }
