@@ -59,12 +59,17 @@
   </url>
 
   <url>
+    <loc>https://marli-immobilier.com/bien/mwNl72</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://marli-immobilier.com/bien/4iJ854</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/l1I250</loc>
+    <loc>https://marli-immobilier.com/bien/ypDo36</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -74,7 +79,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/ypDo36</loc>
+    <loc>https://marli-immobilier.com/bien/l1I250</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -109,12 +114,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://marli-immobilier.com/bien/zc0803</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://marli-immobilier.com/bien/ycWz37</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://marli-immobilier.com/bien/XLmR46</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/bien/aTd666</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/bien/bEt239</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -129,27 +149,12 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/ZQfd06</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://marli-immobilier.com/bien/egw314</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/zc0803</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://marli-immobilier.com/bien/bEt239</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://marli-immobilier.com/bien/aTd666</loc>
+    <loc>https://marli-immobilier.com/bien/ZQfd06</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -159,7 +164,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/sQz543</loc>
+    <loc>https://marli-immobilier.com/bien/jf5c55</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -169,7 +174,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/jf5c55</loc>
+    <loc>https://marli-immobilier.com/bien/sQz543</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -199,11 +204,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/duo698</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://marli-immobilier.com/bien/8PYy42</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
@@ -224,17 +224,12 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/fQOE04</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://marli-immobilier.com/bien/SrIg76</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://marli-immobilier.com/bien/gBy632</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/bien/3Hf805</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -244,7 +239,17 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://marli-immobilier.com/bien/3Hf805</loc>
+    <loc>https://marli-immobilier.com/bien/SrIg76</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/bien/fQOE04</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://marli-immobilier.com/bien/duo698</loc>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
