@@ -87,7 +87,8 @@ export function resumeBien(bien) {
 
 // Carte d'un bien : photo en noir et blanc, la couleur revient au survol
 // (ou, sur téléphone, quand la photo passe au centre de l'écran).
-function CarteBien({ bien, hauteurPhoto = 520, largeurImage = 1200 }) {
+// « format » (ex. '4 / 5') remplace la hauteur fixe : le cadre garde les mêmes proportions sur tous les écrans
+function CarteBien({ bien, hauteurPhoto = 520, largeurImage = 1200, format = null }) {
   const tactile = surEcranTactile()
   const [ref, auCentre] = useEnVue({ seuil: 0, marge: '-35% 0px -35% 0px', uneFois: false, actif: tactile })
   const r = resumeBien(bien)
@@ -95,7 +96,11 @@ function CarteBien({ bien, hauteurPhoto = 520, largeurImage = 1200 }) {
 
   return (
     <Link to={`/bien/${bien.ref}`} className={styles.carte}>
-      <div ref={ref} className={styles.cadrePhoto} style={{ height: hauteurPhoto }}>
+      <div
+        ref={ref}
+        className={styles.cadrePhoto}
+        style={format ? { aspectRatio: format } : { height: hauteurPhoto }}
+      >
         {r.statut && <span className='pastille'>{r.statut}</span>}
         {photo ? (
           <img

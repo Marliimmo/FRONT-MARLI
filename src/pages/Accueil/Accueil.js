@@ -171,7 +171,7 @@ function Accueil() {
           <div className={styles.grilleBiens}>
             {biens.map((bien) => (
               <Apparition key={bien.ref}>
-                <CarteBien bien={bien} hauteurPhoto={600} largeurImage={900} />
+                <CarteBien bien={bien} format='4 / 5' largeurImage={900} />
               </Apparition>
             ))}
           </div>
