@@ -56,10 +56,10 @@ export function regrouper(biens) {
   return elements
 }
 
-// Fourchette de prix des biens disponibles d'une série (hors sous compromis)
+// Fourchette de prix des biens d'une série encore en vente ou sous compromis (hors vendus)
 export function fourchettePrix(chapitres) {
   const prix = chapitres
-    .filter((c) => c.status === 'disponible' && typeof c.prix === 'number')
+    .filter((c) => c.status !== 'vendu' && typeof c.prix === 'number')
     .map((c) => c.prix)
   if (!prix.length) return ''
   if (prix.length === 1) return `${prix[0].toLocaleString('fr-FR')} €`
